@@ -7,9 +7,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="가계부" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=21" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=21" />
-  <title>가계부 23차</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=24" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=24" />
+  <title>가계부 24차</title>
   <link rel="manifest" href="manifest.json" />
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -50,7 +50,7 @@
     .card-box{border:1px solid var(--line);border-radius:18px;padding:15px;background:#fff;box-shadow:0 4px 18px rgba(30,40,80,.045)}.card-box .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.card-box strong{font-size:16px}
     .money{font-size:23px;font-weight:900;margin:12px 0 4px}.meta{font-size:12px;color:var(--muted);line-height:1.65}.hint{font-size:12px;color:var(--muted);line-height:1.55;margin-top:7px}
     .account-note{margin-top:10px;background:#fafbfe;border-radius:10px;padding:9px 10px;font-size:12px;color:#4f5667;line-height:1.5;white-space:pre-wrap}
-    .summary-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.summary-item{border:1px solid var(--line);border-radius:14px;padding:13px}.summary-item span{display:block;color:var(--muted);font-size:12px}.summary-item b{display:block;margin-top:7px;font-size:18px}
+    .summary-strip{display:flex;flex-direction:column;gap:0;margin-bottom:14px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 18px rgba(30,40,80,.04)}.summary-item{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:14px 16px;background:transparent}.summary-item:last-child{border-bottom:0}.summary-item span{display:flex;align-items:center;gap:9px;color:var(--text);font-size:14px;font-weight:850;min-width:0}.summary-item span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--primary);flex:0 0 auto}.summary-item:nth-child(2) span::before{background:var(--good)}.summary-item:nth-child(3) span::before{background:var(--danger)}.summary-item:nth-child(4) span::before{background:var(--warn)}.summary-item b{display:block;margin:0;font-size:18px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
     .badge{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:800}
     .badge.unpaid{background:var(--warn-soft);color:var(--warn)}.badge.paid{background:var(--good-soft);color:var(--good)}.badge.card{background:var(--primary-soft);color:#4253cf}.badge.income{background:var(--good-soft);color:var(--good)}.badge.expense{background:var(--danger-soft);color:var(--danger)}.badge.transfer{background:var(--blue-soft);color:var(--blue)}.badge.fixed{background:#f2ecff;color:#6842b7}
     .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:900px}th,td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;vertical-align:middle}th{background:#fafbfe;color:var(--muted);position:sticky;top:0}tr:last-child td{border-bottom:0}.amount{text-align:right;font-variant-numeric:tabular-nums;font-weight:800}.empty{text-align:center;padding:36px 10px;color:var(--muted)}
@@ -97,11 +97,11 @@
   </style>
 </head>
 <body>
-<div id="appSplash" role="status" aria-label="가계부 실행 중"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">23차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div id="appSplash" role="status" aria-label="가계부 실행 중"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">24차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
   <header class="topbar">
-    <div class="brand"><div class="brand-title"><span class="brand-heart" aria-hidden="true">♥</span><div><h1>가계부 <span class="version-pill">23차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+    <div class="brand"><div class="brand-title"><span class="brand-heart" aria-hidden="true">♥</span><div><h1>가계부 <span class="version-pill">24차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
     <div class="desktop-actions">
       <button type="button" class="ghost-btn" onclick="openAccountModal()">통장 등록</button>
       <button type="button" class="ghost-btn" onclick="openCardModal()">카드 등록</button>
@@ -265,7 +265,7 @@
     </section>
 
     <section class="panel" id="settings"><div class="section"><div class="section-head"><h2>백업·설정·기능 안내</h2></div><div class="settings-grid">
-      <div class="settings-box"><h3>현재 앱 버전</h3><p><b>가계부 23차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 23차</span></div>
+      <div class="settings-box"><h3>현재 앱 버전</h3><p><b>가계부 24차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 24차</span></div>
       <div class="settings-box"><h3>☁️ Firebase 자동 동기화</h3><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p><div class="actions"><button type="button" class="small-btn primary" onclick="openAuthModal('login')">로그인</button><button type="button" class="small-btn" onclick="forceCloudUpload()">현재 자료를 클라우드에 저장</button></div></div>
       <div class="settings-box"><h3>선택 백업</h3><p>전체 자료 또는 필요한 항목만 JSON 파일로 저장합니다. 부분 백업에는 복원에 필요한 분류 정보도 함께 포함됩니다.</p><div class="actions"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select><button type="button" class="small-btn primary" onclick="exportBackup()">백업 파일 저장</button></div></div>
       <div class="settings-box"><h3>백업 불러오기</h3><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input type="file" id="backupInput" accept=".json" onchange="importBackup(event)"></div>
@@ -603,7 +603,7 @@ function deleteSubCategory(majorId,subId){const major=categoryById(majorId),sub=
 
 function download(name,content,type='application/json'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return '\ufeff'+rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n')}
-function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all')data=state;else{data={backupVersion:23,backupScope:scope,categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring')data.recurringItems=state.recurringItems||[];if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_23차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2))}
+function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all')data=state;else{data={backupVersion:24,backupScope:scope,categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring')data.recurringItems=state.recurringItems||[];if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_24차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2))}
 function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=normalizeState(JSON.parse(r.result));saveState();alert('백업을 불러왔습니다.')}catch(err){console.error(err);alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f,'utf-8')}
 function exportPurchaseCSV(){const rows=[['사용일','카드','카드종류','예산구분','사용처','대분류','소분류','총 구매금액','할부개월','청구월별 금액','메모']];state.purchases.forEach(p=>rows.push([p.date,cardById(p.cardId)?.name||'',cardById(p.cardId)?.cardType==='debit'?'체크카드':'신용카드',(p.budgetSource&&p.budgetSource!=='personal')?(purposeFundById(p.budgetSource)?.name||'목적자금'):'내 생활비',p.merchant,p.majorCategory,p.subCategory,p.totalAmount,p.installmentMonths,p.schedules.map(s=>`${s.billingMonth}:${s.amount}:${s.paid?'납부완료':'예정'}`).join(' / '),p.memo||'']));download(`마파가계부_카드사용_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
 function exportLedgerCSV(){const rows=[['날짜','구분','항목','대분류','소분류','통장','금액','메모','자동반영']];state.cashflows.forEach(f=>rows.push([f.date,f.type,f.description,f.majorCategory||'',f.subCategory||'',accountById(f.accountId)?.name||'',f.amount,f.memo||'',f.recurringItemId?'매월 자동':'']));allSchedules().filter(s=>s.paid).forEach(s=>rows.push([s.paidDate,'카드값 출금',`${s.card?.name||''} ${s.purchase.merchant}`,'카드값','',accountById(s.paidAccountId)?.name||'',-s.amount,'']));download(`마파가계부_통장내역_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
