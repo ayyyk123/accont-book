@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="가계부" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=12" />
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=12" />
-  <title>가계부 13차</title>
+  <title>가계부 14차</title>
   <link rel="manifest" href="manifest.json" />
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -85,11 +85,13 @@
     #appSplash{position:fixed;inset:0;z-index:99999;background:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .28s ease,visibility .28s ease}
     #appSplash.hidden{opacity:0;visibility:hidden;pointer-events:none}.splash-inner{text-align:center}.splash-heart{font-size:72px;line-height:1;color:#f4c430;filter:drop-shadow(0 8px 18px rgba(244,196,48,.28));animation:splashPulse .8s ease-in-out}.splash-title{font-size:28px;font-weight:900;margin-top:14px;letter-spacing:-.4px}.splash-sub{font-size:12px;color:#8a8f9d;margin-top:6px;letter-spacing:.8px}
     @keyframes splashPulse{0%{transform:scale(.8);opacity:.2}65%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:1}}
+    @keyframes splashAutoHide{to{opacity:0;visibility:hidden;pointer-events:none}}
     .firebase-loading{opacity:.7;cursor:wait}.auth-note.status{padding:10px 12px;background:#f7f8fc;border-radius:10px}
   </style>
 </head>
 <body>
 <div id="appSplash" role="status" aria-label="가계부 실행 중"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부</div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
   <header class="topbar">
     <div class="brand"><div class="brand-title"><span class="brand-heart" aria-hidden="true">♥</span><div><h1>가계부 <span class="version-pill">13차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
@@ -624,7 +626,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=12',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=14',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
