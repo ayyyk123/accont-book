@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="가계부" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=12" />
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=12" />
-  <title>가계부 14차</title>
+  <title>가계부 15차</title>
   <link rel="manifest" href="manifest.json" />
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -94,7 +94,7 @@
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
   <header class="topbar">
-    <div class="brand"><div class="brand-title"><span class="brand-heart" aria-hidden="true">♥</span><div><h1>가계부 <span class="version-pill">13차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+    <div class="brand"><div class="brand-title"><span class="brand-heart" aria-hidden="true">♥</span><div><h1>가계부 <span class="version-pill">15차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
     <div class="desktop-actions">
       <button type="button" class="ghost-btn" onclick="openAccountModal()">통장 등록</button>
       <button type="button" class="ghost-btn" onclick="openCardModal()">카드 등록</button>
@@ -500,6 +500,7 @@ function detachRecurringRecord(record){delete record.recurringItemId;delete reco
 function confirmDeleteRecurring(removeCurrentMonth){const id=document.getElementById('recurringDeleteId').value,r=state.recurringItems.find(x=>x.id===id);if(!r)return;const month=document.getElementById('mainMonth')?.value||currentMonth();state.cashflows=state.cashflows.filter(f=>{if(f.recurringItemId!==id)return true;if(f.recurringMonth===month&&removeCurrentMonth)return false;if((f.recurringMonth||f.date.slice(0,7))>month)return false;detachRecurringRecord(f);return true});state.purchases=state.purchases.filter(p=>{if(p.recurringItemId!==id)return true;if(p.recurringMonth===month&&removeCurrentMonth)return false;if((p.recurringMonth||p.date.slice(0,7))>month)return false;detachRecurringRecord(p);return true});state.recurringItems=state.recurringItems.filter(x=>x.id!==id);state.recurringSkips=state.recurringSkips.filter(k=>!k.startsWith(id+'|'));closeDialog('recurringDeleteModal');saveState()}
 
 function renderCards(){document.getElementById('cardList').innerHTML=state.cards.length?state.cards.map(c=>{const debit=c.cardType==='debit';return `<div class="card-box entity-card" style="--item-color:${safeColor(c.color,'#6b7280')}"><div class="top"><strong class="entity-title"><span class="color-dot"></span>${esc(c.name)}</strong><span class="badge card">${debit?'체크카드':c.paymentDay+'일 결제'}</span></div><div class="meta" style="margin-top:11px">${debit?'사용 즉시 통장 출금':cycleText(c)}<br>연결 통장: ${esc(accountById(c.accountId)?.name||'미지정')}<br>${debit?'체크카드 누적 사용 '+won(state.purchases.filter(p=>p.cardId===c.id).reduce((x,p)=>x+Number(p.totalAmount),0)):'앞으로 남은 카드값: '+won(allSchedules().filter(s=>s.card?.id===c.id&&!s.paid).reduce((x,s)=>x+Number(s.amount),0))}</div><div class="actions" style="margin-top:12px"><button type="button" class="small-btn" onclick="editCard('${c.id}')">수정</button><button type="button" class="small-btn danger" onclick="deleteCard('${c.id}')">삭제</button></div></div>`}).join(''):'<div class="empty">등록된 카드가 없습니다.</div>'}
+function categoryGroupHtml(c){return `<div class="category-group"><div class="category-group-head"><strong><span class="category-icon">${esc(c.icon||iconForCategory(c.type,c.name))}</span>${esc(c.name)}</strong><div class="actions"><button type="button" class="small-btn" onclick="openCategoryModal('${c.type}','major','${c.id}')">아이콘·이름 수정</button><button type="button" class="small-btn" onclick="openCategoryModal('${c.type}','sub','${c.id}')">+ 소분류</button><button type="button" class="small-btn danger" onclick="deleteMajorCategory('${c.id}')">삭제</button></div></div><div class="category-children">${c.children.length?c.children.map(s=>`<span class="category-chip">${esc(s.name)} <button type="button" class="chip-btn" title="수정" onclick="openCategoryModal('${c.type}','sub','${c.id}','${s.id}')">✎</button><button type="button" class="chip-btn" title="삭제" onclick="deleteSubCategory('${c.id}','${s.id}')">×</button></span>`).join(''):'<span class="subtle">소분류가 없습니다.</span>'}</div></div>`}
 function renderCategoryManager(){document.getElementById('expenseCategoryList').innerHTML=categoriesOf('expense').length?categoriesOf('expense').map(categoryGroupHtml).join(''):'<div class="empty">지출 분류가 없습니다.</div>';document.getElementById('incomeCategoryList').innerHTML=categoriesOf('income').length?categoriesOf('income').map(categoryGroupHtml).join(''):'<div class="empty">소득 분류가 없습니다.</div>'}
 
 function openAccountModal(){document.getElementById('accountForm').reset();document.getElementById('accountId').value='';document.getElementById('accountInitial').value=0;document.getElementById('accountMemo').value='';document.getElementById('accountColor').value='#5b6df6';document.getElementById('accountModalTitle').textContent='통장 등록';openDialog('accountModal')}
@@ -570,7 +571,7 @@ function deleteSubCategory(majorId,subId){const major=categoryById(majorId),sub=
 
 function download(name,content,type='application/json'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return '\ufeff'+rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n')}
-function exportBackup(){download(`가계부_13차_백업_${today()}.json`,JSON.stringify(state,null,2))}
+function exportBackup(){download(`가계부_15차_백업_${today()}.json`,JSON.stringify(state,null,2))}
 function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=normalizeState(JSON.parse(r.result));saveState();alert('백업을 불러왔습니다.')}catch(err){console.error(err);alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f,'utf-8')}
 function exportPurchaseCSV(){const rows=[['사용일','카드','카드종류','예산구분','사용처','대분류','소분류','총 구매금액','할부개월','청구월별 금액','메모']];state.purchases.forEach(p=>rows.push([p.date,cardById(p.cardId)?.name||'',cardById(p.cardId)?.cardType==='debit'?'체크카드':'신용카드',(p.budgetSource&&p.budgetSource!=='personal')?(purposeFundById(p.budgetSource)?.name||'목적자금'):'내 생활비',p.merchant,p.majorCategory,p.subCategory,p.totalAmount,p.installmentMonths,p.schedules.map(s=>`${s.billingMonth}:${s.amount}:${s.paid?'납부완료':'예정'}`).join(' / '),p.memo||'']));download(`마파가계부_카드사용_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
 function exportLedgerCSV(){const rows=[['날짜','구분','항목','대분류','소분류','통장','금액','메모','자동반영']];state.cashflows.forEach(f=>rows.push([f.date,f.type,f.description,f.majorCategory||'',f.subCategory||'',accountById(f.accountId)?.name||'',f.amount,f.memo||'',f.recurringItemId?'매월 자동':'']));allSchedules().filter(s=>s.paid).forEach(s=>rows.push([s.paidDate,'카드값 출금',`${s.card?.name||''} ${s.purchase.merchant}`,'카드값','',accountById(s.paidAccountId)?.name||'',-s.amount,'']));download(`마파가계부_통장내역_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
@@ -626,7 +627,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=14',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=15',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
