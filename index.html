@@ -7,9 +7,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="가계부" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=28.1" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=28.1" />
-  <title>가계부 28.1차</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=28.2" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=28.2" />
+  <title>가계부 28.2차</title>
   <link rel="manifest" href="manifest.json" />
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -113,7 +113,7 @@
     .loan-negative{color:var(--danger)}.two-line-row{padding:11px 2px;border-bottom:1px solid var(--line)}.two-line-row:last-child{border-bottom:0}.two-line-row .row-top{display:flex;justify-content:space-between;gap:12px;font-weight:800}.two-line-row .row-sub{margin-top:4px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.money-input{text-align:right}
     .card-group-row{display:block;width:100%;appearance:none;border:0;background:#fff;color:inherit;text-align:left;font:inherit;cursor:pointer}.card-group-row:hover{background:#fff9dc}.card-group-row:focus-visible{outline:3px solid rgba(255,204,0,.35);outline-offset:-3px}.card-group-row .row-sub>span:last-child{font-weight:800;color:var(--accent-dark)}.card-detail-back{margin-left:8px}.overdraft-interest-fields{border:1px dashed var(--line);border-radius:14px;padding:12px;background:#fffdf2}.overdraft-interest-fields[hidden]{display:none!important}
 
-    /* ===== 28.1차 접기/펴기 + 월 이동 ===== */
+    /* ===== 28.2차 접기/펴기 + 월 이동 ===== */
     .section.collapsible-274>.section-head,
     .settings-box.collapsible-274>.settings-box-head{gap:10px}
     .collapse-toggle-274{flex:0 0 auto;white-space:nowrap;border:1px solid var(--line);background:var(--soft);color:var(--text);border-radius:10px;padding:7px 10px;font-size:12px;font-weight:800;cursor:pointer}
@@ -136,7 +136,7 @@
     }
 
   
-    /* ===== 28.1차 선택 월 카드+통장 소비 통합 ===== */
+    /* ===== 28.2차 선택 월 카드+통장 소비 통합 ===== */
     .monthly-spending-summary-275{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px}
     .monthly-spending-summary-275 .summary-chip-275{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:7px 10px;font-size:12px;color:var(--muted)}
     .monthly-spending-summary-275 .summary-chip-275 b{color:var(--text);font-size:13px}
@@ -151,7 +151,7 @@
     }
 
   
-    /* ===== 28.1차 클릭 상세·헤더 정렬·월 선택기 ===== */
+    /* ===== 28.2차 클릭 상세·헤더 정렬·월 선택기 ===== */
     .section.collapsible-274>.section-head{justify-content:flex-start;flex-wrap:wrap}
     .section.collapsible-274>.section-head>:first-child{margin-right:auto;min-width:0}
     .section.collapsible-274>.section-head>.actions{width:auto}
@@ -175,7 +175,7 @@
     }
 
   
-    /* ===== 28.1차 날짜·상세행 클릭 수정 연결 ===== */
+    /* ===== 28.2차 날짜·상세행 클릭 수정 연결 ===== */
     .calendar-day-clickable-277{width:100%;text-align:left;color:inherit;font:inherit;cursor:pointer;appearance:none}
     .calendar-day-clickable-277:hover,.calendar-day-clickable-277:focus-visible{background:var(--primary-soft);border-color:var(--primary);outline:none;transform:translateY(-1px)}
     .calendar-day-clickable-277 .calendar-count::after{content:' · 상세 ›';font-weight:800;color:var(--primary)}
@@ -190,12 +190,23 @@
     .next-recurring-click-277:hover,.next-recurring-click-277:focus-visible{background:var(--primary-soft);outline:none}
 
   
-    /* ===== 28.1차 카드값·일별 예상잔액·마이너스통장 보충 ===== */
+    /* ===== 28.2차 카드값·일별 예상잔액·마이너스통장 보충 ===== */
     .daily-balance-list-280{display:grid;gap:8px;margin-top:10px}.daily-balance-row-280{width:100%;border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:11px 12px;text-align:left;color:inherit;cursor:pointer}.daily-balance-row-280:hover{background:var(--primary-soft)}.daily-balance-top-280,.daily-balance-sub-280{display:flex;align-items:center;justify-content:space-between;gap:10px}.daily-balance-top-280{font-weight:850}.daily-balance-sub-280{margin-top:5px;font-size:12px;color:var(--muted)}.daily-balance-row-280.shortage{border-color:#efb0b0;background:#fff5f5}.daily-balance-row-280.limit-warning{border-color:#f3cf75;background:#fffaf0}.cash-warning-280{border:1px solid #efb0b0;background:#fff5f5;border-radius:14px;padding:12px;margin:10px 0}.cash-warning-280 b{color:var(--danger)}.topup-actions-280{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.overdraft-metrics-280{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.overdraft-metric-280{border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--panel)}.overdraft-metric-280 span{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}.overdraft-metric-280 b{font-size:14px}.pending-topup-280{border-left:4px solid #8b5cf6}.projection-card-279.alert{border-color:#efb0b0;background:#fff5f5}.projection-card-279.warn{border-color:#f3cf75;background:#fffaf0}
     @media(max-width:720px){.overdraft-metrics-280{grid-template-columns:1fr}.daily-balance-top-280,.daily-balance-sub-280{align-items:flex-start}}
 
-    /* ===== 28.1차 카드결제통장 자체 한도 마지막 사용 ===== */
+    /* ===== 28.2차 카드결제통장 자체 한도 마지막 사용 ===== */
     .cash-warning-280.prefer-281{border-color:#f3cf75;background:#fffaf0}.cash-warning-280.prefer-281 b{color:#8a5a00}.cash-warning-280.fallback-281{border-color:#d7dce5;background:#f8fafc}.cash-warning-280.fallback-281 b{color:#374151}.source-note-281{margin-top:6px;font-size:12px;color:var(--muted);line-height:1.45}.source-note-281 strong{color:var(--text)}.daily-balance-row-280.limit-warning .daily-balance-sub-280 span:last-child{color:#8a5a00;font-weight:800}.overdraft-last-note-281{margin-top:8px;border:1px dashed #f0c861;background:#fffdf2;border-radius:12px;padding:9px 10px;font-size:12px;color:#745100}
+
+    /* ===== 28.2차 모든 출금 보충 + 목적자금 미충전 정산 ===== */
+    .purpose-funding-box-282{margin-top:10px;border:1px solid var(--line);border-radius:13px;padding:10px 11px;background:var(--panel)}
+    .purpose-funding-head-282{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px}
+    .purpose-funding-head-282 b{font-size:13px}.purpose-funding-actions-282{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+    .funding-status-282{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-weight:800;font-size:11px}
+    .funding-status-282.unknown{background:#eef1f5;color:#667085}.funding-status-282.received{background:#eaf8f1;color:#16855a}.funding-status-282.unfunded{background:#fff2df;color:#9a5c00}.funding-status-282.settled{background:#eeeaff;color:#6842b7}
+    .purpose-receivable-note-282{margin-top:6px;color:var(--muted);font-size:12px;line-height:1.45}.purpose-receivable-note-282 strong{color:var(--text)}
+    .daily-balance-row-280.additional-topup-282{border-color:#f3cf75;background:#fffaf0}.daily-balance-row-280.additional-topup-282 .daily-balance-sub-280 span:last-child{color:#8a5a00;font-weight:800}
+    .cash-warning-280.general-topup-282{border-color:#f3cf75;background:#fffaf0}.cash-warning-280.general-topup-282 b{color:#8a5a00}
+    @media(max-width:720px){.purpose-funding-head-282{align-items:flex-start;flex-direction:column}.purpose-funding-actions-282 .small-btn{flex:1}}
 </style>
 
 <style id="v273-budget-split-style">
@@ -234,11 +245,11 @@
 </style>
 </head>
 <body>
-<div id="appSplash" role="status" aria-label="가계부 실행 중"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">28.1차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div id="appSplash" role="status" aria-label="가계부 실행 중"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">28.2차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
   <header class="topbar">
-    <div class="brand"><div class="brand-title"><span class="brand-heart" aria-hidden="true">♥</span><div><h1>가계부 <span class="version-pill">28.1차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+    <div class="brand"><div class="brand-title"><span class="brand-heart" aria-hidden="true">♥</span><div><h1>가계부 <span class="version-pill">28.2차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
     <div class="desktop-actions">
       <button type="button" class="ghost-btn" onclick="openAccountModal()">통장 등록</button>
       <button type="button" class="ghost-btn" onclick="openCardModal()">카드 등록</button>
@@ -421,7 +432,7 @@
     </section>
 
     <section class="panel" id="settings"><div class="section"><div class="section-head"><h2>백업·설정·기능 안내</h2></div><div class="settings-grid">
-      <div class="settings-box"><h3>현재 앱 버전</h3><p><b>가계부 28.1차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 28.1차</span></div>
+      <div class="settings-box"><h3>현재 앱 버전</h3><p><b>가계부 28.2차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 28.2차</span></div>
       <div class="settings-box"><h3>☁️ Firebase 자동 동기화</h3><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p><div class="actions"><button type="button" class="small-btn primary" onclick="openAuthModal('login')">로그인</button><button type="button" class="small-btn" onclick="forceCloudUpload()">현재 자료를 클라우드에 저장</button></div></div>
       <div class="settings-box"><h3>선택 백업</h3><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select><button type="button" class="small-btn primary" onclick="exportBackup()">백업 파일 저장</button></div><div id="lastBackupProof" class="backup-proof"></div></div>
       <div class="settings-box"><h3>백업 불러오기</h3><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input type="file" id="backupInput" accept=".json" onchange="importBackup(event)"></div>
@@ -493,7 +504,7 @@
   <div><label>구분</label><select id="cashflowType"><option value="income">소득</option><option value="expense">직접 지출</option><option value="transfer">통장 이체</option></select></div><div><label>날짜</label><input type="date" id="cashflowDate" required></div>
   <div><label id="sourceAccountLabel">통장</label><select id="cashflowAccount" required></select></div><div id="targetAccountWrap" style="display:none"><label>받는 통장</label><select id="cashflowTarget"></select></div>
   <div><label>항목</label><input id="cashflowDescription" required placeholder="예: 급여, 관리비"></div><div><label>금액</label><input type="text" inputmode="numeric" class="money-input" id="cashflowAmount" min="1" step="1" required></div>
-  <div id="cashflowMajorWrap"><label>대분류</label><select id="cashflowMajor"></select></div><div id="cashflowSubWrap"><label>소분류</label><select id="cashflowSub"></select><div class="hint" id="loanCategoryHint" style="display:none">대여금 지출은 받을 돈, 차입금 입금은 줄 돈에 자동 등록됩니다. 항목에는 상대방 이름을 적어주세요.</div></div>
+  <div id="cashflowBudgetSourceWrap" style="display:none"><label>예산 구분</label><select id="cashflowBudgetSource"><option value="personal">내 생활비</option></select><div class="hint">목적자금 사용으로 지정하면 내 생활비 예산에서 차감되지 않습니다.</div></div><div id="cashflowMajorWrap"><label>대분류</label><select id="cashflowMajor"></select></div><div id="cashflowSubWrap"><label>소분류</label><select id="cashflowSub"></select><div class="hint" id="loanCategoryHint" style="display:none">대여금 지출은 받을 돈, 차입금 입금은 줄 돈에 자동 등록됩니다. 항목에는 상대방 이름을 적어주세요.</div></div>
   <div class="full"><label>메모</label><textarea id="cashflowMemo"></textarea></div>
 </div><div class="form-actions"><button type="button" class="ghost-btn" onclick="closeDialog('cashflowModal')">취소</button><button class="primary-btn" type="submit">저장</button></div></form></dialog>
 
@@ -528,7 +539,7 @@
 
 <dialog id="payModal"><form class="modal" id="payForm"><div class="modal-head"><h2>카드값 납부 완료</h2><button type="button" class="icon-btn" onclick="closeDialog('payModal')" aria-label="닫기">×</button></div><input type="hidden" id="payCardId"><input type="hidden" id="payBillingMonth"><div class="form-grid"><div><label>실제 출금일</label><input type="date" id="payDate" required></div><div><label>출금 통장</label><select id="payAccount" required></select></div><div class="full preview" id="payPreview"></div></div><div class="form-actions"><button type="button" class="ghost-btn" onclick="closeDialog('payModal')">취소</button><button class="primary-btn" type="submit">납부 완료 처리</button></div></form></dialog>
 
-<dialog id="overdraftTopupModal"><form class="modal" id="overdraftTopupForm"><div class="modal-head"><h2>카드대금 보충 이체 예정</h2><button type="button" class="icon-btn" onclick="closeDialog('overdraftTopupModal')" aria-label="닫기">×</button></div><input type="hidden" id="topupTargetAccount"><input type="hidden" id="topupBillingMonth"><div class="form-grid"><div class="full preview" id="topupPreview"></div><div><label>마이너스통장</label><select id="topupSourceAccount" required></select></div><div><label>받는 카드결제 통장</label><input id="topupTargetName" readonly></div><div><label>이체 예정일</label><input type="date" id="topupDate" required></div><div><label>이체 예정금액</label><input type="text" inputmode="numeric" class="money-input" id="topupAmount" required></div><div class="full"><label>메모</label><textarea id="topupMemo" placeholder="예: 삼성카드 결제대금 보충"></textarea></div></div><div class="form-actions"><button type="button" class="ghost-btn" onclick="closeDialog('overdraftTopupModal')">취소</button><button type="submit" class="primary-btn">이체 예정 등록</button></div></form></dialog>
+<dialog id="overdraftTopupModal"><form class="modal" id="overdraftTopupForm"><div class="modal-head"><h2>통장 잔액 보충 이체 예정</h2><button type="button" class="icon-btn" onclick="closeDialog('overdraftTopupModal')" aria-label="닫기">×</button></div><input type="hidden" id="topupTargetAccount"><input type="hidden" id="topupBillingMonth"><div class="form-grid"><div class="full preview" id="topupPreview"></div><div><label>마이너스통장</label><select id="topupSourceAccount" required></select></div><div><label>받는 통장</label><input id="topupTargetName" readonly></div><div><label>이체 예정일</label><input type="date" id="topupDate" required></div><div><label>이체 예정금액</label><input type="text" inputmode="numeric" class="money-input" id="topupAmount" required></div><div class="full"><label>메모</label><textarea id="topupMemo" placeholder="예: 카드값·고정지출 잔액 보충"></textarea></div></div><div class="form-actions"><button type="button" class="ghost-btn" onclick="closeDialog('overdraftTopupModal')">취소</button><button type="submit" class="primary-btn">이체 예정 등록</button></div></form></dialog>
 <dialog id="monthlyDetailModal"><div class="modal"><div class="modal-head"><h2 id="monthlyDetailTitle">월 상세내역</h2><button type="button" class="icon-btn" onclick="closeDialog('monthlyDetailModal')" aria-label="닫기">×</button></div><div id="monthlyDetailSummary" class="preview" style="margin-bottom:12px"></div><div id="monthlyDetailBody" class="monthly-detail-list"></div><div class="form-actions"><button type="button" class="primary-btn" onclick="closeDialog('monthlyDetailModal')">확인</button></div></div></dialog>
 
 <dialog id="categoryModal"><form class="modal" id="categoryForm"><div class="modal-head"><h2 id="categoryModalTitle">분류 추가</h2><button type="button" class="icon-btn" onclick="closeDialog('categoryModal')" aria-label="닫기">×</button></div><input type="hidden" id="categoryType"><input type="hidden" id="categoryLevel"><input type="hidden" id="categoryMajorId"><input type="hidden" id="categorySubId"><div class="form-grid"><div class="full" id="categoryParentWrap" style="display:none"><label>소분류가 들어갈 대분류</label><select id="categoryParent"></select></div><div class="full" id="categoryIconWrap"><label>대분류 아이콘</label><select id="categoryIcon"></select></div><div class="full"><label>분류 이름</label><input id="categoryName" required placeholder="예: 외식"></div></div><div class="form-actions"><button type="button" class="ghost-btn" onclick="closeDialog('categoryModal')">취소</button><button class="primary-btn" type="submit">저장</button></div></form></dialog>
@@ -611,10 +622,11 @@ function normalizeState(raw){
   });
   const recurringItems=(Array.isArray(raw?.recurringItems)?raw.recurringItems:[]).map(r=>({id:r.id||uid('rec'),type:['income','expense','savings'].includes(r.type)?r.type:'expense',paymentMethod:r.type==='income'?'account':(r.type==='savings'?'transfer':(r.paymentMethod==='card'?'card':'account')),accountId:r.accountId||'',targetAccountId:r.targetAccountId||'',purposeFundId:r.purposeFundId||'',cardId:r.cardId||'',description:r.description||'고정항목',amount:Number(r.amount||0),day:Math.min(31,Math.max(1,Number(r.day||1))),startMonth:r.startMonth||currentMonth(),endMonth:r.endMonth||'',active:r.active!==false,majorCategoryId:r.majorCategoryId||'',subCategoryId:r.subCategoryId||'',majorCategory:r.majorCategory||'',subCategory:r.subCategory||'',memo:r.memo||''}));
   const recurringSkips=Array.isArray(raw?.recurringSkips)?raw.recurringSkips:[];const monthlyBudgets=raw?.monthlyBudgets&&typeof raw.monthlyBudgets==='object'?raw.monthlyBudgets:{};const purposeFunds=(Array.isArray(raw?.purposeFunds)?raw.purposeFunds:[]).map(f=>({id:f.id||uid('fund'),name:f.name||'목적자금',monthlyAmount:Number(f.monthlyAmount||0),targetAmount:Number(f.targetAmount||0),openingSaved:Number(f.openingSaved||0),startMonth:f.startMonth||currentMonth(),carryover:f.carryover==='reset'?'reset':'carry',provider:f.provider||'',memo:f.memo||'',active:f.active!==false}));
-  const debts=(Array.isArray(raw?.debts)?raw.debts:[]).map(d=>({id:d.id||uid('debt'),type:d.type==='payable'?'payable':'receivable',person:d.person||'상대방',title:d.title||'금전거래',amount:Number(d.amount||0),originalAmount:Number(d.originalAmount??d.amount??0),date:d.date||today(),dueDate:d.dueDate||'',memo:d.memo||'',payments:Array.isArray(d.payments)?d.payments:[],waivedAmount:Number(d.waivedAmount||0),closedReason:d.closedReason||'',sourceCashflowId:d.sourceCashflowId||''}));
+  const debts=(Array.isArray(raw?.debts)?raw.debts:[]).map(d=>({id:d.id||uid('debt'),type:d.type==='payable'?'payable':'receivable',person:d.person||'상대방',title:d.title||'금전거래',amount:Number(d.amount||0),originalAmount:Number(d.originalAmount??d.amount??0),date:d.date||today(),dueDate:d.dueDate||'',memo:d.memo||'',payments:Array.isArray(d.payments)?d.payments:[],waivedAmount:Number(d.waivedAmount||0),closedReason:d.closedReason||'',sourceCashflowId:d.sourceCashflowId||'',purposeFundId:d.purposeFundId||'',purposeMonth:d.purposeMonth||'',autoPurposeReceivable:Boolean(d.autoPurposeReceivable)}));
   cashflows.forEach(f=>{if(f.recurringItemId&&f.settled===undefined)f.settled=false});
   const loans=(Array.isArray(raw?.loans)?raw.loans:[]).map(l=>({id:l.id||uid('loan'),name:l.name||'대출',loanType:l.loanType||'general',bank:l.bank||'',balance:Number(l.balance||0),interestAmount:Number(l.interestAmount||0),interestDay:Number(l.interestDay||1),interestStartMonth:l.interestStartMonth||l.startDate?.slice(0,7)||'',interestAccountId:l.interestAccountId||'',startDate:l.startDate||'',memo:l.memo||'',active:l.active!==false,recurringItemId:l.recurringItemId||''}));
-  return {version:12,categories,accounts,cards,purchases,cashflows,recurringItems,recurringSkips,monthlyBudgets,debts,purposeFunds,loans,
+  const purposeFundingStatus=raw?.purposeFundingStatus&&typeof raw.purposeFundingStatus==='object'?{...raw.purposeFundingStatus}:{};
+  return {version:12,categories,accounts,cards,purchases,cashflows,recurringItems,recurringSkips,monthlyBudgets,debts,purposeFunds,loans,purposeFundingStatus,
     favorites:Array.isArray(raw?.favorites)?raw.favorites:[],
     preferences:{darkMode:Boolean(raw?.preferences?.darkMode),lastSearch:raw?.preferences?.lastSearch||''}
   };
@@ -767,7 +779,7 @@ function deleteSubCategory(majorId,subId){const major=categoryById(majorId),sub=
 
 function download(name,content,type='application/json'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return '\ufeff'+rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n')}
-function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="28.1";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"28.1",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_28.1차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
+function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="28.2";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"28.2",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_28.2차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
 function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=normalizeState(JSON.parse(r.result));saveState();alert('백업을 불러왔습니다.')}catch(err){console.error(err);alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f,'utf-8')}
 function exportPurchaseCSV(){const rows=[['사용일','카드','카드종류','예산구분','사용처','대분류','소분류','총 구매금액','할부개월','청구월별 금액','메모']];state.purchases.forEach(p=>rows.push([p.date,cardById(p.cardId)?.name||'',cardById(p.cardId)?.cardType==='debit'?'체크카드':'신용카드',(p.budgetSource&&p.budgetSource!=='personal')?(purposeFundById(p.budgetSource)?.name||'목적자금'):'내 생활비',p.merchant,p.majorCategory,p.subCategory,p.totalAmount,p.installmentMonths,p.schedules.map(s=>`${s.billingMonth}:${s.amount}:${s.paid?'납부완료':'예정'}`).join(' / '),p.memo||'']));download(`마파가계부_카드사용_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
 function exportLedgerCSV(){const rows=[['날짜','구분','항목','대분류','소분류','통장','금액','메모','자동반영']];state.cashflows.forEach(f=>rows.push([f.date,f.type,f.description,f.majorCategory||'',f.subCategory||'',accountById(f.accountId)?.name||'',f.amount,f.memo||'',f.recurringItemId?'매월 자동':'']));allSchedules().filter(s=>s.paid).forEach(s=>rows.push([s.paidDate,'카드값 출금',`${s.card?.name||''} ${s.purchase.merchant}`,'카드값','',accountById(s.paidAccountId)?.name||'',-s.amount,'']));download(`마파가계부_통장내역_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
@@ -869,7 +881,7 @@ TAB_INFO.loans=['대출·저축','마이너스통장과 일반대출, 고정저�
 
 
 // ===== 27차 실제 안정화·검증 레이어 =====
-const APP_VERSION_27='28.1';
+const APP_VERSION_27='28.2';
 const BACKUP_META_KEY_27='mapa-household-book-last-backup-v27-4';
 
 function expenseCategoryForLoan27(){
@@ -1018,9 +1030,9 @@ function buildBackup27(scope='all'){
   if(scope==='all')payload=full;else{payload={categories:full.categories};if(scope==='transactions')Object.assign(payload,{purchases:full.purchases,cashflows:full.cashflows,debts:full.debts});if(scope==='cards')payload.cards=full.cards;if(scope==='accounts')payload.accounts=full.accounts;if(scope==='recurring')Object.assign(payload,{recurringItems:full.recurringItems,recurringSkips:full.recurringSkips,loans:full.loans});if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds})}
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 }
-exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_28.1차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
+exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_28.2차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
 function renderBackupProof27(){const el=document.getElementById('lastBackupProof');if(!el)return;try{const m=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');el.textContent=m?`최근 백업: ${new Date(m.createdAt).toLocaleString('ko-KR')} · ${m.scope==='all'?'전체':'선택'} · 검증코드 ${m.checksum} · ${(m.size/1024).toFixed(1)}KB`:'이 기기에서 저장한 백업 기록이 아직 없습니다.'}catch{el.textContent='백업 기록을 읽을 수 없습니다.'}}
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_28.1차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_28.2차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 function integrityIssues27(st){const issues=[],checkIds=(name,arr)=>{const seen=new Set();(arr||[]).forEach(x=>{if(!x.id)issues.push(`${name}: ID 없음`);else if(seen.has(x.id))issues.push(`${name}: 중복 ID ${x.id}`);seen.add(x.id)})};[['통장',st.accounts],['카드',st.cards],['카드사용',st.purchases],['통장내역',st.cashflows],['고정항목',st.recurringItems],['대출',st.loans],['받을·줄 돈',st.debts],['목적자금',st.purposeFunds]].forEach(x=>checkIds(...x));
   (st.cards||[]).forEach(c=>{if(c.accountId&&!st.accounts.some(a=>a.id===c.accountId))issues.push(`카드 ${c.name}: 출금통장 연결 오류`)});(st.purchases||[]).forEach(p=>{if(!st.cards.some(c=>c.id===p.cardId))issues.push(`카드사용 ${p.merchant}: 카드 연결 오류`);if(!Number.isFinite(Number(p.totalAmount)))issues.push(`카드사용 ${p.merchant}: 금액 오류`)});(st.cashflows||[]).forEach(f=>{if(f.accountId&&!st.accounts.some(a=>a.id===f.accountId))issues.push(`통장내역 ${f.description}: 출금·입금통장 오류`);if(f.type==='transfer'&&f.targetAccountId&&!st.accounts.some(a=>a.id===f.targetAccountId))issues.push(`이체 ${f.description}: 대상통장 오류`);if(!Number.isFinite(Number(f.amount)))issues.push(`통장내역 ${f.description}: 금액 오류`)});(st.recurringItems||[]).forEach(r=>{if(r.type==='savings'){if(!st.accounts.some(a=>a.id===r.accountId)||!st.accounts.some(a=>a.id===r.targetAccountId))issues.push(`고정저축 ${r.description}: 통장 연결 오류`);if(r.accountId===r.targetAccountId)issues.push(`고정저축 ${r.description}: 출금·입금통장이 같음`)}else if(r.paymentMethod==='card'&&!st.cards.some(c=>c.id===r.cardId))issues.push(`고정항목 ${r.description}: 카드 연결 오류`);else if(r.accountId&&!st.accounts.some(a=>a.id===r.accountId))issues.push(`고정항목 ${r.description}: 통장 연결 오류`)});(st.loans||[]).forEach(l=>{if(l.interestAccountId&&!st.accounts.some(a=>a.id===l.interestAccountId))issues.push(`대출 ${l.name}: 이자 출금통장 연결 오류`);if(l.recurringItemId&&!st.recurringItems.some(r=>r.id===l.recurringItemId))issues.push(`대출 ${l.name}: 이자 고정지출 연결 오류`)});return issues;
@@ -1093,12 +1105,12 @@ buildBackup27=function(scope='all'){
   if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds});
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),includedKeys:Object.keys(payload),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 };
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_28.1차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_28.2차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 const runDataDiagnostics27Base=runDataDiagnostics;
 runDataDiagnostics=async function(){await runDataDiagnostics27Base();const el=document.getElementById('diagnosticResult'),last=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');if(el&&last)el.innerHTML=el.innerHTML.replace('최근 전체백업:',`최근 백업(${last.scope==='all'?'전체':'선택'}):`)};
 
-// ===== 28.1차 카드별 결제예정 상세·대출이자 시작월 보강 =====
+// ===== 28.2차 카드별 결제예정 상세·대출이자 시작월 보강 =====
 function updateOverdraftInterestFields272(){
   const box=document.getElementById('overdraftInterestFields'),type=document.getElementById('accountType')?.value,balance=parseMoney(document.getElementById('accountInitial')?.value||0),show=type==='overdraft'||balance<0;
   if(box)box.hidden=!show;
@@ -1146,14 +1158,14 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=28.1',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=28.2',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
 </script>
 
 <script id="v273-budget-split-script">
-// ===== 28.1차 내 예산·목적자금 남은 금액 분리 표시 =====
+// ===== 28.2차 내 예산·목적자금 남은 금액 분리 표시 =====
 function signedWon273(value){
   const n=Number(value||0);
   return `${n<0?'-':''}${won(Math.abs(n))}`;
@@ -1233,7 +1245,7 @@ openMonthlyDetail=function(kind){
 </script>
 
 <script id="v274-collapse-month-script">
-// ===== 28.1차 탭별 접기·펴기 및 이전 달·다음 달 이동 =====
+// ===== 28.2차 탭별 접기·펴기 및 이전 달·다음 달 이동 =====
 const COLLAPSE_STORAGE_KEY_274='mapa-household-book-collapse-v274';
 function loadCollapsed274(){
   try{return JSON.parse(localStorage.getItem(COLLAPSE_STORAGE_KEY_274)||'{}')||{}}catch(_){return {}}
@@ -1297,7 +1309,7 @@ installCollapsibles274();
 
 
 <script id="v275-monthly-spending-script">
-// ===== 28.1차 선택 월 카드·통장 소비 통합 =====
+// ===== 28.2차 선택 월 카드·통장 소비 통합 =====
 TAB_INFO.purchases=['월 소비내역','선택한 달의 카드 사용과 통장 직접 지출을 한 화면에서 확인합니다.'];
 
 function allMonthlySpendingRows275(month){
@@ -1390,7 +1402,7 @@ renderAll();
 
 
 <script id="v276-click-details-script">
-// ===== 28.1차 홈 금액행 클릭 상세·월 선택기 개선 =====
+// ===== 28.2차 홈 금액행 클릭 상세·월 선택기 개선 =====
 function openAccountMonthDetail276(accountId='',month=''){
   const m=month||document.getElementById('mainMonth')?.value||currentMonth();
   const account=accountId?accountById(accountId):null;
@@ -1437,7 +1449,7 @@ renderDashboard();
 
 
 <script id="v277-calendar-detail-edit-script">
-// ===== 28.1차 월 소비달력 날짜 상세 + 상세행 수정 연결 =====
+// ===== 28.2차 월 소비달력 날짜 상세 + 상세행 수정 연결 =====
 const openDialogBefore277=openDialog;
 openDialog=function(id){const d=document.getElementById(id);if(d)d.style.removeProperty('display');return openDialogBefore277(id)};
 function openDetailEditor277(kind,id){
@@ -1582,7 +1594,7 @@ renderAll();
 
 
 <script id="v278-payment-method-budget-source-script">
-// ===== 28.1차 월 소비 결제수단별 1차 목록 + 예산 구분 표시 =====
+// ===== 28.2차 월 소비 결제수단별 1차 목록 + 예산 구분 표시 =====
 function spendingBudgetInfo278(row){
   const raw=row?.raw||{};
   const source=raw.budgetSource||raw.purposeFundId||'personal';
@@ -1680,7 +1692,7 @@ renderAll();
 
 
 <script id="v279-account-pending-projection-script">
-// ===== 28.1차 통장별 미반영 고정항목·반영 후 예상잔액 =====
+// ===== 28.2차 통장별 미반영 고정항목·반영 후 예상잔액 =====
 function pendingAccountItems279(accountId,month){
   const m=month||document.getElementById('mainMonth')?.value||currentMonth();
   const rows=[];
@@ -1786,7 +1798,7 @@ renderAll();
 </script>
 
 <script id="v280-cashflow-projection-script">
-// ===== 28.1차 카드값 포함 일별 통장잔액·마이너스통장 보충 =====
+// ===== 28.2차 카드값 포함 일별 통장잔액·마이너스통장 보충 =====
 function isOverdraftAccount280(a){return !!a&&(a.accountType==='overdraft'||Number(a.initialBalance||0)<0)}
 function overdraftLimit280(a){return Math.max(0,Number(a?.overdraftLimit||0))}
 function pendingPriority280(r){return ({income:1,transferIn:2,savingsIn:2,topupIn:2,expense:5,savingsOut:6,transferOut:6,topupOut:6,cardDue:9})[r.type]||7}
@@ -1809,7 +1821,7 @@ function pendingAccountItems280(accountId,month){
   const m=month||document.getElementById('mainMonth')?.value||currentMonth(),rows=[];
   (state.cashflows||[]).forEach(f=>{
     if(f.plannedTopup&&!f.plannedCompleted&&(f.date||'').slice(0,7)===m){
-      const amt=Number(f.amount||0);if(f.accountId===accountId)rows.push({kind:'topup',flowId:f.id,date:f.date,title:f.description||'카드대금 보충 이체',amount:-amt,type:'topupOut',label:'보충 이체 출금'});if(f.targetAccountId===accountId)rows.push({kind:'topup',flowId:f.id,date:f.date,title:f.description||'카드대금 보충 이체',amount:amt,type:'topupIn',label:'보충 이체 입금'});return;
+      const amt=Number(f.amount||0);if(f.accountId===accountId)rows.push({kind:'topup',flowId:f.id,date:f.date,title:f.description||'통장 잔액 보충 이체',amount:-amt,type:'topupOut',label:'보충 이체 출금'});if(f.targetAccountId===accountId)rows.push({kind:'topup',flowId:f.id,date:f.date,title:f.description||'통장 잔액 보충 이체',amount:amt,type:'topupIn',label:'보충 이체 입금'});return;
     }
     if(f.recurringItemId&&!f.recurringSavings&&!f.recurringOverride&&!f.settled&&f.recurringMonth===m&&(f.accountId||'')===accountId){const amt=Number(f.amount||0),sign=f.type==='income'?1:-1;rows.push({kind:'recurring',recurringId:f.recurringItemId,flowId:f.id,date:f.date||`${m}-01`,title:f.description||'고정항목',amount:sign*amt,type:f.type==='income'?'income':'expense',label:f.type==='income'?'고정수입':'고정지출'});return}
     if((f.date||'').slice(0,7)!==m||(f.date||'')<=today()||(f.recurringItemId&&!f.recurringOverride))return;
@@ -1849,10 +1861,10 @@ function showTimelineDay280(accountId,month,date){const a=accountById(accountId)
 function openAccountBalanceProjection279(accountId,month=''){const m=month||document.getElementById('mainMonth')?.value||currentMonth(),a=accountById(accountId);if(!a)return;const p=accountProjection279(accountId,m),body=document.getElementById('monthlyDetailBody'),summary=document.getElementById('monthlyDetailSummary'),title=document.getElementById('monthlyDetailTitle');title.textContent=`${Number(m.slice(5,7))}월 ${a.name} 잔액 예상`;summary.innerHTML=projectionSummary279(p)+overdraftMetrics280(a,p);const pending=`<button type="button" class="two-line-row detail-edit-row-277 pending-account-row-279" onclick='showPendingAccountItems279(${JSON.stringify(accountId)},${JSON.stringify(m)})'><div class="row-top"><span>잔액 미반영 예정항목 <span class="badge ${p.pending.length?'unpaid':'paid'}">${p.pending.length}건</span></span><span class="${p.net<0?'negative':'positive'}">${signedWon279(p.net)}</span></div><div class="row-sub"><span>들어올 돈 ${won(p.incoming)} · 나갈 돈 ${won(p.outgoing)} · 카드값 포함</span><span class="detail-edit-hint-277">목록 보기 ›</span></div></button>`;const applied=reflectedAccountRows279(accountId,m),appliedButton=`<button type="button" class="two-line-row detail-edit-row-277" onclick='showReflectedAccountItems279(${JSON.stringify(accountId)},${JSON.stringify(m)})'><div class="row-top"><span>${Number(m.slice(5,7))}월 잔액 반영 완료내역</span><span>${applied.length}건</span></div><div class="row-sub"><span>이미 통장 잔액에 들어간 입출금·이체·카드값</span><span class="detail-edit-hint-277">내역 보기 ›</span></div></button>`;body.innerHTML=topupSuggestions280(accountId,m,p)+pending+`<div class="section-head" style="margin-top:14px"><h3>일별 예상 통장잔액</h3></div>`+dailyTimelineHtml280(accountId,m,p)+appliedButton;openDialog('monthlyDetailModal')}
 function showPendingAccountItems279(accountId,month){const a=accountById(accountId);if(!a)return;const p=accountProjection279(accountId,month),body=document.getElementById('monthlyDetailBody'),summary=document.getElementById('monthlyDetailSummary'),title=document.getElementById('monthlyDetailTitle');title.textContent=`${Number(month.slice(5,7))}월 ${a.name} 미반영 예정항목`;summary.innerHTML=`${p.pending.length}건 · 들어올 돈 <b>${won(p.incoming)}</b> · 나갈 돈 <b>${won(p.outgoing)}</b> · 반영 후 <b class="${p.projected<0?'negative':'positive'}">${signedWon279(p.projected)}</b> <button type="button" class="small-btn card-detail-back" onclick='openAccountBalanceProjection279(${JSON.stringify(accountId)},${JSON.stringify(month)})'>← 잔액 예상</button>`;body.innerHTML=p.pending.length?p.pending.map(r=>pendingRowHtml280(r,accountId,month)).join(''):'<div class="empty">잔액에 아직 반영되지 않은 항목이 없습니다.</div>';openDialog('monthlyDetailModal')}
 
-function reflectedAccountRows279(accountId,month){const rows=[];(state.cashflows||[]).forEach(f=>{if(f.plannedTopup){if(!f.plannedCompleted||(f.plannedCompletedDate||'').slice(0,7)!==month)return;const date=f.plannedCompletedDate,amt=Number(f.amount||0);if(f.accountId===accountId)rows.push({date,type:'transfer',title:f.description||'카드대금 보충 이체',category:'보충 이체',account:`${accountById(f.accountId)?.name||''} → ${accountById(f.targetAccountId)?.name||''}`,amount:-amt,id:f.id,kind:'cashflow'});if(f.targetAccountId===accountId)rows.push({date,type:'transfer',title:f.description||'카드대금 보충 이체',category:'보충 이체',account:`${accountById(f.accountId)?.name||''} → ${accountById(f.targetAccountId)?.name||''}`,amount:amt,id:f.id,kind:'cashflow'});return}if(f.recurringItemId&&!f.recurringOverride){if(!f.settled)return;const date=f.settledDate||f.date||'';if(date.slice(0,7)!==month||date>today())return;const aid=f.settledAccountId||f.accountId;if(aid!==accountId)return;const amt=Number(f.settledAmount||f.amount||0);rows.push({date,type:f.type,title:f.description,category:categoryPath(f.majorCategory,f.subCategory),account:accountById(aid)?.name||'',amount:f.type==='income'?amt:-amt,id:f.id,kind:'cashflow'});return}const date=f.date||'';if(date.slice(0,7)!==month||date>today())return;const amt=Number(f.amount||0);if(f.type==='income'&&f.accountId===accountId)rows.push({date,type:'income',title:f.description,category:categoryPath(f.majorCategory,f.subCategory),account:accountById(f.accountId)?.name||'',amount:amt,id:f.id,kind:'cashflow'});if(f.type==='expense'&&f.accountId===accountId)rows.push({date,type:'expense',title:f.description,category:categoryPath(f.majorCategory,f.subCategory),account:accountById(f.accountId)?.name||'',amount:-amt,id:f.id,kind:'cashflow'});if(f.type==='transfer'){if(f.accountId===accountId)rows.push({date,type:'transfer',title:f.description||'통장 이체',category:'이체',account:`${accountById(f.accountId)?.name||''} → ${accountById(f.targetAccountId)?.name||''}`,amount:-amt,id:f.id,kind:'cashflow'});if(f.targetAccountId===accountId)rows.push({date,type:'transfer',title:f.description||'통장 이체 입금',category:'이체',account:`${accountById(f.accountId)?.name||''} → ${accountById(f.targetAccountId)?.name||''}`,amount:amt,id:f.id,kind:'cashflow'})}});allSchedules().forEach(s=>{const date=s.paidDate||'';if(!s.paid||s.paidAccountId!==accountId||date.slice(0,7)!==month||date>today())return;rows.push({date,type:'cardpay',title:`${s.card?.name||'카드'} 카드값 · ${s.purchase?.merchant||''}`,category:'카드값 출금',account:accountById(s.paidAccountId)?.name||'미지정',amount:-Number(s.amount||0),id:'',kind:'payments'})});return rows.sort((a,b)=>(b.date||'').localeCompare(a.date||''))}
+function reflectedAccountRows279(accountId,month){const rows=[];(state.cashflows||[]).forEach(f=>{if(f.plannedTopup){if(!f.plannedCompleted||(f.plannedCompletedDate||'').slice(0,7)!==month)return;const date=f.plannedCompletedDate,amt=Number(f.amount||0);if(f.accountId===accountId)rows.push({date,type:'transfer',title:f.description||'통장 잔액 보충 이체',category:'보충 이체',account:`${accountById(f.accountId)?.name||''} → ${accountById(f.targetAccountId)?.name||''}`,amount:-amt,id:f.id,kind:'cashflow'});if(f.targetAccountId===accountId)rows.push({date,type:'transfer',title:f.description||'통장 잔액 보충 이체',category:'보충 이체',account:`${accountById(f.accountId)?.name||''} → ${accountById(f.targetAccountId)?.name||''}`,amount:amt,id:f.id,kind:'cashflow'});return}if(f.recurringItemId&&!f.recurringOverride){if(!f.settled)return;const date=f.settledDate||f.date||'';if(date.slice(0,7)!==month||date>today())return;const aid=f.settledAccountId||f.accountId;if(aid!==accountId)return;const amt=Number(f.settledAmount||f.amount||0);rows.push({date,type:f.type,title:f.description,category:categoryPath(f.majorCategory,f.subCategory),account:accountById(aid)?.name||'',amount:f.type==='income'?amt:-amt,id:f.id,kind:'cashflow'});return}const date=f.date||'';if(date.slice(0,7)!==month||date>today())return;const amt=Number(f.amount||0);if(f.type==='income'&&f.accountId===accountId)rows.push({date,type:'income',title:f.description,category:categoryPath(f.majorCategory,f.subCategory),account:accountById(f.accountId)?.name||'',amount:amt,id:f.id,kind:'cashflow'});if(f.type==='expense'&&f.accountId===accountId)rows.push({date,type:'expense',title:f.description,category:categoryPath(f.majorCategory,f.subCategory),account:accountById(f.accountId)?.name||'',amount:-amt,id:f.id,kind:'cashflow'});if(f.type==='transfer'){if(f.accountId===accountId)rows.push({date,type:'transfer',title:f.description||'통장 이체',category:'이체',account:`${accountById(f.accountId)?.name||''} → ${accountById(f.targetAccountId)?.name||''}`,amount:-amt,id:f.id,kind:'cashflow'});if(f.targetAccountId===accountId)rows.push({date,type:'transfer',title:f.description||'통장 이체 입금',category:'이체',account:`${accountById(f.accountId)?.name||''} → ${accountById(f.targetAccountId)?.name||''}`,amount:amt,id:f.id,kind:'cashflow'})}});allSchedules().forEach(s=>{const date=s.paidDate||'';if(!s.paid||s.paidAccountId!==accountId||date.slice(0,7)!==month||date>today())return;rows.push({date,type:'cardpay',title:`${s.card?.name||'카드'} 카드값 · ${s.purchase?.merchant||''}`,category:'카드값 출금',account:accountById(s.paidAccountId)?.name||'미지정',amount:-Number(s.amount||0),id:'',kind:'payments'})});return rows.sort((a,b)=>(b.date||'').localeCompare(a.date||''))}
 
 function openOverdraftTopup280(targetAccountId,date,amount,month){const sources=(state.accounts||[]).filter(a=>a.id!==targetAccountId&&isOverdraftAccount280(a));if(!sources.length){alert('마이너스통장을 먼저 등록하고 한도액을 입력해주세요.');openAccountModal();return}const target=accountById(targetAccountId);document.getElementById('topupTargetAccount').value=targetAccountId;document.getElementById('topupBillingMonth').value=month||date.slice(0,7);document.getElementById('topupTargetName').value=target?.name||'';document.getElementById('topupDate').value=date;document.getElementById('topupAmount').value=Number(amount||0).toLocaleString('ko-KR');document.getElementById('topupMemo').value=`${target?.name||'카드결제 통장'} 카드대금 보충`;document.getElementById('topupSourceAccount').innerHTML=sources.map(a=>{const p=accountProjection279(a.id,month||date.slice(0,7)),limit=overdraftLimit280(a),remaining=limit?Math.max(0,limit-Math.abs(Math.min(0,p.projected))):0;return `<option value="${a.id}">${esc(a.name)} · 예상잔액 ${signedWon279(p.projected)} · 남은한도 ${limit?won(remaining):'미설정'}</option>`}).join('');document.getElementById('topupPreview').innerHTML=`<b>${esc(target?.name||'카드결제 통장')}에 ${won(amount)} 부족 예상</b><br>이 등록은 소비가 아니라 계좌 간 이체 예정이며, 실제 이체 완료 전에는 통장 실제 잔액에 반영되지 않습니다.`;installMoneyInputs();openDialog('overdraftTopupModal')}
-document.getElementById('overdraftTopupForm')?.addEventListener('submit',e=>{e.preventDefault();const source=document.getElementById('topupSourceAccount').value,target=document.getElementById('topupTargetAccount').value,date=document.getElementById('topupDate').value,amount=Math.max(0,parseMoney(document.getElementById('topupAmount').value)),src=accountById(source);if(!source||!target||source===target||!date||!amount){alert('이체 정보를 확인해주세요.');return}const limit=overdraftLimit280(src),p=accountProjection279(source,date.slice(0,7)),after=p.projected-amount;if(limit&&after < -limit&&!confirm(`이체 예정 후 마이너스통장 한도를 ${won(Math.abs(after)-limit)} 초과합니다. 그래도 등록할까요?`))return;state.cashflows.push({id:uid('flow'),type:'transfer',date,accountId:source,targetAccountId:target,description:'카드대금 보충 이체',amount,majorCategoryId:'',subCategoryId:'',majorCategory:'',subCategory:'',memo:document.getElementById('topupMemo').value.trim(),plannedTopup:true,plannedCompleted:false,plannedCompletedDate:'',cardBillingMonth:document.getElementById('topupBillingMonth').value});closeDialog('overdraftTopupModal');saveState()})
+document.getElementById('overdraftTopupForm')?.addEventListener('submit',e=>{e.preventDefault();const source=document.getElementById('topupSourceAccount').value,target=document.getElementById('topupTargetAccount').value,date=document.getElementById('topupDate').value,amount=Math.max(0,parseMoney(document.getElementById('topupAmount').value)),src=accountById(source);if(!source||!target||source===target||!date||!amount){alert('이체 정보를 확인해주세요.');return}const limit=overdraftLimit280(src),p=accountProjection279(source,date.slice(0,7)),after=p.projected-amount;if(limit&&after < -limit&&!confirm(`이체 예정 후 마이너스통장 한도를 ${won(Math.abs(after)-limit)} 초과합니다. 그래도 등록할까요?`))return;state.cashflows.push({id:uid('flow'),type:'transfer',date,accountId:source,targetAccountId:target,description:'통장 잔액 보충 이체',amount,majorCategoryId:'',subCategoryId:'',majorCategory:'',subCategory:'',memo:document.getElementById('topupMemo').value.trim(),plannedTopup:true,plannedCompleted:false,plannedCompletedDate:'',cardBillingMonth:document.getElementById('topupBillingMonth').value});closeDialog('overdraftTopupModal');saveState()})
 function completeTopup280(id){const f=state.cashflows.find(x=>x.id===id&&x.plannedTopup);if(!f)return;if(!confirm(`${won(f.amount)} 이체를 실제로 완료했나요? 완료 처리하면 두 통장 실제 잔액에 반영됩니다.`))return;f.plannedCompleted=true;f.plannedCompletedDate=today();saveState();closeDialog('monthlyDetailModal')}
 function deleteTopup280(id){if(!confirm('이 보충 이체 예정을 삭제할까요?'))return;state.cashflows=state.cashflows.filter(x=>x.id!==id);saveState();closeDialog('monthlyDetailModal')}
 
@@ -1868,7 +1880,7 @@ renderAll();
 
 
 <script id="v281-overdraft-priority-script">
-// ===== 28.1차 카드결제통장 자체 마이너스한도는 마지막에 사용 =====
+// ===== 28.2차 카드결제통장 자체 마이너스한도는 마지막에 사용 =====
 function isCardSettlementAccount281(accountId){
   return (state.cards||[]).some(c=>c.cardType!=='debit'&&c.accountId===accountId);
 }
@@ -1971,9 +1983,183 @@ document.getElementById('overdraftTopupForm')?.addEventListener('submit',e=>{
   const capacity=topupSourceCapacity281(source,date,month),need=Math.max(0,Number(e.currentTarget.dataset.need||0));
   if(amount>capacity){alert(`선택한 마이너스통장에서 현재 이체 가능한 금액은 ${won(capacity)}입니다.`);updateTopupSourcePreview281();return}
   if(amount>need&&!confirm(`현재 보충 필요액 ${won(need)}보다 ${won(amount-need)} 많이 등록됩니다. 계속할까요?`))return;
-  state.cashflows.push({id:uid('flow'),type:'transfer',date,accountId:source,targetAccountId:target,description:'카드대금 보충 이체',amount,majorCategoryId:'',subCategoryId:'',majorCategory:'',subCategory:'',memo:document.getElementById('topupMemo').value.trim(),plannedTopup:true,plannedCompleted:false,plannedCompletedDate:'',cardBillingMonth:month,overdraftPriorityMode:'external-first'});
+  state.cashflows.push({id:uid('flow'),type:'transfer',date,accountId:source,targetAccountId:target,description:'통장 잔액 보충 이체',amount,majorCategoryId:'',subCategoryId:'',majorCategory:'',subCategory:'',memo:document.getElementById('topupMemo').value.trim(),plannedTopup:true,plannedCompleted:false,plannedCompletedDate:'',cardBillingMonth:month,overdraftPriorityMode:'external-first'});
   closeDialog('overdraftTopupModal');saveState();
 },true);
+
+renderAll();
+</script>
+
+
+<script id="v282-all-outflow-purpose-funding-script">
+// ===== 28.2차 모든 출금 보충 + 목적자금 미충전 대신 결제 =====
+function ensurePurposeFunding282(){
+  state.purposeFundingStatus=state.purposeFundingStatus&&typeof state.purposeFundingStatus==='object'?state.purposeFundingStatus:{};
+  state.cashflows=(state.cashflows||[]).map(f=>({...f,budgetSource:f.budgetSource||'personal'}));
+}
+function purposeFundingKey282(fundId,month){return `${fundId}|${month}`}
+function purposeFundingState282(fundId,month){ensurePurposeFunding282();return state.purposeFundingStatus[purposeFundingKey282(fundId,month)]||'unknown'}
+function purposeMonthExpenseRows282(fundId,month){
+  const rows=[];
+  (state.purchases||[]).forEach(p=>{if((p.budgetSource||'personal')===fundId&&(p.date||'').slice(0,7)===month)rows.push({date:p.date||`${month}-01`,amount:Number(p.totalAmount||0),kind:'purchase',id:p.id,title:p.merchant||'카드 사용'})});
+  (state.cashflows||[]).forEach(f=>{if(f.type==='expense'&&(f.budgetSource||'personal')===fundId&&(f.date||'').slice(0,7)===month)rows.push({date:f.date||`${month}-01`,amount:Number(f.amount||0),kind:'cashflow',id:f.id,title:f.description||'통장 지출'})});
+  return rows.sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+}
+function purposeSpent282(fundId,month){return purposeMonthExpenseRows282(fundId,month).reduce((s,r)=>s+Number(r.amount||0),0)}
+function fundMonthSequence282(fund,endMonth){const out=[];let m=fund.startMonth||endMonth,guard=0;while(m<=endMonth&&guard<240){out.push(m);m=addMonths(m,1);guard++}return out}
+function actualPurposeBalanceBefore282(fund,month){
+  if(!fund||month<(fund.startMonth||month))return Number(fund?.openingSaved||0);
+  if(fund.carryover!=='carry')return 0;
+  let bal=Number(fund.openingSaved||0);
+  for(const m of fundMonthSequence282(fund,addMonths(month,-1))){
+    if(purposeFundingState282(fund.id,m)!=='unfunded')bal+=Number(fund.monthlyAmount||0);
+    bal-=purposeSpent282(fund.id,m);
+  }
+  return bal;
+}
+function purposeUnfundedAdvance282(fund,month){
+  if(!fund||purposeFundingState282(fund.id,month)!=='unfunded')return 0;
+  const spent=purposeSpent282(fund.id,month);
+  if(fund.carryover!=='carry')return Math.max(0,spent);
+  const before=actualPurposeBalanceBefore282(fund,month),defBefore=Math.max(0,-before),after=before-spent,defAfter=Math.max(0,-after);
+  return Math.max(0,defAfter-defBefore);
+}
+function purposeAutoDebt282(fundId,month){return (state.debts||[]).find(d=>d.autoPurposeReceivable&&d.purposeFundId===fundId&&d.purposeMonth===month)}
+function syncPurposeReceivable282(fundId,month){
+  ensurePurposeFunding282();const fund=purposeFundById(fundId),status=purposeFundingState282(fundId,month),existing=purposeAutoDebt282(fundId,month);if(!fund)return;
+  const processed=existing?(existing.payments||[]).reduce((s,p)=>s+Number(p.amount||0),0)+Number(existing.waivedAmount||0):0;
+  if(status!=='unfunded'){
+    if(existing&&processed===0)state.debts=state.debts.filter(d=>d.id!==existing.id);
+    return;
+  }
+  const rows=purposeMonthExpenseRows282(fundId,month),advance=purposeUnfundedAdvance282(fund,month);
+  if(advance<=0){if(existing&&processed===0)state.debts=state.debts.filter(d=>d.id!==existing.id);return}
+  const provider=(fund.provider||'목적자금 제공자').trim(),date=rows[0]?.date||`${month}-01`,memo=`${fund.name} ${month} 충전 미수령으로 내 돈 대신 결제 · 카드/통장 사용 ${won(purposeSpent282(fundId,month))}`;
+  if(existing){existing.type='receivable';existing.person=provider;existing.title=`${month} ${fund.name} 미충전 대신 결제`;existing.amount=Math.max(advance,processed);existing.originalAmount=Math.max(Number(existing.originalAmount||0),advance,processed);existing.date=date;existing.memo=memo;existing.purposeFundId=fundId;existing.purposeMonth=month;existing.autoPurposeReceivable=true}
+  else state.debts.push({id:uid('debt'),type:'receivable',person:provider,title:`${month} ${fund.name} 미충전 대신 결제`,amount:advance,originalAmount:advance,date,dueDate:'',memo,payments:[],waivedAmount:0,closedReason:'',sourceCashflowId:'',purposeFundId:fundId,purposeMonth:month,autoPurposeReceivable:true});
+}
+function syncAllPurposeReceivables282(){
+  ensurePurposeFunding282();Object.entries(state.purposeFundingStatus||{}).forEach(([key,status])=>{if(status!=='unfunded')return;const i=key.lastIndexOf('|');if(i>0)syncPurposeReceivable282(key.slice(0,i),key.slice(i+1))});
+}
+
+// Preserve the new state fields during local/cloud restore.
+const normalizeStateBefore282=normalizeState;
+normalizeState=function(raw){
+  const n=normalizeStateBefore282(raw),rawDebts=Array.isArray(raw?.debts)?raw.debts:[];
+  n.purposeFundingStatus=raw?.purposeFundingStatus&&typeof raw.purposeFundingStatus==='object'?{...raw.purposeFundingStatus}:{};
+  n.cashflows=(n.cashflows||[]).map(f=>({...f,budgetSource:f.budgetSource||'personal'}));
+  n.debts=(n.debts||[]).map(d=>{const src=rawDebts.find(x=>x.id===d.id)||{};return {...d,purposeFundId:src.purposeFundId||'',purposeMonth:src.purposeMonth||'',autoPurposeReceivable:Boolean(src.autoPurposeReceivable)}});
+  return n;
+};
+// The initial page state was loaded before this version's normalizer was installed, so restore the new top-level fields once from local storage.
+try{const raw282=JSON.parse(localStorage.getItem(STORE_KEY)||'null');if(raw282){state.purposeFundingStatus=raw282.purposeFundingStatus&&typeof raw282.purposeFundingStatus==='object'?{...raw282.purposeFundingStatus}:{};const rawDebts282=Array.isArray(raw282.debts)?raw282.debts:[];state.debts=(state.debts||[]).map(d=>{const src=rawDebts282.find(x=>x.id===d.id)||{};return {...d,purposeFundId:src.purposeFundId||d.purposeFundId||'',purposeMonth:src.purposeMonth||d.purposeMonth||'',autoPurposeReceivable:Boolean(src.autoPurposeReceivable||d.autoPurposeReceivable)}})}}catch(err){console.warn('28.2 상태 확장 복원 실패',err)}
+ensurePurposeFunding282();
+
+// Direct account expenses can also use a purpose fund.
+function fillCashflowBudgetSources282(selected='personal'){
+  const el=document.getElementById('cashflowBudgetSource');if(!el)return;
+  el.innerHTML='<option value="personal">내 생활비</option>'+(state.purposeFunds||[]).filter(f=>f.active!==false).map(f=>`<option value="${f.id}">목적자금 · ${esc(f.name)}</option>`).join('');
+  el.value=[...el.options].some(o=>o.value===selected)?selected:'personal';
+}
+const renderSelectorsBefore282=renderSelectors;
+renderSelectors=function(){renderSelectorsBefore282();fillCashflowBudgetSources282(document.getElementById('cashflowBudgetSource')?.value||'personal')};
+const updateCashflowUIBefore282=updateCashflowUI;
+updateCashflowUI=function(majorId='',subId=''){
+  updateCashflowUIBefore282(majorId,subId);const type=document.getElementById('cashflowType')?.value||'income',wrap=document.getElementById('cashflowBudgetSourceWrap');if(wrap)wrap.style.display=type==='expense'?'block':'none';if(type!=='expense')fillCashflowBudgetSources282('personal');
+};
+const openCashflowModalBefore282=openCashflowModal;
+openCashflowModal=function(type='income'){openCashflowModalBefore282(type);fillCashflowBudgetSources282('personal');updateCashflowUI()};
+const editCashflowBefore282=editCashflow;
+editCashflow=function(id){const f=state.cashflows.find(x=>x.id===id);editCashflowBefore282(id);fillCashflowBudgetSources282(f?.budgetSource||'personal');updateCashflowUI(f?.majorCategoryId||'',f?.subCategoryId||'');fillCashflowBudgetSources282(f?.budgetSource||'personal')};
+
+// Replace the original cashflow submit path so the budget source is saved reliably.
+document.getElementById('cashflowForm')?.addEventListener('submit',e=>{
+  e.preventDefault();e.stopImmediatePropagation();if(!e.currentTarget.reportValidity())return;
+  const id=document.getElementById('cashflowId').value,type=document.getElementById('cashflowType').value,accountId=document.getElementById('cashflowAccount').value,target=document.getElementById('cashflowTarget').value;
+  if(type==='transfer'&&accountId===target){alert('보내는 통장과 받는 통장을 다르게 선택해주세요.');return}
+  const cat=type==='transfer'?{majorCategoryId:'',subCategoryId:'',majorCategory:'',subCategory:''}:selectedCategory(document.getElementById('cashflowMajor'),document.getElementById('cashflowSub'));
+  if(!cat){alert('대분류와 소분류를 선택해주세요.');return}
+  const oldFlow=id?state.cashflows.find(x=>x.id===id):null,recurringMeta=oldFlow?.recurringItemId?{recurringItemId:oldFlow.recurringItemId,recurringMonth:oldFlow.recurringMonth,generatedByRecurring:true,recurringOverride:true}:{};
+  const f={id:id||uid('flow'),type,date:document.getElementById('cashflowDate').value,accountId,targetAccountId:type==='transfer'?target:'',description:document.getElementById('cashflowDescription').value.trim(),amount:parseMoney(document.getElementById('cashflowAmount').value),...cat,memo:document.getElementById('cashflowMemo').value.trim(),...recurringMeta,debtId:oldFlow?.debtId||'',budgetSource:type==='expense'?(document.getElementById('cashflowBudgetSource').value||'personal'):'personal'};
+  const debtType=linkedDebtType(type,cat);
+  if(debtType){let debt=f.debtId?state.debts.find(d=>d.id===f.debtId):null;const label=debtType==='receivable'?'대여금':'차입금';if(debt&&debt.type!==debtType){const processed=(debt.payments||[]).reduce((x,p)=>x+Number(p.amount||0),0)+Number(debt.waivedAmount||0);if(processed>0){alert('연결된 받을 돈·줄 돈에 처리내역이 있어 거래 종류를 바꿀 수 없습니다.');return}state.debts=state.debts.filter(d=>d.id!==debt.id);debt=null;f.debtId=''}if(!debt){debt={id:uid('debt'),type:debtType,person:f.description,title:`${f.description} ${label}`,amount:f.amount,originalAmount:f.amount,date:f.date,dueDate:'',memo:f.memo,payments:[],waivedAmount:0,closedReason:'',sourceCashflowId:f.id};state.debts.push(debt);f.debtId=debt.id}else{const processed=(debt.payments||[]).reduce((x,p)=>x+Number(p.amount||0),0)+Number(debt.waivedAmount||0);if(f.amount<processed){alert('이미 처리된 금액보다 원래 금액을 작게 수정할 수 없습니다.');return}debt.type=debtType;debt.person=f.description;debt.title=`${f.description} ${label}`;debt.amount=f.amount;debt.originalAmount=Math.max(Number(debt.originalAmount||0),f.amount);debt.date=f.date;debt.memo=f.memo;debt.sourceCashflowId=f.id}}else if(oldFlow?.debtId){const debt=state.debts.find(d=>d.id===oldFlow.debtId);if(debt&&((debt.payments||[]).length||Number(debt.waivedAmount||0)>0)){alert('연결된 받을 돈·줄 돈에 처리내역이 있어 분류를 변경할 수 없습니다.');return}state.debts=state.debts.filter(d=>d.id!==oldFlow.debtId);f.debtId=''}
+  state.cashflows=id?state.cashflows.map(x=>x.id===id?f:x):[...state.cashflows,f];closeDialog('cashflowModal');saveState();
+},true);
+
+// Purpose-fund spending includes both card purchases and direct account expenses.
+purposeSpent=function(fundId,month){return purposeSpent282(fundId,month)};
+purposeAvailable=function(f,month){
+  if(month<f.startMonth)return 0;const funded=f.carryover==='carry'?monthsBetween(f.startMonth,month)*Number(f.monthlyAmount||0):Number(f.monthlyAmount||0);
+  let spent=0;if(f.carryover==='carry'){for(const m of fundMonthSequence282(f,month))spent+=purposeSpent282(f.id,m)}else spent=purposeSpent282(f.id,month);return funded-spent;
+};
+personalMonthExpense=function(m){return (state.purchases||[]).filter(p=>(p.date||'').slice(0,7)===m&&(p.budgetSource||'personal')==='personal').reduce((s,p)=>s+Number(p.totalAmount||0),0)+(state.cashflows||[]).filter(f=>f.type==='expense'&&(f.date||'').slice(0,7)===m&&(f.budgetSource||'personal')==='personal').reduce((s,f)=>s+Number(f.amount||0),0)};
+const monthSummaryBefore282=monthSummary;
+monthSummary=function(month){
+  const s=monthSummaryBefore282(month),excluded=(state.cashflows||[]).filter(f=>f.type==='income'&&(f.date||'').slice(0,7)===month&&f.debtId&&state.debts.some(d=>d.id===f.debtId&&d.autoPurposeReceivable)).reduce((sum,f)=>sum+Number(f.amount||0),0),income=Math.max(0,Number(s.income||0)-excluded),budgetBase=s.hasBudget?Number(s.budgetBase||0):income,remainingBudget=budgetBase-personalMonthExpense(month)-plannedSavingsForMonth(month);return {...s,income,budgetBase,remainingBudget};
+};
+const budgetMetricsBefore282=budgetMetrics27;
+budgetMetrics27=function(month){const base=budgetMetricsBefore282(month),purpose=purposeBudgetSummary273(month),personalSpent=personalMonthExpense(month);return {...base,personalSpent,purposeSpentTotal:purpose.usedTotal,purposeAvailableTotal:purpose.availableTotal,purposeFundDetails:purpose.details,purposeMonthlyFundingTotal:purpose.monthlyFundingTotal,remainingBudget:Number(base.budgetBase||0)-personalSpent-Number(base.savingsPlanned||0)}};
+
+function purposeFundingStatusHtml282(fund,month){
+  const status=purposeFundingState282(fund.id,month),debt=purposeAutoDebt282(fund.id,month),remaining=debt?debtRemaining(debt):0,advance=purposeUnfundedAdvance282(fund,month),spent=purposeSpent282(fund.id,month);
+  let cls='unknown',label='충전 여부 미확인';if(status==='received'){cls='received';label='충전 받음'}else if(status==='unfunded'&&debt&&remaining===0){cls='settled';label='미충전분 정산 완료'}else if(status==='unfunded'){cls='unfunded';label='아직 못 받음'}
+  const note=status==='unfunded'?`이달 카드·통장 사용 ${won(spent)} · 실제 대신 낸 금액 ${won(advance)}${remaining?` · 받을 돈 <strong>${won(remaining)}</strong>`:''}`:status==='received'?`이달 충전금 ${won(fund.monthlyAmount||0)}을 받은 것으로 관리합니다.`:`충전받지 못했다면 사용액 중 실제 대신 낸 금액을 받을 돈으로 자동 기록합니다.`;
+  return `<div class="purpose-funding-box-282"><div class="purpose-funding-head-282"><span>${Number(month.slice(5,7))}월 충전 상태</span><span class="funding-status-282 ${cls}">${label}</span></div><div class="purpose-receivable-note-282">${note}</div><div class="purpose-funding-actions-282"><button type="button" class="small-btn" onclick='markPurposeFundingReceived282(${JSON.stringify(fund.id)},${JSON.stringify(month)})'>충전 받음</button><button type="button" class="small-btn" onclick='markPurposeFundingUnfunded282(${JSON.stringify(fund.id)},${JSON.stringify(month)})'>아직 못 받음</button>${debt&&remaining?`<button type="button" class="small-btn primary" onclick='openDebtPaymentModal(${JSON.stringify(debt.id)})'>받을 돈 입금 처리</button>`:''}</div></div>`;
+}
+function markPurposeFundingUnfunded282(fundId,month){
+  const fund=purposeFundById(fundId);if(!fund)return;if(!fund.provider){const name=prompt('받을 돈의 상대방 이름을 입력해주세요.',fund.provider||'');if(name===null||!name.trim())return;fund.provider=name.trim()}
+  state.purposeFundingStatus[purposeFundingKey282(fundId,month)]='unfunded';saveState();
+}
+function markPurposeFundingReceived282(fundId,month){
+  const debt=purposeAutoDebt282(fundId,month);if(debt&&debtRemaining(debt)>0){if(confirm(`이미 ${won(debtRemaining(debt))}의 받을 돈이 있습니다. 지금 입금 받은 금액을 통장에 반영할까요?`))openDebtPaymentModal(debt.id);return}
+  state.purposeFundingStatus[purposeFundingKey282(fundId,month)]='received';saveState();
+}
+const renderBudgetBefore282=renderBudget;
+renderBudget=function(){
+  renderBudgetBefore282();const m=document.getElementById('mainMonth')?.value||currentMonth(),list=document.getElementById('purposeFundList');if(!list)return;
+  list.innerHTML=(state.purposeFunds||[]).length?(state.purposeFunds||[]).map(f=>{const used=purposeSpent(f.id,m),available=purposeAvailable(f,m),saved=Number(f.openingSaved||0)+linkedFundSavings27(f.id,m),target=Number(f.targetAmount||0),pct=target>0?Math.min(100,saved/target*100):0;return `<div class="two-line-row"><div class="row-top"><span>${esc(f.name)} <span class="badge ${f.active?'income':'fixed'}">${f.active?'사용 중':'일시정지'}</span></span><span>${available<0?'-':''}${won(Math.abs(available))}</span></div><div class="row-sub"><span>지출용: 매월 ${won(f.monthlyAmount)} · ${m} 사용 ${won(used)} · ${f.carryover==='carry'?'잔액 이월':'매월 초기화'}${target>0?`<br>저축목표: ${won(saved)} / ${won(target)} (${pct.toFixed(1)}%)`:saved>0?`<br>연결 저축 누계: ${won(saved)}`:''}</span><span><button class="small-btn" onclick="editPurposeFund('${f.id}')">수정</button><button class="small-btn danger" onclick="deletePurposeFund('${f.id}')">삭제</button></span></div>${purposeFundingStatusHtml282(f,m)}</div>`}).join(''):'<div class="empty">등록된 목적자금이 없습니다.</div>';
+};
+const deletePurposeFundBefore282=deletePurposeFund;
+deletePurposeFund=function(id){
+  const f=purposeFundById(id);if(!f)return;const used=(state.purchases||[]).some(p=>(p.budgetSource||'personal')===id)||(state.cashflows||[]).some(x=>x.type==='expense'&&(x.budgetSource||'personal')===id);
+  if(used){if(!confirm('이 목적자금을 사용한 카드·통장 지출이 있습니다. 삭제하면 해당 내역은 내 생활비로 변경됩니다. 계속할까요?'))return;(state.purchases||[]).forEach(p=>{if((p.budgetSource||'personal')===id)p.budgetSource='personal'});(state.cashflows||[]).forEach(x=>{if(x.type==='expense'&&(x.budgetSource||'personal')===id)x.budgetSource='personal'})}else if(!confirm('이 목적자금을 삭제할까요?'))return;
+  state.purposeFunds=state.purposeFunds.filter(x=>x.id!==id);Object.keys(state.purposeFundingStatus||{}).forEach(k=>{if(k.startsWith(id+'|'))delete state.purposeFundingStatus[k]});state.debts=state.debts.filter(d=>!(d.autoPurposeReceivable&&d.purposeFundId===id&&!(d.payments||[]).length&&!Number(d.waivedAmount||0)));saveState();
+};
+
+// Every new negative step in a card-settlement account gets its own top-up suggestion.
+accountTimeline280=function(accountId,month){
+  const a=accountById(accountId),current=accountBalance(accountId),pending=pendingAccountItems280(accountId,month),groups=[];let balance=current,minBalance=current,episodeMaxNeed=0;
+  const map=new Map();pending.forEach(r=>{if(!map.has(r.date))map.set(r.date,[]);map.get(r.date).push(r)});
+  [...map.entries()].sort((x,y)=>x[0].localeCompare(y[0])).forEach(([date,items])=>{
+    items.sort((x,y)=>pendingPriority280(x)-pendingPriority280(y));const start=balance,net=items.reduce((sum,r)=>sum+Number(r.amount||0),0);balance+=net;minBalance=Math.min(minBalance,balance);
+    const limit=overdraftLimit280(a),floor=isOverdraftAccount280(a)&&limit>0?-limit:0,shortage=Math.max(0,floor-balance),hasCard=items.some(r=>r.type==='cardDue'),cumulativeNeed=isCardSettlementAccount281(accountId)?Math.max(0,-balance):0;
+    if(cumulativeNeed===0)episodeMaxNeed=0;const topupNeed=Math.max(0,cumulativeNeed-episodeMaxNeed);episodeMaxNeed=Math.max(episodeMaxNeed,cumulativeNeed);
+    const outflowLabels=items.filter(r=>Number(r.amount||0)<0).map(r=>r.label);
+    groups.push({date,items,start,net,balance,shortage,hasCard,cumulativeNeed,topupNeed,outflowLabels});
+  });
+  return {account:a,current,pending,days:groups,projected:balance,minBalance,firstShortage:groups.find(d=>d.shortage>0)||null,firstTopupNeed:groups.find(d=>d.topupNeed>0)||null};
+};
+accountProjection279=function(accountId,month){const t=accountTimeline280(accountId,month),incoming=t.pending.filter(x=>x.amount>0).reduce((s,x)=>s+Number(x.amount||0),0),outgoing=t.pending.filter(x=>x.amount<0).reduce((s,x)=>s+Math.abs(Number(x.amount||0)),0),net=incoming-outgoing,a=t.account,limit=overdraftLimit280(a),projectedUsed=Math.abs(Math.min(0,t.projected)),remainingLimit=limit?Math.max(0,limit-projectedUsed):0;return {account:a,current:t.current,pending:t.pending,incoming,outgoing,net,projected:t.projected,minBalance:t.minBalance,days:t.days,firstShortage:t.firstShortage,firstTopupNeed:t.firstTopupNeed,overdraftLimit:limit,projectedUsed,remainingLimit}};
+dailyTimelineHtml280=function(accountId,month,p){
+  if(!p.days.length)return '<div class="empty">이 달에 예정된 입출금이 없습니다.</div>';
+  return `<div class="daily-balance-list-280">${p.days.map(d=>{const cls=d.shortage?'shortage':d.topupNeed?'additional-topup-282':'';const end=d.shortage?`한도 초과 부족 ${won(d.shortage)} ›`:d.topupNeed?`외부 보충 추가 ${won(d.topupNeed)} ›`:'내역 ›';return `<button type="button" class="daily-balance-row-280 ${cls}" onclick='showTimelineDay280(${JSON.stringify(accountId)},${JSON.stringify(month)},${JSON.stringify(d.date)})'><div class="daily-balance-top-280"><span>${esc(d.date)} · ${d.items.length}건</span><span class="${d.balance<0?'negative':'positive'}">${signedWon279(d.balance)}</span></div><div class="daily-balance-sub-280"><span>당일 증감 ${signedWon279(d.net)} · ${d.items.map(x=>x.label).join(', ')}</span><span>${end}</span></div></button>`}).join('')}</div>`;
+};
+topupSuggestions280=function(accountId,month,p){
+  const target=accountById(accountId),days=p.days.filter(d=>d.topupNeed>0);if(!days.length)return '';
+  return days.map(d=>{const sources=availableTopupSources281(accountId,d.date,month),total=sources.reduce((sum,x)=>sum+x.capacity,0),fallback=Math.max(0,d.topupNeed-total),reason=(d.outflowLabels||[]).join('·')||'예정 출금';if(total<=0)return `<div class="cash-warning-280 fallback-281"><b>${d.date} ${esc(reason)} 후 ${won(d.topupNeed)} 추가 보충 필요</b><div class="source-note-281">사용 가능한 다른 마이너스통장이 없어 카드결제 통장 자체 한도 또는 별도 입금이 필요합니다.</div></div>`;return `<div class="cash-warning-280 general-topup-282"><b>${d.date} ${esc(reason)} 전에 다른 마이너스통장에서 ${won(d.topupNeed)} 추가 보충 필요</b><div class="source-note-281">다른 마이너스통장 사용 가능 합계 <strong>${won(total)}</strong>${fallback?` · 남는 ${won(fallback)}은 이 통장 자체 한도로 계산`:''}</div><div class="topup-actions-280"><button type="button" class="small-btn primary" onclick='openOverdraftTopup280(${JSON.stringify(accountId)},${JSON.stringify(d.date)},${Number(d.topupNeed)},${JSON.stringify(month)})'>다른 마이너스통장에서 ${won(d.topupNeed)} 이체 예정</button></div></div>`}).join('');
+};
+openOverdraftTopup280=function(targetAccountId,date,amount,month){
+  const m=month||date.slice(0,7),sources=availableTopupSources281(targetAccountId,date,m),target=accountById(targetAccountId);if(!sources.length){alert('현재 사용 가능한 다른 마이너스통장 한도가 없습니다.');return}
+  const form=document.getElementById('overdraftTopupForm');form.dataset.need=String(Math.max(0,Number(amount||0)));document.getElementById('topupTargetAccount').value=targetAccountId;document.getElementById('topupBillingMonth').value=m;document.getElementById('topupTargetName').value=target?.name||'';document.getElementById('topupDate').value=date;document.getElementById('topupMemo').value=`${target?.name||'통장'} 예정 출금 잔액 보충`;document.getElementById('topupSourceAccount').innerHTML=sources.map(x=>`<option value="${x.account.id}" data-capacity="${x.capacity}" data-name="${esc(x.account.name)}">${esc(x.account.name)} · 사용 가능 ${won(x.capacity)} · 한도 ${won(overdraftLimit280(x.account))}</option>`).join('');updateTopupSourcePreview281();installMoneyInputs();openDialog('overdraftTopupModal');
+};
+
+// Save-time synchronization keeps auto receivables in step with edits and deletions.
+const saveStateBefore282=saveState;
+saveState=function(){ensurePurposeFunding282();syncAllPurposeReceivables282();saveStateBefore282()};
+
+// Include monthly funding status in selective budget backups.
+const buildBackupBefore282=buildBackup27;
+buildBackup27=function(scope='all'){const data=buildBackupBefore282(scope);if(scope==='budget'){data.state.purposeFundingStatus=JSON.parse(JSON.stringify(state.purposeFundingStatus||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='28.2';return data};
 
 renderAll();
 </script>
