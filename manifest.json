@@ -2,7 +2,7 @@
   "name": "가계부",
   "short_name": "가계부",
   "description": "카드·통장·예산·목적자금을 편안하게 관리하는 가계부",
-  "start_url": "./?v=29",
+  "start_url": "./?v=29.1",
   "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -10,13 +10,13 @@
   "lang": "ko-KR",
   "icons": [
     {
-      "src": "icon-192.png?v=29",
+      "src": "icon-192.png?v=29.1",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icon-512.png?v=29",
+      "src": "icon-512.png?v=29.1",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
