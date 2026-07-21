@@ -7,9 +7,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="가계부" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=29.2" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=29.2" />
-  <title>가계부 29.2차</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=29.4" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=29.4" />
+  <title>가계부 29.4차</title>
   <link rel="manifest" href="manifest.json" />
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -255,11 +255,11 @@
 </style>
 </head>
 <body>
-<div id="appSplash" role="status" aria-label="가계부 실행 중"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">29.2차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div id="appSplash" role="status" aria-label="가계부 실행 중"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">29.4차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
   <header class="topbar">
-    <div class="brand"><div class="brand-title"><span class="brand-heart" aria-hidden="true">♥</span><div><h1>가계부 <span class="version-pill">29.2차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+    <div class="brand"><div class="brand-title"><span class="brand-heart" aria-hidden="true">♥</span><div><h1>가계부 <span class="version-pill">29.4차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
     <div class="desktop-actions">
       <button type="button" class="ghost-btn" onclick="openAccountModal()">통장 등록</button>
       <button type="button" class="ghost-btn" onclick="openCardModal()">카드 등록</button>
@@ -442,7 +442,7 @@
     </section>
 
     <section class="panel" id="settings"><div class="section"><div class="section-head"><h2>백업·설정·기능 안내</h2></div><div class="settings-grid">
-      <div class="settings-box"><h3>현재 앱 버전</h3><p><b>가계부 29.2차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 29.2차</span></div>
+      <div class="settings-box"><h3>현재 앱 버전</h3><p><b>가계부 29.4차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 29.4차</span></div>
       <div class="settings-box"><h3>☁️ Firebase 자동 동기화</h3><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p><div class="actions"><button type="button" class="small-btn primary" onclick="openAuthModal('login')">로그인</button><button type="button" class="small-btn" onclick="forceCloudUpload()">현재 자료를 클라우드에 저장</button></div></div>
       <div class="settings-box"><h3>선택 백업</h3><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select><button type="button" class="small-btn primary" onclick="exportBackup()">백업 파일 저장</button></div><div id="lastBackupProof" class="backup-proof"></div></div>
       <div class="settings-box"><h3>백업 불러오기</h3><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input type="file" id="backupInput" accept=".json" onchange="importBackup(event)"></div>
@@ -658,7 +658,7 @@ function syncRecurringCashflows(targetMonth=currentMonth()){
   let changed=false;const itemMap=new Map(state.recurringItems.map(r=>[r.id,r]));
   state.cashflows=state.cashflows.filter(f=>{if(!f.recurringItemId||f.recurringOverride)return true;const item=itemMap.get(f.recurringItemId),month=f.recurringMonth||f.date?.slice(0,7);if(!item||item.paymentMethod==='card'){if(month<currentMonth())return true;changed=true;return false}const inRange=month>=item.startMonth&&(!item.endMonth||month<=item.endMonth);if(!inRange){if(month<currentMonth())return true;changed=true;return false}if(!item.active&&f.date>today()){changed=true;return false}return true});
   state.purchases=state.purchases.filter(p=>{if(!p.recurringItemId||p.recurringOverride)return true;const item=itemMap.get(p.recurringItemId),month=p.recurringMonth||p.date?.slice(0,7);if(!item||item.paymentMethod!=='card'){if(month<currentMonth())return true;changed=true;return false}const inRange=month>=item.startMonth&&(!item.endMonth||month<=item.endMonth);if(!inRange){if(month<currentMonth())return true;changed=true;return false}if(!item.active&&p.date>today()){changed=true;return false}return true});
-  for(const item of state.recurringItems){if(!item.active)continue;let month=item.startMonth||currentMonth();const limit=item.endMonth&&item.endMonth<targetMonth?item.endMonth:targetMonth;let guard=0;while(month<=limit&&guard++<600){const key=recurringSkipKey(item.id,month);if(!state.recurringSkips.includes(key)){const date=recurringDate(item,month);if(item.type==='expense'&&item.paymentMethod==='card'){const card=cardById(item.cardId);if(card){let p=state.purchases.find(x=>x.recurringItemId===item.id&&x.recurringMonth===month);const data={date,cardId:card.id,merchant:item.description,totalAmount:Number(item.amount),installmentMonths:1,majorCategoryId:item.majorCategoryId,subCategoryId:item.subCategoryId,majorCategory:item.majorCategory,subCategory:item.subCategory,memo:item.memo||'',recurringItemId:item.id,recurringMonth:month,generatedByRecurring:true,recurringOverride:false};if(!p){state.purchases.push({id:uid('pur'),...data,schedules:makeSchedules(date,card,Number(item.amount),1,[])});changed=true}else if(!p.recurringOverride&&month>=currentMonth()){const before=JSON.stringify(p),oldSchedules=p.schedules||[];Object.assign(p,data);p.schedules=makeSchedules(date,card,Number(item.amount),1,oldSchedules);if(JSON.stringify(p)!==before)changed=true}}}else{let f=state.cashflows.find(x=>x.recurringItemId===item.id&&x.recurringMonth===month);const data={type:item.type,date,accountId:item.accountId,targetAccountId:'',description:item.description,amount:Number(item.amount),majorCategoryId:item.majorCategoryId,subCategoryId:item.subCategoryId,majorCategory:item.majorCategory,subCategory:item.subCategory,memo:item.memo||'',recurringItemId:item.id,recurringMonth:month,generatedByRecurring:true,recurringOverride:false};if(!f){state.cashflows.push({id:uid('flow'),...data,settled:false,settledDate:'',settledAccountId:item.accountId||'',settledAmount:Number(item.amount)});changed=true}else if(!f.recurringOverride&&month>=currentMonth()){const before=JSON.stringify(f);const keep={settled:Boolean(f.settled),settledDate:f.settledDate||'',settledAccountId:f.settledAccountId||f.accountId||'',settledAmount:Number(f.settledAmount||f.amount)};Object.assign(f,data,keep);if(JSON.stringify(f)!==before)changed=true}}}month=addMonths(month,1)}}
+  for(const item of state.recurringItems){if(!item.active)continue;let month=item.startMonth||currentMonth();const limit=item.endMonth&&item.endMonth<targetMonth?item.endMonth:targetMonth;let guard=0;while(month<=limit&&guard++<600){const key=recurringSkipKey(item.id,month);if(!state.recurringSkips.includes(key)){const date=recurringDate(item,month);if(item.type==='expense'&&item.paymentMethod==='card'){const card=cardById(item.cardId);if(card){let p=state.purchases.find(x=>x.recurringItemId===item.id&&x.recurringMonth===month);const appliedAmount=p?.recurringAmountAdjusted?Number(p.totalAmount||0):Number(item.amount);const data={date,cardId:card.id,merchant:item.description,totalAmount:appliedAmount,installmentMonths:1,majorCategoryId:item.majorCategoryId,subCategoryId:item.subCategoryId,majorCategory:item.majorCategory,subCategory:item.subCategory,memo:item.memo||'',recurringItemId:item.id,recurringMonth:month,generatedByRecurring:true,recurringOverride:false};if(!p){state.purchases.push({id:uid('pur'),...data,schedules:makeSchedules(date,card,appliedAmount,1,[])});changed=true}else if(!p.recurringOverride&&month>=currentMonth()){const before=JSON.stringify(p),oldSchedules=p.schedules||[];Object.assign(p,data);p.schedules=makeSchedules(date,card,appliedAmount,1,oldSchedules);if(JSON.stringify(p)!==before)changed=true}}}else{let f=state.cashflows.find(x=>x.recurringItemId===item.id&&x.recurringMonth===month);const appliedAmount=f?.recurringAmountAdjusted?Number(f.amount||0):Number(item.amount);const data={type:item.type,date,accountId:item.accountId,targetAccountId:'',description:item.description,amount:appliedAmount,majorCategoryId:item.majorCategoryId,subCategoryId:item.subCategoryId,majorCategory:item.majorCategory,subCategory:item.subCategory,memo:item.memo||'',recurringItemId:item.id,recurringMonth:month,generatedByRecurring:true,recurringOverride:false};if(!f){state.cashflows.push({id:uid('flow'),...data,settled:false,settledDate:'',settledAccountId:item.accountId||'',settledAmount:appliedAmount});changed=true}else if(!f.recurringOverride&&month>=currentMonth()){const before=JSON.stringify(f);const keep={settled:Boolean(f.settled),settledDate:f.settledDate||'',settledAccountId:f.settledAccountId||f.accountId||'',settledAmount:Number(f.settledAmount||f.amount)};Object.assign(f,data,keep);if(JSON.stringify(f)!==before)changed=true}}}month=addMonths(month,1)}}
   return changed
 }
 function saveState(){syncRecurringCashflows(selectedTargetMonth());localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave()}
@@ -789,7 +789,7 @@ function deleteSubCategory(majorId,subId){const major=categoryById(majorId),sub=
 
 function download(name,content,type='application/json'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return '\ufeff'+rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n')}
-function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="29.2";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"29.2",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_29.2차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
+function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="29.4";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"29.4",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_29.4차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
 function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=normalizeState(JSON.parse(r.result));saveState();alert('백업을 불러왔습니다.')}catch(err){console.error(err);alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f,'utf-8')}
 function exportPurchaseCSV(){const rows=[['사용일','카드','카드종류','예산구분','사용처','대분류','소분류','총 구매금액','할부개월','청구월별 금액','메모']];state.purchases.forEach(p=>rows.push([p.date,cardById(p.cardId)?.name||'',cardById(p.cardId)?.cardType==='debit'?'체크카드':'신용카드',(p.budgetSource&&p.budgetSource!=='personal')?(purposeFundById(p.budgetSource)?.name||'목적자금'):'내 생활비',p.merchant,p.majorCategory,p.subCategory,p.totalAmount,p.installmentMonths,p.schedules.map(s=>`${s.billingMonth}:${s.amount}:${s.paid?'납부완료':'예정'}`).join(' / '),p.memo||'']));download(`마파가계부_카드사용_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
 function exportLedgerCSV(){const rows=[['날짜','구분','항목','대분류','소분류','통장','금액','메모','자동반영']];state.cashflows.forEach(f=>rows.push([f.date,f.type,f.description,f.majorCategory||'',f.subCategory||'',accountById(f.accountId)?.name||'',f.amount,f.memo||'',f.recurringItemId?'매월 자동':'']));allSchedules().filter(s=>s.paid).forEach(s=>rows.push([s.paidDate,'카드값 출금',`${s.card?.name||''} ${s.purchase.merchant}`,'카드값','',accountById(s.paidAccountId)?.name||'',-s.amount,'']));download(`마파가계부_통장내역_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
@@ -891,7 +891,7 @@ TAB_INFO.loans=['대출·저축','마이너스통장과 일반대출, 고정저�
 
 
 // ===== 27차 실제 안정화·검증 레이어 =====
-const APP_VERSION_27='29.2';
+const APP_VERSION_27='29.4';
 const BACKUP_META_KEY_27='mapa-household-book-last-backup-v27-4';
 
 function expenseCategoryForLoan27(){
@@ -1051,9 +1051,9 @@ function buildBackup27(scope='all'){
   if(scope==='all')payload=full;else{payload={categories:full.categories};if(scope==='transactions')Object.assign(payload,{purchases:full.purchases,cashflows:full.cashflows,debts:full.debts});if(scope==='cards')payload.cards=full.cards;if(scope==='accounts')payload.accounts=full.accounts;if(scope==='recurring')Object.assign(payload,{recurringItems:full.recurringItems,recurringSkips:full.recurringSkips,loans:full.loans});if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds})}
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 }
-exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_29.2차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
+exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_29.4차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
 function renderBackupProof27(){const el=document.getElementById('lastBackupProof');if(!el)return;try{const m=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');el.textContent=m?`최근 백업: ${new Date(m.createdAt).toLocaleString('ko-KR')} · ${m.scope==='all'?'전체':'선택'} · 검증코드 ${m.checksum} · ${(m.size/1024).toFixed(1)}KB`:'이 기기에서 저장한 백업 기록이 아직 없습니다.'}catch{el.textContent='백업 기록을 읽을 수 없습니다.'}}
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_29.2차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_29.4차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 function integrityIssues27(st){const issues=[],checkIds=(name,arr)=>{const seen=new Set();(arr||[]).forEach(x=>{if(!x.id)issues.push(`${name}: ID 없음`);else if(seen.has(x.id))issues.push(`${name}: 중복 ID ${x.id}`);seen.add(x.id)})};[['통장',st.accounts],['카드',st.cards],['카드사용',st.purchases],['통장내역',st.cashflows],['고정항목',st.recurringItems],['대출',st.loans],['받을·줄 돈',st.debts],['목적자금',st.purposeFunds]].forEach(x=>checkIds(...x));
   (st.cards||[]).forEach(c=>{if(c.accountId&&!st.accounts.some(a=>a.id===c.accountId))issues.push(`카드 ${c.name}: 출금통장 연결 오류`)});(st.purchases||[]).forEach(p=>{if(!st.cards.some(c=>c.id===p.cardId))issues.push(`카드사용 ${p.merchant}: 카드 연결 오류`);if(!Number.isFinite(Number(p.totalAmount)))issues.push(`카드사용 ${p.merchant}: 금액 오류`)});(st.cashflows||[]).forEach(f=>{if(f.accountId&&!st.accounts.some(a=>a.id===f.accountId))issues.push(`통장내역 ${f.description}: 출금·입금통장 오류`);if(f.type==='transfer'&&f.targetAccountId&&!st.accounts.some(a=>a.id===f.targetAccountId))issues.push(`이체 ${f.description}: 대상통장 오류`);if(!Number.isFinite(Number(f.amount)))issues.push(`통장내역 ${f.description}: 금액 오류`)});(st.recurringItems||[]).forEach(r=>{if(r.type==='savings'){if(!st.accounts.some(a=>a.id===r.accountId)||!st.accounts.some(a=>a.id===r.targetAccountId))issues.push(`고정저축 ${r.description}: 통장 연결 오류`);if(r.accountId===r.targetAccountId)issues.push(`고정저축 ${r.description}: 출금·입금통장이 같음`)}else if(r.paymentMethod==='card'&&!st.cards.some(c=>c.id===r.cardId))issues.push(`고정항목 ${r.description}: 카드 연결 오류`);else if(r.accountId&&!st.accounts.some(a=>a.id===r.accountId))issues.push(`고정항목 ${r.description}: 통장 연결 오류`)});(st.loans||[]).forEach(l=>{if(l.interestAccountId&&!st.accounts.some(a=>a.id===l.interestAccountId))issues.push(`대출 ${l.name}: 이자 출금통장 연결 오류`);if(l.recurringItemId&&!st.recurringItems.some(r=>r.id===l.recurringItemId))issues.push(`대출 ${l.name}: 이자 고정지출 연결 오류`)});return issues;
@@ -1126,7 +1126,7 @@ buildBackup27=function(scope='all'){
   if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds});
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),includedKeys:Object.keys(payload),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 };
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_29.2차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_29.4차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 const runDataDiagnostics27Base=runDataDiagnostics;
 runDataDiagnostics=async function(){await runDataDiagnostics27Base();const el=document.getElementById('diagnosticResult'),last=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');if(el&&last)el.innerHTML=el.innerHTML.replace('최근 전체백업:',`최근 백업(${last.scope==='all'?'전체':'선택'}):`)};
@@ -1179,7 +1179,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=29.2',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=29.4',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
@@ -2180,7 +2180,7 @@ saveState=function(){ensurePurposeFunding282();syncAllPurposeReceivables282();sa
 
 // Include monthly funding status in selective budget backups.
 const buildBackupBefore282=buildBackup27;
-buildBackup27=function(scope='all'){const data=buildBackupBefore282(scope);if(scope==='budget'){data.state.purposeFundingStatus=JSON.parse(JSON.stringify(state.purposeFundingStatus||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='29.2';return data};
+buildBackup27=function(scope='all'){const data=buildBackupBefore282(scope);if(scope==='budget'){data.state.purposeFundingStatus=JSON.parse(JSON.stringify(state.purposeFundingStatus||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='29.4';return data};
 
 renderAll();
 </script>
@@ -2304,13 +2304,13 @@ ensurePurposeReceipts290();
 const saveStateBefore290=saveState;
 saveState=function(){ensurePurposeReceipts290();syncAllPurposeReceivables290();saveStateBefore290()};
 const buildBackupBefore290=buildBackup27;
-buildBackup27=function(scope='all'){const data=buildBackupBefore290(scope);if(scope==='budget'){data.state.purposeFundingReceipts=JSON.parse(JSON.stringify(state.purposeFundingReceipts||[]));data.state.purposeReceiptMigration=JSON.parse(JSON.stringify(state.purposeReceiptMigration||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='29.2';return data};
+buildBackup27=function(scope='all'){const data=buildBackupBefore290(scope);if(scope==='budget'){data.state.purposeFundingReceipts=JSON.parse(JSON.stringify(state.purposeFundingReceipts||[]));data.state.purposeReceiptMigration=JSON.parse(JSON.stringify(state.purposeReceiptMigration||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='29.4';return data};
 
 renderAll();
 </script>
 
 <script>
-// ===== 29.2차: 목적자금 장부잔액과 실수령/받을돈 분리 =====
+// ===== 29.3차: 목적자금 장부잔액과 실수령/받을돈 분리 =====
 function purposeLedgerBalance291(fund,month){
   if(!fund||!month||month<fund.startMonth)return 0;
   const monthly=Number(fund.monthlyAmount||0),opening=Number(fund.openingSaved||0);
@@ -2351,6 +2351,287 @@ renderBudget=function(){
 syncAllPurposeReceivables290();
 renderAll();
 </script>
+
+
+
+<dialog id="recurringCardSettleModal294">
+  <form class="modal" id="recurringCardSettleForm294">
+    <div class="modal-head">
+      <h2 id="recurringCardSettleTitle294">카드 고정지출 승인 확인</h2>
+      <button type="button" class="icon-btn" onclick="closeDialog('recurringCardSettleModal294')" aria-label="닫기">×</button>
+    </div>
+    <input type="hidden" id="recurringCardSettlePurchaseId294">
+    <div class="form-grid">
+      <div class="full">
+        <label>이번 달 실제 승인금액</label>
+        <input type="text" inputmode="numeric" class="money-input" id="recurringCardSettleAmount294" min="1" required>
+        <div class="hint">여기서 바꾼 금액은 선택한 달에만 반영되고 다음 달 고정금액은 그대로 유지됩니다.</div>
+      </div>
+      <div class="full preview" id="recurringCardSettlePreview294"></div>
+    </div>
+    <div class="form-actions">
+      <button type="button" class="ghost-btn" onclick="closeDialog('recurringCardSettleModal294')">취소</button>
+      <button class="primary-btn" type="submit" id="recurringCardSettleSubmit294">승인 확인</button>
+    </div>
+  </form>
+</dialog>
+
+<script id="v293-recurring-cancel-tab-month-sync">
+// ===== 29.3차: 통장 고정지출 이번 달 취소 + 탭/월 동기화 =====
+function cancelRecurringAccountMonth293(flowId){
+  const f=(state.cashflows||[]).find(x=>x.id===flowId);
+  if(!f||!f.recurringItemId||!f.recurringMonth||f.type!=='expense')return;
+  const month=f.recurringMonth;
+  const settledText=f.settled?'\n\n이미 통장 잔액에 반영된 출금도 함께 취소되어 통장잔액과 예산이 복원됩니다.':'';
+  if(!confirm(`${f.description||'고정지출'}을(를) ${Number(month.slice(5,7))}월에만 취소할까요?\n\n이 달 소비에서 제외되고 남은 예산이 다시 늘어납니다. 고정항목 자체는 다음 달부터 계속 유지됩니다.${settledText}`))return;
+  const key=recurringSkipKey(f.recurringItemId,month);
+  if(!state.recurringSkips.includes(key))state.recurringSkips.push(key);
+  state.cashflows=state.cashflows.filter(x=>x.id!==flowId);
+  saveState();
+}
+function restoreRecurringAccountMonth293(recurringId,month){
+  const key=recurringSkipKey(recurringId,month);
+  state.recurringSkips=state.recurringSkips.filter(x=>x!==key);
+  saveState();
+}
+
+renderRecurringMonthlyStatus=function(){
+  const el=document.getElementById('recurringMonthlyStatus');if(!el)return;
+  const m=document.getElementById('mainMonth').value||currentMonth();
+  const accountRows=(state.cashflows||[]).filter(f=>f.recurringItemId&&f.recurringMonth===m&&!f.recurringSavings);
+  const cardRows=(state.purchases||[]).filter(p=>p.recurringItemId&&p.recurringMonth===m);
+  const savingDefs=(state.recurringItems||[]).filter(r=>r.type==='savings'&&r.active&&r.startMonth<=m&&(!r.endMonth||r.endMonth>=m));
+  const completed=savingsRowsForMonth(m);
+  const canceledCardDefs=(state.recurringItems||[]).filter(r=>r.type==='expense'&&r.paymentMethod==='card'&&r.active&&r.startMonth<=m&&(!r.endMonth||r.endMonth>=m)&&state.recurringSkips.includes(recurringSkipKey(r.id,m)));
+  const canceledAccountDefs=(state.recurringItems||[]).filter(r=>r.type==='expense'&&r.paymentMethod!=='card'&&r.active&&r.startMonth<=m&&(!r.endMonth||r.endMonth>=m)&&state.recurringSkips.includes(recurringSkipKey(r.id,m)));
+  const rows=[
+    ...accountRows.map(f=>({kind:'account',id:f.id,recurringId:f.recurringItemId,date:f.date,description:f.description,amount:f.amount,settled:Boolean(f.settled),type:f.type,target:accountById(f.accountId)?.name||'통장'})),
+    ...cardRows.map(p=>({kind:'card',id:p.id,recurringId:p.recurringItemId,date:p.date,description:p.merchant,amount:p.totalAmount,settled:Boolean(p.recurringSettled),type:'expense',target:cardById(p.cardId)?.name||'카드'})),
+    ...canceledCardDefs.map(r=>({kind:'cardCanceled',id:r.id,recurringId:r.id,date:`${m}-${String(clampDay(m,r.day)).padStart(2,'0')}`,description:r.description,amount:r.amount,settled:false,type:'expense',target:cardById(r.cardId)?.name||'카드'})),
+    ...canceledAccountDefs.map(r=>({kind:'accountCanceled',id:r.id,recurringId:r.id,date:`${m}-${String(clampDay(m,r.day)).padStart(2,'0')}`,description:r.description,amount:r.amount,settled:false,type:'expense',target:accountById(r.accountId)?.name||'통장'})),
+    ...savingDefs.map(r=>{const done=completed.find(f=>f.recurringItemId===r.id);return {kind:'savings',id:r.id,flowId:done?.id||'',date:`${m}-${String(clampDay(m,r.day)).padStart(2,'0')}`,description:r.description,amount:r.amount,settled:Boolean(done),type:'savings',target:recurringTargetText27(r)}})
+  ].sort((a,b)=>a.date.localeCompare(b.date));
+
+  el.innerHTML=rows.length?rows.map(r=>{
+    let action='',status='';
+    if(r.kind==='cardCanceled'){
+      status='이번 달 취소';
+      action=`<button class="small-btn" onclick='restoreRecurringCardMonth(${JSON.stringify(r.id)},${JSON.stringify(m)})'>취소 해제</button>`;
+    }else if(r.kind==='accountCanceled'){
+      status='이번 달 취소';
+      action=`<button class="small-btn" onclick='restoreRecurringAccountMonth293(${JSON.stringify(r.id)},${JSON.stringify(m)})'>취소 해제</button>`;
+    }else if(r.kind==='card'){
+      status=r.settled?'승인 확인':'승인 대기';
+      action=r.settled
+        ?`<button class="small-btn" onclick='toggleRecurringCardSettlement(${JSON.stringify(r.id)},false)'>확인 취소</button>`
+        :`<button class="small-btn primary" onclick='toggleRecurringCardSettlement(${JSON.stringify(r.id)},true)'>승인 확인</button> <button class="small-btn danger" onclick='cancelRecurringCardMonth(${JSON.stringify(r.id)})'>이번 달 취소</button>`;
+    }else if(r.kind==='savings'){
+      status=r.settled?'완료':'대기중';
+      action=r.settled
+        ?`<button class="small-btn" onclick='undoSavings(${JSON.stringify(r.flowId)})'>완료 취소</button>`
+        :`<button class="small-btn primary" onclick='completeSavings(${JSON.stringify(r.id)},${JSON.stringify(m)})'>이체 완료</button>`;
+    }else{
+      status=r.settled?'완료':'대기중';
+      if(r.type==='income'){
+        action=r.settled
+          ?`<button class="small-btn" onclick='undoRecurringSettlement(${JSON.stringify(r.id)})'>완료 취소</button>`
+          :`<button class="small-btn primary" onclick='openRecurringSettleModal(${JSON.stringify(r.id)})'>입금 확인</button>`;
+      }else{
+        action=(r.settled
+          ?`<button class="small-btn" onclick='undoRecurringSettlement(${JSON.stringify(r.id)})'>완료 취소</button>`
+          :`<button class="small-btn primary" onclick='openRecurringSettleModal(${JSON.stringify(r.id)})'>납부 확인</button>`)
+          +` <button class="small-btn danger" onclick='cancelRecurringAccountMonth293(${JSON.stringify(r.id)})'>이번 달 취소</button>`;
+      }
+    }
+    return `<div class="two-line-row"><div class="row-top"><span>${esc(r.description)} <span class="badge ${r.type==='income'?'income':r.type==='savings'?'transfer':'expense'}">${r.type==='income'?'수입':r.type==='savings'?'저축':'지출'}</span></span><span>${won(r.amount)}</span></div><div class="row-sub"><span>${r.date} · ${esc(r.target)} · ${status}</span><span>${action}</span></div></div>`;
+  }).join(''):'<div class="empty">이 달의 고정항목이 없습니다.</div>';
+};
+
+function setActiveTabWithoutScroll293(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));
+  document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
+  const info=TAB_INFO[id]||[id,''];
+  const title=document.getElementById('activeViewTitle'),desc=document.getElementById('activeViewDesc');
+  if(title)title.textContent=info[0];
+  if(desc)desc.textContent=info[1];
+  if(id==='statistics')renderStatistics();
+}
+
+let activeTabBeforeMonthChange293='dashboard';
+const mainMonth293=document.getElementById('mainMonth');
+mainMonth293?.addEventListener('change',()=>{
+  activeTabBeforeMonthChange293=document.querySelector('.panel.active')?.id||'dashboard';
+  const m=mainMonth293.value||currentMonth();
+  ['purchaseMonthFilter','billingMonthFilter','ledgerMonthFilter','statsMonth'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=m});
+},true);
+mainMonth293?.addEventListener('change',()=>{
+  setActiveTabWithoutScroll293(activeTabBeforeMonthChange293||'dashboard');
+  if(activeTabBeforeMonthChange293==='payments')renderPayments();
+},false);
+
+const switchTabBefore293=switchTab;
+switchTab=function(id){
+  if(id==='payments'){
+    const m=document.getElementById('mainMonth')?.value||currentMonth();
+    const billing=document.getElementById('billingMonthFilter');
+    if(billing)billing.value=m;
+  }
+  switchTabBefore293(id);
+  if(id==='payments')renderPayments();
+};
+
+renderAll();
+</script>
+
+
+<script id="v294-recurring-month-amount-adjustment">
+// ===== 29.4차: 고정수입·고정지출 이번 달 실제 금액 수정 =====
+function recurringBaseAmount294(recurringId, fallback=0){
+  const item=(state.recurringItems||[]).find(x=>x.id===recurringId);
+  return Number(item?.amount ?? fallback ?? 0);
+}
+function recurringAmountChanged294(recurringId, amount){
+  return Number(amount||0)!==recurringBaseAmount294(recurringId,amount);
+}
+
+openRecurringSettleModal=function(id){
+  if(!state.accounts.length){alert('통장을 먼저 등록해주세요.');openAccountModal();return}
+  const f=(state.cashflows||[]).find(x=>x.id===id);if(!f)return;
+  const base=recurringBaseAmount294(f.recurringItemId,f.amount),month=f.recurringMonth||f.date?.slice(0,7)||currentMonth();
+  document.getElementById('recurringSettleFlowId').value=id;
+  document.getElementById('recurringSettleDate').value=f.settledDate||today();
+  document.getElementById('recurringSettleAmount').value=Number(f.amount||0).toLocaleString('ko-KR');
+  document.getElementById('recurringSettleAccount').innerHTML=state.accounts.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join('');
+  document.getElementById('recurringSettleAccount').value=f.settledAccountId||f.accountId||state.accounts[0].id;
+  const title=document.querySelector('#recurringSettleModal h2');
+  if(title)title.textContent=f.type==='income'?'이번 달 고정수입 입금 확인':'이번 달 고정지출 납부 확인';
+  const submit=document.querySelector('#recurringSettleForm .primary-btn');
+  if(submit)submit.textContent=f.settled?'금액 수정 저장':(f.type==='income'?'입금 확인':'납부 확인');
+  document.getElementById('recurringSettlePreview').innerHTML=
+    `기본 고정금액 <b>${won(base)}</b> · 입력한 실제 금액은 <b>${esc(month)}</b>에만 반영됩니다.<br>`+
+    `${f.type==='income'?'이번 달 소득·예산 기준과 통장 입금액':'이번 달 소비·남은 예산과 통장 출금액'}이 입력금액으로 함께 바뀝니다.`;
+  installMoneyInputs();
+  openDialog('recurringSettleModal');
+};
+
+document.getElementById('recurringSettleForm')?.addEventListener('submit',function(e){
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  const f=(state.cashflows||[]).find(x=>x.id===document.getElementById('recurringSettleFlowId').value);
+  if(!f)return;
+  const amount=parseMoney(document.getElementById('recurringSettleAmount').value);
+  if(!Number.isFinite(amount)||amount<=0){alert('실제 금액을 1원 이상 입력해주세요.');return}
+  const base=recurringBaseAmount294(f.recurringItemId,f.amount);
+  f.amount=amount;
+  f.settled=true;
+  f.settledDate=document.getElementById('recurringSettleDate').value;
+  f.settledAmount=amount;
+  f.settledAccountId=document.getElementById('recurringSettleAccount').value;
+  f.recurringAmountAdjusted=amount!==base;
+  f.recurringBaseAmount=base;
+  closeDialog('recurringSettleModal');
+  saveState();
+},true);
+
+function openRecurringCardSettleModal294(id){
+  const p=(state.purchases||[]).find(x=>x.id===id);if(!p)return;
+  const base=recurringBaseAmount294(p.recurringItemId,p.totalAmount),month=p.recurringMonth||p.date?.slice(0,7)||currentMonth();
+  document.getElementById('recurringCardSettlePurchaseId294').value=id;
+  document.getElementById('recurringCardSettleAmount294').value=Number(p.totalAmount||0).toLocaleString('ko-KR');
+  document.getElementById('recurringCardSettleTitle294').textContent=p.recurringSettled?'이번 달 카드 승인금액 수정':'카드 고정지출 승인 확인';
+  document.getElementById('recurringCardSettleSubmit294').textContent=p.recurringSettled?'금액 수정 저장':'승인 확인';
+  document.getElementById('recurringCardSettlePreview294').innerHTML=
+    `<b>${esc(p.merchant||'카드 고정지출')}</b> · ${esc(month)}<br>`+
+    `기본 고정금액 ${won(base)} · 실제 승인금액으로 바꾸면 이번 달 소비·남은 예산·카드 결제예정액이 함께 수정됩니다.<br>`+
+    `다음 달부터는 다시 기본 고정금액 ${won(base)}으로 자동 반영됩니다.`;
+  installMoneyInputs();
+  openDialog('recurringCardSettleModal294');
+}
+
+document.getElementById('recurringCardSettleForm294')?.addEventListener('submit',function(e){
+  e.preventDefault();
+  const p=(state.purchases||[]).find(x=>x.id===document.getElementById('recurringCardSettlePurchaseId294').value);
+  if(!p)return;
+  const amount=parseMoney(document.getElementById('recurringCardSettleAmount294').value);
+  if(!Number.isFinite(amount)||amount<=0){alert('실제 승인금액을 1원 이상 입력해주세요.');return}
+  const oldAmount=Number(p.totalAmount||0),base=recurringBaseAmount294(p.recurringItemId,oldAmount),card=cardById(p.cardId);
+  if(!card){alert('연결된 카드를 찾을 수 없습니다.');return}
+  if(amount!==oldAmount&&(p.schedules||[]).some(s=>s.paid)&&!confirm('이미 카드값 납부 완료로 처리된 금액이 있습니다.\n이번 달 승인금액을 바꾸면 통장에 반영된 카드값도 함께 변경됩니다. 계속할까요?'))return;
+  p.totalAmount=amount;
+  p.schedules=makeSchedules(p.date,card,amount,1,p.schedules||[]);
+  p.recurringSettled=true;
+  p.recurringSettledDate=today();
+  p.recurringAmountAdjusted=amount!==base;
+  p.recurringBaseAmount=base;
+  closeDialog('recurringCardSettleModal294');
+  saveState();
+});
+
+toggleRecurringCardSettlement=function(id,settled){
+  const p=(state.purchases||[]).find(x=>x.id===id);if(!p)return;
+  if(settled){openRecurringCardSettleModal294(id);return}
+  p.recurringSettled=false;
+  p.recurringSettledDate='';
+  saveState();
+};
+
+renderRecurringMonthlyStatus=function(){
+  const el=document.getElementById('recurringMonthlyStatus');if(!el)return;
+  const m=document.getElementById('mainMonth').value||currentMonth();
+  const accountRows=(state.cashflows||[]).filter(f=>f.recurringItemId&&f.recurringMonth===m&&!f.recurringSavings);
+  const cardRows=(state.purchases||[]).filter(p=>p.recurringItemId&&p.recurringMonth===m);
+  const savingDefs=(state.recurringItems||[]).filter(r=>r.type==='savings'&&r.active&&r.startMonth<=m&&(!r.endMonth||r.endMonth>=m));
+  const completed=savingsRowsForMonth(m);
+  const canceledCardDefs=(state.recurringItems||[]).filter(r=>r.type==='expense'&&r.paymentMethod==='card'&&r.active&&r.startMonth<=m&&(!r.endMonth||r.endMonth>=m)&&state.recurringSkips.includes(recurringSkipKey(r.id,m)));
+  const canceledAccountDefs=(state.recurringItems||[]).filter(r=>r.type==='expense'&&r.paymentMethod!=='card'&&r.active&&r.startMonth<=m&&(!r.endMonth||r.endMonth>=m)&&state.recurringSkips.includes(recurringSkipKey(r.id,m)));
+  const rows=[
+    ...accountRows.map(f=>({kind:'account',id:f.id,recurringId:f.recurringItemId,date:f.date,description:f.description,amount:Number(f.amount||0),baseAmount:recurringBaseAmount294(f.recurringItemId,f.amount),adjusted:Boolean(f.recurringAmountAdjusted),settled:Boolean(f.settled),type:f.type,target:accountById(f.accountId)?.name||'통장'})),
+    ...cardRows.map(p=>({kind:'card',id:p.id,recurringId:p.recurringItemId,date:p.date,description:p.merchant,amount:Number(p.totalAmount||0),baseAmount:recurringBaseAmount294(p.recurringItemId,p.totalAmount),adjusted:Boolean(p.recurringAmountAdjusted),settled:Boolean(p.recurringSettled),type:'expense',target:cardById(p.cardId)?.name||'카드'})),
+    ...canceledCardDefs.map(r=>({kind:'cardCanceled',id:r.id,recurringId:r.id,date:`${m}-${String(clampDay(m,r.day)).padStart(2,'0')}`,description:r.description,amount:r.amount,baseAmount:r.amount,adjusted:false,settled:false,type:'expense',target:cardById(r.cardId)?.name||'카드'})),
+    ...canceledAccountDefs.map(r=>({kind:'accountCanceled',id:r.id,recurringId:r.id,date:`${m}-${String(clampDay(m,r.day)).padStart(2,'0')}`,description:r.description,amount:r.amount,baseAmount:r.amount,adjusted:false,settled:false,type:'expense',target:accountById(r.accountId)?.name||'통장'})),
+    ...savingDefs.map(r=>{const done=completed.find(f=>f.recurringItemId===r.id);return {kind:'savings',id:r.id,flowId:done?.id||'',date:`${m}-${String(clampDay(m,r.day)).padStart(2,'0')}`,description:r.description,amount:r.amount,baseAmount:r.amount,adjusted:false,settled:Boolean(done),type:'savings',target:recurringTargetText27(r)}})
+  ].sort((a,b)=>a.date.localeCompare(b.date));
+
+  el.innerHTML=rows.length?rows.map(r=>{
+    let action='',status='';
+    if(r.kind==='cardCanceled'){
+      status='이번 달 취소';
+      action=`<button class="small-btn" onclick='restoreRecurringCardMonth(${JSON.stringify(r.id)},${JSON.stringify(m)})'>취소 해제</button>`;
+    }else if(r.kind==='accountCanceled'){
+      status='이번 달 취소';
+      action=`<button class="small-btn" onclick='restoreRecurringAccountMonth293(${JSON.stringify(r.id)},${JSON.stringify(m)})'>취소 해제</button>`;
+    }else if(r.kind==='card'){
+      status=r.settled?'승인 확인':'승인 대기';
+      action=r.settled
+        ?`<button class="small-btn primary" onclick='openRecurringCardSettleModal294(${JSON.stringify(r.id)})'>금액 수정</button> <button class="small-btn" onclick='toggleRecurringCardSettlement(${JSON.stringify(r.id)},false)'>확인 취소</button>`
+        :`<button class="small-btn primary" onclick='openRecurringCardSettleModal294(${JSON.stringify(r.id)})'>승인 확인</button> <button class="small-btn danger" onclick='cancelRecurringCardMonth(${JSON.stringify(r.id)})'>이번 달 취소</button>`;
+    }else if(r.kind==='savings'){
+      status=r.settled?'완료':'대기중';
+      action=r.settled
+        ?`<button class="small-btn" onclick='undoSavings(${JSON.stringify(r.flowId)})'>완료 취소</button>`
+        :`<button class="small-btn primary" onclick='completeSavings(${JSON.stringify(r.id)},${JSON.stringify(m)})'>이체 완료</button>`;
+    }else{
+      status=r.settled?(r.type==='income'?'입금 완료':'납부 완료'):'대기중';
+      if(r.type==='income'){
+        action=r.settled
+          ?`<button class="small-btn primary" onclick='openRecurringSettleModal(${JSON.stringify(r.id)})'>금액 수정</button> <button class="small-btn" onclick='undoRecurringSettlement(${JSON.stringify(r.id)})'>완료 취소</button>`
+          :`<button class="small-btn primary" onclick='openRecurringSettleModal(${JSON.stringify(r.id)})'>입금 확인</button>`;
+      }else{
+        action=(r.settled
+          ?`<button class="small-btn primary" onclick='openRecurringSettleModal(${JSON.stringify(r.id)})'>금액 수정</button> <button class="small-btn" onclick='undoRecurringSettlement(${JSON.stringify(r.id)})'>완료 취소</button>`
+          :`<button class="small-btn primary" onclick='openRecurringSettleModal(${JSON.stringify(r.id)})'>납부 확인</button>`)
+          +` <button class="small-btn danger" onclick='cancelRecurringAccountMonth293(${JSON.stringify(r.id)})'>이번 달 취소</button>`;
+      }
+    }
+    const amountNote=r.adjusted?` · 기본 ${won(r.baseAmount)} → 이번 달 ${won(r.amount)}`:'';
+    const amountBadge=r.adjusted?' <span class="badge fixed">이번 달 금액 수정</span>':'';
+    return `<div class="two-line-row"><div class="row-top"><span>${esc(r.description)} <span class="badge ${r.type==='income'?'income':r.type==='savings'?'transfer':'expense'}">${r.type==='income'?'수입':r.type==='savings'?'저축':'지출'}</span>${amountBadge}</span><span>${won(r.amount)}</span></div><div class="row-sub"><span>${r.date} · ${esc(r.target)} · ${status}${amountNote}</span><span>${action}</span></div></div>`;
+  }).join(''):'<div class="empty">이 달의 고정항목이 없습니다.</div>';
+};
+
+renderAll();
+</script>
+
 </body>
 </html>
 
