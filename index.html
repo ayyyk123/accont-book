@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=31" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=31" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 31.2차</title>
+<title>가계부 31.3차</title>
 <link href="manifest.json" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -209,7 +209,7 @@
     .cash-warning-280.general-topup-282{border-color:#f3cf75;background:#fffaf0}.cash-warning-280.general-topup-282 b{color:#8a5a00}
     @media(max-width:720px){.purpose-funding-head-282{align-items:flex-start;flex-direction:column}.purpose-funding-actions-282 .small-btn{flex:1}}
 
-    /* 31.2차: 모바일 입력 모달과 저장 버튼 접근성 개선 */
+    /* 31.3차: 모바일 입력 모달과 저장 버튼 접근성 개선 */
     @media(max-width:640px){
       dialog{
         width:calc(100vw - 8px);
@@ -320,7 +320,7 @@
 @media(max-width:640px){.purpose-receipt-row-290{align-items:flex-start}.purpose-receipt-row-290 .receipt-actions{flex-direction:column}}
 </style>
 <style id="v300-mobile-line-layout-calendar">
-/* ===== 31.2차: 모바일 전체 탭 줄형식·아이폰 글꼴·고정항목 달력 ===== */
+/* ===== 31.3차: 모바일 전체 탭 줄형식·아이폰 글꼴·고정항목 달력 ===== */
 .recurring-calendar-body-300{display:block}
 .recurring-calendar-section-300.collapsed-300 .recurring-calendar-body-300{display:none}
 .recurring-calendar-head-300{margin-bottom:10px}
@@ -542,7 +542,7 @@ body.dark .recurring-calendar-day-300.selected-300{background:var(--primary-soft
 }
 </style>
 <style id="v310-all-tabs-layout">
-/* ===== 31.2차: 홈 제거·All 통합·탭 구성 개편 ===== */
+/* ===== 31.3차: 홈 제거·All 통합·탭 구성 개편 ===== */
 .legacy-hidden-310,.legacy-compat-310{display:none!important}
 .all-calendar-modes-310{display:flex;gap:6px;flex-wrap:wrap}
 .all-calendar-modes-310 .small-btn{min-width:82px}
@@ -564,7 +564,7 @@ body.dark .recurring-calendar-day-300.selected-300{background:var(--primary-soft
 </style>
 
 <style id="v312-ui-refinement">
-/* ===== 31.2차: 필터·접기·설명·목록·통계·달력 개선 ===== */
+/* ===== 31.3차: 필터·접기·설명·목록·통계·달력 개선 ===== */
 :root{--info-yellow:#ffd84d;--info-yellow-soft:#fff9d7}
 
 /* 모든 접기/펴기 버튼은 오른쪽 상단 + / - */
@@ -795,13 +795,386 @@ body.dark .recurring-calendar-day-300.selected-300{background:var(--primary-soft
 }
 </style>
 
+
+<style id="v313-layout-interaction-fixes">
+/* ===== 31.3차: PC 단일 줄, 모바일 버튼 축소, 통계·달력·분류 UI 보정 ===== */
+
+/* PC에서도 카드/안내가 한 줄에 하나씩 */
+.settings-grid,
+.assistant-grid{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  background:var(--panel)
+}
+.settings-grid>.settings-box,
+.assistant-grid>.assistant-card{
+  width:100%!important;
+  margin:0!important;
+  border:0!important;
+  border-bottom:1px solid var(--line)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  box-sizing:border-box
+}
+.settings-grid>.settings-box:last-child,
+.assistant-grid>.assistant-card:last-child{border-bottom:0!important}
+
+/* 설명/접기 버튼은 반드시 헤더를 기준으로 배치 */
+.section-head,
+.settings-box-head,
+.recurring-calendar-head-300{
+  position:relative!important
+}
+.collapse-toggle-274,
+#recurringCalendarToggle300{
+  z-index:2!important
+}
+
+/* 작고 덜 눈에 띄는 노란 확성기 */
+.info-toggle-312,
+.info-toggle-313{
+  position:absolute!important;
+  right:40px!important;
+  top:6px!important;
+  width:23px!important;
+  height:23px!important;
+  min-width:23px!important;
+  min-height:23px!important;
+  padding:0!important;
+  border:1px solid #e7c95b!important;
+  border-radius:7px!important;
+  background:#fff5bd!important;
+  color:#6a5700!important;
+  font-size:12px!important;
+  line-height:21px!important;
+  box-shadow:none!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  cursor:pointer;
+  z-index:2!important
+}
+.info-toggle-312:hover,
+.info-toggle-312.active-312,
+.info-toggle-313:hover,
+.info-toggle-313.active-313{
+  background:#ffe987!important;
+  box-shadow:none!important;
+  filter:none!important
+}
+
+/* 모드 선택 버튼은 눌린 상태가 확실히 보이도록 */
+.mode-selected-313,
+.all-calendar-modes-310 .mode-selected-313,
+.recurring-calendar-mode-312 .mode-selected-313{
+  background:#5868f5!important;
+  border-color:#5868f5!important;
+  color:#fff!important;
+  font-weight:900!important;
+  box-shadow:0 3px 9px rgba(88,104,245,.28)!important
+}
+.mode-unselected-313{
+  background:var(--panel)!important;
+  border-color:var(--line)!important;
+  color:var(--text)!important;
+  box-shadow:none!important
+}
+
+/* 고정 달력 월별 선택 */
+.recurring-calendar-mode-312{
+  align-items:center
+}
+.recurring-calendar-month-313{
+  display:none;
+  min-width:150px;
+  width:auto;
+  padding:7px 9px
+}
+.recurring-calendar-mode-312.month-mode-313 .recurring-calendar-month-313{
+  display:block
+}
+
+/* 통계 그래프: 클릭 가능한 영역 명확화 */
+.stats-major-button-313{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:inherit;
+  padding:0;
+  margin:0;
+  text-align:left;
+  cursor:pointer;
+  border-radius:9px
+}
+.stats-major-button-313:hover,
+.stats-major-button-313:focus-visible,
+.stats-major-button-313.selected-313{
+  background:var(--primary-soft);
+  outline:none;
+  box-shadow:inset 0 0 0 1px var(--primary)
+}
+.stats-pie-segment-313{
+  fill:none;
+  stroke-width:22;
+  cursor:pointer;
+  pointer-events:stroke;
+  transition:stroke-width .15s ease,opacity .15s ease
+}
+.stats-pie-segment-313:hover,
+.stats-pie-segment-313.selected-313{
+  stroke-width:29;
+  opacity:.9
+}
+.stats-legend-row-313{
+  border:0;
+  border-bottom:1px solid var(--line);
+  background:transparent;
+  color:inherit;
+  padding:9px 10px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  text-align:left;
+  cursor:pointer
+}
+.stats-legend-row-313:last-child{border-bottom:0}
+.stats-legend-row-313:hover,
+.stats-legend-row-313.selected-313{background:var(--primary-soft)}
+
+/* 분류 관리: 대분류 가로 탭 + 선택된 소분류 */
+.category-columns{
+  grid-template-columns:1fr!important
+}
+.category-tab-strip-313{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  padding:2px 0 8px;
+  scroll-snap-type:x proximity
+}
+.category-tab-strip-313::-webkit-scrollbar{display:none}
+.category-major-tab-313{
+  flex:0 0 auto;
+  white-space:nowrap;
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:var(--text);
+  border-radius:999px;
+  padding:7px 11px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+  scroll-snap-align:start
+}
+.category-major-tab-313.active-313{
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary)
+}
+.category-selected-panel-313{
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden
+}
+.category-selected-head-313{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:10px;
+  border-bottom:1px solid var(--line)
+}
+.category-selected-name-313{font-weight:900}
+.category-selected-actions-313{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  justify-content:flex-end
+}
+.category-sub-list-313{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  padding:10px
+}
+.category-sub-list-313::-webkit-scrollbar{display:none}
+.category-sub-item-313{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:6px 9px;
+  background:var(--soft);
+  white-space:nowrap;
+  font-size:11px
+}
+
+/* 고정항목 목록 버튼을 오른쪽 한 줄에 짧게 */
+.recurring-row-actions-313{
+  display:flex;
+  gap:4px;
+  justify-content:flex-end;
+  align-items:center;
+  flex-wrap:nowrap
+}
+
+/* 하단 메뉴가 내용 버튼에 가려지지 않도록 */
+.bottom-nav{z-index:100!important}
+@media(max-width:640px){
+  .app{
+    padding-bottom:calc(126px + env(safe-area-inset-bottom))!important
+  }
+
+  /* 접기/펴기 및 설명 버튼을 더 작게 */
+  .collapse-toggle-274,
+  #recurringCalendarToggle300{
+    right:6px!important;
+    top:6px!important;
+    width:25px!important;
+    height:25px!important;
+    min-width:25px!important;
+    min-height:25px!important;
+    padding:0!important;
+    border-radius:7px!important;
+    font-size:16px!important;
+    line-height:23px!important
+  }
+  .info-toggle-312,
+  .info-toggle-313{
+    right:35px!important;
+    top:6px!important;
+    width:21px!important;
+    height:21px!important;
+    min-width:21px!important;
+    min-height:21px!important;
+    border-radius:6px!important;
+    font-size:11px!important
+  }
+  .section.collapsible-274>.section-head,
+  .settings-box.collapsible-274>.settings-box-head,
+  .recurring-calendar-head-300{
+    padding-right:36px!important;
+    min-height:28px!important
+  }
+  .section.has-info-312>.section-head,
+  .section.has-info-313>.section-head{
+    padding-right:64px!important
+  }
+
+  /* 수정/삭제/ON 등 작은 동작 버튼 높이 축소 */
+  .two-line-row .small-btn,
+  .compact-row-actions-312 .small-btn,
+  .compact-all-actions-312 .small-btn,
+  .category-selected-actions-313 .small-btn,
+  .payment-detail-312 .small-btn,
+  .settings-box .small-btn,
+  .assistant-card .small-btn{
+    min-height:25px!important;
+    height:auto!important;
+    padding:3px 6px!important;
+    font-size:9px!important;
+    line-height:1.2!important;
+    border-radius:7px!important
+  }
+
+  /* 고정항목: 메타와 버튼이 겹치지 않게 2단, 버튼은 짧게 */
+  .two-line-row .row-sub{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    gap:4px 6px!important;
+    align-items:center!important
+  }
+  .two-line-row .row-sub>span:first-child{
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+  }
+  .two-line-row .row-sub>span:last-child{
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    gap:3px!important;
+    justify-content:flex-end!important
+  }
+  .recurring-row-actions-313{gap:3px}
+
+  /* 달력 헤더의 버튼 겹침 방지 */
+  .recurring-calendar-head-300{
+    display:block!important
+  }
+  .recurring-calendar-mode-312{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:5px!important;
+    padding-right:0!important
+  }
+  .recurring-calendar-month-313{
+    grid-column:1/-1;
+    width:100%!important;
+    min-width:0!important;
+    font-size:13px!important;
+    padding:6px 8px!important
+  }
+  .recurring-calendar-mode-312 .small-btn{
+    min-height:29px!important;
+    padding:4px 5px!important;
+    font-size:9px!important
+  }
+
+  /* PC용 단일 행 구조를 모바일에서도 유지 */
+  .settings-grid,
+  .assistant-grid{
+    display:flex!important;
+    flex-direction:column!important
+  }
+
+  /* 분류 탭 및 버튼 축소 */
+  .category-column{padding:8px!important}
+  .category-column-head{margin-bottom:7px!important}
+  .category-major-tab-313{padding:5px 8px;font-size:10px}
+  .category-selected-head-313{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    padding:7px;
+    gap:5px
+  }
+  .category-selected-name-313{font-size:12px}
+  .category-selected-actions-313{gap:3px}
+  .category-sub-list-313{padding:7px;gap:5px}
+  .category-sub-item-313{padding:5px 7px;font-size:9.5px}
+
+  /* 하단 탭과 떠 있는 버튼의 레이어 충돌 방지 */
+  .bottom-nav{
+    z-index:100!important;
+  }
+  .section-head .info-toggle-312,
+  .section-head .info-toggle-313,
+  .section-head .collapse-toggle-274{
+    z-index:2!important
+  }
+}
+</style>
+
 </head>
 <body>
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">31.2차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">31.3차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">31.2차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">31.3차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="desktop-actions">
 <button class="ghost-btn" onclick="openAccountModal()" type="button">통장 등록</button>
 <button class="ghost-btn" onclick="openCardModal()" type="button">카드 등록</button>
@@ -900,7 +1273,7 @@ body.dark .recurring-calendar-day-300.selected-300{background:var(--primary-soft
 <div class="subtle" id="recurringCalendarMonthLabel300" style="margin-top:5px">등록된 전체 고정항목을 날짜별로 확인합니다.</div>
 <div class="recurring-calendar-mode-312">
 <button type="button" class="small-btn recurring-calendar-mode-btn-312 active-312" data-recurring-calendar-mode-312="all" onclick="setRecurringCalendarMode312('all')">전체 고정 달력</button>
-<button type="button" class="small-btn recurring-calendar-mode-btn-312" data-recurring-calendar-mode-312="month" onclick="setRecurringCalendarMode312('month')">월별 보기</button>
+<button type="button" class="small-btn recurring-calendar-mode-btn-312" data-recurring-calendar-mode-312="month" onclick="setRecurringCalendarMode312('month')">월별 보기</button><input type="month" id="recurringCalendarMonth313" class="recurring-calendar-month-313" aria-label="고정항목 월별 달력 조회 월">
 </div>
 </div>
 <button aria-expanded="true" class="collapse-toggle-274" id="recurringCalendarToggle300" onclick="toggleRecurringCalendar300()" type="button">−</button>
@@ -922,7 +1295,7 @@ body.dark .recurring-calendar-day-300.selected-300{background:var(--primary-soft
 <div class="section"><div class="section-head"><div><h2>대출·저축 현황</h2><div class="subtle" style="margin-top:5px">마이너스통장은 음수 통장잔액에서 자동 계산되고, 일반대출만 별도로 등록합니다.</div></div><div class="actions"><button class="small-btn primary" onclick="openLoanModal()" type="button">+ 일반대출</button><button class="small-btn" onclick="openRecurringModal('savings')" type="button">+ 고정저축</button></div></div>
 <div class="summary-strip"><div class="summary-item"><span>마이너스통장 사용액</span><b id="overdraftTotal">0원</b></div><div class="summary-item"><span>일반대출 합계</span><b id="generalLoanTotal">0원</b></div><div class="summary-item"><span>총 대출 합계</span><b id="allLoanTotal">0원</b></div><div class="summary-item"><span>이번 달 저축</span><b id="monthlySavingsTotal">0원</b></div></div>
 <div class="section" style="margin:14px 0"><div class="section-head"><h2>대출 목록</h2></div><div class="line-list" id="loanList"></div></div>
-<div class="section" style="margin:0"><div class="section-head"><h2>저축목록</h2></div><div class="line-list" id="fixedSavingsList"></div></div></div>
+<div class="section" style="margin:0"><div class="section-head"><h2>저축 목록</h2></div><div class="line-list" id="fixedSavingsList"></div></div></div>
 </section>
 <section class="panel" id="debts">
 <div class="section">
@@ -981,7 +1354,7 @@ body.dark .recurring-calendar-day-300.selected-300{background:var(--primary-soft
 <div class="section"><div class="section-head"><div><h2>즐겨찾기 관리</h2><div class="subtle" style="margin-top:5px">자주 입력하는 거래를 저장해 한 번에 불러옵니다.</div></div><button class="small-btn primary" onclick="openFavoriteModal()" type="button">+ 즐겨찾기 만들기</button></div><div class="grid-3" id="favoriteManager"></div></div>
 </section>
 <section class="panel" id="settings"><div class="section"><div class="section-head"><h2>백업·설정·기능 안내</h2></div><div class="settings-grid">
-<div class="settings-box"><h3>현재 앱 버전</h3><p><b>가계부 31.2차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 31.2차</span></div>
+<div class="settings-box"><h3>현재 앱 버전</h3><p><b>가계부 31.3차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 31.3차</span></div>
 <div class="settings-box"><h3>☁️ Firebase 자동 동기화</h3><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p><div class="actions"><button class="small-btn primary" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" onclick="forceCloudUpload()" type="button">현재 자료를 클라우드에 저장</button></div></div>
 <div class="settings-box"><h3>선택 백업</h3><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select><button class="small-btn primary" onclick="exportBackup()" type="button">백업 파일 저장</button></div><div class="backup-proof" id="lastBackupProof"></div></div>
 <div class="settings-box"><h3>백업 불러오기</h3><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input accept=".json" id="backupInput" onchange="importBackup(event)" type="file"/></div>
@@ -1297,7 +1670,7 @@ function deleteSubCategory(majorId,subId){const major=categoryById(majorId),sub=
 
 function download(name,content,type='application/json'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return '\ufeff'+rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n')}
-function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="31.2";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"31.2",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_31.2차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
+function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="31.3";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"31.3",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_31.3차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
 function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=normalizeState(JSON.parse(r.result));saveState();alert('백업을 불러왔습니다.')}catch(err){console.error(err);alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f,'utf-8')}
 function exportPurchaseCSV(){const rows=[['사용일','카드','카드종류','예산구분','사용처','대분류','소분류','총 구매금액','할부개월','청구월별 금액','메모']];state.purchases.forEach(p=>rows.push([p.date,cardById(p.cardId)?.name||'',cardById(p.cardId)?.cardType==='debit'?'체크카드':'신용카드',(p.budgetSource&&p.budgetSource!=='personal')?(purposeFundById(p.budgetSource)?.name||'목적자금'):'내 생활비',p.merchant,p.majorCategory,p.subCategory,p.totalAmount,p.installmentMonths,p.schedules.map(s=>`${s.billingMonth}:${s.amount}:${s.paid?'납부완료':'예정'}`).join(' / '),p.memo||'']));download(`마파가계부_카드사용_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
 function exportLedgerCSV(){const rows=[['날짜','구분','항목','대분류','소분류','통장','금액','메모','자동반영']];state.cashflows.forEach(f=>rows.push([f.date,f.type,f.description,f.majorCategory||'',f.subCategory||'',accountById(f.accountId)?.name||'',f.amount,f.memo||'',f.recurringItemId?'매월 자동':'']));allSchedules().filter(s=>s.paid).forEach(s=>rows.push([s.paidDate,'카드값 출금',`${s.card?.name||''} ${s.purchase.merchant}`,'카드값','',accountById(s.paidAccountId)?.name||'',-s.amount,'']));download(`마파가계부_통장내역_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
@@ -1399,7 +1772,7 @@ TAB_INFO.loans=['대출·저축','마이너스통장과 일반대출, 고정저�
 
 
 // ===== 27차 실제 안정화·검증 레이어 =====
-const APP_VERSION_27='31.2';
+const APP_VERSION_27='31.3';
 const BACKUP_META_KEY_27='mapa-household-book-last-backup-v27-4';
 
 function expenseCategoryForLoan27(){
@@ -1559,9 +1932,9 @@ function buildBackup27(scope='all'){
   if(scope==='all')payload=full;else{payload={categories:full.categories};if(scope==='transactions')Object.assign(payload,{purchases:full.purchases,cashflows:full.cashflows,debts:full.debts});if(scope==='cards')payload.cards=full.cards;if(scope==='accounts')payload.accounts=full.accounts;if(scope==='recurring')Object.assign(payload,{recurringItems:full.recurringItems,recurringSkips:full.recurringSkips,loans:full.loans});if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds})}
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 }
-exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_31.2차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
+exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_31.3차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
 function renderBackupProof27(){const el=document.getElementById('lastBackupProof');if(!el)return;try{const m=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');el.textContent=m?`최근 백업: ${new Date(m.createdAt).toLocaleString('ko-KR')} · ${m.scope==='all'?'전체':'선택'} · 검증코드 ${m.checksum} · ${(m.size/1024).toFixed(1)}KB`:'이 기기에서 저장한 백업 기록이 아직 없습니다.'}catch{el.textContent='백업 기록을 읽을 수 없습니다.'}}
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_31.2차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_31.3차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 function integrityIssues27(st){const issues=[],checkIds=(name,arr)=>{const seen=new Set();(arr||[]).forEach(x=>{if(!x.id)issues.push(`${name}: ID 없음`);else if(seen.has(x.id))issues.push(`${name}: 중복 ID ${x.id}`);seen.add(x.id)})};[['통장',st.accounts],['카드',st.cards],['카드사용',st.purchases],['통장내역',st.cashflows],['고정항목',st.recurringItems],['대출',st.loans],['받을·줄 돈',st.debts],['목적자금',st.purposeFunds]].forEach(x=>checkIds(...x));
   (st.cards||[]).forEach(c=>{if(c.accountId&&!st.accounts.some(a=>a.id===c.accountId))issues.push(`카드 ${c.name}: 출금통장 연결 오류`)});(st.purchases||[]).forEach(p=>{if(!st.cards.some(c=>c.id===p.cardId))issues.push(`카드사용 ${p.merchant}: 카드 연결 오류`);if(!Number.isFinite(Number(p.totalAmount)))issues.push(`카드사용 ${p.merchant}: 금액 오류`)});(st.cashflows||[]).forEach(f=>{if(f.accountId&&!st.accounts.some(a=>a.id===f.accountId))issues.push(`통장내역 ${f.description}: 출금·입금통장 오류`);if(f.type==='transfer'&&f.targetAccountId&&!st.accounts.some(a=>a.id===f.targetAccountId))issues.push(`이체 ${f.description}: 대상통장 오류`);if(!Number.isFinite(Number(f.amount)))issues.push(`통장내역 ${f.description}: 금액 오류`)});(st.recurringItems||[]).forEach(r=>{if(r.type==='savings'){if(!st.accounts.some(a=>a.id===r.accountId)||!st.accounts.some(a=>a.id===r.targetAccountId))issues.push(`고정저축 ${r.description}: 통장 연결 오류`);if(r.accountId===r.targetAccountId)issues.push(`고정저축 ${r.description}: 출금·입금통장이 같음`)}else if(r.paymentMethod==='card'&&!st.cards.some(c=>c.id===r.cardId))issues.push(`고정항목 ${r.description}: 카드 연결 오류`);else if(r.accountId&&!st.accounts.some(a=>a.id===r.accountId))issues.push(`고정항목 ${r.description}: 통장 연결 오류`)});(st.loans||[]).forEach(l=>{if(l.interestAccountId&&!st.accounts.some(a=>a.id===l.interestAccountId))issues.push(`대출 ${l.name}: 이자 출금통장 연결 오류`);if(l.recurringItemId&&!st.recurringItems.some(r=>r.id===l.recurringItemId))issues.push(`대출 ${l.name}: 이자 고정지출 연결 오류`)});return issues;
@@ -1634,7 +2007,7 @@ buildBackup27=function(scope='all'){
   if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds});
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),includedKeys:Object.keys(payload),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 };
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_31.2차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_31.3차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 const runDataDiagnostics27Base=runDataDiagnostics;
 runDataDiagnostics=async function(){await runDataDiagnostics27Base();const el=document.getElementById('diagnosticResult'),last=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');if(el&&last)el.innerHTML=el.innerHTML.replace('최근 전체백업:',`최근 백업(${last.scope==='all'?'전체':'선택'}):`)};
@@ -1687,7 +2060,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=31.2',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=31.3',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
@@ -2671,7 +3044,7 @@ saveState=function(){ensurePurposeFunding282();syncAllPurposeReceivables282();sa
 
 // Include monthly funding status in selective budget backups.
 const buildBackupBefore282=buildBackup27;
-buildBackup27=function(scope='all'){const data=buildBackupBefore282(scope);if(scope==='budget'){data.state.purposeFundingStatus=JSON.parse(JSON.stringify(state.purposeFundingStatus||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='31.2';return data};
+buildBackup27=function(scope='all'){const data=buildBackupBefore282(scope);if(scope==='budget'){data.state.purposeFundingStatus=JSON.parse(JSON.stringify(state.purposeFundingStatus||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='31.3';return data};
 
 renderAll();
 </script>
@@ -2792,7 +3165,7 @@ ensurePurposeReceipts290();
 const saveStateBefore290=saveState;
 saveState=function(){ensurePurposeReceipts290();syncAllPurposeReceivables290();saveStateBefore290()};
 const buildBackupBefore290=buildBackup27;
-buildBackup27=function(scope='all'){const data=buildBackupBefore290(scope);if(scope==='budget'){data.state.purposeFundingReceipts=JSON.parse(JSON.stringify(state.purposeFundingReceipts||[]));data.state.purposeReceiptMigration=JSON.parse(JSON.stringify(state.purposeReceiptMigration||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='31.2';return data};
+buildBackup27=function(scope='all'){const data=buildBackupBefore290(scope);if(scope==='budget'){data.state.purposeFundingReceipts=JSON.parse(JSON.stringify(state.purposeFundingReceipts||[]));data.state.purposeReceiptMigration=JSON.parse(JSON.stringify(state.purposeReceiptMigration||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='31.3';return data};
 
 renderAll();
 </script>
@@ -3113,7 +3486,7 @@ renderRecurringMonthlyStatus=function(){
 renderAll();
 </script>
 <script id="v295-recurring-income-month-cancel">
-// ===== 31.2차: 고정수입 이번 달 취소 =====
+// ===== 31.3차: 고정수입 이번 달 취소 =====
 function cancelRecurringIncomeMonth295(flowId){
   const f=(state.cashflows||[]).find(x=>x.id===flowId);
   if(!f||!f.recurringItemId||!f.recurringMonth||f.type!=='income')return;
@@ -3279,7 +3652,7 @@ renderAll();
 </form>
 </dialog>
 <script id="v296-recurring-savings-month-cancel">
-// ===== 31.2차: 고정저축 이번 달 취소 =====
+// ===== 31.3차: 고정저축 이번 달 취소 =====
 function recurringSavingsSkipped296(id, month){
   return (state.recurringSkips||[]).includes(recurringSkipKey(id,month));
 }
@@ -3489,7 +3862,7 @@ renderRecurringMonthlyStatus=function(){
 renderAll();
 </script>
 <script id="v297-recurring-savings-month-amount">
-// ===== 31.2차: 고정저축 이번 달 실제 금액 수정 =====
+// ===== 31.3차: 고정저축 이번 달 실제 금액 수정 =====
 function recurringSavingsFlow297(recurringId, month){
   return (state.cashflows||[]).find(f=>
     f.recurringSavings&&
@@ -3787,7 +4160,7 @@ renderRecurringMonthlyStatus=function(){
 renderAll();
 </script>
 <script id="v298-mobile-dialog-viewport">
-// ===== 31.2차: 모바일 키보드·입력 모달 높이 및 저장 버튼 보정 =====
+// ===== 31.3차: 모바일 키보드·입력 모달 높이 및 저장 버튼 보정 =====
 function syncDialogViewport298(){
   const viewport=window.visualViewport;
   const height=Math.max(320,Math.round(viewport?.height||window.innerHeight||document.documentElement.clientHeight));
@@ -3838,7 +4211,7 @@ document.addEventListener('focusin',event=>{
 },{passive:true});
 </script>
 <script id="v300-recurring-calendar">
-// ===== 31.2차: 고정항목 날짜별 달력 =====
+// ===== 31.3차: 고정항목 날짜별 달력 =====
 const RECURRING_CALENDAR_COLLAPSED_KEY_300='household-book-recurring-calendar-collapsed-300';
 let recurringCalendarSelectedDate300='';
 
@@ -4044,7 +4417,7 @@ applyRecurringCalendarCollapsed300(recurringCalendarStoredCollapsed300());
 renderAll();
 </script>
 <script id="v310-all-tab-rebuild">
-// ===== 31.2차: 홈 제거·All 통합·탭 이름/순서 개편 =====
+// ===== 31.3차: 홈 제거·All 통합·탭 이름/순서 개편 =====
 TAB_INFO.purchases=['All','선택한 달의 소득과 소비를 한 화면에서 검색하고 확인합니다.'];
 TAB_INFO.recurring=['고정내역','매월 반복되는 고정수입·고정지출·고정저축을 관리합니다.'];
 TAB_INFO.payments=['카드값','선택한 달의 카드 결제예정액을 확인합니다.'];
@@ -4397,7 +4770,7 @@ renderAll();
 </script>
 
 <script id="v312-feature-refinement">
-// ===== 31.2차 기능 개선 =====
+// ===== 31.3차 기능 개선 =====
 
 // ── 모든 접기/펴기 버튼: + / -, 오른쪽 상단 ──
 setCollapsed274=function(box,button,collapsed){
@@ -5015,6 +5388,293 @@ setRecurringCalendarMode312('all');
 setAllCalendarMode310(allCalendarMode310||'all');
 installInfoToggles312();
 normalizeCollapseButtons312();
+renderAll();
+</script>
+
+
+<script id="v313-interaction-layout-fixes">
+// ===== 31.3차: 상호작용과 배열 재정의 =====
+
+// ── 설명 아이콘: 작은 노란 확성기 ──
+function normalizeInfoButtons313(){
+  document.querySelectorAll('.info-toggle-312,.info-toggle-313').forEach(button=>{
+    button.classList.add('info-toggle-313');
+    button.textContent='📣';
+    button.title=button.getAttribute('aria-expanded')==='true'?'설명 접기':'설명 보기';
+  });
+  document.querySelectorAll('.section.has-info-312').forEach(section=>section.classList.add('has-info-313'));
+}
+
+// ── 모드 버튼 색상 확실히 표시 ──
+function applyModeButtons313(selector,activeValue,dataName){
+  document.querySelectorAll(selector).forEach(button=>{
+    const active=button.dataset[dataName]===activeValue;
+    button.classList.toggle('mode-selected-313',active);
+    button.classList.toggle('mode-unselected-313',!active);
+    button.classList.toggle('primary',active);
+    button.setAttribute('aria-pressed',String(active));
+  });
+}
+
+setAllCalendarMode310=function(mode){
+  allCalendarMode310=['all','income','expense'].includes(mode)?mode:'all';
+  applyModeButtons313(
+    '[data-all-calendar-mode-310]',
+    allCalendarMode310,
+    'allCalendarMode310'
+  );
+  const title=document.getElementById('allCalendarTitle310');
+  const desc=document.getElementById('allCalendarDesc310');
+  if(title)title.textContent=
+    allCalendarMode310==='income'?'월 소득 달력':
+    allCalendarMode310==='expense'?'월 소비 달력':'월 소득·소비 달력';
+  if(desc)desc.textContent=
+    allCalendarMode310==='income'?'날짜별 소득 합계와 건수를 확인합니다.':
+    allCalendarMode310==='expense'?'날짜별 카드·통장 소비 합계와 건수를 확인합니다.':
+    '날짜별 소득과 소비를 동시에 비교합니다.';
+  renderPurchaseCalendar();
+};
+
+// ── 고정항목 달력: 월별 보기는 독립 월 선택 가능 ──
+recurringCalendarMonth300=function(){
+  const picker=document.getElementById('recurringCalendarMonth313');
+  if(recurringCalendarMode312==='month'&&picker?.value)return picker.value;
+  return document.getElementById('mainMonth')?.value||currentMonth();
+};
+
+setRecurringCalendarMode312=function(mode){
+  recurringCalendarMode312=mode==='month'?'month':'all';
+  const wrap=document.querySelector('.recurring-calendar-mode-312');
+  if(wrap)wrap.classList.toggle('month-mode-313',recurringCalendarMode312==='month');
+
+  const picker=document.getElementById('recurringCalendarMonth313');
+  if(picker&&!picker.value){
+    picker.value=document.getElementById('mainMonth')?.value||currentMonth();
+  }
+  applyModeButtons313(
+    '[data-recurring-calendar-mode-312]',
+    recurringCalendarMode312,
+    'recurringCalendarMode312'
+  );
+  recurringCalendarSelectedDate300='';
+  renderRecurringCalendar300();
+};
+
+document.getElementById('recurringCalendarMonth313')?.addEventListener('change',()=>{
+  recurringCalendarSelectedDate300='';
+  renderRecurringCalendar300();
+});
+
+document.getElementById('mainMonth')?.addEventListener('change',event=>{
+  const picker=document.getElementById('recurringCalendarMonth313');
+  if(picker)picker.value=event.target.value;
+  if(recurringCalendarMode312==='month'){
+    recurringCalendarSelectedDate300='';
+    renderRecurringCalendar300();
+  }
+});
+
+// ── 고정항목 목록 버튼을 짧은 한 줄로 다시 출력 ──
+recurringItemHtml=function(r){
+  const cat=r.type==='savings'?'저축 · 통장간 이동':categoryDisplay(r.majorCategory,r.subCategory,r.majorCategoryId);
+  return `<div class="two-line-row">
+    <div class="row-top">
+      <span>${esc(r.description)} <span class="badge ${r.type==='income'?'income':r.type==='savings'?'transfer':'expense'}">${recurringKindLabel27(r)}</span></span>
+      <span>${won(r.amount)}</span>
+    </div>
+    <div class="row-sub">
+      <span>매월 ${r.day}일 · ${esc(recurringTargetText27(r))} · ${esc(cat)} · ${r.active?'사용 중':'일시정지'}</span>
+      <span class="recurring-row-actions-313">
+        <button class="small-btn ${r.active?'primary':''}" onclick="toggleRecurring('${r.id}')">${r.active?'ON':'OFF'}</button>
+        <button class="small-btn" onclick="editRecurring('${r.id}')">수정</button>
+        <button class="small-btn danger" onclick="deleteRecurring('${r.id}')">삭제</button>
+      </span>
+    </div>
+  </div>`;
+};
+recurringSavingsHtml=recurringItemHtml;
+
+// ── 통계 대분류 클릭: 인라인 onclick으로 확실히 동작 ──
+function showStatsMajorDetail313(type,major){
+  statsSelection312={scope:'major',type,major};
+  renderStatistics();
+  requestAnimationFrame(()=>{
+    document.getElementById('statsDetail')?.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+function showStatsAllDetail313(type){
+  statsSelection312={scope:'type',type,major:''};
+  renderStatistics();
+  requestAnimationFrame(()=>{
+    document.getElementById('statsDetail')?.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+showStatsMajorDetail312=showStatsMajorDetail313;
+showStatsAllDetail312=showStatsAllDetail313;
+
+chartHtml=function(groups,total,type){
+  if(!groups.length)return '<div class="empty">이 기간의 내역이 없습니다.</div>';
+  const mode=document.getElementById('statsChartType')?.value||'bar';
+
+  if(mode==='pie'){
+    const radius=58;
+    const circumference=2*Math.PI*radius;
+    let offset=0;
+    const circles=groups.map((group,index)=>{
+      const fraction=total?group.amount/total:0;
+      const length=fraction*circumference;
+      const selected=statsSelectionMatch312(type,group.name)?' selected-313':'';
+      const circle=`<circle
+        class="stats-pie-segment-313${selected}"
+        cx="80" cy="80" r="${radius}"
+        stroke="${statsPalette312[index%statsPalette312.length]}"
+        stroke-dasharray="${length} ${Math.max(0,circumference-length)}"
+        stroke-dashoffset="${-offset}"
+        tabindex="0"
+        role="button"
+        aria-label="${esc(group.name)} 상세 통계"
+        onclick='showStatsMajorDetail313(${JSON.stringify(type)},${JSON.stringify(group.name)})'
+        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}"></circle>`;
+      offset+=length;
+      return circle;
+    }).join('');
+
+    const legend=groups.map((group,index)=>`
+      <button type="button"
+        class="stats-legend-row-313${statsSelectionMatch312(type,group.name)?' selected-313':''}"
+        onclick='showStatsMajorDetail313(${JSON.stringify(type)},${JSON.stringify(group.name)})'>
+        <span class="legend-dot" style="background:${statsPalette312[index%statsPalette312.length]}"></span>
+        <span>${esc(group.icon)} ${esc(group.name)}</span>
+        <b>${total?Math.round(group.amount/total*100):0}% · ${won(group.amount)}</b>
+      </button>`).join('');
+
+    return `<div class="stats-pie-wrap-312">
+      <div class="stats-pie-container-312">
+        <svg class="stats-pie-svg-312" viewBox="0 0 160 160" role="img" aria-label="${type==='income'?'소득':'소비'} 원형그래프">
+          <circle class="stats-pie-bg-312" cx="80" cy="80" r="${radius}"></circle>
+          ${circles}
+        </svg>
+        <div class="stats-pie-center-312"><span>합계</span><b>${won(total)}</b></div>
+      </div>
+      <div class="stats-legend-312">${legend}</div>
+    </div>`;
+  }
+
+  const max=Math.max(...groups.map(group=>group.amount),1);
+  return groups.map(group=>`
+    <button type="button"
+      class="stats-major-button-313${statsSelectionMatch312(type,group.name)?' selected-313':''}"
+      onclick='showStatsMajorDetail313(${JSON.stringify(type)},${JSON.stringify(group.name)})'>
+      <div class="bar-row">
+        <div class="bar-label" title="${esc(group.name)}">${esc(group.icon)} ${esc(group.name)}</div>
+        <div class="bar-track"><div class="bar-fill ${type==='income'?'income':''}" style="width:${Math.max(2,group.amount/max*100)}%"></div></div>
+        <div class="bar-value">${won(group.amount)} · ${total?Math.round(group.amount/total*100):0}%</div>
+      </div>
+    </button>`).join('');
+};
+
+// HTML의 전체 상세 버튼도 새 함수로 연결
+document.querySelectorAll('.chart-title-row-312 button').forEach(button=>{
+  const text=button.closest('.chart-card')?.querySelector('h3')?.textContent||'';
+  const type=text.includes('소득')?'income':'expense';
+  button.setAttribute('onclick',`showStatsAllDetail313('${type}')`);
+});
+
+// ── 분류 항목 관리: 대분류 가로 탭, 선택 시 소분류 표시 ──
+const selectedCategoryMajor313={expense:'',income:''};
+
+function categoryManagerHtml313(type){
+  const categories=categoriesOf(type);
+  if(!categories.length){
+    return `<div class="empty">${type==='expense'?'지출':'소득'} 분류가 없습니다.</div>`;
+  }
+
+  if(!categories.some(category=>category.id===selectedCategoryMajor313[type])){
+    selectedCategoryMajor313[type]=categories[0].id;
+  }
+  const selected=categories.find(category=>category.id===selectedCategoryMajor313[type])||categories[0];
+
+  const tabs=categories.map(category=>`
+    <button type="button"
+      class="category-major-tab-313${category.id===selected.id?' active-313':''}"
+      onclick='selectCategoryMajor313(${JSON.stringify(type)},${JSON.stringify(category.id)})'>
+      ${esc(category.icon||iconForCategory(type,category.name))} ${esc(category.name)}
+    </button>`).join('');
+
+  const children=(selected.children||[]).length
+    ?selected.children.map(child=>`
+      <span class="category-sub-item-313">
+        ${esc(child.name)}
+        <button type="button" class="chip-btn" title="수정"
+          onclick="openCategoryModal('${type}','sub','${selected.id}','${child.id}')">✎</button>
+        <button type="button" class="chip-btn" title="삭제"
+          onclick="deleteSubCategory('${selected.id}','${child.id}')">×</button>
+      </span>`).join('')
+    :'<span class="subtle">소분류가 없습니다.</span>';
+
+  return `
+    <div class="category-tab-strip-313">${tabs}</div>
+    <div class="category-selected-panel-313">
+      <div class="category-selected-head-313">
+        <span class="category-selected-name-313">${esc(selected.icon||iconForCategory(type,selected.name))} ${esc(selected.name)}</span>
+        <span class="category-selected-actions-313">
+          <button type="button" class="small-btn" onclick="openCategoryModal('${type}','major','${selected.id}')">이름 수정</button>
+          <button type="button" class="small-btn primary" onclick="openCategoryModal('${type}','sub','${selected.id}')">+ 소분류</button>
+          <button type="button" class="small-btn danger" onclick="deleteMajorCategory('${selected.id}')">삭제</button>
+        </span>
+      </div>
+      <div class="category-sub-list-313">${children}</div>
+    </div>`;
+}
+
+function selectCategoryMajor313(type,id){
+  selectedCategoryMajor313[type]=id;
+  renderCategoryManager();
+}
+
+renderCategoryManager=function(){
+  const expense=document.getElementById('expenseCategoryList');
+  const income=document.getElementById('incomeCategoryList');
+  if(expense)expense.innerHTML=categoryManagerHtml313('expense');
+  if(income)income.innerHTML=categoryManagerHtml313('income');
+};
+
+// ── 렌더 후 항상 보정 ──
+function apply313VisualState(){
+  normalizeInfoButtons313();
+  applyModeButtons313(
+    '[data-all-calendar-mode-310]',
+    allCalendarMode310||'all',
+    'allCalendarMode310'
+  );
+  applyModeButtons313(
+    '[data-recurring-calendar-mode-312]',
+    recurringCalendarMode312||'all',
+    'recurringCalendarMode312'
+  );
+}
+
+const renderAllBefore313=renderAll;
+renderAll=function(){
+  renderAllBefore313();
+  renderCategoryManager();
+  apply313VisualState();
+};
+
+const switchTabBefore313=switchTab;
+switchTab=function(id){
+  switchTabBefore313(id);
+  if(id==='statistics'){
+    renderCategoryManager();
+    renderStatistics();
+  }
+  requestAnimationFrame(apply313VisualState);
+};
+
+setRecurringCalendarMode312(recurringCalendarMode312||'all');
+setAllCalendarMode310(allCalendarMode310||'all');
+renderCategoryManager();
+apply313VisualState();
 renderAll();
 </script>
 
