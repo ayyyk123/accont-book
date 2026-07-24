@@ -8,9 +8,9 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="가계부" name="apple-mobile-web-app-title"/>
-<link href="apple-touch-icon.png?v=36.3" rel="apple-touch-icon" sizes="180x180"/>
-<link href="icon-192.png?v=36.3" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 36.3차</title>
+<link href="apple-touch-icon.png?v=36.7" rel="apple-touch-icon" sizes="180x180"/>
+<link href="icon-192.png?v=36.7" rel="icon" sizes="192x192" type="image/png"/>
+<title>가계부 36.7차</title>
 <link href="manifest.json" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -2792,17 +2792,617 @@ button,input,select,textarea{
   unicode-bidi:plaintext;
   ime-mode:active;
 }
+</style><style id="v364-loan-account-history-style">
+/* ===== 36.4차: 대출내역·통장 전체장부·항상 이체예정 ===== */
+
+/* 35.3차에서 모바일 summary-strip의 flex 방향을 바꾸지 않아
+   각 칸의 124px flex-basis가 높이로 적용되던 오류 수정 */
+@media(max-width:640px){
+  #loans .summary-strip{
+    flex-direction:row!important;
+    align-items:stretch!important;
+    gap:0!important;
+  }
+  #loans .summary-item{
+    flex:0 0 150px!important;
+    min-height:0!important;
+    padding:10px 11px!important;
+  }
+}
+
+.loan-list-clickable-364{
+  cursor:pointer;
+}
+.loan-list-clickable-364:hover,
+.loan-list-clickable-364:focus-visible{
+  background:var(--soft);
+  outline:none;
+}
+.loan-history-hint-364{
+  color:var(--primary);
+  font-size:10px;
+  font-weight:850;
+  white-space:nowrap;
+}
+.loan-history-filters-364,
+.account-history-filters-364{
+  display:grid;
+  grid-template-columns:minmax(130px,1fr) repeat(2,minmax(130px,1fr)) minmax(150px,1.2fr) auto;
+  gap:7px;
+  align-items:end;
+  margin-bottom:9px;
+}
+.loan-history-filters-364{
+  grid-template-columns:repeat(2,minmax(135px,1fr)) auto;
+}
+.loan-history-filters-364 label,
+.account-history-filters-364 label{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:800;
+}
+.account-history-summary-364{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-bottom:9px;
+}
+.account-history-chip-364{
+  padding:6px 9px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:var(--soft);
+  color:var(--muted);
+  font-size:9px;
+}
+.account-history-chip-364 b{
+  margin-left:3px;
+  color:var(--text);
+}
+.account-history-group-364{
+  margin-bottom:11px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  overflow:hidden;
+  background:var(--panel);
+}
+.account-history-group-head-364{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:10px 12px;
+  border-bottom:1px solid var(--line);
+  background:var(--soft);
+}
+.account-history-group-head-364 strong{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.account-history-group-meta-364{
+  color:var(--muted);
+  font-size:9px;
+  text-align:right;
+}
+.account-history-row-364,
+.loan-history-row-364{
+  display:grid;
+  grid-template-columns:86px 86px minmax(0,1fr) 105px 120px;
+  gap:8px;
+  align-items:center;
+  padding:9px 11px;
+  border-bottom:1px solid var(--line);
+  font-size:10px;
+}
+.account-history-row-364:last-child,
+.loan-history-row-364:last-child{
+  border-bottom:0;
+}
+.account-history-title-364{
+  min-width:0;
+}
+.account-history-title-364 b{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.account-history-title-364 small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.account-history-change-364,
+.account-history-balance-364{
+  text-align:right;
+  font-weight:850;
+  font-variant-numeric:tabular-nums;
+}
+.account-history-change-364.positive{
+  color:var(--good);
+}
+.account-history-change-364.negative{
+  color:var(--danger);
+}
+.account-history-empty-364{
+  padding:14px;
+  color:var(--muted);
+  text-align:center;
+  font-size:10px;
+}
+.loan-history-row-364{
+  grid-template-columns:90px minmax(0,1fr) 115px 120px;
+}
+.planned-transfer-button-364{
+  border-color:#c9cff8!important;
+  color:#4b58d5!important;
+}
+
+@media(max-width:760px){
+  .loan-history-filters-364,
+  .account-history-filters-364{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .account-history-filters-364>select,
+  .account-history-filters-364>#accountHistorySearch364{
+    grid-column:1/-1;
+  }
+  .account-history-row-364,
+  .loan-history-row-364{
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:4px 8px;
+    padding:9px 10px;
+  }
+  .account-history-row-364>span:nth-child(1),
+  .loan-history-row-364>span:nth-child(1){
+    grid-column:1;
+    color:var(--muted);
+    font-size:8.5px;
+  }
+  .account-history-row-364>span:nth-child(2){
+    grid-column:2;
+    grid-row:1;
+    text-align:right;
+  }
+  .account-history-title-364{
+    grid-column:1/-1;
+  }
+  .account-history-change-364{
+    grid-column:1;
+    text-align:left;
+  }
+  .account-history-balance-364{
+    grid-column:2;
+  }
+  .loan-history-row-364 .account-history-title-364{
+    grid-column:1/-1;
+  }
+  .loan-history-row-364 .account-history-change-364{
+    grid-column:1;
+  }
+  .loan-history-row-364 .account-history-balance-364{
+    grid-column:2;
+  }
+}
+</style><style id="v365-transfer-reminder-style">
+/* ===== 36.5차: 앱 실행 시 미완료 이체 예정 알림 ===== */
+.transfer-reminder-365{
+  margin:0 0 12px;
+  padding:12px;
+  border:1px solid #aeb8ff;
+  border-radius:15px;
+  background:#f3f5ff;
+  box-shadow:0 5px 18px rgba(56,72,170,.09);
+}
+.transfer-reminder-365[hidden]{
+  display:none!important;
+}
+.transfer-reminder-365.overdue-365{
+  border-color:#efaaaa;
+  background:#fff3f3;
+  box-shadow:0 5px 18px rgba(177,46,63,.09);
+}
+.transfer-reminder-head-365{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:9px;
+}
+.transfer-reminder-icon-365{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  border-radius:10px;
+  background:#e2e6ff;
+  font-size:17px;
+}
+.overdue-365 .transfer-reminder-icon-365{
+  background:#ffe0e2;
+}
+.transfer-reminder-head-365 b{
+  display:block;
+  color:#3443c5;
+  font-size:13px;
+}
+.overdue-365 .transfer-reminder-head-365 b{
+  color:#b42337;
+}
+.transfer-reminder-head-365 span:not(.transfer-reminder-icon-365):not(.transfer-reminder-count-365){
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:10px;
+}
+.transfer-reminder-count-365{
+  padding:5px 8px;
+  border-radius:999px;
+  background:#e1e5ff;
+  color:#3f4dcc;
+  font-size:9px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.overdue-365 .transfer-reminder-count-365{
+  background:#ffdadd;
+  color:#a51d32;
+}
+.transfer-reminder-rows-365{
+  display:grid;
+  gap:7px;
+  margin-top:10px;
+}
+.transfer-reminder-row-365{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px 12px;
+  align-items:center;
+  padding:10px 11px;
+  border:1px solid rgba(117,128,223,.25);
+  border-radius:12px;
+  background:rgba(255,255,255,.88);
+}
+.transfer-reminder-row-365.overdue-row-365{
+  border-color:rgba(211,78,94,.30);
+}
+.transfer-reminder-main-365{
+  min-width:0;
+}
+.transfer-reminder-route-365{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  min-width:0;
+  font-size:11px;
+  font-weight:900;
+}
+.transfer-reminder-route-365 span{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.transfer-reminder-arrow-365{
+  flex:0 0 auto;
+  color:var(--muted);
+}
+.transfer-reminder-meta-365{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:5px 8px;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:9px;
+}
+.transfer-reminder-date-365{
+  font-weight:850;
+}
+.transfer-reminder-date-365.today-365{
+  color:#4050d4;
+}
+.transfer-reminder-date-365.overdue-365{
+  color:#b42337;
+}
+.transfer-reminder-memo-365{
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.transfer-reminder-amount-365{
+  margin-top:5px;
+  color:var(--text);
+  font-size:13px;
+  font-weight:950;
+}
+.transfer-reminder-actions-365{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:5px;
+  flex-wrap:wrap;
+}
+.transfer-reminder-actions-365 .small-btn{
+  min-height:30px!important;
+  padding:5px 8px!important;
+  font-size:9px!important;
+}
+.transfer-reminder-complete-365{
+  border-color:#7884ee!important;
+  background:#6572eb!important;
+  color:#fff!important;
+}
+.overdue-row-365 .transfer-reminder-complete-365{
+  border-color:#c94256!important;
+  background:#c94256!important;
+}
+.transfer-reminder-view-365{
+  background:#fff!important;
+}
+
+@media(max-width:640px){
+  .transfer-reminder-365{
+    margin-bottom:9px;
+    padding:10px;
+    border-radius:12px;
+  }
+  .transfer-reminder-icon-365{
+    width:29px;
+    height:29px;
+    font-size:15px;
+  }
+  .transfer-reminder-row-365{
+    grid-template-columns:1fr;
+    padding:9px;
+  }
+  .transfer-reminder-actions-365{
+    justify-content:flex-start;
+  }
+  .transfer-reminder-actions-365 .small-btn{
+    flex:1 1 100px;
+  }
+}
+</style><style id="v366-transfer-reminder-groups-style">
+/* ===== 36.6차: 미완료·오늘 완료 알림 접기/펴기 ===== */
+.transfer-reminder-group-366{
+  margin-top:10px;
+  border:1px solid rgba(117,128,223,.25);
+  border-radius:12px;
+  overflow:hidden;
+  background:rgba(255,255,255,.62);
+}
+.transfer-reminder-group-366.completed-group-366{
+  border-color:rgba(52,155,105,.27);
+  background:rgba(246,255,250,.80);
+}
+.transfer-reminder-group-366[hidden]{
+  display:none!important;
+}
+.transfer-reminder-group-toggle-366{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:9px!important;
+  width:100%!important;
+  min-height:39px!important;
+  padding:8px 10px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--text)!important;
+  box-shadow:none!important;
+  text-align:left!important;
+}
+.transfer-reminder-group-toggle-366:hover{
+  background:rgba(232,235,255,.58)!important;
+}
+.completed-group-366 .transfer-reminder-group-toggle-366:hover{
+  background:rgba(222,247,233,.62)!important;
+}
+.transfer-reminder-group-title-366{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+}
+.transfer-reminder-group-title-366 b{
+  color:#3443c5;
+  font-size:11px;
+}
+.completed-group-366 .transfer-reminder-group-title-366 b{
+  color:#21794e;
+}
+.transfer-reminder-group-count-366{
+  padding:3px 6px;
+  border-radius:999px;
+  background:#e1e5ff;
+  color:#3f4dcc;
+  font-size:8px;
+  font-weight:900;
+}
+.completed-group-366 .transfer-reminder-group-count-366{
+  background:#dff5e8;
+  color:#21794e;
+}
+.transfer-reminder-group-arrow-366{
+  flex:0 0 auto;
+  color:var(--muted);
+  font-size:16px;
+  font-weight:800;
+  line-height:1;
+}
+.transfer-reminder-group-body-366{
+  padding:0 8px 8px;
+}
+.transfer-reminder-group-366.collapsed-366
+  .transfer-reminder-group-body-366{
+  display:none!important;
+}
+.transfer-reminder-group-366.collapsed-366
+  .transfer-reminder-group-arrow-366{
+  transform:none;
+}
+.transfer-reminder-group-body-366
+  .transfer-reminder-rows-365{
+  margin-top:0;
+}
+.transfer-reminder-completed-row-366{
+  border-color:rgba(52,155,105,.26)!important;
+  background:rgba(255,255,255,.92)!important;
+}
+.transfer-reminder-completed-status-366{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  padding:4px 7px;
+  border-radius:999px;
+  background:#dff5e8;
+  color:#21794e;
+  font-size:8px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.transfer-reminder-completed-date-366{
+  color:#21794e;
+  font-weight:850;
+}
+.transfer-reminder-empty-366{
+  padding:10px;
+  color:var(--muted);
+  font-size:9px;
+  text-align:center;
+}
+.transfer-reminder-365.completed-only-366{
+  border-color:#9ed6b6;
+  background:#f2fbf6;
+}
+.transfer-reminder-365.completed-only-366
+  .transfer-reminder-icon-365{
+  background:#dff5e8;
+}
+.transfer-reminder-365.completed-only-366
+  .transfer-reminder-head-365 b{
+  color:#21794e;
+}
+.transfer-reminder-365.completed-only-366
+  .transfer-reminder-count-365{
+  background:#dff5e8;
+  color:#21794e;
+}
+
+@media(max-width:640px){
+  .transfer-reminder-group-366{
+    margin-top:8px;
+  }
+  .transfer-reminder-group-toggle-366{
+    min-height:36px!important;
+    padding:7px 8px!important;
+  }
+  .transfer-reminder-group-body-366{
+    padding:0 6px 6px;
+  }
+}
+</style><style id="v367-card-reimbursement-style">
+/* ===== 36.7차: 카드 대신 결제·받을 돈 연동 ===== */
+.purchase-reimbursement-toggle-367{
+  padding:10px 11px;
+  border:1px solid #c9cff8;
+  border-radius:12px;
+  background:#f6f7ff;
+}
+.purchase-reimbursement-check-367{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  margin:0!important;
+  color:#3443c5!important;
+  font-size:11px!important;
+  font-weight:900!important;
+  cursor:pointer;
+}
+.purchase-reimbursement-check-367 input{
+  width:17px!important;
+  height:17px!important;
+  min-height:17px!important;
+  margin:0!important;
+  padding:0!important;
+  accent-color:#6572eb;
+}
+.purchase-reimbursement-fields-367{
+  padding:11px;
+  border:1px solid #d8dcf7;
+  border-radius:12px;
+  background:#fbfbff;
+}
+.purchase-reimbursement-fields-367[hidden]{
+  display:none!important;
+}
+.purchase-reimbursement-grid-367{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.purchase-reimbursement-grid-367>div{
+  min-width:0;
+}
+.purchase-reimbursement-preview-wrap-367{
+  grid-column:1/-1;
+}
+.purchase-reimbursement-preview-367{
+  min-height:45px;
+  line-height:1.55;
+}
+.purchase-reimbursement-preview-367 strong{
+  color:#4654d9;
+}
+.card-reimbursement-note-367{
+  display:block;
+  margin-top:4px;
+  color:#4654d9;
+  font-size:9px;
+  font-weight:800;
+}
+.card-reimbursement-note-367.done-367{
+  color:#16855a;
+}
+.debt-card-reimbursement-badge-367{
+  display:inline-flex;
+  align-items:center;
+  margin-left:5px;
+  padding:2px 6px;
+  border-radius:999px;
+  background:#eef0ff;
+  color:#4654d9;
+  font-size:8px;
+  font-weight:900;
+}
+@media(max-width:640px){
+  .purchase-reimbursement-grid-367{
+    grid-template-columns:1fr;
+  }
+  .purchase-reimbursement-preview-wrap-367{
+    grid-column:auto;
+  }
+}
 </style></head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">36.3차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">36.7차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">36.3차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">36.7차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="desktop-actions">
 <button class="ghost-btn" onclick="openAccountModal()" type="button">통장 등록</button>
 <button class="ghost-btn" onclick="openCardModal()" type="button">카드 등록</button>
-<button class="primary-btn" onclick="openPurchaseModal()" type="button">+ 카드 사용</button>
+<button class="primary-btn" onclick="openPurchaseModal()" type="button">+ 카드 사용</button><button class="ghost-btn" data-open-reimbursable367="" onclick="openReimbursablePurchase367()" type="button">카드 대신 결제</button>
 </div>
 <button class="primary-btn mobile-only" onclick="openQuickMenu()" type="button">+ 입력</button>
 </header>
@@ -2818,7 +3418,7 @@ button,input,select,textarea{
 </div>
 <button aria-label="다음 달" class="ghost-btn month-step-btn" onclick="changeMainMonth274(1)" type="button">다음 달 ›</button>
 </div>
-<section aria-label="선택한 달 요약" class="cards-grid" id="monthlySummary351">
+<section aria-label="미완료 이체 예정 알림" aria-live="assertive" class="transfer-reminder-365" hidden="" id="transferReminder365"><div class="transfer-reminder-head-365"><span aria-hidden="true" class="transfer-reminder-icon-365">🔔</span><div><b id="transferReminderTitle365">이체 예정 알림</b><span id="transferReminderSub365">완료하지 않은 이체 예정이 있습니다.</span></div><span class="transfer-reminder-count-365" id="transferReminderCount365">0건</span></div><div class="transfer-reminder-group-366" id="transferReminderPendingGroup366"><button aria-expanded="true" class="transfer-reminder-group-toggle-366" data-toggle-transfer-group366="pending" type="button"><span class="transfer-reminder-group-title-366"><b>미완료 이체</b><span class="transfer-reminder-group-count-366" id="transferReminderPendingCount366">0건</span></span><span class="transfer-reminder-group-arrow-366">−</span></button><div class="transfer-reminder-group-body-366" id="transferReminderPendingBody366"><div class="transfer-reminder-rows-365" id="transferReminderPendingRows366"></div></div></div><div class="transfer-reminder-group-366 collapsed-366 completed-group-366" id="transferReminderCompletedGroup366"><button aria-expanded="false" class="transfer-reminder-group-toggle-366" data-toggle-transfer-group366="completed" type="button"><span class="transfer-reminder-group-title-366"><b>오늘 완료한 이체</b><span class="transfer-reminder-group-count-366" id="transferReminderCompletedCount366">0건</span></span><span class="transfer-reminder-group-arrow-366">+</span></button><div class="transfer-reminder-group-body-366" id="transferReminderCompletedBody366"><div class="transfer-reminder-rows-365" id="transferReminderCompletedRows366"></div></div></div></section><section aria-label="선택한 달 요약" class="cards-grid" id="monthlySummary351">
 <div class="stat" id="budgetStat"><div class="label" id="statBudgetLabel">이번 달 남은 예산</div><div class="value" id="statBudget">0원</div><div class="sub" id="statBudgetSub"></div></div>
 <div class="stat"><div class="label" id="statIncomeLabel">이번 달 소득</div><div class="value" id="statIncome">0원</div><div class="sub">통장에 들어온 소득 합계</div></div>
 <div class="stat"><div class="label" id="statConsumptionLabel">이번 달 소비</div><div class="value" id="statConsumption">0원</div><div class="sub">카드 구매금액 + 직접 지출</div></div>
@@ -2842,7 +3442,7 @@ button,input,select,textarea{
 </section>
 <section class="panel active" id="purchases">
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:purchases:0:월 총내역" data-collapse-title320="월 총내역">
-<div class="section-head"><div><h2>월 총내역</h2><div class="subtle" style="margin-top:5px">선택한 달의 소득·통장 입금과 카드·통장 소비를 날짜순으로 함께 검색합니다.</div></div><div class="actions"><button class="small-btn primary" onclick="openPurchaseModal()" type="button">+ 카드 사용</button><button class="small-btn" onclick="openCashflowModal('income')" type="button">+ 소득</button><button class="small-btn" onclick="openCashflowModal('deposit')" type="button">+ 통장 입금</button><button class="small-btn" onclick="openCashflowModal('withdrawal')" type="button">+ 통장 출금</button><button class="small-btn" onclick="openCashflowModal('expense')" type="button">+ 통장 지출</button><button class="small-btn" onclick="openCashflowModal('transfer')" type="button">+ 통장 이체</button></div><button aria-expanded="false" aria-label="월 총내역 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div>
+<div class="section-head"><div><h2>월 총내역</h2><div class="subtle" style="margin-top:5px">선택한 달의 소득·통장 입금과 카드·통장 소비를 날짜순으로 함께 검색합니다.</div></div><div class="actions"><button class="small-btn primary" onclick="openPurchaseModal()" type="button">+ 카드 사용</button><button class="small-btn" data-open-reimbursable367="" onclick="openReimbursablePurchase367()" type="button">+ 대신 결제</button><button class="small-btn" onclick="openCashflowModal('income')" type="button">+ 소득</button><button class="small-btn" onclick="openCashflowModal('deposit')" type="button">+ 통장 입금</button><button class="small-btn" onclick="openCashflowModal('withdrawal')" type="button">+ 통장 출금</button><button class="small-btn" onclick="openCashflowModal('expense')" type="button">+ 통장 지출</button><button class="small-btn" onclick="openCashflowModal('transfer')" type="button">+ 통장 이체</button></div><button aria-expanded="false" aria-label="월 총내역 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div>
 <div class="collapse-body-320"><div class="all-fixed-filters-360" id="allFixedFilters360"><label class="all-fixed-month-field-360" id="purchaseMonthField350"><span id="purchaseMonthLabel350">조회월</span><input id="purchaseMonthFilter" type="month"/></label><label class="all-fixed-month-field-360" id="purchasePurposeEndField350"><span class="month-field-label-line-361"><span>종료월</span><small class="month-field-inline-hint-361">선택 시 기간 적용</small></span><input id="purchasePurposeEndMonth350" type="month"/></label><button class="all-fixed-filter-button-360" data-fixed-filter360="types" id="allTypeFilterButton360" type="button"><span class="all-fixed-filter-label-360">거래유형 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="paymentKind" id="allPaymentFilterButton360" type="button"><span class="all-fixed-filter-label-360">결제구분 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="cardId" id="allCardFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 카드</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="accountId" id="allAccountFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 통장</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="majorId" id="allMajorFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 대분류</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="subId" id="allSubFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 소분류</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="purposeFund" id="allPurposeFilterButton360" type="button"><span class="all-fixed-filter-label-360">목적자금 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="receiptStatus" id="allReceiptFilterButton360" type="button"><span class="all-fixed-filter-label-360">수령상태 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><input class="all-fixed-search-360" id="purchaseSearch" placeholder="소득·사용처·항목 검색"/></div><div aria-hidden="true" class="legacy-all-filters-360">
 <select id="purchaseFlowTypeFilter310"><option value="">소득+입금+출금+지출 전체</option><option value="income">소득만</option><option value="deposit">통장 입금만</option><option value="withdrawal">통장 출금만</option><option value="expense">지출만</option></select>
 <select id="purchaseSourceFilter275"><option value="">카드+통장 전체</option><option value="card">카드만</option><option value="account">통장만</option><option value="purpose">목적자금만</option></select><select class="purpose-only-filter-350" hidden="" id="purchasePurposeFundFilter350"><option value="">모든 목적자금</option></select><select class="purpose-only-filter-350" hidden="" id="purchasePurposeReceiptFilter350"><option value="">수령상태 전체</option><option value="unreceived">미수령 있음</option><option value="received">수령완료</option></select>
@@ -2858,7 +3458,7 @@ button,input,select,textarea{
 <section class="panel" id="accounts">
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:accounts:0:통장목록" data-collapse-title320="통장목록">
 <div class="section-head"><h2>통장목록</h2><div class="actions"><button class="small-btn primary" onclick="openAccountModal()" type="button">+ 통장 등록</button></div><button aria-expanded="false" aria-label="통장목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div>
-<div class="collapse-body-320"><div class="line-list" id="accountCards"></div></div></div>
+<div class="collapse-body-320"><div class="line-list" id="accountCards"></div></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:accounts:1:통장별 전체 거래내역" data-collapse-title320="통장별 전체 거래내역" id="accountHistorySection364" style="margin:14px 0"><div class="section-head"><div><h2>통장별 전체 거래내역</h2><div class="subtle" style="margin-top:5px">소득·지출뿐 아니라 입금·출금·이체·카드값까지 거래 후 잔액과 함께 확인합니다.</div></div><button aria-expanded="false" aria-label="통장별 전체 거래내역 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="account-history-filters-364"><select id="accountHistoryAccount364"><option value="">모든 통장</option></select><label><span>시작일</span><input id="accountHistoryStart364" type="date"/></label><label><span>종료일</span><input id="accountHistoryEnd364" type="date"/></label><input id="accountHistorySearch364" placeholder="항목·분류·통장 검색"/><button class="small-btn" onclick="setAccountHistoryCurrentMonth364()" type="button">이번 달</button></div><div class="account-history-summary-364" id="accountHistorySummary364"></div><div class="account-history-result-364" id="accountHistoryResult364"></div></div></div>
 <div aria-hidden="true" class="section legacy-compat-310"><div class="section-head"><h2>소득·지출·통장내역</h2></div>
 <div class="summary-strip"><div class="summary-item"><span>월 소득</span><b id="accountIncome">0원</b></div><div class="summary-item"><span>월 직접 지출</span><b id="accountExpense">0원</b></div><div class="summary-item"><span>월 카드값 출금</span><b id="accountCardOut">0원</b></div><div class="summary-item"><span>월 실제 순증감</span><b id="accountNet">0원</b></div></div>
 <div class="filters"><input id="ledgerMonthFilter" type="month"/><select id="ledgerAccountFilter"><option value="">모든 통장</option></select></div><div id="ledgerTable"></div>
@@ -2949,7 +3549,7 @@ button,input,select,textarea{
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:smart:2:즐겨찾기 관리" data-collapse-title320="즐겨찾기 관리"><div class="section-head"><div><h2>즐겨찾기 관리</h2><div class="subtle" style="margin-top:5px">자주 입력하는 거래를 저장해 한 번에 불러옵니다.</div></div><button class="small-btn primary" onclick="openFavoriteModal()" type="button">+ 즐겨찾기 만들기</button><button aria-expanded="false" aria-label="즐겨찾기 관리 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="grid-3" id="favoriteManager"></div></div></div>
 </section>
 <section class="panel" id="settings"><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:settings:0:백업·설정·기능 안내" data-collapse-title320="백업·설정·기능 안내"><div class="section-head"><h2>백업·설정·기능 안내</h2><button aria-expanded="false" aria-label="백업·설정·기능 안내 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="settings-grid">
-<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 36.3차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 36.3차</span></div></div>
+<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 36.7차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 36.7차</span></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:1:☁️ Firebase 자동 동기화" data-collapse-title320="☁️ Firebase 자동 동기화" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>☁️ Firebase 자동 동기화</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" onclick="forceCloudUpload()" type="button">현재 자료를 클라우드에 저장</button></div><button aria-expanded="false" aria-label="☁️ Firebase 자동 동기화 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_1"><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:2:선택 백업" data-collapse-title320="선택 백업" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>선택 백업</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="exportBackup()" type="button">백업 파일 저장</button></div><button aria-expanded="false" aria-label="선택 백업 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_2"><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions settings-body-controls-315"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select></div><div class="backup-proof" id="lastBackupProof"></div></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:3:백업 불러오기" data-collapse-title320="백업 불러오기"><div class="settings-title-row-315"><h3>백업 불러오기</h3><button aria-expanded="false" aria-label="백업 불러오기 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input accept=".json" id="backupInput" onchange="importBackup(event)" type="file"/></div></div>
@@ -2984,7 +3584,7 @@ button,input,select,textarea{
 <div><label>사용일</label><input id="purchaseDate" required="" type="date"/></div><div><label>카드</label><select id="purchaseCard" required=""></select></div>
 <div><label>사용처</label><input id="purchaseMerchant" placeholder="예: 이마트" required=""/></div><div><label>총 구매금액</label><input class="money-input" id="purchaseAmount" inputmode="numeric" placeholder="300,000" required="" type="text"/></div>
 <div><label>지출 대분류</label><select id="purchaseMajor" required=""></select></div><div><label>지출 소분류</label><select id="purchaseSub" required=""></select></div>
-<div id="purchaseInstallmentWrap"><label>할부 개월</label><input id="purchaseInstallments" max="36" min="1" required="" type="number" value="1"/></div><div><label>예산 구분</label><select id="purchaseBudgetSource"><option value="personal">내 생활비</option></select><div class="hint">목적자금을 선택하면 내 월 예산에서 차감되지 않습니다.</div></div>
+<div id="purchaseInstallmentWrap"><label>할부 개월</label><input id="purchaseInstallments" max="36" min="1" required="" type="number" value="1"/></div><div><label>예산 구분</label><select id="purchaseBudgetSource"><option value="personal">내 생활비</option></select><div class="hint">목적자금을 선택하면 내 월 예산에서 차감되지 않습니다.</div></div><div class="full purchase-reimbursement-toggle-367"><label class="purchase-reimbursement-check-367"><input id="purchaseReimbursementEnabled367" type="checkbox"/><span>나중에 돈으로 받을 금액 있음</span></label><div class="hint">내 카드 결제액은 전액 카드값에 남고, 받을 금액은 받을 돈으로 따로 관리됩니다.</div></div><div class="full purchase-reimbursement-fields-367" hidden="" id="purchaseReimbursementFields367"><div class="purchase-reimbursement-grid-367"><div><label>받을 사람·기관</label><input id="purchaseReimbursementPerson367" inputmode="text" lang="ko" placeholder="예: 언니, 회사, 모임"/></div><div><label>받을 금액</label><input class="money-input" id="purchaseReimbursementAmount367" inputmode="numeric" placeholder="50,000" type="text"/></div><div><label>받기로 한 날</label><input id="purchaseReimbursementDueDate367" type="date"/></div><div class="purchase-reimbursement-preview-wrap-367"><label>처리 방식</label><div class="preview purchase-reimbursement-preview-367" id="purchaseReimbursementPreview367">받을 금액을 입력하면 받을 돈에 자동 연결됩니다.</div></div></div></div>
 <div class="full preview" id="installmentPreview">카드·사용일·금액을 입력하면 자동 청구월을 계산합니다.</div><div class="full"><label>메모</label><textarea id="purchaseMemo" placeholder="필요한 내용을 적어주세요."></textarea></div>
 </div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('purchaseModal')" type="button">취소</button><button class="primary-btn" type="submit">저장</button></div></form></dialog>
 <dialog id="purposeFundModal"><form class="modal" id="purposeFundForm"><div class="modal-head"><h2 id="purposeFundModalTitle">목적자금 등록</h2><button class="icon-btn" onclick="closeDialog('purposeFundModal')" type="button">×</button></div><input id="purposeFundId" type="hidden"/><div class="form-grid">
@@ -3027,7 +3627,7 @@ button,input,select,textarea{
 <div class="full"><label>통장</label><select id="recurringSettleAccount" required=""></select></div><div class="full preview" id="recurringSettlePreview"></div>
 </div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('recurringSettleModal')" type="button">취소</button><button class="primary-btn" type="submit">완료 처리</button></div></form></dialog>
 <dialog id="payModal"><form class="modal" id="payForm"><div class="modal-head"><h2>카드값 납부 완료</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('payModal')" type="button">×</button></div><input id="payCardId" type="hidden"/><input id="payBillingMonth" type="hidden"/><div class="form-grid"><div><label>실제 출금일</label><input id="payDate" required="" type="date"/></div><div><label>출금 통장</label><select id="payAccount" required=""></select></div><div class="full preview" id="payPreview"></div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('payModal')" type="button">취소</button><button class="primary-btn" type="submit">납부 완료 처리</button></div></form></dialog>
-<dialog id="overdraftTopupModal"><form class="modal" id="overdraftTopupForm"><div class="modal-head"><h2>통장 잔액 보충 이체 예정</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('overdraftTopupModal')" type="button">×</button></div><input id="topupTargetAccount" type="hidden"/><input id="topupBillingMonth" type="hidden"/><div class="form-grid"><div class="full preview" id="topupPreview"></div><div><label>마이너스통장</label><select id="topupSourceAccount" required=""></select></div><div><label>받는 통장</label><input id="topupTargetName" readonly=""/></div><div><label>이체 예정일</label><input id="topupDate" required="" type="date"/></div><div><label>이체 예정금액</label><input class="money-input" id="topupAmount" inputmode="numeric" required="" type="text"/></div><div class="full"><label>메모</label><textarea id="topupMemo" placeholder="예: 카드값·고정지출 잔액 보충"></textarea></div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('overdraftTopupModal')" type="button">취소</button><button class="primary-btn" type="submit">이체 예정 등록</button></div></form></dialog>
+<dialog id="overdraftTopupModal"><form class="modal" id="overdraftTopupForm"><div class="modal-head"><h2>통장 잔액 보충 이체 예정</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('overdraftTopupModal')" type="button">×</button></div><input id="topupTargetAccount" type="hidden"/><input id="topupBillingMonth" type="hidden"/><div class="form-grid"><div class="full preview" id="topupPreview"></div><div><label>보내는 통장</label><select id="topupSourceAccount" required=""></select></div><div><label>받는 통장</label><input id="topupTargetName" readonly=""/></div><div><label>이체 예정일</label><input id="topupDate" required="" type="date"/></div><div><label>이체 예정금액</label><input class="money-input" id="topupAmount" inputmode="numeric" required="" type="text"/></div><div class="full"><label>메모</label><textarea id="topupMemo" placeholder="예: 카드값·고정지출 잔액 보충"></textarea></div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('overdraftTopupModal')" type="button">취소</button><button class="primary-btn" type="submit">이체 예정 등록</button></div></form></dialog>
 <dialog id="monthlyDetailModal"><div class="modal"><div class="modal-head"><h2 id="monthlyDetailTitle">월 상세내역</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('monthlyDetailModal')" type="button">×</button></div><div class="preview" id="monthlyDetailSummary" style="margin-bottom:12px"></div><div class="monthly-detail-list" id="monthlyDetailBody"></div><div class="form-actions"><button class="primary-btn" onclick="closeDialog('monthlyDetailModal')" type="button">확인</button></div></div></dialog>
 <dialog id="categoryModal"><form class="modal" id="categoryForm"><div class="modal-head"><h2 id="categoryModalTitle">분류 추가</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('categoryModal')" type="button">×</button></div><input id="categoryType" type="hidden"/><input id="categoryLevel" type="hidden"/><input id="categoryMajorId" type="hidden"/><input id="categorySubId" type="hidden"/><div class="form-grid"><div class="full" id="categoryParentWrap" style="display:none"><label>소분류가 들어갈 대분류</label><select id="categoryParent"></select></div><div class="full" id="categoryIconWrap"><label>대분류 아이콘</label><select id="categoryIcon"></select></div><div class="full"><label>분류 이름</label><input id="categoryName" placeholder="예: 외식" required=""/></div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('categoryModal')" type="button">취소</button><button class="primary-btn" type="submit">저장</button></div></form></dialog>
 <script>
@@ -3265,7 +3865,7 @@ function deleteSubCategory(majorId,subId){const major=categoryById(majorId),sub=
 
 function download(name,content,type='application/json'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return '\ufeff'+rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n')}
-function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="36.3";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"36.3",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_36.3차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
+function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="36.7";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"36.7",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_36.7차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
 function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=normalizeState(JSON.parse(r.result));saveState();alert('백업을 불러왔습니다.')}catch(err){console.error(err);alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f,'utf-8')}
 function exportPurchaseCSV(){const rows=[['사용일','카드','카드종류','예산구분','사용처','대분류','소분류','총 구매금액','할부개월','청구월별 금액','메모']];state.purchases.forEach(p=>rows.push([p.date,cardById(p.cardId)?.name||'',cardById(p.cardId)?.cardType==='debit'?'체크카드':'신용카드',(p.budgetSource&&p.budgetSource!=='personal')?(purposeFundById(p.budgetSource)?.name||'목적자금'):'내 생활비',p.merchant,p.majorCategory,p.subCategory,p.totalAmount,p.installmentMonths,p.schedules.map(s=>`${s.billingMonth}:${s.amount}:${s.paid?'납부완료':'예정'}`).join(' / '),p.memo||'']));download(`마파가계부_카드사용_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
 function exportLedgerCSV(){const rows=[['날짜','구분','항목','대분류','소분류','통장','금액','메모','자동반영']];state.cashflows.forEach(f=>rows.push([f.date,f.type,f.description,f.majorCategory||'',f.subCategory||'',accountById(f.accountId)?.name||'',f.amount,f.memo||'',f.recurringItemId?'매월 자동':'']));allSchedules().filter(s=>s.paid).forEach(s=>rows.push([s.paidDate,'카드값 출금',`${s.card?.name||''} ${s.purchase.merchant}`,'카드값','',accountById(s.paidAccountId)?.name||'',-s.amount,'']));download(`마파가계부_통장내역_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
@@ -3367,7 +3967,7 @@ TAB_INFO.loans=['대출·저축','마이너스통장과 일반대출, 고정저�
 
 
 // ===== 27차 실제 안정화·검증 레이어 =====
-const APP_VERSION_27='36.3';
+const APP_VERSION_27='36.7';
 const BACKUP_META_KEY_27='mapa-household-book-last-backup-v27-4';
 
 function expenseCategoryForLoan27(){
@@ -3527,9 +4127,9 @@ function buildBackup27(scope='all'){
   if(scope==='all')payload=full;else{payload={categories:full.categories};if(scope==='transactions')Object.assign(payload,{purchases:full.purchases,cashflows:full.cashflows,debts:full.debts});if(scope==='cards')payload.cards=full.cards;if(scope==='accounts')payload.accounts=full.accounts;if(scope==='recurring')Object.assign(payload,{recurringItems:full.recurringItems,recurringSkips:full.recurringSkips,loans:full.loans});if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds})}
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 }
-exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_36.3차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
+exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_36.7차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
 function renderBackupProof27(){const el=document.getElementById('lastBackupProof');if(!el)return;try{const m=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');el.textContent=m?`최근 백업: ${new Date(m.createdAt).toLocaleString('ko-KR')} · ${m.scope==='all'?'전체':'선택'} · 검증코드 ${m.checksum} · ${(m.size/1024).toFixed(1)}KB`:'이 기기에서 저장한 백업 기록이 아직 없습니다.'}catch{el.textContent='백업 기록을 읽을 수 없습니다.'}}
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_36.3차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_36.7차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 function integrityIssues27(st){const issues=[],checkIds=(name,arr)=>{const seen=new Set();(arr||[]).forEach(x=>{if(!x.id)issues.push(`${name}: ID 없음`);else if(seen.has(x.id))issues.push(`${name}: 중복 ID ${x.id}`);seen.add(x.id)})};[['통장',st.accounts],['카드',st.cards],['카드사용',st.purchases],['통장내역',st.cashflows],['고정항목',st.recurringItems],['대출',st.loans],['받을·줄 돈',st.debts],['목적자금',st.purposeFunds]].forEach(x=>checkIds(...x));
   (st.cards||[]).forEach(c=>{if(c.accountId&&!st.accounts.some(a=>a.id===c.accountId))issues.push(`카드 ${c.name}: 출금통장 연결 오류`)});(st.purchases||[]).forEach(p=>{if(!st.cards.some(c=>c.id===p.cardId))issues.push(`카드사용 ${p.merchant}: 카드 연결 오류`);if(!Number.isFinite(Number(p.totalAmount)))issues.push(`카드사용 ${p.merchant}: 금액 오류`)});(st.cashflows||[]).forEach(f=>{if(f.accountId&&!st.accounts.some(a=>a.id===f.accountId))issues.push(`통장내역 ${f.description}: 출금·입금통장 오류`);if(f.type==='transfer'&&f.targetAccountId&&!st.accounts.some(a=>a.id===f.targetAccountId))issues.push(`이체 ${f.description}: 대상통장 오류`);if(!Number.isFinite(Number(f.amount)))issues.push(`통장내역 ${f.description}: 금액 오류`)});(st.recurringItems||[]).forEach(r=>{if(r.type==='savings'){if(!st.accounts.some(a=>a.id===r.accountId)||!st.accounts.some(a=>a.id===r.targetAccountId))issues.push(`고정저축 ${r.description}: 통장 연결 오류`);if(r.accountId===r.targetAccountId)issues.push(`고정저축 ${r.description}: 출금·입금통장이 같음`)}else if(r.paymentMethod==='card'&&!st.cards.some(c=>c.id===r.cardId))issues.push(`고정항목 ${r.description}: 카드 연결 오류`);else if(r.accountId&&!st.accounts.some(a=>a.id===r.accountId))issues.push(`고정항목 ${r.description}: 통장 연결 오류`)});(st.loans||[]).forEach(l=>{if(l.interestAccountId&&!st.accounts.some(a=>a.id===l.interestAccountId))issues.push(`대출 ${l.name}: 이자 출금통장 연결 오류`);if(l.recurringItemId&&!st.recurringItems.some(r=>r.id===l.recurringItemId))issues.push(`대출 ${l.name}: 이자 고정지출 연결 오류`)});return issues;
@@ -3602,7 +4202,7 @@ buildBackup27=function(scope='all'){
   if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds});
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),includedKeys:Object.keys(payload),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 };
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_36.3차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_36.7차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 const runDataDiagnostics27Base=runDataDiagnostics;
 runDataDiagnostics=async function(){await runDataDiagnostics27Base();const el=document.getElementById('diagnosticResult'),last=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');if(el&&last)el.innerHTML=el.innerHTML.replace('최근 전체백업:',`최근 백업(${last.scope==='all'?'전체':'선택'}):`)};
@@ -3655,7 +4255,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=36.3',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=36.7',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
@@ -4577,7 +5177,7 @@ saveState=function(){ensurePurposeFunding282();syncAllPurposeReceivables282();sa
 
 // Include monthly funding status in selective budget backups.
 const buildBackupBefore282=buildBackup27;
-buildBackup27=function(scope='all'){const data=buildBackupBefore282(scope);if(scope==='budget'){data.state.purposeFundingStatus=JSON.parse(JSON.stringify(state.purposeFundingStatus||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='36.3';return data};
+buildBackup27=function(scope='all'){const data=buildBackupBefore282(scope);if(scope==='budget'){data.state.purposeFundingStatus=JSON.parse(JSON.stringify(state.purposeFundingStatus||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='36.7';return data};
 
 renderAll();
 </script>
@@ -4698,7 +5298,7 @@ ensurePurposeReceipts290();
 const saveStateBefore290=saveState;
 saveState=function(){ensurePurposeReceipts290();syncAllPurposeReceivables290();saveStateBefore290()};
 const buildBackupBefore290=buildBackup27;
-buildBackup27=function(scope='all'){const data=buildBackupBefore290(scope);if(scope==='budget'){data.state.purposeFundingReceipts=JSON.parse(JSON.stringify(state.purposeFundingReceipts||[]));data.state.purposeReceiptMigration=JSON.parse(JSON.stringify(state.purposeReceiptMigration||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='36.3';return data};
+buildBackup27=function(scope='all'){const data=buildBackupBefore290(scope);if(scope==='budget'){data.state.purposeFundingReceipts=JSON.parse(JSON.stringify(state.purposeFundingReceipts||[]));data.state.purposeReceiptMigration=JSON.parse(JSON.stringify(state.purposeReceiptMigration||{}));data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state))}data.backupVersion='36.7';return data};
 
 renderAll();
 </script>
@@ -9854,7 +10454,7 @@ buildBackup27=function(scope='all'){
     );
   }
 
-  data.backupVersion='36.3';
+  data.backupVersion='36.7';
   return data;
 };
 
@@ -15517,5 +16117,2889 @@ cashflowFormObserver363.observe(
 );
 
 prepareCashflowKoreanInputs363();
+</script><dialog id="loanHistoryModal364"><div class="modal"><div class="modal-head"><h2 id="loanHistoryTitle364">대출 내역</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('loanHistoryModal364')" type="button">×</button></div><input id="loanHistoryType364" type="hidden"/><input id="loanHistoryId364" type="hidden"/><div class="loan-history-filters-364"><label><span>시작일</span><input id="loanHistoryStart364" type="date"/></label><label><span>종료일</span><input id="loanHistoryEnd364" type="date"/></label><button class="small-btn" onclick="setLoanHistoryCurrentYear364()" type="button">올해</button></div><div class="preview" id="loanHistorySummary364" style="margin-bottom:10px"></div><div class="loan-history-result-364" id="loanHistoryResult364"></div><div class="form-actions"><button class="primary-btn" onclick="closeDialog('loanHistoryModal364')" type="button">확인</button></div></div></dialog><script id="v364-loan-account-history-script">
+// ===== 36.4차: 대출내역·통장 전체장부·항상 이체예정 =====
+
+function dateInRange364(date,start,end){
+  return Boolean(date)&&
+    (!start||date>=start)&&
+    (!end||date<=end);
+}
+
+function actualFlowDate364(flow){
+  if(flow.plannedTopup){
+    return flow.plannedCompleted
+      ?(flow.plannedCompletedDate||flow.date||'')
+      :'';
+  }
+  if(flow.recurringItemId&&!flow.recurringOverride){
+    return flow.settled
+      ?(flow.settledDate||flow.date||'')
+      :'';
+  }
+  return flow.date||'';
+}
+
+function actualFlowAmount364(flow){
+  if(flow.recurringItemId&&!flow.recurringOverride){
+    return Number(flow.settledAmount||flow.amount||0);
+  }
+  return Number(flow.amount||0);
+}
+
+function actualFlowAccount364(flow){
+  if(flow.recurringItemId&&!flow.recurringOverride){
+    return flow.settledAccountId||flow.accountId||'';
+  }
+  return flow.accountId||'';
+}
+
+function accountTypeBadge364(type){
+  return {
+    income:'소득',
+    expense:'지출',
+    transfer:'이체',
+    deposit:'입금',
+    withdrawal:'출금',
+    card:'카드값'
+  }[type]||type;
+}
+
+function accountAppliedEvents364(accountId=''){
+  const rows=[];
+  let order=0;
+
+  function push(row){
+    if(!row.accountId)return;
+    if(accountId&&row.accountId!==accountId)return;
+    rows.push({
+      ...row,
+      order:order++
+    });
+  }
+
+  (state.cashflows||[]).forEach(flow=>{
+    const date=actualFlowDate364(flow);
+    if(!date||date>today())return;
+
+    const amount=actualFlowAmount364(flow);
+    const mainAccount=actualFlowAccount364(flow);
+
+    if(flow.plannedTopup){
+      push({
+        date,
+        accountId:flow.accountId,
+        type:'transfer',
+        title:flow.description||'이체 예정 완료',
+        detail:`→ ${accountById(flow.targetAccountId)?.name||'받는 통장'}`,
+        amount:-amount,
+        id:flow.id,
+        editable:true
+      });
+      push({
+        date,
+        accountId:flow.targetAccountId,
+        type:'transfer',
+        title:flow.description||'이체 예정 완료',
+        detail:`← ${accountById(flow.accountId)?.name||'보내는 통장'}`,
+        amount,
+        id:flow.id,
+        editable:true
+      });
+      return;
+    }
+
+    if(flow.recurringItemId&&!flow.recurringOverride){
+      push({
+        date,
+        accountId:mainAccount,
+        type:flow.type==='income'?'income':'expense',
+        title:flow.description||'고정항목',
+        detail:categoryDisplay(
+          flow.majorCategory,
+          flow.subCategory,
+          flow.majorCategoryId
+        ),
+        amount:flow.type==='income'?amount:-amount,
+        id:flow.id,
+        editable:true,
+        recurring:true
+      });
+      return;
+    }
+
+    if(flow.type==='income'){
+      push({
+        date,
+        accountId:flow.accountId,
+        type:'income',
+        title:flow.description||'소득',
+        detail:categoryDisplay(
+          flow.majorCategory,
+          flow.subCategory,
+          flow.majorCategoryId
+        ),
+        amount,
+        id:flow.id,
+        editable:true
+      });
+      return;
+    }
+
+    if(flow.type==='expense'){
+      push({
+        date,
+        accountId:flow.accountId,
+        type:'expense',
+        title:flow.description||'통장 지출',
+        detail:categoryDisplay(
+          flow.majorCategory,
+          flow.subCategory,
+          flow.majorCategoryId
+        ),
+        amount:-amount,
+        id:flow.id,
+        editable:true
+      });
+      return;
+    }
+
+    if(flow.type==='transfer'){
+      push({
+        date,
+        accountId:flow.accountId,
+        type:'transfer',
+        title:flow.description||'통장 이체',
+        detail:`→ ${accountById(flow.targetAccountId)?.name||'받는 통장'}`,
+        amount:-amount,
+        id:flow.id,
+        editable:true
+      });
+      if(flow.targetAccountId!==flow.accountId){
+        push({
+          date,
+          accountId:flow.targetAccountId,
+          type:'transfer',
+          title:flow.description||'통장 이체',
+          detail:`← ${accountById(flow.accountId)?.name||'보내는 통장'}`,
+          amount,
+          id:flow.id,
+          editable:true
+        });
+      }
+      return;
+    }
+
+    if(flow.type==='deposit'){
+      push({
+        date,
+        accountId:flow.accountId,
+        type:'deposit',
+        title:flow.description||'통장 입금',
+        detail:`← ${movementCounterpartyName354(flow)} · 소득 제외`,
+        amount,
+        id:flow.id,
+        editable:true
+      });
+      if(
+        flow.counterpartyType==='cash'&&
+        flow.counterpartyAccountId
+      ){
+        push({
+          date,
+          accountId:flow.counterpartyAccountId,
+          type:'withdrawal',
+          title:flow.description||'현금계좌 출금',
+          detail:`→ ${accountById(flow.accountId)?.name||'통장'}`,
+          amount:-amount,
+          id:flow.id,
+          editable:true
+        });
+      }
+      return;
+    }
+
+    if(flow.type==='withdrawal'){
+      push({
+        date,
+        accountId:flow.accountId,
+        type:'withdrawal',
+        title:flow.description||'통장 출금',
+        detail:`→ ${movementCounterpartyName354(flow)} · 지출 제외`,
+        amount:-amount,
+        id:flow.id,
+        editable:true
+      });
+      if(
+        flow.counterpartyType==='cash'&&
+        flow.counterpartyAccountId
+      ){
+        push({
+          date,
+          accountId:flow.counterpartyAccountId,
+          type:'deposit',
+          title:flow.description||'현금계좌 입금',
+          detail:`← ${accountById(flow.accountId)?.name||'통장'}`,
+          amount,
+          id:flow.id,
+          editable:true
+        });
+      }
+    }
+  });
+
+  allSchedules().forEach(schedule=>{
+    const date=schedule.paidDate||'';
+    if(
+      !schedule.paid||
+      !date||
+      date>today()
+    )return;
+
+    push({
+      date,
+      accountId:schedule.paidAccountId,
+      type:'card',
+      title:`${schedule.card?.name||'카드'} 카드값`,
+      detail:schedule.purchase?.merchant||'카드 결제',
+      amount:-Number(schedule.amount||0),
+      id:schedule.purchase?.id||'',
+      editable:false
+    });
+  });
+
+  const byAccount=new Map();
+
+  (state.accounts||[]).forEach(account=>{
+    byAccount.set(account.id,{
+      account,
+      balance:Number(account.initialBalance||0),
+      events:[]
+    });
+  });
+
+  [...rows]
+    .sort((a,b)=>
+      a.date.localeCompare(b.date)||
+      a.order-b.order
+    )
+    .forEach(row=>{
+      const group=byAccount.get(row.accountId);
+      if(!group)return;
+      group.balance+=Number(row.amount||0);
+      group.events.push({
+        ...row,
+        balanceAfter:group.balance
+      });
+    });
+
+  return [...byAccount.values()]
+    .flatMap(group=>group.events);
+}
+
+function accountBalanceBeforeDate364(accountId,startDate){
+  const account=accountById(accountId);
+  let balance=Number(account?.initialBalance||0);
+
+  accountAppliedEvents364(accountId)
+    .filter(row=>row.date<startDate)
+    .forEach(row=>{
+      balance=Number(row.balanceAfter||balance);
+    });
+
+  return balance;
+}
+
+function accountHistoryRange364(){
+  let start=
+    document.getElementById('accountHistoryStart364')
+      ?.value||
+    `${currentMonth()}-01`;
+  let end=
+    document.getElementById('accountHistoryEnd364')
+      ?.value||
+    today();
+
+  if(start>end)[start,end]=[end,start];
+
+  return {start,end};
+}
+
+function fillAccountHistoryAccounts364(){
+  const select=document.getElementById(
+    'accountHistoryAccount364'
+  );
+  if(!select)return;
+
+  const selected=select.value;
+  select.innerHTML=
+    '<option value="">모든 통장</option>'+
+    (state.accounts||[])
+      .map(account=>
+        `<option value="${esc(account.id)}">`+
+        `${esc(account.name)}`+
+        `</option>`
+      )
+      .join('');
+
+  if([...select.options].some(o=>o.value===selected)){
+    select.value=selected;
+  }
+}
+
+function accountHistoryRowHtml364(row){
+  return `
+    <div class="account-history-row-364">
+      <span>${esc(row.date)}</span>
+      <span class="badge ${
+        row.amount>=0
+          ?'income'
+          :row.type==='transfer'
+            ?'transfer'
+            :row.type==='card'
+              ?'card'
+              :'expense'
+      }">${esc(accountTypeBadge364(row.type))}</span>
+      <span class="account-history-title-364">
+        <b>${esc(row.title||'거래')}</b>
+        <small>${esc(row.detail||'')}</small>
+      </span>
+      <span class="account-history-change-364 ${
+        row.amount>=0?'positive':'negative'
+      }">
+        ${row.amount>=0?'+':'-'}${won(Math.abs(row.amount))}
+      </span>
+      <span class="account-history-balance-364">
+        잔액 ${signedWon279(row.balanceAfter)}
+      </span>
+    </div>`;
+}
+
+function renderAccountHistory364(){
+  const result=document.getElementById(
+    'accountHistoryResult364'
+  );
+  const summary=document.getElementById(
+    'accountHistorySummary364'
+  );
+  if(!result||!summary)return;
+
+  fillAccountHistoryAccounts364();
+
+  const selectedAccount=
+    document.getElementById('accountHistoryAccount364')
+      ?.value||
+    '';
+  const query=(
+    document.getElementById('accountHistorySearch364')
+      ?.value||
+    ''
+  ).trim().toLowerCase();
+  const {start,end}=accountHistoryRange364();
+
+  let rows=accountAppliedEvents364(selectedAccount)
+    .filter(row=>
+      dateInRange364(row.date,start,end)
+    );
+
+  if(query){
+    rows=rows.filter(row=>{
+      const account=accountById(row.accountId);
+      return (
+        `${account?.name||''} ${row.title||''} `+
+        `${row.detail||''} ${row.date||''} `+
+        `${accountTypeBadge364(row.type)}`
+      ).toLowerCase().includes(query);
+    });
+  }
+
+  const accountIds=selectedAccount
+    ?[selectedAccount]
+    :(state.accounts||[]).map(account=>account.id);
+
+  const groups=accountIds
+    .map(accountId=>{
+      const account=accountById(accountId);
+      if(!account)return null;
+
+      const allRows=accountAppliedEvents364(accountId);
+      const visible=rows
+        .filter(row=>row.accountId===accountId)
+        .sort((a,b)=>
+          b.date.localeCompare(a.date)||
+          b.order-a.order
+        );
+
+      const startBalance=accountBalanceBeforeDate364(
+        accountId,
+        start
+      );
+      const periodNet=visible.reduce(
+        (sum,row)=>sum+Number(row.amount||0),
+        0
+      );
+      const endRows=allRows
+        .filter(row=>row.date<=end)
+        .sort((a,b)=>
+          a.date.localeCompare(b.date)||
+          a.order-b.order
+        );
+      const endBalance=endRows.length
+        ?endRows[endRows.length-1].balanceAfter
+        :Number(account.initialBalance||0);
+
+      return {
+        account,
+        visible,
+        startBalance,
+        periodNet,
+        endBalance
+      };
+    })
+    .filter(Boolean)
+    .filter(group=>
+      selectedAccount||
+      group.visible.length
+    );
+
+  const count=groups.reduce(
+    (sum,group)=>sum+group.visible.length,
+    0
+  );
+  const net=groups.reduce(
+    (sum,group)=>sum+group.periodNet,
+    0
+  );
+
+  summary.innerHTML=`
+    <span class="account-history-chip-364">
+      기간 <b>${esc(start)} ~ ${esc(end)}</b>
+    </span>
+    <span class="account-history-chip-364">
+      거래 <b>${count}건</b>
+    </span>
+    <span class="account-history-chip-364">
+      순증감 <b class="${net<0?'negative':'positive'}">
+        ${signedWon279(net)}
+      </b>
+    </span>`;
+
+  result.innerHTML=groups.length
+    ?groups.map(group=>`
+      <div class="account-history-group-364">
+        <div class="account-history-group-head-364">
+          <strong>
+            <span class="color-dot"
+              style="background:${safeColor(group.account.color)}"></span>
+            ${esc(group.account.name)}
+          </strong>
+          <span class="account-history-group-meta-364">
+            시작 ${signedWon279(group.startBalance)} ·
+            증감 ${signedWon279(group.periodNet)} ·
+            종료 ${signedWon279(group.endBalance)}
+          </span>
+        </div>
+        ${group.visible.length
+          ?group.visible.map(accountHistoryRowHtml364).join('')
+          :'<div class="account-history-empty-364">선택한 기간의 거래가 없습니다.</div>'
+        }
+      </div>`
+    ).join('')
+    :'<div class="empty">선택한 기간의 통장 거래내역이 없습니다.</div>';
+}
+
+function setAccountHistoryCurrentMonth364(){
+  document.getElementById('accountHistoryStart364')
+    .value=`${currentMonth()}-01`;
+  document.getElementById('accountHistoryEnd364')
+    .value=today();
+  renderAccountHistory364();
+}
+
+function openAccountHistory364(accountId=''){
+  const section=document.getElementById(
+    'accountHistorySection364'
+  );
+  if(!section)return;
+
+  section.classList.remove('collapsed-320');
+  const toggle=section.querySelector(
+    '.collapse-toggle-320'
+  );
+  if(toggle){
+    toggle.textContent='−';
+    toggle.setAttribute('aria-expanded','true');
+    toggle.title='접기';
+  }
+
+  const select=document.getElementById(
+    'accountHistoryAccount364'
+  );
+  fillAccountHistoryAccounts364();
+  if(select)select.value=accountId||'';
+
+  renderAccountHistory364();
+  section.scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+}
+
+// ── 모든 통장에 '다른 통장에서 이체 예정' ──
+function openPlannedTransferForAccount364(targetAccountId){
+  const target=accountById(targetAccountId);
+  const sources=(state.accounts||[])
+    .filter(account=>account.id!==targetAccountId);
+
+  if(!target)return;
+  if(!sources.length){
+    alert('이체 예정의 보내는 통장으로 사용할 다른 통장을 먼저 등록해주세요.');
+    return;
+  }
+
+  const form=document.getElementById(
+    'overdraftTopupForm'
+  );
+  if(!form)return;
+
+  form.dataset.manual364='1';
+  form.dataset.need='0';
+
+  document.getElementById('topupTargetAccount')
+    .value=targetAccountId;
+  document.getElementById('topupBillingMonth')
+    .value=currentMonth();
+  document.getElementById('topupTargetName')
+    .value=target.name;
+  document.getElementById('topupDate')
+    .value=today();
+  document.getElementById('topupAmount')
+    .value='';
+  document.getElementById('topupMemo')
+    .value=`${target.name}으로 이체 예정`;
+
+  document.getElementById('topupSourceAccount')
+    .innerHTML=sources.map(account=>{
+      const projection=accountProjection279(
+        account.id,
+        currentMonth()
+      );
+      return `
+        <option value="${esc(account.id)}"
+          data-capacity="0"
+          data-name="${esc(account.name)}">
+          ${esc(account.name)} ·
+          현재 ${signedWon279(projection.current)} ·
+          반영 후 ${signedWon279(projection.projected)}
+        </option>`;
+    }).join('');
+
+  document.getElementById('topupPreview')
+    .innerHTML=
+      `<b>${esc(target.name)}으로 받을 이체 예정</b><br>`+
+      `소비나 소득이 아닌 계좌 간 이동으로 기록되며, `+
+      `완료 처리 전에는 실제 잔액에 반영되지 않습니다.`;
+
+  installMoneyInputs();
+  openDialog('overdraftTopupModal');
+}
+
+function installPlannedTransferSubmit364(){
+  const oldForm=document.getElementById(
+    'overdraftTopupForm'
+  );
+  if(!oldForm||oldForm.dataset.submit364==='1')return;
+
+  const form=oldForm.cloneNode(true);
+  form.dataset.submit364='1';
+  oldForm.replaceWith(form);
+
+  form.addEventListener('submit',event=>{
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    const source=document.getElementById(
+      'topupSourceAccount'
+    ).value;
+    const target=document.getElementById(
+      'topupTargetAccount'
+    ).value;
+    const date=document.getElementById(
+      'topupDate'
+    ).value;
+    const month=document.getElementById(
+      'topupBillingMonth'
+    ).value||date.slice(0,7);
+    const amount=Math.max(
+      0,
+      parseMoney(
+        document.getElementById('topupAmount').value
+      )
+    );
+
+    if(
+      !source||
+      !target||
+      source===target||
+      !date||
+      !amount
+    ){
+      alert('이체 정보를 확인해주세요.');
+      return;
+    }
+
+    const manual=form.dataset.manual364==='1';
+
+    if(!manual){
+      const capacity=topupSourceCapacity281(
+        source,
+        date,
+        month
+      );
+      const need=Math.max(
+        0,
+        Number(form.dataset.need||0)
+      );
+
+      if(amount>capacity){
+        alert(
+          `선택한 마이너스통장에서 현재 이체 가능한 금액은 `+
+          `${won(capacity)}입니다.`
+        );
+        updateTopupSourcePreview281();
+        return;
+      }
+
+      if(
+        amount>need&&
+        !confirm(
+          `현재 보충 필요액 ${won(need)}보다 `+
+          `${won(amount-need)} 많이 등록됩니다. 계속할까요?`
+        )
+      )return;
+    }
+
+    state.cashflows.push({
+      id:uid('flow'),
+      type:'transfer',
+      date,
+      accountId:source,
+      targetAccountId:target,
+      description:manual
+        ?'다른 통장에서 이체 예정'
+        :'통장 잔액 보충 이체',
+      amount,
+      majorCategoryId:'',
+      subCategoryId:'',
+      majorCategory:'',
+      subCategory:'',
+      memo:document
+        .getElementById('topupMemo')
+        .value
+        .trim(),
+      plannedTopup:true,
+      plannedCompleted:false,
+      plannedCompletedDate:'',
+      cardBillingMonth:month,
+      overdraftPriorityMode:manual
+        ?'manual'
+        :'external-first'
+    });
+
+    delete form.dataset.manual364;
+    closeDialog('overdraftTopupModal');
+    saveState();
+  },true);
+
+  form.querySelector('#topupSourceAccount')
+    ?.addEventListener('change',()=>{
+      if(form.dataset.manual364==='1')return;
+      updateTopupSourcePreview281();
+    });
+}
+
+const openOverdraftTopupBefore364=
+  openOverdraftTopup280;
+
+openOverdraftTopup280=function(
+  targetAccountId,
+  date,
+  amount,
+  month
+){
+  installPlannedTransferSubmit364();
+  const form=document.getElementById(
+    'overdraftTopupForm'
+  );
+  if(form)delete form.dataset.manual364;
+  return openOverdraftTopupBefore364(
+    targetAccountId,
+    date,
+    amount,
+    month
+  );
+};
+
+// 통장 카드에 예약 이체와 전체 거래내역 버튼 추가
+const accountCardHtmlBefore364=accountCardHtml;
+
+accountCardHtml=function(account,manage=false){
+  const html=accountCardHtmlBefore364(
+    account,
+    manage
+  );
+  if(!manage)return html;
+
+  const wrapper=document.createElement('div');
+  wrapper.innerHTML=html;
+
+  const group=wrapper.querySelector(
+    '.account-quick-group-355'
+  );
+  const actions=wrapper.querySelector(
+    '.account-quick-actions-355'
+  );
+
+  if(group&&!group.querySelector(
+    '[data-planned-transfer364]'
+  )){
+    const planned=document.createElement('button');
+    planned.type='button';
+    planned.className=
+      'small-btn planned-transfer-button-364';
+    planned.dataset.plannedTransfer364=account.id;
+    planned.textContent='이체 예정';
+    group.appendChild(planned);
+  }
+
+  if(actions&&!actions.querySelector(
+    '[data-account-history364]'
+  )){
+    const history=document.createElement('button');
+    history.type='button';
+    history.className='small-btn';
+    history.dataset.accountHistory364=account.id;
+    history.textContent='거래내역';
+    actions.insertBefore(
+      history,
+      actions.querySelector(
+        'button[onclick*="editAccount"]'
+      )
+    );
+  }
+
+  return wrapper.innerHTML;
+};
+
+document.addEventListener('click',event=>{
+  const planned=event.target.closest(
+    '[data-planned-transfer364]'
+  );
+  if(planned){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    openPlannedTransferForAccount364(
+      planned.dataset.plannedTransfer364
+    );
+    return;
+  }
+
+  const history=event.target.closest(
+    '[data-account-history364]'
+  );
+  if(history){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    openAccountHistory364(
+      history.dataset.accountHistory364
+    );
+  }
+},true);
+
+// ── 대출별 상세내역 ──
+function loanHistoryRange364(){
+  let start=
+    document.getElementById('loanHistoryStart364')
+      ?.value||
+    `${new Date().getFullYear()}-01-01`;
+  let end=
+    document.getElementById('loanHistoryEnd364')
+      ?.value||
+    today();
+
+  if(start>end)[start,end]=[end,start];
+  return {start,end};
+}
+
+function generalLoanInterestRows364(loan){
+  const exactNames=new Set([
+    `대출이자_${loan.name}`,
+    `${loan.name} 대출이자`
+  ]);
+
+  return (state.cashflows||[])
+    .filter(flow=>{
+      const date=actualFlowDate364(flow);
+      if(!date||date>today())return false;
+
+      const linked=Boolean(
+        loan.recurringItemId&&
+        flow.recurringItemId===loan.recurringItemId
+      );
+      const legacy=exactNames.has(
+        String(flow.description||'').trim()
+      );
+
+      return (linked||legacy)&&
+        flow.type==='expense'&&
+        (
+          !flow.recurringItemId||
+          flow.recurringOverride||
+          flow.settled
+        );
+    })
+    .map(flow=>({
+      date:actualFlowDate364(flow),
+      amount:actualFlowAmount364(flow),
+      accountId:actualFlowAccount364(flow),
+      title:flow.description||`${loan.name} 대출이자`,
+      memo:flow.memo||'',
+      id:flow.id
+    }))
+    .sort((a,b)=>b.date.localeCompare(a.date));
+}
+
+function openLoanHistory364(type,id){
+  const start=document.getElementById(
+    'loanHistoryStart364'
+  );
+  const end=document.getElementById(
+    'loanHistoryEnd364'
+  );
+
+  document.getElementById(
+    'loanHistoryType364'
+  ).value=type;
+  document.getElementById(
+    'loanHistoryId364'
+  ).value=id;
+
+  if(start&&!start.value){
+    start.value=`${new Date().getFullYear()}-01-01`;
+  }
+  if(end&&!end.value){
+    end.value=today();
+  }
+
+  renderLoanHistory364();
+  openDialog('loanHistoryModal364');
+}
+
+function setLoanHistoryCurrentYear364(){
+  document.getElementById('loanHistoryStart364')
+    .value=`${new Date().getFullYear()}-01-01`;
+  document.getElementById('loanHistoryEnd364')
+    .value=today();
+  renderLoanHistory364();
+}
+
+function renderLoanHistory364(){
+  const type=document.getElementById(
+    'loanHistoryType364'
+  )?.value;
+  const id=document.getElementById(
+    'loanHistoryId364'
+  )?.value;
+  const title=document.getElementById(
+    'loanHistoryTitle364'
+  );
+  const summary=document.getElementById(
+    'loanHistorySummary364'
+  );
+  const result=document.getElementById(
+    'loanHistoryResult364'
+  );
+  if(!title||!summary||!result)return;
+
+  const {start,end}=loanHistoryRange364();
+
+  if(type==='overdraft'){
+    const account=accountById(id);
+    if(!account)return;
+
+    const rows=accountAppliedEvents364(id)
+      .filter(row=>
+        dateInRange364(row.date,start,end)
+      )
+      .sort((a,b)=>
+        b.date.localeCompare(a.date)||
+        b.order-a.order
+      );
+
+    const startBalance=accountBalanceBeforeDate364(
+      id,
+      start
+    );
+    const net=rows.reduce(
+      (sum,row)=>sum+Number(row.amount||0),
+      0
+    );
+    const endBalance=startBalance+net;
+
+    title.textContent=`${account.name} 잔액 변화내역`;
+    summary.innerHTML=
+      `기간 ${esc(start)} ~ ${esc(end)} · `+
+      `${rows.length}건 · `+
+      `시작잔액 <b>${signedWon279(startBalance)}</b> · `+
+      `순증감 <b class="${net<0?'negative':'positive'}">`+
+      `${signedWon279(net)}</b> · `+
+      `종료잔액 <b>${signedWon279(endBalance)}</b>`;
+
+    result.innerHTML=rows.length
+      ?rows.map(row=>`
+        <div class="loan-history-row-364">
+          <span>${esc(row.date)}</span>
+          <span class="account-history-title-364">
+            <b>${esc(row.title)}</b>
+            <small>
+              ${esc(row.detail||'')} ·
+              마이너스 사용액
+              ${won(Math.abs(Math.min(0,row.balanceAfter)))}
+            </small>
+          </span>
+          <span class="account-history-change-364 ${
+            row.amount>=0?'positive':'negative'
+          }">
+            ${row.amount>=0?'+':'-'}${won(Math.abs(row.amount))}
+          </span>
+          <span class="account-history-balance-364">
+            잔액 ${signedWon279(row.balanceAfter)}
+          </span>
+        </div>`
+      ).join('')
+      :'<div class="empty">선택한 기간의 잔액 변화내역이 없습니다.</div>';
+    return;
+  }
+
+  const loan=(state.loans||[])
+    .find(item=>item.id===id);
+  if(!loan)return;
+
+  const rows=generalLoanInterestRows364(loan)
+    .filter(row=>
+      dateInRange364(row.date,start,end)
+    );
+  const total=rows.reduce(
+    (sum,row)=>sum+Number(row.amount||0),
+    0
+  );
+
+  title.textContent=`${loan.name} 이자 상환내역`;
+  summary.innerHTML=
+    `기간 ${esc(start)} ~ ${esc(end)} · `+
+    `${rows.length}건 · `+
+    `납부한 이자 <b>${won(total)}</b> · `+
+    `현재 대출잔액 <b>${won(loan.balance||0)}</b>`;
+
+  result.innerHTML=rows.length
+    ?rows.map(row=>`
+      <div class="loan-history-row-364">
+        <span>${esc(row.date)}</span>
+        <span class="account-history-title-364">
+          <b>${esc(row.title)}</b>
+          <small>
+            ${esc(accountById(row.accountId)?.name||'출금통장 미지정')}
+            ${row.memo?` · ${esc(row.memo)}`:''}
+          </small>
+        </span>
+        <span class="account-history-change-364 negative">
+          -${won(row.amount)}
+        </span>
+        <span class="account-history-balance-364">
+          이자 납부
+        </span>
+      </div>`
+    ).join('')
+    :'<div class="empty">선택한 기간에 완료 처리된 이자 납부내역이 없습니다.</div>';
+}
+
+[
+  'loanHistoryStart364',
+  'loanHistoryEnd364'
+].forEach(id=>{
+  document.getElementById(id)
+    ?.addEventListener('change',renderLoanHistory364);
+});
+
+[
+  'accountHistoryAccount364',
+  'accountHistoryStart364',
+  'accountHistoryEnd364'
+].forEach(id=>{
+  document.getElementById(id)
+    ?.addEventListener('change',renderAccountHistory364);
+});
+
+document.getElementById('accountHistorySearch364')
+  ?.addEventListener('input',renderAccountHistory364);
+
+// 기존 대출 렌더를 상세내역 클릭형으로 교체
+const renderLoansBefore364=renderLoans;
+
+renderLoans=function(){
+  ensure26State();
+
+  const overdrafts=(state.accounts||[])
+    .filter(account=>
+      account.accountType==='overdraft'||
+      Number(account.overdraftLimit||0)>0||
+      Number(account.initialBalance||0)<0
+    )
+    .map(account=>({
+      account,
+      balance:accountBalance(account.id)
+    }));
+
+  const overdraftTotal=overdrafts.reduce(
+    (sum,item)=>
+      sum+Math.abs(Math.min(0,item.balance)),
+    0
+  );
+
+  const general=(state.loans||[])
+    .filter(loan=>loan.active!==false);
+  const generalTotal=general.reduce(
+    (sum,loan)=>sum+Number(loan.balance||0),
+    0
+  );
+  const month=
+    document.getElementById('mainMonth')?.value||
+    currentMonth();
+
+  const set=(id,value)=>{
+    const element=document.getElementById(id);
+    if(element)element.textContent=won(value);
+  };
+
+  set('overdraftTotal',overdraftTotal);
+  set('generalLoanTotal',generalTotal);
+  set('allLoanTotal',overdraftTotal+generalTotal);
+  set('monthlySavingsTotal',completedSavingsForMonth(month));
+
+  const rows=[
+    ...overdrafts.map(item=>`
+      <div class="two-line-row loan-list-clickable-364"
+        role="button"
+        tabindex="0"
+        onclick='openLoanHistory364("overdraft",${JSON.stringify(item.account.id)})'
+        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
+        <div class="row-top">
+          <span>
+            ${esc(item.account.name)}
+            <span class="badge expense">마이너스통장</span>
+          </span>
+          <span class="${item.balance<0?'loan-negative':''}">
+            ${won(Math.abs(Math.min(0,item.balance)))}
+          </span>
+        </div>
+        <div class="row-sub">
+          <span>
+            ${esc(item.account.bank||'')} ·
+            현재잔액 ${signedWon279(item.balance)} ·
+            한도 ${Number(item.account.overdraftLimit||0)
+              ?won(item.account.overdraftLimit)
+              :'미설정'
+            }
+          </span>
+          <span class="loan-history-hint-364">
+            잔액 변화내역 ›
+          </span>
+        </div>
+      </div>`),
+    ...general.map(loan=>`
+      <div class="two-line-row loan-list-clickable-364"
+        role="button"
+        tabindex="0"
+        onclick='openLoanHistory364("general",${JSON.stringify(loan.id)})'
+        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
+        <div class="row-top">
+          <span>${esc(loan.name)}</span>
+          <span>${won(loan.balance)}</span>
+        </div>
+        <div class="row-sub">
+          <span>
+            ${esc(loan.bank||'')} ·
+            월 이자 ${won(loan.interestAmount||0)}
+          </span>
+          <span>
+            <span class="loan-history-hint-364">이자내역 ›</span>
+            <button class="small-btn"
+              onclick="event.stopPropagation();openLoanModal('${loan.id}')">
+              수정
+            </button>
+            <button class="small-btn danger"
+              onclick="event.stopPropagation();deleteLoan('${loan.id}')">
+              삭제
+            </button>
+          </span>
+        </div>
+      </div>`)
+  ];
+
+  const element=document.getElementById('loanList');
+  if(element){
+    element.innerHTML=rows.length
+      ?rows.join('')
+      :'<div class="empty">등록된 대출이 없습니다.</div>';
+  }
+
+  renderInvestments353();
+};
+
+const renderAccountsBefore364=renderAccounts;
+
+renderAccounts=function(){
+  installPlannedTransferSubmit364();
+  renderAccountsBefore364();
+  fillAccountHistoryAccounts364();
+  renderAccountHistory364();
+};
+
+const renderAllBefore364=renderAll;
+
+renderAll=function(){
+  installPlannedTransferSubmit364();
+  renderAllBefore364();
+  fillAccountHistoryAccounts364();
+  renderAccountHistory364();
+  renderLoans();
+};
+
+installPlannedTransferSubmit364();
+setAccountHistoryCurrentMonth364();
+renderAll();
+</script><script id="v365-transfer-reminder-script">
+// ===== 36.5차: 앱 실행·복귀 시 미완료 이체 예정 알림 =====
+function duePlannedTransfers365(){
+  const todayDate=today();
+
+  return (state.cashflows||[])
+    .filter(flow=>
+      flow.plannedTopup&&
+      !flow.plannedCompleted&&
+      Boolean(flow.date)&&
+      flow.date<=todayDate
+    )
+    .sort((a,b)=>
+      a.date.localeCompare(b.date)||
+      String(a.id||'').localeCompare(String(b.id||''))
+    );
+}
+
+function overdueDays365(date){
+  const target=new Date(`${date}T00:00:00`);
+  const current=new Date(`${today()}T00:00:00`);
+  return Math.max(
+    0,
+    Math.round(
+      (current-target)/(24*60*60*1000)
+    )
+  );
+}
+
+function plannedTransferDateLabel365(flow){
+  const late=overdueDays365(flow.date);
+
+  if(late>0){
+    return {
+      label:`${flow.date} · ${late}일 지남`,
+      overdue:true
+    };
+  }
+
+  return {
+    label:`오늘 ${flow.date}`,
+    overdue:false
+  };
+}
+
+function renderTransferReminder365(){
+  const box=document.getElementById(
+    'transferReminder365'
+  );
+  const title=document.getElementById(
+    'transferReminderTitle365'
+  );
+  const sub=document.getElementById(
+    'transferReminderSub365'
+  );
+  const count=document.getElementById(
+    'transferReminderCount365'
+  );
+  const rows=document.getElementById(
+    'transferReminderRows365'
+  );
+
+  if(!box||!rows)return;
+
+  const due=duePlannedTransfers365();
+
+  if(!due.length){
+    box.hidden=true;
+    box.classList.remove('overdue-365');
+    rows.innerHTML='';
+    return;
+  }
+
+  const overdueCount=due.filter(
+    flow=>flow.date<today()
+  ).length;
+  const todayCount=due.length-overdueCount;
+
+  box.hidden=false;
+  box.classList.toggle(
+    'overdue-365',
+    overdueCount>0
+  );
+
+  if(title){
+    title.textContent=overdueCount
+      ?'완료하지 않은 이체가 있어요'
+      :'오늘 이체할 내역이 있어요';
+  }
+
+  if(sub){
+    const parts=[];
+    if(overdueCount)parts.push(`지난 이체 ${overdueCount}건`);
+    if(todayCount)parts.push(`오늘 이체 ${todayCount}건`);
+    sub.textContent=
+      `${parts.join(' · ')}입니다. 실제 이체 후 완료 처리해주세요.`;
+  }
+
+  if(count){
+    count.textContent=`${due.length}건`;
+  }
+
+  rows.innerHTML=due.map(flow=>{
+    const source=accountById(flow.accountId);
+    const target=accountById(flow.targetAccountId);
+    const dateInfo=plannedTransferDateLabel365(flow);
+    const memo=String(flow.memo||'').trim();
+
+    return `
+      <div class="transfer-reminder-row-365 ${
+        dateInfo.overdue?'overdue-row-365':''
+      }">
+        <div class="transfer-reminder-main-365">
+          <div class="transfer-reminder-route-365">
+            <span>${esc(source?.name||'보내는 통장')}</span>
+            <span class="transfer-reminder-arrow-365">→</span>
+            <span>${esc(target?.name||'받는 통장')}</span>
+          </div>
+          <div class="transfer-reminder-meta-365">
+            <span class="transfer-reminder-date-365 ${
+              dateInfo.overdue?'overdue-365':'today-365'
+            }">${esc(dateInfo.label)}</span>
+            ${memo
+              ?`<span class="transfer-reminder-memo-365">${esc(memo)}</span>`
+              :''
+            }
+          </div>
+          <div class="transfer-reminder-amount-365">
+            ${won(flow.amount)}
+          </div>
+        </div>
+        <div class="transfer-reminder-actions-365">
+          <button type="button"
+            class="small-btn transfer-reminder-view-365"
+            data-view-planned-transfer365="${esc(flow.id)}">
+            내역 보기
+          </button>
+          <button type="button"
+            class="small-btn transfer-reminder-complete-365"
+            data-complete-planned-transfer365="${esc(flow.id)}">
+            이체 완료
+          </button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function completePlannedTransfer365(id){
+  const flow=(state.cashflows||[])
+    .find(item=>
+      item.id===id&&
+      item.plannedTopup&&
+      !item.plannedCompleted
+    );
+
+  if(!flow)return;
+
+  const source=accountById(flow.accountId);
+  const target=accountById(flow.targetAccountId);
+
+  if(!confirm(
+    `${source?.name||'보내는 통장'}에서 `+
+    `${target?.name||'받는 통장'}으로 `+
+    `${won(flow.amount)}을 실제로 이체했나요?\n\n`+
+    `완료 처리하면 오늘 날짜로 두 통장 잔액에 반영됩니다.`
+  ))return;
+
+  flow.plannedCompleted=true;
+  flow.plannedCompletedDate=today();
+
+  saveState();
+  renderTransferReminder365();
+}
+
+function viewPlannedTransfer365(id){
+  const flow=(state.cashflows||[])
+    .find(item=>
+      item.id===id&&
+      item.plannedTopup
+    );
+
+  if(!flow)return;
+
+  switchTab('accounts');
+
+  requestAnimationFrame(()=>{
+    const accountId=
+      flow.targetAccountId||
+      flow.accountId;
+    const month=(flow.date||today()).slice(0,7);
+
+    if(
+      accountId&&
+      typeof openAccountBalanceProjection279==='function'
+    ){
+      openAccountBalanceProjection279(
+        accountId,
+        month
+      );
+      return;
+    }
+
+    if(
+      accountId&&
+      typeof openAccountHistory364==='function'
+    ){
+      openAccountHistory364(accountId);
+    }
+  });
+}
+
+document.addEventListener('click',event=>{
+  const completeButton=event.target.closest(
+    '[data-complete-planned-transfer365]'
+  );
+
+  if(completeButton){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    completePlannedTransfer365(
+      completeButton.dataset.completePlannedTransfer365
+    );
+    return;
+  }
+
+  const viewButton=event.target.closest(
+    '[data-view-planned-transfer365]'
+  );
+
+  if(viewButton){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    viewPlannedTransfer365(
+      viewButton.dataset.viewPlannedTransfer365
+    );
+  }
+},true);
+
+// 데이터가 저장되거나 화면이 다시 그려질 때 알림도 즉시 갱신
+const renderAllBefore365=renderAll;
+
+renderAll=function(){
+  renderAllBefore365();
+  renderTransferReminder365();
+};
+
+// 다른 앱을 보다가 가계부로 돌아오거나 홈 화면 앱을 다시 열 때 재확인
+window.addEventListener(
+  'pageshow',
+  renderTransferReminder365
+);
+
+window.addEventListener(
+  'focus',
+  renderTransferReminder365
+);
+
+document.addEventListener(
+  'visibilitychange',
+  ()=>{
+    if(document.visibilityState==='visible'){
+      renderTransferReminder365();
+    }
+  }
+);
+
+renderTransferReminder365();
+</script><script id="v366-transfer-reminder-groups-script">
+// ===== 36.6차: 미완료·오늘 완료 알림 분리 및 접기/펴기 =====
+const TRANSFER_GROUP_STATE_366=
+  'mapa-transfer-reminder-group-state-366';
+
+let transferGroupState366={
+  pendingExpanded:true,
+  completedExpanded:false
+};
+
+try{
+  const stored=JSON.parse(
+    localStorage.getItem(TRANSFER_GROUP_STATE_366)||'null'
+  );
+  if(stored&&typeof stored==='object'){
+    transferGroupState366={
+      pendingExpanded:
+        stored.pendingExpanded!==false,
+      completedExpanded:
+        stored.completedExpanded===true
+    };
+  }
+}catch(_){}
+
+function saveTransferGroupState366(){
+  try{
+    localStorage.setItem(
+      TRANSFER_GROUP_STATE_366,
+      JSON.stringify(transferGroupState366)
+    );
+  }catch(_){}
+}
+
+function completedTodayTransfers366(){
+  return (state.cashflows||[])
+    .filter(flow=>
+      flow.plannedTopup&&
+      flow.plannedCompleted&&
+      flow.plannedCompletedDate===today()
+    )
+    .sort((a,b)=>
+      String(b.plannedCompletedDate||'')
+        .localeCompare(String(a.plannedCompletedDate||''))||
+      String(a.date||'').localeCompare(String(b.date||''))||
+      String(a.id||'').localeCompare(String(b.id||''))
+    );
+}
+
+function applyTransferGroupState366(){
+  [
+    ['pending','pendingExpanded'],
+    ['completed','completedExpanded']
+  ].forEach(([key,stateKey])=>{
+    const group=document.getElementById(
+      `transferReminder${key[0].toUpperCase()+key.slice(1)}Group366`
+    );
+    const toggle=group?.querySelector(
+      '[data-toggle-transfer-group366]'
+    );
+    const arrow=group?.querySelector(
+      '.transfer-reminder-group-arrow-366'
+    );
+    const expanded=Boolean(
+      transferGroupState366[stateKey]
+    );
+
+    group?.classList.toggle(
+      'collapsed-366',
+      !expanded
+    );
+    toggle?.setAttribute(
+      'aria-expanded',
+      expanded?'true':'false'
+    );
+    if(arrow)arrow.textContent=expanded?'−':'+';
+  });
+}
+
+function toggleTransferGroup366(key){
+  if(key==='pending'){
+    transferGroupState366.pendingExpanded=
+      !transferGroupState366.pendingExpanded;
+  }else if(key==='completed'){
+    transferGroupState366.completedExpanded=
+      !transferGroupState366.completedExpanded;
+  }else{
+    return;
+  }
+
+  saveTransferGroupState366();
+  applyTransferGroupState366();
+}
+
+function pendingTransferRowHtml366(flow){
+  const source=accountById(flow.accountId);
+  const target=accountById(flow.targetAccountId);
+  const dateInfo=plannedTransferDateLabel365(flow);
+  const memo=String(flow.memo||'').trim();
+
+  return `
+    <div class="transfer-reminder-row-365 ${
+      dateInfo.overdue?'overdue-row-365':''
+    }">
+      <div class="transfer-reminder-main-365">
+        <div class="transfer-reminder-route-365">
+          <span>${esc(source?.name||'보내는 통장')}</span>
+          <span class="transfer-reminder-arrow-365">→</span>
+          <span>${esc(target?.name||'받는 통장')}</span>
+        </div>
+        <div class="transfer-reminder-meta-365">
+          <span class="transfer-reminder-date-365 ${
+            dateInfo.overdue?'overdue-365':'today-365'
+          }">${esc(dateInfo.label)}</span>
+          ${memo
+            ?`<span class="transfer-reminder-memo-365">${esc(memo)}</span>`
+            :''
+          }
+        </div>
+        <div class="transfer-reminder-amount-365">
+          ${won(flow.amount)}
+        </div>
+      </div>
+      <div class="transfer-reminder-actions-365">
+        <button type="button"
+          class="small-btn transfer-reminder-view-365"
+          data-view-planned-transfer365="${esc(flow.id)}">
+          내역 보기
+        </button>
+        <button type="button"
+          class="small-btn transfer-reminder-complete-365"
+          data-complete-planned-transfer365="${esc(flow.id)}">
+          이체 완료
+        </button>
+      </div>
+    </div>`;
+}
+
+function completedTransferRowHtml366(flow){
+  const source=accountById(flow.accountId);
+  const target=accountById(flow.targetAccountId);
+  const memo=String(flow.memo||'').trim();
+  const plannedDate=flow.date||'';
+  const late=plannedDate&&plannedDate<today();
+
+  return `
+    <div class="transfer-reminder-row-365 transfer-reminder-completed-row-366">
+      <div class="transfer-reminder-main-365">
+        <div class="transfer-reminder-route-365">
+          <span>${esc(source?.name||'보내는 통장')}</span>
+          <span class="transfer-reminder-arrow-365">→</span>
+          <span>${esc(target?.name||'받는 통장')}</span>
+        </div>
+        <div class="transfer-reminder-meta-365">
+          <span class="transfer-reminder-completed-date-366">
+            오늘 완료
+          </span>
+          ${plannedDate
+            ?`<span>예정일 ${esc(plannedDate)}${late?' · 지연 완료':''}</span>`
+            :''
+          }
+          ${memo
+            ?`<span class="transfer-reminder-memo-365">${esc(memo)}</span>`
+            :''
+          }
+        </div>
+        <div class="transfer-reminder-amount-365">
+          ${won(flow.amount)}
+        </div>
+      </div>
+      <div class="transfer-reminder-actions-365">
+        <span class="transfer-reminder-completed-status-366">
+          ✓ 완료됨
+        </span>
+        <button type="button"
+          class="small-btn transfer-reminder-view-365"
+          data-view-planned-transfer365="${esc(flow.id)}">
+          내역 보기
+        </button>
+      </div>
+    </div>`;
+}
+
+renderTransferReminder365=function(){
+  const box=document.getElementById(
+    'transferReminder365'
+  );
+  const title=document.getElementById(
+    'transferReminderTitle365'
+  );
+  const sub=document.getElementById(
+    'transferReminderSub365'
+  );
+  const totalCount=document.getElementById(
+    'transferReminderCount365'
+  );
+
+  const pendingGroup=document.getElementById(
+    'transferReminderPendingGroup366'
+  );
+  const completedGroup=document.getElementById(
+    'transferReminderCompletedGroup366'
+  );
+  const pendingCount=document.getElementById(
+    'transferReminderPendingCount366'
+  );
+  const completedCount=document.getElementById(
+    'transferReminderCompletedCount366'
+  );
+  const pendingRows=document.getElementById(
+    'transferReminderPendingRows366'
+  );
+  const completedRows=document.getElementById(
+    'transferReminderCompletedRows366'
+  );
+
+  if(
+    !box||
+    !pendingGroup||
+    !completedGroup||
+    !pendingRows||
+    !completedRows
+  )return;
+
+  const pending=duePlannedTransfers365();
+  const completed=completedTodayTransfers366();
+
+  if(!pending.length&&!completed.length){
+    box.hidden=true;
+    box.classList.remove(
+      'overdue-365',
+      'completed-only-366'
+    );
+    pendingRows.innerHTML='';
+    completedRows.innerHTML='';
+    return;
+  }
+
+  const overdueCount=pending.filter(
+    flow=>flow.date<today()
+  ).length;
+  const todayPendingCount=
+    pending.length-overdueCount;
+
+  box.hidden=false;
+  box.classList.toggle(
+    'overdue-365',
+    overdueCount>0
+  );
+  box.classList.toggle(
+    'completed-only-366',
+    pending.length===0&&completed.length>0
+  );
+
+  if(title){
+    if(overdueCount>0){
+      title.textContent='완료하지 않은 이체가 있어요';
+    }else if(pending.length>0){
+      title.textContent='오늘 이체할 내역이 있어요';
+    }else{
+      title.textContent='오늘 이체를 모두 완료했어요';
+    }
+  }
+
+  if(sub){
+    const parts=[];
+    if(overdueCount){
+      parts.push(`지난 이체 ${overdueCount}건`);
+    }
+    if(todayPendingCount){
+      parts.push(`오늘 미완료 ${todayPendingCount}건`);
+    }
+    if(completed.length){
+      parts.push(`오늘 완료 ${completed.length}건`);
+    }
+
+    sub.textContent=pending.length
+      ?`${parts.join(' · ')}입니다. 실제 이체 후 완료 처리해주세요.`
+      :`${parts.join(' · ')}입니다. 오늘 동안 완료내역을 확인할 수 있어요.`;
+  }
+
+  if(totalCount){
+    totalCount.textContent=
+      pending.length&&completed.length
+        ?`미완료 ${pending.length} · 완료 ${completed.length}`
+        :pending.length
+          ?`미완료 ${pending.length}`
+          :`완료 ${completed.length}`;
+  }
+
+  if(pendingCount){
+    pendingCount.textContent=`${pending.length}건`;
+  }
+  if(completedCount){
+    completedCount.textContent=`${completed.length}건`;
+  }
+
+  pendingGroup.hidden=pending.length===0;
+  completedGroup.hidden=completed.length===0;
+
+  pendingRows.innerHTML=pending.length
+    ?pending.map(pendingTransferRowHtml366).join('')
+    :'<div class="transfer-reminder-empty-366">미완료 이체가 없습니다.</div>';
+
+  completedRows.innerHTML=completed.length
+    ?completed.map(completedTransferRowHtml366).join('')
+    :'<div class="transfer-reminder-empty-366">오늘 완료한 이체가 없습니다.</div>';
+
+  applyTransferGroupState366();
+};
+
+document.addEventListener('click',event=>{
+  const toggle=event.target.closest(
+    '[data-toggle-transfer-group366]'
+  );
+  if(!toggle)return;
+
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+
+  toggleTransferGroup366(
+    toggle.dataset.toggleTransferGroup366
+  );
+},true);
+
+// 36.5차 완료 처리 함수는 완료일을 오늘로 저장한다.
+// 새 렌더 함수가 미완료 목록에서 오늘 완료 목록으로 즉시 이동시킨다.
+renderTransferReminder365();
+</script><script id="v3661-final-verification-fix-script">
+// ===== 36.6.1차: 최종점검 - 투자 평가기준일 보존 =====
+// 35.3차의 상태 정리 함수가 투자 객체를 예전 형식으로 다시 만들면서
+// currentValueDate를 제외하던 문제를 보완한다.
+const ensure353StateBefore3661=ensure353State;
+ensure353State=function(){
+  const valuationDates=new Map(
+    (state.investments||[]).map(item=>[
+      item.id,
+      item.currentValueDate||''
+    ])
+  );
+
+  ensure353StateBefore3661();
+
+  state.investments=(state.investments||[]).map(item=>({
+    ...item,
+    currentValueDate:
+      item.currentValueDate||
+      valuationDates.get(item.id)||
+      ''
+  }));
+};
+
+// 이미 메모리에 올라온 투자 데이터도 즉시 보존 형식으로 정리한다.
+ensure353State();
+renderInvestments353();
+</script><script id="v367-card-reimbursement-script">
+// ===== 36.7차: 카드 대신 결제·받을 돈 자동 연동 =====
+function cardReceivableDebt367(purchaseOrId){
+  const purchase=typeof purchaseOrId==='string'
+    ?purchaseById(purchaseOrId)
+    :purchaseOrId;
+
+  if(!purchase)return null;
+
+  return (state.debts||[]).find(debt=>
+    debt.id===purchase.reimbursementDebtId||
+    (
+      debt.autoCardReceivable&&
+      debt.sourcePurchaseId===purchase.id
+    )
+  )||null;
+}
+
+function cardReceivableProcessed367(debt){
+  if(!debt)return 0;
+
+  return (debt.payments||[]).reduce(
+    (sum,payment)=>sum+Number(payment.amount||0),
+    0
+  )+Number(debt.waivedAmount||0);
+}
+
+function cardReimbursementLabel367(purchase){
+  const debt=cardReceivableDebt367(purchase);
+  if(!debt)return '';
+
+  const remaining=debtRemaining(debt);
+  const total=Number(debt.amount||0);
+
+  return remaining>0
+    ?`받을 돈 · ${debt.person} · 남은 ${won(remaining)} / 총 ${won(total)}`
+    :`돌려받기 완료 · ${debt.person} · ${won(total)}`;
+}
+
+function updatePurchaseReimbursementUI367({
+  autofillAmount=false
+}={}){
+  const enabled=document.getElementById(
+    'purchaseReimbursementEnabled367'
+  );
+  const fields=document.getElementById(
+    'purchaseReimbursementFields367'
+  );
+  const person=document.getElementById(
+    'purchaseReimbursementPerson367'
+  );
+  const amount=document.getElementById(
+    'purchaseReimbursementAmount367'
+  );
+  const dueDate=document.getElementById(
+    'purchaseReimbursementDueDate367'
+  );
+  const totalInput=document.getElementById(
+    'purchaseAmount'
+  );
+  const preview=document.getElementById(
+    'purchaseReimbursementPreview367'
+  );
+
+  if(!enabled||!fields)return;
+
+  fields.hidden=!enabled.checked;
+
+  [person,amount].forEach(input=>{
+    if(input)input.required=enabled.checked;
+  });
+
+  if(!enabled.checked)return;
+
+  const total=typeof parseMoney==='function'
+    ?parseMoney(totalInput?.value||0)
+    :Number(totalInput?.value||0);
+
+  const currentAmount=typeof parseMoney==='function'
+    ?parseMoney(amount?.value||0)
+    :Number(amount?.value||0);
+
+  if(
+    amount&&
+    autofillAmount&&
+    total>0&&
+    (!currentAmount||amount.dataset.auto367==='1')
+  ){
+    amount.value=String(total);
+    amount.dataset.auto367='1';
+  }
+
+  const receiveAmount=typeof parseMoney==='function'
+    ?parseMoney(amount?.value||0)
+    :Number(amount?.value||0);
+  const personName=person?.value.trim()||'상대방';
+  const due=dueDate?.value||'약속일 미정';
+
+  if(preview){
+    preview.innerHTML=
+      `카드값에는 <strong>${won(total)}</strong> 전체가 잡히고, `+
+      `<strong>${esc(personName)}</strong>에게 받을 `+
+      `<strong>${won(receiveAmount)}</strong>은 받을 돈에 자동 등록됩니다.<br>`+
+      `받기로 한 날: ${esc(due)} · 입금받을 때 월 소득에서는 제외됩니다.`;
+  }
+}
+
+function resetPurchaseReimbursement367(){
+  const enabled=document.getElementById(
+    'purchaseReimbursementEnabled367'
+  );
+  const person=document.getElementById(
+    'purchaseReimbursementPerson367'
+  );
+  const amount=document.getElementById(
+    'purchaseReimbursementAmount367'
+  );
+  const dueDate=document.getElementById(
+    'purchaseReimbursementDueDate367'
+  );
+
+  if(enabled)enabled.checked=false;
+  if(person)person.value='';
+  if(amount){
+    amount.value='';
+    delete amount.dataset.auto367;
+  }
+  if(dueDate)dueDate.value='';
+
+  updatePurchaseReimbursementUI367();
+}
+
+const openPurchaseModalBefore367=openPurchaseModal;
+
+openPurchaseModal=function(){
+  const result=openPurchaseModalBefore367();
+  resetPurchaseReimbursement367();
+  return result;
+};
+
+function openReimbursablePurchase367(){
+  openPurchaseModal();
+
+  requestAnimationFrame(()=>{
+    const enabled=document.getElementById(
+      'purchaseReimbursementEnabled367'
+    );
+    if(enabled)enabled.checked=true;
+
+    updatePurchaseReimbursementUI367({
+      autofillAmount:true
+    });
+
+    document.getElementById(
+      'purchaseReimbursementPerson367'
+    )?.focus();
+  });
+}
+
+const editPurchaseBefore367=editPurchase;
+
+editPurchase=function(id){
+  const purchase=purchaseById(id);
+  const debt=cardReceivableDebt367(purchase);
+
+  editPurchaseBefore367(id);
+
+  const enabled=document.getElementById(
+    'purchaseReimbursementEnabled367'
+  );
+  const person=document.getElementById(
+    'purchaseReimbursementPerson367'
+  );
+  const amount=document.getElementById(
+    'purchaseReimbursementAmount367'
+  );
+  const dueDate=document.getElementById(
+    'purchaseReimbursementDueDate367'
+  );
+
+  const active=Boolean(
+    purchase?.reimbursementEnabled||
+    debt
+  );
+
+  if(enabled)enabled.checked=active;
+  if(person){
+    person.value=
+      debt?.person||
+      purchase?.reimbursementPerson||
+      '';
+  }
+  if(amount){
+    amount.value=String(
+      debt?.amount||
+      purchase?.reimbursementAmount||
+      ''
+    );
+    delete amount.dataset.auto367;
+  }
+  if(dueDate){
+    dueDate.value=
+      debt?.dueDate||
+      purchase?.reimbursementDueDate||
+      '';
+  }
+
+  updatePurchaseReimbursementUI367();
+};
+
+document.getElementById(
+  'purchaseReimbursementEnabled367'
+)?.addEventListener('change',()=>{
+  updatePurchaseReimbursementUI367({
+    autofillAmount:true
+  });
+});
+
+document.getElementById(
+  'purchaseReimbursementPerson367'
+)?.addEventListener(
+  'input',
+  ()=>updatePurchaseReimbursementUI367()
+);
+
+document.getElementById(
+  'purchaseReimbursementDueDate367'
+)?.addEventListener(
+  'change',
+  ()=>updatePurchaseReimbursementUI367()
+);
+
+document.getElementById(
+  'purchaseReimbursementAmount367'
+)?.addEventListener('input',event=>{
+  delete event.currentTarget.dataset.auto367;
+  updatePurchaseReimbursementUI367();
+});
+
+document.getElementById(
+  'purchaseAmount'
+)?.addEventListener('input',()=>{
+  updatePurchaseReimbursementUI367({
+    autofillAmount:true
+  });
+});
+
+function syncPurchaseReceivable367(
+  purchase,
+  data,
+  oldDebtId=''
+){
+  if(!purchase)return;
+
+  const existing=(state.debts||[]).find(debt=>
+    debt.id===oldDebtId||
+    debt.id===purchase.reimbursementDebtId||
+    (
+      debt.autoCardReceivable&&
+      debt.sourcePurchaseId===purchase.id
+    )
+  )||null;
+
+  if(!data.enabled){
+    if(
+      existing&&
+      cardReceivableProcessed367(existing)===0
+    ){
+      state.debts=state.debts.filter(
+        debt=>debt.id!==existing.id
+      );
+    }
+
+    purchase.reimbursementEnabled=false;
+    purchase.reimbursementPerson='';
+    purchase.reimbursementAmount=0;
+    purchase.reimbursementDueDate='';
+    purchase.reimbursementDebtId='';
+    return;
+  }
+
+  const card=cardById(purchase.cardId);
+  const title=
+    `${purchase.merchant} 카드 대신 결제`;
+  const memo=[
+    `${card?.name||'카드'}로 먼저 결제`,
+    purchase.memo||''
+  ].filter(Boolean).join(' · ');
+
+  let debt=existing;
+
+  if(debt){
+    const processed=cardReceivableProcessed367(debt);
+
+    debt.type='receivable';
+    debt.person=data.person;
+    debt.title=title;
+    debt.amount=data.amount;
+
+    if(processed===0){
+      debt.originalAmount=data.amount;
+    }
+
+    debt.date=purchase.date;
+    debt.dueDate=data.dueDate;
+    debt.memo=memo;
+    debt.sourcePurchaseId=purchase.id;
+    debt.autoCardReceivable=true;
+  }else{
+    debt={
+      id:uid('debt'),
+      type:'receivable',
+      person:data.person,
+      title,
+      amount:data.amount,
+      originalAmount:data.amount,
+      date:purchase.date,
+      dueDate:data.dueDate,
+      memo,
+      payments:[],
+      waivedAmount:0,
+      closedReason:'',
+      sourceCashflowId:'',
+      sourcePurchaseId:purchase.id,
+      autoCardReceivable:true,
+      purposeFundId:'',
+      purposeMonth:'',
+      autoPurposeReceivable:false
+    };
+
+    state.debts=[
+      ...(state.debts||[]),
+      debt
+    ];
+  }
+
+  purchase.reimbursementEnabled=true;
+  purchase.reimbursementPerson=data.person;
+  purchase.reimbursementAmount=data.amount;
+  purchase.reimbursementDueDate=data.dueDate;
+  purchase.reimbursementDebtId=debt.id;
+}
+
+const purchaseForm367=document.getElementById(
+  'purchaseForm'
+);
+
+purchaseForm367?.addEventListener(
+  'submit',
+  event=>{
+    const enabled=document.getElementById(
+      'purchaseReimbursementEnabled367'
+    )?.checked===true;
+
+    const person=document.getElementById(
+      'purchaseReimbursementPerson367'
+    )?.value.trim()||'';
+
+    const total=typeof parseMoney==='function'
+      ?parseMoney(
+        document.getElementById('purchaseAmount')
+          ?.value||0
+      )
+      :Number(
+        document.getElementById('purchaseAmount')
+          ?.value||0
+      );
+
+    const amount=typeof parseMoney==='function'
+      ?parseMoney(
+        document.getElementById(
+          'purchaseReimbursementAmount367'
+        )?.value||0
+      )
+      :Number(
+        document.getElementById(
+          'purchaseReimbursementAmount367'
+        )?.value||0
+      );
+
+    const dueDate=document.getElementById(
+      'purchaseReimbursementDueDate367'
+    )?.value||'';
+
+    const purchaseId=document.getElementById(
+      'purchaseId'
+    )?.value||'';
+
+    const oldPurchase=purchaseId
+      ?purchaseById(purchaseId)
+      :null;
+    const oldDebt=cardReceivableDebt367(
+      oldPurchase
+    );
+
+    if(enabled&&!person){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      alert('받을 사람이나 기관을 입력해주세요.');
+      return;
+    }
+
+    if(enabled&&amount<=0){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      alert('받을 금액을 입력해주세요.');
+      return;
+    }
+
+    if(enabled&&amount>total){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      alert('받을 금액은 카드 총 구매금액보다 클 수 없습니다.');
+      return;
+    }
+
+    if(
+      enabled&&
+      oldDebt&&
+      amount<cardReceivableProcessed367(oldDebt)
+    ){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      alert(
+        '받을 금액은 이미 입금 처리하거나 받지 않기로 한 금액보다 작게 변경할 수 없습니다.'
+      );
+      return;
+    }
+
+    if(
+      !enabled&&
+      oldDebt&&
+      cardReceivableProcessed367(oldDebt)>0
+    ){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      alert(
+        '이미 입금 처리된 내역이 있어 받을 돈 연결을 해제할 수 없습니다. 완료 기록은 그대로 보관해주세요.'
+      );
+      return;
+    }
+
+    purchaseForm367._reimbursementSnapshot367={
+      enabled,
+      person,
+      amount,
+      dueDate,
+      purchaseId,
+      oldDebtId:oldDebt?.id||'',
+      beforeLength:(state.purchases||[]).length
+    };
+  },
+  true
+);
+
+purchaseForm367?.addEventListener(
+  'submit',
+  ()=>{
+    const snapshot=
+      purchaseForm367._reimbursementSnapshot367;
+
+    delete purchaseForm367._reimbursementSnapshot367;
+
+    if(!snapshot)return;
+
+    const purchase=snapshot.purchaseId
+      ?purchaseById(snapshot.purchaseId)
+      :(state.purchases||[])[snapshot.beforeLength];
+
+    if(!purchase)return;
+
+    syncPurchaseReceivable367(
+      purchase,
+      snapshot,
+      snapshot.oldDebtId
+    );
+
+    saveState();
+  }
+);
+
+// ── 받을 돈 수정 시 카드 사용과 연결 유지 ──
+const openDebtModalBefore367=openDebtModal;
+
+openDebtModal=function(type='receivable'){
+  const result=openDebtModalBefore367(type);
+  const typeInput=document.getElementById(
+    'debtType'
+  );
+  if(typeInput)typeInput.disabled=false;
+  return result;
+};
+
+const editDebtBefore367=editDebt;
+
+editDebt=function(id){
+  const debt=(state.debts||[]).find(
+    item=>item.id===id
+  );
+
+  editDebtBefore367(id);
+
+  const typeInput=document.getElementById(
+    'debtType'
+  );
+
+  if(debt?.autoCardReceivable){
+    if(typeInput)typeInput.disabled=true;
+
+    const title=document.getElementById(
+      'debtModalTitle'
+    );
+    if(title){
+      title.textContent=
+        '카드 대신 결제 받을 돈 수정';
+    }
+  }else if(typeInput){
+    typeInput.disabled=false;
+  }
+};
+
+const debtForm367=document.getElementById(
+  'debtForm'
+);
+
+debtForm367?.addEventListener(
+  'submit',
+  event=>{
+    const id=document.getElementById(
+      'debtId'
+    )?.value||'';
+
+    const debt=(state.debts||[]).find(
+      item=>item.id===id
+    );
+
+    if(!debt?.autoCardReceivable){
+      debtForm367._autoCardSnapshot367=null;
+      return;
+    }
+
+    const purchase=purchaseById(
+      debt.sourcePurchaseId
+    );
+
+    const amount=typeof parseMoney==='function'
+      ?parseMoney(
+        document.getElementById('debtAmount')
+          ?.value||0
+      )
+      :Number(
+        document.getElementById('debtAmount')
+          ?.value||0
+      );
+
+    if(
+      purchase&&
+      amount>Number(purchase.totalAmount||0)
+    ){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      alert(
+        '받을 금액은 연결된 카드 총 구매금액보다 클 수 없습니다.'
+      );
+      return;
+    }
+
+    debtForm367._autoCardSnapshot367={
+      id,
+      sourcePurchaseId:debt.sourcePurchaseId,
+      autoCardReceivable:true
+    };
+  },
+  true
+);
+
+debtForm367?.addEventListener(
+  'submit',
+  ()=>{
+    const snapshot=
+      debtForm367._autoCardSnapshot367;
+
+    delete debtForm367._autoCardSnapshot367;
+
+    if(!snapshot)return;
+
+    const debt=(state.debts||[]).find(
+      item=>item.id===snapshot.id
+    );
+    if(!debt)return;
+
+    debt.sourcePurchaseId=
+      snapshot.sourcePurchaseId;
+    debt.autoCardReceivable=true;
+    debt.type='receivable';
+
+    const purchase=purchaseById(
+      snapshot.sourcePurchaseId
+    );
+
+    if(purchase){
+      purchase.reimbursementEnabled=true;
+      purchase.reimbursementPerson=debt.person;
+      purchase.reimbursementAmount=
+        Number(debt.amount||0);
+      purchase.reimbursementDueDate=
+        debt.dueDate||'';
+      purchase.reimbursementDebtId=debt.id;
+    }
+
+    const typeInput=document.getElementById(
+      'debtType'
+    );
+    if(typeInput)typeInput.disabled=false;
+
+    saveState();
+  }
+);
+
+// ── 카드 대신 결제금을 받으면 통장 입금으로 기록하되 소득에서는 제외 ──
+const openDebtPaymentModalBefore367=
+  openDebtPaymentModal;
+
+openDebtPaymentModal=function(id){
+  const debt=(state.debts||[]).find(
+    item=>item.id===id
+  );
+
+  const result=openDebtPaymentModalBefore367(
+    id
+  );
+
+  const memo=document.getElementById(
+    'debtPaymentMemo'
+  );
+  if(memo)memo.value='';
+
+  if(debt?.autoCardReceivable){
+    const title=document.getElementById(
+      'debtPaymentTitle'
+    );
+    const preview=document.getElementById(
+      'debtPaymentPreview'
+    );
+
+    if(title){
+      title.textContent=
+        '카드 대신 결제금 받기';
+    }
+
+    if(preview){
+      preview.innerHTML=
+        `남은 금액 <b>${won(debtRemaining(debt))}</b><br>`+
+        `입금받은 금액은 선택한 통장 잔액에 반영되지만 월 소득에는 포함되지 않습니다.`;
+    }
+  }
+
+  return result;
+};
+
+const debtPaymentForm367=document.getElementById(
+  'debtPaymentForm'
+);
+
+debtPaymentForm367?.addEventListener(
+  'submit',
+  ()=>{
+    const debtId=document.getElementById(
+      'debtPaymentDebtId'
+    )?.value||'';
+
+    const debt=(state.debts||[]).find(
+      item=>item.id===debtId
+    );
+
+    debtPaymentForm367._receiptSnapshot367={
+      debtId,
+      autoCardReceivable:
+        Boolean(debt?.autoCardReceivable),
+      beforePaymentIds:new Set(
+        (debt?.payments||[]).map(
+          payment=>payment.id
+        )
+      )
+    };
+  },
+  true
+);
+
+debtPaymentForm367?.addEventListener(
+  'submit',
+  ()=>{
+    const snapshot=
+      debtPaymentForm367._receiptSnapshot367;
+
+    delete debtPaymentForm367._receiptSnapshot367;
+
+    if(!snapshot?.autoCardReceivable)return;
+
+    const debt=(state.debts||[]).find(
+      item=>item.id===snapshot.debtId
+    );
+    if(!debt)return;
+
+    const payment=(debt.payments||[]).find(
+      item=>!snapshot.beforePaymentIds.has(item.id)
+    );
+    if(!payment)return;
+
+    const flow=(state.cashflows||[]).find(
+      item=>item.debtPaymentId===payment.id
+    );
+    if(!flow)return;
+
+    flow.type='deposit';
+    flow.description=
+      `${debt.person} 카드 대신 결제 정산`;
+    flow.majorCategory='';
+    flow.subCategory='';
+    flow.majorCategoryId='';
+    flow.subCategoryId='';
+    flow.excludeFromIncome=true;
+    flow.counterpartyType='cash';
+    flow.counterpartyAccountId='';
+    flow.cardReimbursementReceipt=true;
+    flow.sourcePurchaseId=
+      debt.sourcePurchaseId||'';
+    flow.reimbursementPerson=
+      debt.person||'상대방';
+    flow.memo=
+      payment.memo||
+      `${debt.title} 입금`;
+
+    saveState();
+  }
+);
+
+const movementCounterpartyNameBefore367=
+  movementCounterpartyName354;
+
+movementCounterpartyName354=function(flow){
+  if(flow?.cardReimbursementReceipt){
+    return (
+      `카드 정산 · `+
+      `${flow.reimbursementPerson||'상대방'}`
+    );
+  }
+
+  return movementCounterpartyNameBefore367(
+    flow
+  );
+};
+
+// ── 카드 사용 및 All 표에 받을 돈 상태 표시 ──
+const purchaseTableHtmlBefore367=
+  purchaseTableHtml;
+
+purchaseTableHtml=function(list){
+  return purchaseTableHtmlBefore367(
+    (list||[]).map(purchase=>{
+      const label=cardReimbursementLabel367(
+        purchase
+      );
+
+      if(!label)return purchase;
+
+      return {
+        ...purchase,
+        memo:[
+          purchase.memo||'',
+          label
+        ].filter(Boolean).join(' · ')
+      };
+    })
+  );
+};
+
+const allMonthlyRowsBefore367=
+  allMonthlyRows310;
+
+allMonthlyRows310=function(month){
+  return allMonthlyRowsBefore367(month)
+    .map(row=>{
+      if(row.kind!=='card')return row;
+
+      const purchase=purchaseById(row.id);
+      const label=cardReimbursementLabel367(
+        purchase
+      );
+
+      if(!label)return row;
+
+      return {
+        ...row,
+        memo:[
+          row.memo||'',
+          label
+        ].filter(Boolean).join(' · '),
+        reimbursementMeta367:label
+      };
+    });
+};
+
+// ── 연결된 카드 사용·받을 돈 삭제 동기화 ──
+const deletePurchaseBefore367=deletePurchase;
+
+deletePurchase=function(id){
+  const purchase=purchaseById(id);
+  const debt=cardReceivableDebt367(
+    purchase
+  );
+
+  deletePurchaseBefore367(id);
+
+  if(purchaseById(id)||!debt)return;
+
+  if(cardReceivableProcessed367(debt)>0){
+    debt.autoCardReceivable=false;
+    debt.sourcePurchaseId='';
+    debt.memo=[
+      debt.memo||'',
+      '연결된 카드 사용내역 삭제됨'
+    ].filter(Boolean).join(' · ');
+  }else{
+    state.debts=state.debts.filter(
+      item=>item.id!==debt.id
+    );
+  }
+
+  saveState();
+};
+
+const deleteDebtBefore367=deleteDebt;
+
+deleteDebt=function(id){
+  const debt=(state.debts||[]).find(
+    item=>item.id===id
+  );
+
+  if(!debt?.autoCardReceivable){
+    return deleteDebtBefore367(id);
+  }
+
+  if(cardReceivableProcessed367(debt)>0){
+    alert(
+      '이미 입금 처리하거나 완료 처리된 내역이 있어 삭제할 수 없습니다.'
+    );
+    return;
+  }
+
+  if(!confirm(
+    '이 카드 대신 결제 받을 돈을 삭제할까요? 카드 사용기록은 그대로 유지됩니다.'
+  ))return;
+
+  const purchase=purchaseById(
+    debt.sourcePurchaseId
+  );
+
+  if(purchase){
+    purchase.reimbursementEnabled=false;
+    purchase.reimbursementPerson='';
+    purchase.reimbursementAmount=0;
+    purchase.reimbursementDueDate='';
+    purchase.reimbursementDebtId='';
+  }
+
+  state.debts=state.debts.filter(
+    item=>item.id!==id
+  );
+
+  saveState();
+};
+
+// ── 자동 받을 돈 배지 표시 ──
+const renderDebtsBefore367=renderDebts;
+
+renderDebts=function(){
+  renderDebtsBefore367();
+
+  document.querySelectorAll(
+    '#debtList .card-box'
+  ).forEach(card=>{
+    const strong=card.querySelector(
+      '.top strong'
+    );
+    if(!strong)return;
+
+    const text=strong.textContent||'';
+    const debt=(state.debts||[]).find(item=>
+      item.autoCardReceivable&&
+      text.includes(item.person)&&
+      text.includes(item.title)
+    );
+
+    if(
+      debt&&
+      !strong.querySelector(
+        '.debt-card-reimbursement-badge-367'
+      )
+    ){
+      const badge=document.createElement(
+        'span'
+      );
+      badge.className=
+        'debt-card-reimbursement-badge-367';
+      badge.textContent='카드 대신 결제';
+      strong.appendChild(badge);
+    }
+  });
+};
+
+// ── 저장 데이터 호환 ──
+const normalizeStateBefore367=normalizeState;
+
+normalizeState=function(raw){
+  const normalized=normalizeStateBefore367(
+    raw
+  );
+
+  const rawPurchases=new Map(
+    (Array.isArray(raw?.purchases)
+      ?raw.purchases
+      :[]
+    ).map(item=>[item.id,item])
+  );
+
+  const rawDebts=new Map(
+    (Array.isArray(raw?.debts)
+      ?raw.debts
+      :[]
+    ).map(item=>[item.id,item])
+  );
+
+  const rawFlows=new Map(
+    (Array.isArray(raw?.cashflows)
+      ?raw.cashflows
+      :[]
+    ).map(item=>[item.id,item])
+  );
+
+  normalized.purchases=(
+    normalized.purchases||[]
+  ).map(purchase=>{
+    const source=rawPurchases.get(
+      purchase.id
+    )||{};
+
+    return {
+      ...purchase,
+      reimbursementEnabled:
+        Boolean(source.reimbursementEnabled),
+      reimbursementPerson:
+        source.reimbursementPerson||'',
+      reimbursementAmount:
+        Number(source.reimbursementAmount||0),
+      reimbursementDueDate:
+        source.reimbursementDueDate||'',
+      reimbursementDebtId:
+        source.reimbursementDebtId||''
+    };
+  });
+
+  normalized.debts=(
+    normalized.debts||[]
+  ).map(debt=>{
+    const source=rawDebts.get(
+      debt.id
+    )||{};
+
+    return {
+      ...debt,
+      sourcePurchaseId:
+        source.sourcePurchaseId||'',
+      autoCardReceivable:
+        Boolean(source.autoCardReceivable)
+    };
+  });
+
+  normalized.cashflows=(
+    normalized.cashflows||[]
+  ).map(flow=>{
+    const source=rawFlows.get(
+      flow.id
+    )||{};
+
+    if(!source.cardReimbursementReceipt){
+      return flow;
+    }
+
+    return normalizeMovement354({
+      ...flow,
+      ...source,
+      type:'deposit',
+      excludeFromIncome:true,
+      counterpartyType:'cash',
+      counterpartyAccountId:''
+    });
+  });
+
+  return normalized;
+};
+
+// 초기 상태는 이 스크립트보다 먼저 로드되므로 로컬 저장값에서 한 번 복원
+try{
+  const raw367=JSON.parse(
+    localStorage.getItem(STORE_KEY)||'null'
+  );
+
+  if(raw367){
+    const rawPurchases=new Map(
+      (Array.isArray(raw367.purchases)
+        ?raw367.purchases
+        :[]
+      ).map(item=>[item.id,item])
+    );
+
+    const rawDebts=new Map(
+      (Array.isArray(raw367.debts)
+        ?raw367.debts
+        :[]
+      ).map(item=>[item.id,item])
+    );
+
+    const rawFlows=new Map(
+      (Array.isArray(raw367.cashflows)
+        ?raw367.cashflows
+        :[]
+      ).map(item=>[item.id,item])
+    );
+
+    state.purchases=(state.purchases||[])
+      .map(purchase=>{
+        const source=rawPurchases.get(
+          purchase.id
+        )||{};
+
+        return {
+          ...purchase,
+          reimbursementEnabled:
+            Boolean(source.reimbursementEnabled),
+          reimbursementPerson:
+            source.reimbursementPerson||'',
+          reimbursementAmount:
+            Number(source.reimbursementAmount||0),
+          reimbursementDueDate:
+            source.reimbursementDueDate||'',
+          reimbursementDebtId:
+            source.reimbursementDebtId||''
+        };
+      });
+
+    state.debts=(state.debts||[])
+      .map(debt=>{
+        const source=rawDebts.get(
+          debt.id
+        )||{};
+
+        return {
+          ...debt,
+          sourcePurchaseId:
+            source.sourcePurchaseId||'',
+          autoCardReceivable:
+            Boolean(source.autoCardReceivable)
+        };
+      });
+
+    state.cashflows=(state.cashflows||[])
+      .map(flow=>{
+        const source=rawFlows.get(
+          flow.id
+        )||{};
+
+        if(!source.cardReimbursementReceipt){
+          return flow;
+        }
+
+        return normalizeMovement354({
+          ...flow,
+          ...source,
+          type:'deposit',
+          excludeFromIncome:true,
+          counterpartyType:'cash',
+          counterpartyAccountId:''
+        });
+      });
+  }
+}catch(error){
+  console.warn(
+    '36.7차 카드 대신 결제 데이터 복원 실패',
+    error
+  );
+}
+
+updatePurchaseReimbursementUI367();
+renderAll();
 </script></body>
 </html>
