@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=37.8" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=37.8" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 40.2차</title>
+<title>가계부 40.3차</title>
 <link href="manifest.json" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -6980,13 +6980,159 @@ html,body,button,[role="button"],tr[role="button"]{
 }
 </style>
 
+
+<style id="v403-final-fixes-style">
+/* ===== 40.3차: 손익필터·투자지출 복구·월별예산·분할이월 ===== */
+
+/* 손익 필터 결과 가운데 정렬 */
+#investmentFilterSummary353{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  width:100%!important;
+  gap:5px!important;
+  flex-wrap:wrap!important;
+  text-align:center!important;
+}
+
+/* 투자지출 영역은 데이터가 있으면 확실히 보이도록 */
+#investmentExpenseSection388:not(.collapsed-320) > .collapse-body-320{
+  display:block!important;
+}
+.investment-expense-restored-403{
+  display:inline-flex;
+  margin-left:5px;
+  padding:2px 6px;
+  border-radius:999px;
+  background:#eef7ff;
+  color:#24649a;
+  font-size:9px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+/* 월별 예산 기본 연도 선택 */
+.budget-history-year-403{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex:0 0 auto;
+}
+.budget-history-year-403 label{
+  color:var(--muted);
+  font-size:10px;
+  font-weight:750;
+  white-space:nowrap;
+}
+.budget-history-year-403 select{
+  min-width:105px;
+}
+
+/* 분할 이월 입력 */
+.budget-allocation-editor-403{
+  margin-top:8px;
+  padding:8px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--soft);
+}
+.budget-allocation-title-403{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:7px;
+  margin-bottom:6px;
+}
+.budget-allocation-title-403 b{
+  font-size:10.5px;
+}
+.budget-allocation-list-403{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.budget-allocation-row-403{
+  display:grid;
+  grid-template-columns:minmax(130px,1fr) minmax(110px,1fr) auto;
+  gap:5px;
+  align-items:center;
+}
+.budget-allocation-row-403 select,
+.budget-allocation-row-403 input,
+.budget-allocation-row-403 button{
+  width:100%;
+  min-width:0;
+}
+.budget-allocation-summary-403{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:7px;
+  color:var(--muted);
+  font-size:9.5px;
+  font-weight:750;
+}
+.budget-allocation-summary-403 b{
+  color:var(--text);
+}
+.budget-processing-fields-403{
+  display:flex;
+  justify-content:flex-end;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:8px;
+}
+.budget-processing-fields-403 .small-btn{
+  min-width:92px;
+}
+.budget-partial-403{
+  background:#fff3df!important;
+  color:#8a5b00!important;
+}
+.budget-overallocated-403{
+  margin-top:5px;
+  color:var(--danger);
+  font-size:9.5px;
+  font-weight:750;
+}
+.budget-rollover-reminder-401 .budget-allocation-editor-403{
+  border-color:#efd18c;
+  background:#fffdf7;
+}
+.budget-history-row-402 .budget-history-status-402{
+  overflow-wrap:anywhere;
+}
+
+@media(max-width:640px){
+  .budget-history-toolbar-402{
+    align-items:flex-start;
+  }
+  .budget-history-year-403{
+    width:100%;
+    justify-content:flex-end;
+  }
+  .budget-allocation-row-403{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;
+  }
+  .budget-processing-fields-403{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .budget-processing-fields-403 .small-btn{
+    min-width:0;
+    width:100%;
+  }
+}
+</style>
+
 </head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">40.2차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">40.3차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">40.2차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">40.3차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="desktop-actions"><button class="primary-btn" onclick="openTransactionRegister389()" type="button">거래등록</button></div>
 <button class="primary-btn mobile-only" onclick="openQuickMenu()" type="button">+ 입력</button>
 </header>
@@ -7133,7 +7279,7 @@ html,body,button,[role="button"],tr[role="button"]{
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:smart:2:즐겨찾기 관리" data-collapse-title320="즐겨찾기 관리"><div class="section-head"><div><h2>즐겨찾기 관리</h2><div class="subtle" style="margin-top:5px">자주 입력하는 거래를 저장해 한 번에 불러옵니다.</div></div><button class="small-btn primary" onclick="openFavoriteModal()" type="button">+ 즐겨찾기 만들기</button><button aria-expanded="false" aria-label="즐겨찾기 관리 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="grid-3" id="favoriteManager"></div></div></div>
 </section>
 <section class="panel" id="settings"><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:settings:0:백업·설정·기능 안내" data-collapse-title320="백업·설정·기능 안내"><div class="section-head"><h2>백업·설정·기능 안내</h2><button aria-expanded="false" aria-label="백업·설정·기능 안내 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="settings-grid">
-<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 40.2차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 40.2차</span></div></div>
+<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 40.3차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 40.3차</span></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:1:☁️ Firebase 자동 동기화" data-collapse-title320="☁️ Firebase 자동 동기화" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>☁️ Firebase 자동 동기화</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" onclick="forceCloudUpload()" type="button">현재 자료를 클라우드에 저장</button></div><button aria-expanded="false" aria-label="☁️ Firebase 자동 동기화 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_1"><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:2:선택 백업" data-collapse-title320="선택 백업" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>선택 백업</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="exportBackup()" type="button">백업 파일 저장</button></div><button aria-expanded="false" aria-label="선택 백업 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_2"><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions settings-body-controls-315"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select></div><div class="backup-proof" id="lastBackupProof"></div></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:3:백업 불러오기" data-collapse-title320="백업 불러오기"><div class="settings-title-row-315"><h3>백업 불러오기</h3><button aria-expanded="false" aria-label="백업 불러오기 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input accept=".json" id="backupInput" onchange="importBackup(event)" type="file"/></div></div>
@@ -7449,7 +7595,7 @@ function deleteSubCategory(majorId,subId){const major=categoryById(majorId),sub=
 
 function download(name,content,type='application/json'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return '\ufeff'+rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n')}
-function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="40.2";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"40.2",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_40.2차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
+function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="40.3";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"40.3",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_40.3차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
 function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=normalizeState(JSON.parse(r.result));saveState();alert('백업을 불러왔습니다.')}catch(err){console.error(err);alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f,'utf-8')}
 function exportPurchaseCSV(){const rows=[['사용일','카드','카드종류','예산구분','사용처','대분류','소분류','총 구매금액','할부개월','청구월별 금액','메모']];state.purchases.forEach(p=>rows.push([p.date,cardById(p.cardId)?.name||'',cardById(p.cardId)?.cardType==='debit'?'체크카드':'신용카드',(p.budgetSource&&p.budgetSource!=='personal')?(purposeFundById(p.budgetSource)?.name||'목적자금'):'내 생활비',p.merchant,p.majorCategory,p.subCategory,p.totalAmount,p.installmentMonths,p.schedules.map(s=>`${s.billingMonth}:${s.amount}:${s.paid?'납부완료':'예정'}`).join(' / '),p.memo||'']));download(`마파가계부_카드사용_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
 function exportLedgerCSV(){const rows=[['날짜','구분','항목','대분류','소분류','통장','금액','메모','자동반영']];state.cashflows.forEach(f=>rows.push([f.date,f.type,f.description,f.majorCategory||'',f.subCategory||'',accountById(f.accountId)?.name||'',f.amount,f.memo||'',f.recurringItemId?'매월 자동':'']));allSchedules().filter(s=>s.paid).forEach(s=>rows.push([s.paidDate,'카드값 출금',`${s.card?.name||''} ${s.purchase.merchant}`,'카드값','',accountById(s.paidAccountId)?.name||'',-s.amount,'']));download(`마파가계부_통장내역_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
@@ -7711,9 +7857,9 @@ function buildBackup27(scope='all'){
   if(scope==='all')payload=full;else{payload={categories:full.categories};if(scope==='transactions')Object.assign(payload,{purchases:full.purchases,cashflows:full.cashflows,debts:full.debts});if(scope==='cards')payload.cards=full.cards;if(scope==='accounts')payload.accounts=full.accounts;if(scope==='recurring')Object.assign(payload,{recurringItems:full.recurringItems,recurringSkips:full.recurringSkips,loans:full.loans});if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds})}
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 }
-exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_40.2차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
+exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_40.3차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
 function renderBackupProof27(){const el=document.getElementById('lastBackupProof');if(!el)return;try{const m=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');el.textContent=m?`최근 백업: ${new Date(m.createdAt).toLocaleString('ko-KR')} · ${m.scope==='all'?'전체':'선택'} · 검증코드 ${m.checksum} · ${(m.size/1024).toFixed(1)}KB`:'이 기기에서 저장한 백업 기록이 아직 없습니다.'}catch{el.textContent='백업 기록을 읽을 수 없습니다.'}}
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_40.2차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_40.3차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 function integrityIssues27(st){const issues=[],checkIds=(name,arr)=>{const seen=new Set();(arr||[]).forEach(x=>{if(!x.id)issues.push(`${name}: ID 없음`);else if(seen.has(x.id))issues.push(`${name}: 중복 ID ${x.id}`);seen.add(x.id)})};[['통장',st.accounts],['카드',st.cards],['카드사용',st.purchases],['통장내역',st.cashflows],['고정항목',st.recurringItems],['대출',st.loans],['받을·줄 돈',st.debts],['목적자금',st.purposeFunds]].forEach(x=>checkIds(...x));
   (st.cards||[]).forEach(c=>{if(c.accountId&&!st.accounts.some(a=>a.id===c.accountId))issues.push(`카드 ${c.name}: 출금통장 연결 오류`)});(st.purchases||[]).forEach(p=>{if(!st.cards.some(c=>c.id===p.cardId))issues.push(`카드사용 ${p.merchant}: 카드 연결 오류`);if(!Number.isFinite(Number(p.totalAmount)))issues.push(`카드사용 ${p.merchant}: 금액 오류`)});(st.cashflows||[]).forEach(f=>{if(f.accountId&&!st.accounts.some(a=>a.id===f.accountId))issues.push(`통장내역 ${f.description}: 출금·입금통장 오류`);if(f.type==='transfer'&&f.targetAccountId&&!st.accounts.some(a=>a.id===f.targetAccountId))issues.push(`이체 ${f.description}: 대상통장 오류`);if(!Number.isFinite(Number(f.amount)))issues.push(`통장내역 ${f.description}: 금액 오류`)});(st.recurringItems||[]).forEach(r=>{if(r.type==='savings'){if(!st.accounts.some(a=>a.id===r.accountId)||!st.accounts.some(a=>a.id===r.targetAccountId))issues.push(`고정저축 ${r.description}: 통장 연결 오류`);if(r.accountId===r.targetAccountId)issues.push(`고정저축 ${r.description}: 출금·입금통장이 같음`)}else if(r.paymentMethod==='card'&&!st.cards.some(c=>c.id===r.cardId))issues.push(`고정항목 ${r.description}: 카드 연결 오류`);else if(r.accountId&&!st.accounts.some(a=>a.id===r.accountId))issues.push(`고정항목 ${r.description}: 통장 연결 오류`)});(st.loans||[]).forEach(l=>{if(l.interestAccountId&&!st.accounts.some(a=>a.id===l.interestAccountId))issues.push(`대출 ${l.name}: 이자 출금통장 연결 오류`);if(l.recurringItemId&&!st.recurringItems.some(r=>r.id===l.recurringItemId))issues.push(`대출 ${l.name}: 이자 고정지출 연결 오류`)});return issues;
@@ -7786,7 +7932,7 @@ buildBackup27=function(scope='all'){
   if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds});
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),includedKeys:Object.keys(payload),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 };
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_40.2차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_40.3차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 const runDataDiagnostics27Base=runDataDiagnostics;
 runDataDiagnostics=async function(){await runDataDiagnostics27Base();const el=document.getElementById('diagnosticResult'),last=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');if(el&&last)el.innerHTML=el.innerHTML.replace('최근 전체백업:',`최근 백업(${last.scope==='all'?'전체':'선택'}):`)};
@@ -24606,7 +24752,7 @@ buildBackup27=function(scope='all'){
     data.state.investmentExpenses=JSON.parse(JSON.stringify(state.investmentExpenses||[]));
     data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state));
   }
-  data.backupVersion="40.2";return data;
+  data.backupVersion="40.3";return data;
 };
 
 const renderAllBefore388=renderAll;
@@ -27108,10 +27254,10 @@ function forceVersion399(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 40.2차</b>가 적용되어 있습니다. '+
+        '<b>가계부 40.3차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 40.2차';
+    if(badge)badge.textContent='현재 버전 40.3차';
   }
 }
 
@@ -27749,10 +27895,10 @@ function forceVersion400(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 40.2차</b>가 적용되어 있습니다. '+
+        '<b>가계부 40.3차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 40.2차';
+    if(badge)badge.textContent='현재 버전 40.3차';
   }
 }
 
@@ -28136,10 +28282,10 @@ function forceVersion401(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 40.2차</b>가 적용되어 있습니다. '+
+        '<b>가계부 40.3차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 40.2차';
+    if(badge)badge.textContent='현재 버전 40.3차';
   }
 }
 
@@ -28456,7 +28602,7 @@ buildBackup27=function(scope='all'){
     }
   }
 
-  data.backupVersion="40.2";
+  data.backupVersion="40.3";
   return data;
 };
 
@@ -28533,10 +28679,10 @@ function forceVersion402(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 40.2차</b>가 적용되어 있습니다. '+
+        '<b>가계부 40.3차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 40.2차';
+    if(badge)badge.textContent='현재 버전 40.3차';
   }
 }
 
@@ -29260,7 +29406,7 @@ renderBudgetRolloverReminder401=function(){
 const buildBackupBefore402=buildBackup27;
 buildBackup27=function(scope='all'){
   const data=buildBackupBefore402(scope);
-  data.backupVersion='40.2';
+  data.backupVersion="40.3";
   return data;
 };
 
@@ -29300,6 +29446,1148 @@ window.addEventListener('load',()=>{
   renderBudgetHistory402();
   renderBudgetRolloverReminder401();
 });
+</script>
+
+
+<script id="v403-final-fixes-script">
+// ===== 40.3차 최종 수정 =====
+
+function forceVersion403(){
+  document.title='가계부 40.3차';
+  document.querySelectorAll('.version-pill')
+    .forEach(element=>element.textContent='40.3차');
+
+  const versionBox=[...document.querySelectorAll('.settings-box')]
+    .find(box=>box.textContent.includes('현재 앱 버전'));
+
+  if(versionBox){
+    const paragraph=versionBox.querySelector('p');
+    const badge=versionBox.querySelector('.badge');
+
+    if(paragraph){
+      paragraph.innerHTML=
+        '<b>가계부 40.3차</b>가 적용되어 있습니다. '+
+        '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
+    }
+    if(badge)badge.textContent='현재 버전 40.3차';
+  }
+}
+
+
+// ─────────────────────────────────────────────
+// 1. 투자 목록 손익 필터를 DOM의 현재 선택값으로 직접 처리
+// ─────────────────────────────────────────────
+function ensureInvestmentFilterFinal403(){
+  if(
+    !document.getElementById('investmentProfitFilter398')||
+    !document.getElementById('investmentItemFilter398')
+  ){
+    ensureInvestmentFilterUI399();
+  }
+
+  let profit=document.getElementById('investmentProfitFilter398');
+  if(profit&&profit.dataset.final403!=='1'){
+    const value=profit.value||'';
+    const clone=profit.cloneNode(true);
+    clone.dataset.final403='1';
+    profit.replaceWith(clone);
+    profit=clone;
+
+    if(![...profit.options].some(option=>option.value===value)){
+      profit.innerHTML=`
+        <option value="">전체 손익</option>
+        <option value="profit">수익 투자만</option>
+        <option value="loss">손실 투자만</option>
+        <option value="zero">손익 0원만</option>`;
+    }
+    profit.value=value;
+
+    profit.addEventListener('change',()=>{
+      renderInvestments353();
+    });
+  }
+
+  const reset=document.getElementById('investmentFilterReset398');
+  if(reset&&reset.dataset.final403!=='1'){
+    reset.dataset.final403='1';
+    reset.addEventListener('click',()=>{
+      const profitSelect=document.getElementById('investmentProfitFilter398');
+      if(profitSelect)profitSelect.value='';
+      setTimeout(renderInvestments353,0);
+    });
+  }
+}
+
+function filteredInvestments403(){
+  const type=document.getElementById('investmentTypeFilter353')?.value||'';
+  const status=document.getElementById('investmentStatusFilter353')?.value||'';
+  const itemId=document.getElementById('investmentItemFilter398')?.value||'';
+  const profitFilter=document.getElementById('investmentProfitFilter398')?.value||'';
+
+  return (state.investments||[])
+    .filter(item=>{
+      if(type&&item.investmentType!==type)return false;
+      if(status&&item.status!==status)return false;
+      if(itemId&&item.id!==itemId)return false;
+
+      const profit=Number(investmentDisplayProfit389(item)||0);
+
+      if(profitFilter==='profit'&&profit<=0)return false;
+      if(profitFilter==='loss'&&profit>=0)return false;
+      if(profitFilter==='zero'&&profit!==0)return false;
+
+      return true;
+    })
+    .sort((a,b)=>
+      String(b.startDate||'').localeCompare(String(a.startDate||''))||
+      String(a.name||'').localeCompare(String(b.name||''),'ko')
+    );
+}
+
+renderInvestments353=function(){
+  state.investments=(state.investments||[])
+    .map(normalizeInvestment355);
+
+  ensureInvestmentFilterFinal403();
+  updateInvestmentStatusButtons399();
+  updateInvestmentOverview399();
+
+  const rows=filteredInvestments403();
+  updateInvestmentListSummary399(rows);
+
+  const list=document.getElementById('investmentList353');
+  if(list){
+    list.innerHTML=rows.length
+      ?rows.map(investmentRowHtml399).join('')
+      :'<div class="empty">선택한 필터에 맞는 투자건이 없습니다.</div>';
+  }
+
+  document.getElementById('completedInvestmentSummary397')?.remove();
+};
+
+
+// ─────────────────────────────────────────────
+// 2. 투자지출을 연결된 카드·통장 기록에서도 복구
+// ─────────────────────────────────────────────
+const localInvestmentExpensesBackup403=(()=>{
+  try{
+    const raw=JSON.parse(localStorage.getItem(STORE_KEY)||'null');
+    return Array.isArray(raw?.investmentExpenses)
+      ?raw.investmentExpenses.map(normalizeInvestmentExpense388)
+      :[];
+  }catch(error){
+    return [];
+  }
+})();
+function cleanInvestmentExpenseMemo403(value=''){
+  return String(value||'')
+    .replace(/(?:\s*·\s*)?투자 지출\s*$/,'')
+    .trim();
+}
+
+function cleanInvestmentExpenseDescription403(value='',investmentName=''){
+  let text=String(value||'').trim();
+  const prefix=`${investmentName} · `;
+  if(investmentName&&text.startsWith(prefix)){
+    text=text.slice(prefix.length);
+  }
+  return text||'투자 지출';
+}
+
+function repairInvestmentExpenses403(){
+  ensureInvestmentExpenseState388();
+
+  const currentRows=(state.investmentExpenses||[])
+    .map(normalizeInvestmentExpense388);
+  const seedRows=currentRows.length
+    ?currentRows
+    :localInvestmentExpensesBackup403;
+
+  const existing=new Map(
+    seedRows.map(row=>[row.id,row])
+  );
+
+  let changed=
+    !currentRows.length&&
+    localInvestmentExpensesBackup403.length>0;
+
+  (state.purchases||[])
+    .filter(row=>row.investmentExpenseId388&&row.investmentId388)
+    .forEach(purchase=>{
+      const id=purchase.investmentExpenseId388;
+      const investment=state.investments
+        .find(item=>item.id===purchase.investmentId388);
+      const old=existing.get(id);
+
+      const restored=normalizeInvestmentExpense388({
+        ...(old||{}),
+        id,
+        investmentId:purchase.investmentId388,
+        date:purchase.date||old?.date||today(),
+        description:old?.description||
+          cleanInvestmentExpenseDescription403(
+            purchase.merchant,
+            investment?.name||''
+          ),
+        amount:Number(old?.amount||purchase.totalAmount||0),
+        paymentMethod:'card',
+        sourceId:purchase.cardId||old?.sourceId||'',
+        memo:old?.memo||cleanInvestmentExpenseMemo403(purchase.memo),
+        linkedPurchaseId:purchase.id,
+        linkedCashflowId:''
+      });
+
+      if(!old)changed=true;
+      existing.set(id,restored);
+    });
+
+  (state.cashflows||[])
+    .filter(row=>
+      row.investmentId&&
+      (row.investmentExpenseId388||row.investmentExpensePayment388)
+    )
+    .forEach(flow=>{
+      const id=flow.investmentExpenseId388||`invexp-restored-${flow.id}`;
+      const investment=state.investments
+        .find(item=>item.id===flow.investmentId);
+      const account=accountById(flow.accountId);
+      const old=existing.get(id);
+
+      const restored=normalizeInvestmentExpense388({
+        ...(old||{}),
+        id,
+        investmentId:flow.investmentId,
+        date:flow.date||old?.date||today(),
+        description:old?.description||
+          cleanInvestmentExpenseDescription403(
+            flow.description,
+            investment?.name||''
+          ),
+        amount:Number(old?.amount||flow.amount||0),
+        paymentMethod:account?.accountType==='cash'?'cash':'account',
+        sourceId:flow.accountId||old?.sourceId||'',
+        memo:old?.memo||cleanInvestmentExpenseMemo403(flow.memo),
+        linkedPurchaseId:'',
+        linkedCashflowId:flow.id
+      });
+
+      if(!old)changed=true;
+      existing.set(id,restored);
+    });
+
+  const repaired=[...existing.values()]
+    .filter(row=>row.investmentId&&Number(row.amount||0)>0);
+
+  if(
+    repaired.length!==(state.investmentExpenses||[]).length||
+    repaired.some((row,index)=>row.id!==state.investmentExpenses[index]?.id)
+  ){
+    changed=true;
+  }
+
+  state.investmentExpenses=repaired;
+
+  if(changed){
+    try{
+      localStorage.setItem(STORE_KEY,JSON.stringify(state));
+      if(typeof scheduleCloudSave==='function')scheduleCloudSave();
+    }catch(error){
+      console.warn('투자지출 복구 저장 실패',error);
+    }
+  }
+
+  return changed;
+}
+
+function ensureInvestmentExpenseFiltersFinal403(){
+  ensureInvestmentExpenseFilters400();
+
+  const subtitle=document.querySelector(
+    '#investmentExpenseSection388 .section-head .subtle'
+  );
+  if(subtitle){
+    subtitle.textContent=
+      '진행 중·회수 완료 여부와 상관없이 모든 투자지출을 투자건과 날짜별로 검색합니다.';
+  }
+}
+
+renderInvestmentExpenses388=function(){
+  repairInvestmentExpenses403();
+  ensureInvestmentExpenseFiltersFinal403();
+
+  const rows=filteredInvestmentExpenses400();
+  const allRows=state.investmentExpenses||[];
+  const summary=document.getElementById('investmentExpenseSummary388');
+  const filterSummary=document.getElementById('investmentExpenseFilterSummary400');
+  const list=document.getElementById('investmentExpenseList388');
+
+  if(!summary||!filterSummary||!list)return;
+
+  const total=rows.reduce(
+    (sum,row)=>sum+Number(row.amount||0),0
+  );
+  const allTotal=allRows.reduce(
+    (sum,row)=>sum+Number(row.amount||0),0
+  );
+
+  summary.innerHTML=
+    `전체 투자지출 <b>${won(allTotal)}</b> · ${allRows.length}건`;
+
+  filterSummary.innerHTML=`
+    <span class="investment-expense-summary-chip-400">
+      검색 결과 <b>${rows.length}건</b>
+    </span>
+    <span class="investment-expense-summary-chip-400">
+      검색 합계 <b>${won(total)}</b>
+    </span>`;
+
+  list.innerHTML=rows.length
+    ?rows.map(row=>{
+      const investment=(state.investments||[])
+        .find(item=>item.id===row.investmentId);
+      const statusText=investment?.status==='closed'
+        ?'회수 완료'
+        :'진행 중';
+      const statusClass=investment?.status==='closed'
+        ?'fixed'
+        :'income';
+      const restored=
+        String(row.id||'').startsWith('invexp-restored-');
+
+      return `<div class="two-line-row investment-expense-row-400">
+        <div class="row-top">
+          <span>
+            <b>${esc(investment?.name||'삭제된 투자')}</b>
+            <span class="badge ${statusClass}">${statusText}</span>
+            ${restored
+              ?'<span class="investment-expense-restored-403">연결기록 복구</span>'
+              :''
+            }
+            · ${esc(row.description||'투자지출')}
+          </span>
+          <span class="negative">-${won(row.amount)}</span>
+        </div>
+        <div class="row-sub">
+          <span>
+            ${esc(row.date||'')} ·
+            <span class="investment-expense-source-388">
+              ${esc(investmentExpensePaymentLabel388(row))}
+            </span>
+            ${row.memo
+              ?`<span class="investment-expense-linked-388">${esc(row.memo)}</span>`
+              :''
+            }
+          </span>
+          <span>
+            <button type="button" class="small-btn"
+              onclick="openInvestmentExpense388('${row.investmentId}','${row.id}')">
+              수정
+            </button>
+            <button type="button" class="small-btn danger"
+              onclick="deleteInvestmentExpense388('${row.id}')">
+              삭제
+            </button>
+          </span>
+        </div>
+      </div>`;
+    }).join('')
+    :'<div class="investment-expense-empty-400">선택한 조건의 투자지출이 없습니다.</div>';
+
+  const section=document.getElementById('investmentExpenseSection388');
+  if(
+    section&&
+    allRows.length&&
+    sessionStorage.getItem('investmentExpenseOpened403')!=='1'
+  ){
+    sessionStorage.setItem('investmentExpenseOpened403','1');
+
+    if(typeof applyCollapsed320==='function'){
+      applyCollapsed320(section,false,{save:true});
+    }else{
+      section.classList.remove('collapsed-320');
+    }
+  }
+};
+
+
+// ─────────────────────────────────────────────
+// 3. 앱 시작 중간값(-30,000,000원) 노출 차단
+// ─────────────────────────────────────────────
+let budgetStable403=false;
+const releaseBudgetSplashBefore403=releaseBudgetSplash401;
+
+releaseBudgetSplash401=function(){
+  if(!budgetStable403)return;
+  releaseBudgetSplashBefore403();
+};
+
+function waitUntil403(check,timeout=7000,interval=100){
+  return new Promise(resolve=>{
+    const started=Date.now();
+    const timer=setInterval(()=>{
+      let result=false;
+
+      try{
+        result=Boolean(check());
+      }catch(error){}
+
+      if(result||Date.now()-started>=timeout){
+        clearInterval(timer);
+        resolve(result);
+      }
+    },interval);
+  });
+}
+
+async function releaseAfterFinalData403(){
+  await waitUntil403(()=>Boolean(firebaseAuth),6000,100);
+
+  if(firebaseAuth){
+    await new Promise(resolve=>{
+      let finished=false;
+      let unsubscribe=null;
+
+      const finish=()=>{
+        if(finished)return;
+        finished=true;
+        try{unsubscribe?.()}catch(error){}
+        resolve();
+      };
+
+      const timer=setTimeout(finish,9000);
+
+      try{
+        unsubscribe=firebaseAuth.onAuthStateChanged(async user=>{
+          if(user){
+            await waitUntil403(
+              ()=>Boolean(cloudInitialized),
+              8000,
+              100
+            );
+          }
+          clearTimeout(timer);
+          finish();
+        },()=>{
+          clearTimeout(timer);
+          finish();
+        });
+      }catch(error){
+        clearTimeout(timer);
+        finish();
+      }
+    });
+  }
+
+  repairInvestmentExpenses403();
+  renderAll();
+
+  budgetStable403=true;
+  releaseBudgetSplash401();
+}
+
+
+// ─────────────────────────────────────────────
+// 4. 월별 예산은 올해 1월부터 현재 달까지 기본 표시
+// ─────────────────────────────────────────────
+function ensureBudgetHistoryYear403(){
+  ensureBudgetHistoryPanel402();
+
+  const toolbar=document.querySelector(
+    '#budgetHistoryPanel402 .budget-history-toolbar-402'
+  );
+  if(!toolbar)return null;
+
+  let wrap=document.getElementById('budgetHistoryYearWrap403');
+
+  if(!wrap){
+    wrap=document.createElement('div');
+    wrap.id='budgetHistoryYearWrap403';
+    wrap.className='budget-history-year-403';
+    wrap.innerHTML=`
+      <label for="budgetHistoryYear403">조회연도</label>
+      <select id="budgetHistoryYear403"></select>`;
+    toolbar.appendChild(wrap);
+  }
+
+  const select=document.getElementById('budgetHistoryYear403');
+  const currentYear=Number(currentMonth().slice(0,4));
+  const selected=Number(select.value||currentYear);
+
+  const years=new Set([currentYear]);
+
+  Object.keys(state.monthlyBudgets||{})
+    .forEach(month=>years.add(Number(month.slice(0,4))));
+  Object.keys(state.monthlyBudgetRolloverDecisions401||{})
+    .forEach(month=>years.add(Number(month.slice(0,4))));
+  Object.values(state.monthlyBudgetRolloverDecisions401||{})
+    .forEach(decision=>{
+      (decision?.allocations||[]).forEach(allocation=>{
+        if(allocation?.targetMonth){
+          years.add(Number(allocation.targetMonth.slice(0,4)));
+        }
+      });
+      if(decision?.targetMonth){
+        years.add(Number(decision.targetMonth.slice(0,4)));
+      }
+    });
+
+  select.innerHTML=[...years]
+    .filter(Number.isFinite)
+    .sort((a,b)=>b-a)
+    .map(year=>
+      `<option value="${year}">${year}년</option>`
+    ).join('');
+
+  select.value=String(
+    [...select.options].some(option=>Number(option.value)===selected)
+      ?selected
+      :currentYear
+  );
+
+  if(select.dataset.listener403!=='1'){
+    select.dataset.listener403='1';
+    select.addEventListener('change',renderBudgetHistory402);
+  }
+
+  return select;
+}
+
+budgetHistoryMonths402=function(){
+  const current=currentMonth();
+  const currentYear=Number(current.slice(0,4));
+  const selectedYear=Number(
+    document.getElementById('budgetHistoryYear403')?.value||
+    currentYear
+  );
+  const lastMonth=selectedYear===currentYear
+    ?Number(current.slice(5,7))
+    :12;
+
+  return Array.from(
+    {length:lastMonth},
+    (_,index)=>
+      `${selectedYear}-${String(index+1).padStart(2,'0')}`
+  );
+};
+
+
+// ─────────────────────────────────────────────
+// 5. 여러 달로 나눠 이월
+// ─────────────────────────────────────────────
+function decisionAllocations403(month){
+  const decision=state.monthlyBudgetRolloverDecisions401?.[month];
+
+  if(!decision||decision.decision==='reset')return [];
+
+  if(Array.isArray(decision.allocations)){
+    return decision.allocations
+      .map(row=>({
+        targetMonth:row.targetMonth||'',
+        amount:Number(row.amount||0)
+      }))
+      .filter(row=>row.targetMonth&&row.amount!==0);
+  }
+
+  if(
+    decision.decision==='carry'&&
+    decision.targetMonth&&
+    Number(decision.amount||0)!==0
+  ){
+    return [{
+      targetMonth:decision.targetMonth,
+      amount:Number(decision.amount||0)
+    }];
+  }
+
+  return [];
+}
+
+budgetCarryoverInto401=function(month){
+  ensureBudgetRolloverState401();
+
+  return Object.keys(state.monthlyBudgetRolloverDecisions401||{})
+    .reduce((sum,sourceMonth)=>{
+      return sum+decisionAllocations403(sourceMonth)
+        .filter(row=>row.targetMonth===month)
+        .reduce((subtotal,row)=>subtotal+Number(row.amount||0),0);
+    },0);
+};
+
+incomingBudgetSources402=function(month){
+  const rows=[];
+
+  Object.keys(state.monthlyBudgetRolloverDecisions401||{})
+    .forEach(sourceMonth=>{
+      decisionAllocations403(sourceMonth)
+        .filter(row=>row.targetMonth===month)
+        .forEach(row=>{
+          rows.push({
+            sourceMonth,
+            amount:Number(row.amount||0)
+          });
+        });
+    });
+
+  return rows.sort((a,b)=>a.sourceMonth.localeCompare(b.sourceMonth));
+};
+
+budgetMonthSnapshot402=function(month){
+  const metrics=budgetMetrics27(month);
+  const incoming=budgetCarryoverInto401(month);
+  const opening=Number(metrics?.budgetBase||0);
+  const baseBeforeCarry=opening-incoming;
+  const ending=Number(metrics?.remainingBudget||0);
+  const decision=state.monthlyBudgetRolloverDecisions401?.[month]||null;
+  const allocations=decisionAllocations403(month);
+  const allocated=allocations.reduce(
+    (sum,row)=>sum+Number(row.amount||0),0
+  );
+  const remaining=decision?.decision==='reset'
+    ?0
+    :ending-allocated;
+  const endReached=today()>=monthEndDate401(month);
+
+  let status='미처리';
+  let tone='expense';
+
+  if(ending===0){
+    status='처리 불필요';
+    tone='fixed';
+  }else if(decision?.decision==='reset'){
+    status='이월 안 함으로 마감';
+    tone='fixed';
+  }else if(allocations.length&&Math.abs(remaining)<1){
+    status=allocations.length===1
+      ?`${allocations[0].targetMonth}로 ${signedBudgetWon402(allocated)} 이월`
+      :`${allocations.length}개 월로 분할 이월 완료`;
+    tone='income';
+  }else if(allocations.length){
+    status=
+      `부분 이월 · ${signedBudgetWon402(remaining)} 미처리`;
+    tone='card';
+  }else if(!endReached){
+    status='월말 전 · 미처리';
+    tone='card';
+  }
+
+  return {
+    month,
+    metrics,
+    incoming,
+    opening,
+    baseBeforeCarry,
+    ending,
+    decision,
+    allocations,
+    allocated,
+    remaining,
+    status,
+    tone,
+    endReached
+  };
+};
+
+pendingBudgetRollover401=function(){
+  ensureBudgetRolloverState401();
+
+  const start=state.budgetRolloverStartMonth401;
+  const current=currentMonth();
+  const todayText=today();
+  let month=start;
+  let guard=0;
+
+  while(month<=current&&guard++<240){
+    const eligible=todayText>=monthEndDate401(month);
+    const snapshot=budgetMonthSnapshot402(month);
+
+    if(
+      eligible&&
+      snapshot.ending!==0&&
+      snapshot.decision?.decision!=='reset'&&
+      Math.abs(snapshot.remaining)>0
+    ){
+      return {
+        sourceMonth:month,
+        targetMonth:addMonths(month,1),
+        amount:snapshot.remaining,
+        fullAmount:snapshot.ending,
+        allocations:snapshot.allocations
+      };
+    }
+
+    month=addMonths(month,1);
+  }
+
+  return null;
+};
+
+function allocationRowsHtml403(
+  sourceMonth,
+  ending,
+  allocations=[],
+  containerId
+){
+  const sign=ending<0?-1:1;
+  const rows=allocations.length
+    ?allocations
+    :[{
+        targetMonth:addMonths(sourceMonth,1),
+        amount:ending
+      }];
+
+  return `
+    <div class="budget-allocation-editor-403">
+      <div class="budget-allocation-title-403">
+        <b>이월 월별 배분</b>
+        <button type="button" class="small-btn"
+          onclick="addBudgetAllocationRow403('${containerId}','${sourceMonth}')">
+          분할 추가
+        </button>
+      </div>
+
+      <div class="budget-allocation-list-403" id="${containerId}">
+        ${rows.map(row=>
+          budgetAllocationRowHtml403(
+            sourceMonth,
+            row.targetMonth,
+            Math.abs(Number(row.amount||0))
+          )
+        ).join('')}
+      </div>
+
+      <div class="budget-allocation-summary-403"
+        id="${containerId}Summary">
+        <span>처리할 금액 <b>${signedBudgetWon402(ending)}</b></span>
+        <span>입력 합계 <b>계산 중</b></span>
+        <span>남은 미처리 <b>계산 중</b></span>
+      </div>
+    </div>`;
+}
+
+function budgetAllocationRowHtml403(
+  sourceMonth,
+  targetMonth='',
+  amount=''
+){
+  return `
+    <div class="budget-allocation-row-403"
+      data-budget-allocation-row403>
+      <select data-budget-target403>
+        ${budgetTargetMonthOptions402(
+          sourceMonth,
+          targetMonth||addMonths(sourceMonth,1)
+        )}
+      </select>
+      <input type="text" inputmode="numeric"
+        data-budget-amount403
+        value="${amount?Number(amount).toLocaleString('ko-KR'):''}"
+        placeholder="이월 금액">
+      <button type="button" class="small-btn danger"
+        onclick="removeBudgetAllocationRow403(this)">삭제</button>
+    </div>`;
+}
+
+function addBudgetAllocationRow403(containerId,sourceMonth){
+  const container=document.getElementById(containerId);
+  if(!container)return;
+
+  container.insertAdjacentHTML(
+    'beforeend',
+    budgetAllocationRowHtml403(
+      sourceMonth,
+      addMonths(sourceMonth,1),
+      ''
+    )
+  );
+
+  installMoneyInputs();
+  updateBudgetAllocationSummary403(containerId,sourceMonth);
+}
+
+function removeBudgetAllocationRow403(button){
+  const row=button.closest('[data-budget-allocation-row403]');
+  const container=row?.parentElement;
+  if(!row||!container)return;
+
+  if(container.children.length<=1){
+    const amount=row.querySelector('[data-budget-amount403]');
+    if(amount)amount.value='';
+  }else{
+    row.remove();
+  }
+
+  const sourceMonth=container.dataset.sourceMonth403;
+  updateBudgetAllocationSummary403(container.id,sourceMonth);
+}
+
+function readBudgetAllocations403(containerId,sourceMonth,ending){
+  const container=document.getElementById(containerId);
+  if(!container)return [];
+
+  const sign=ending<0?-1:1;
+
+  return [...container.querySelectorAll('[data-budget-allocation-row403]')]
+    .map(row=>({
+      targetMonth:row.querySelector('[data-budget-target403]')?.value||'',
+      amount:Math.abs(parseMoney(
+        row.querySelector('[data-budget-amount403]')?.value||0
+      ))*sign
+    }))
+    .filter(row=>row.targetMonth&&row.amount!==0);
+}
+
+function updateBudgetAllocationSummary403(containerId,sourceMonth){
+  const container=document.getElementById(containerId);
+  const summary=document.getElementById(`${containerId}Summary`);
+  if(!container||!summary)return;
+
+  container.dataset.sourceMonth403=sourceMonth;
+
+  const snapshot=budgetMonthSnapshot402(sourceMonth);
+  const allocations=readBudgetAllocations403(
+    containerId,
+    sourceMonth,
+    snapshot.ending
+  );
+  const allocated=allocations.reduce(
+    (sum,row)=>sum+Number(row.amount||0),0
+  );
+  const remaining=snapshot.ending-allocated;
+  const over=
+    Math.abs(allocated)>Math.abs(snapshot.ending)+0.5;
+
+  summary.innerHTML=`
+    <span>처리할 금액 <b>${signedBudgetWon402(snapshot.ending)}</b></span>
+    <span>입력 합계 <b>${signedBudgetWon402(allocated)}</b></span>
+    <span>남은 미처리
+      <b class="${remaining<0?'negative':'positive'}">
+        ${signedBudgetWon402(remaining)}
+      </b>
+    </span>
+    ${over
+      ?'<span class="budget-overallocated-403">처리할 금액보다 많이 입력했습니다.</span>'
+      :''
+    }`;
+}
+
+function installBudgetAllocationListeners403(containerId,sourceMonth){
+  const container=document.getElementById(containerId);
+  if(!container)return;
+
+  container.dataset.sourceMonth403=sourceMonth;
+
+  if(container.dataset.listener403!=='1'){
+    container.dataset.listener403='1';
+
+    container.addEventListener('input',()=>{
+      updateBudgetAllocationSummary403(containerId,sourceMonth);
+    });
+    container.addEventListener('change',()=>{
+      updateBudgetAllocationSummary403(containerId,sourceMonth);
+    });
+  }
+
+  updateBudgetAllocationSummary403(containerId,sourceMonth);
+  installMoneyInputs();
+}
+
+renderBudgetProcessing402=function(snapshot){
+  const containerId=`budgetDetailAllocations403_${snapshot.month}`;
+  const decision=snapshot.decision;
+  const overAllocated=
+    Math.abs(snapshot.allocated)>Math.abs(snapshot.ending)+0.5;
+
+  setTimeout(
+    ()=>installBudgetAllocationListeners403(
+      containerId,
+      snapshot.month
+    ),
+    0
+  );
+
+  return `
+    <div class="budget-processing-title-402">
+      <b>월말잔액 처리</b>
+      <span class="badge ${snapshot.tone}">
+        ${esc(snapshot.status)}
+      </span>
+    </div>
+
+    ${allocationRowsHtml403(
+      snapshot.month,
+      snapshot.ending,
+      snapshot.allocations,
+      containerId
+    )}
+
+    <div class="budget-processing-fields-403">
+      <button type="button" class="small-btn primary"
+        ${snapshot.ending===0?'disabled':''}
+        onclick="saveBudgetAllocations403('${snapshot.month}','${containerId}')">
+        이월 저장
+      </button>
+
+      <button type="button" class="small-btn"
+        ${snapshot.ending===0?'disabled':''}
+        onclick="decideBudgetRollover403('${snapshot.month}',false)">
+        이월 안 함
+      </button>
+
+      <button type="button" class="small-btn danger"
+        ${decision?'':'disabled'}
+        onclick="clearBudgetRolloverDecision402('${snapshot.month}')">
+        미처리로 변경
+      </button>
+    </div>
+
+    ${overAllocated
+      ?'<div class="budget-overallocated-403">현재 월말잔액보다 더 많이 이월 처리되어 있습니다. 다시 저장해주세요.</div>'
+      :''
+    }`;
+};
+
+function syncLegacyBudgetCarryovers403(){
+  ensureBudgetRolloverState401();
+
+  const next={};
+
+  Object.keys(state.monthlyBudgetRolloverDecisions401||{})
+    .forEach(sourceMonth=>{
+      decisionAllocations403(sourceMonth)
+        .forEach(row=>{
+          next[row.targetMonth]=
+            Number(next[row.targetMonth]||0)+
+            Number(row.amount||0);
+        });
+    });
+
+  state.monthlyBudgetCarryovers401=Object.fromEntries(
+    Object.entries(next)
+      .filter(([,amount])=>Number(amount||0)!==0)
+  );
+}
+
+// 40.2차의 미처리 변경 기능도 분할 이월 계산을 사용하도록 연결합니다.
+syncLegacyBudgetCarryovers402=syncLegacyBudgetCarryovers403;
+
+function saveBudgetAllocations403(sourceMonth,containerId){
+  const snapshot=budgetMonthSnapshot402(sourceMonth);
+  const allocations=readBudgetAllocations403(
+    containerId,
+    sourceMonth,
+    snapshot.ending
+  );
+
+  if(!allocations.length){
+    alert('이월할 월과 금액을 입력해주세요.');
+    return;
+  }
+
+  if(allocations.some(row=>row.targetMonth<=sourceMonth)){
+    alert('이월 대상 월은 처리할 월보다 이후여야 합니다.');
+    return;
+  }
+
+  const allocated=allocations.reduce(
+    (sum,row)=>sum+Number(row.amount||0),0
+  );
+
+  if(Math.abs(allocated)>Math.abs(snapshot.ending)+0.5){
+    alert('월말잔액보다 많은 금액을 이월할 수 없습니다.');
+    return;
+  }
+
+  state.monthlyBudgetRolloverDecisions401[sourceMonth]={
+    decision:'carry',
+    amount:Number(snapshot.ending||0),
+    allocatedAmount:allocated,
+    remainingAmount:Number(snapshot.ending||0)-allocated,
+    allocations,
+    targetMonth:allocations[0]?.targetMonth||'',
+    decidedAt:today()
+  };
+
+  syncLegacyBudgetCarryovers403();
+  sessionStorage.removeItem(
+    `budgetRolloverDismissed401:${sourceMonth}`
+  );
+
+  saveState();
+
+  if(document.getElementById('budgetMonthDetailModal402')?.open){
+    openBudgetMonthDetail402(sourceMonth);
+  }
+}
+
+function decideBudgetRollover403(sourceMonth,carry){
+  if(carry){
+    const containerId=
+      `budgetReminderAllocations403_${sourceMonth}`;
+    saveBudgetAllocations403(sourceMonth,containerId);
+    return;
+  }
+
+  const snapshot=budgetMonthSnapshot402(sourceMonth);
+
+  state.monthlyBudgetRolloverDecisions401[sourceMonth]={
+    decision:'reset',
+    amount:Number(snapshot.ending||0),
+    allocations:[],
+    targetMonth:'',
+    decidedAt:today()
+  };
+
+  syncLegacyBudgetCarryovers403();
+  sessionStorage.removeItem(
+    `budgetRolloverDismissed401:${sourceMonth}`
+  );
+
+  saveState();
+
+  if(document.getElementById('budgetMonthDetailModal402')?.open){
+    openBudgetMonthDetail402(sourceMonth);
+  }
+}
+
+decideBudgetRollover402=function(sourceMonth,carry){
+  decideBudgetRollover403(sourceMonth,carry);
+};
+decideBudgetRollover401=function(sourceMonth,carry){
+  decideBudgetRollover403(sourceMonth,carry);
+};
+
+renderBudgetRolloverReminder401=function(){
+  const section=ensureBudgetRolloverReminder401();
+  if(!section)return;
+
+  const pending=pendingBudgetRollover401();
+
+  if(!pending){
+    section.hidden=true;
+    section.innerHTML='';
+    return;
+  }
+
+  const dismissed=sessionStorage.getItem(
+    `budgetRolloverDismissed401:${pending.sourceMonth}`
+  )==='1';
+
+  if(dismissed){
+    section.hidden=true;
+    return;
+  }
+
+  const amountText=
+    `${pending.amount>0?'남은 예산':'초과 예산'} `+
+    `${won(Math.abs(pending.amount))}`;
+  const containerId=
+    `budgetReminderAllocations403_${pending.sourceMonth}`;
+
+  section.hidden=false;
+  section.dataset.sourceMonth401=pending.sourceMonth;
+  section.innerHTML=`
+    <div class="budget-rollover-head-401">
+      <span class="budget-rollover-icon-401" aria-hidden="true">🔔</span>
+      <div class="budget-rollover-copy-401">
+        <b>${monthLabel401(pending.sourceMonth)} 예산을 마감할까요?</b>
+        <p>
+          한 달로 전액 이월하거나 여러 달로 나눠 이월할 수 있습니다.
+          일부만 입력하면 나머지는 미처리로 남아 다시 알림이 표시됩니다.
+        </p>
+
+        ${allocationRowsHtml403(
+          pending.sourceMonth,
+          pending.fullAmount,
+          pending.allocations,
+          containerId
+        )}
+      </div>
+      <span class="budget-rollover-amount-401">${amountText}</span>
+    </div>
+
+    <div class="budget-rollover-actions-401">
+      <button type="button" class="small-btn carry-401"
+        onclick="saveBudgetAllocations403('${pending.sourceMonth}','${containerId}')">
+        이월 저장
+      </button>
+      <button type="button" class="small-btn"
+        onclick="decideBudgetRollover403('${pending.sourceMonth}',false)">
+        이월 안 함
+      </button>
+      <button type="button" class="small-btn"
+        onclick="dismissBudgetRollover401('${pending.sourceMonth}')">
+        나중에
+      </button>
+    </div>`;
+
+  setTimeout(
+    ()=>installBudgetAllocationListeners403(
+      containerId,
+      pending.sourceMonth
+    ),
+    0
+  );
+};
+
+
+// ─────────────────────────────────────────────
+// 월별 예산 렌더 및 전체 렌더 최종 연결
+// ─────────────────────────────────────────────
+const renderBudgetHistoryBefore403=renderBudgetHistory402;
+renderBudgetHistory402=function(){
+  ensureBudgetHistoryYear403();
+  renderBudgetHistoryBefore403();
+};
+
+const buildBackupBefore403=buildBackup27;
+buildBackup27=function(scope='all'){
+  const data=buildBackupBefore403(scope);
+  data.backupVersion='40.3';
+  return data;
+};
+
+const renderAllBefore403=renderAll;
+renderAll=function(){
+  repairInvestmentExpenses403();
+  const result=renderAllBefore403();
+
+  forceVersion403();
+  ensureInvestmentFilterFinal403();
+  renderInvestments353();
+  renderInvestmentExpenses388();
+  ensureBudgetHistoryYear403();
+
+  if(
+    document.getElementById('budgetHistoryPanel402')
+      ?.classList.contains('active')
+  ){
+    renderBudgetHistory402();
+  }
+
+  renderBudgetRolloverReminder401();
+  return result;
+};
+
+
+// ─────────────────────────────────────────────
+// 초기 실행
+// ─────────────────────────────────────────────
+forceVersion403();
+repairInvestmentExpenses403();
+ensureInvestmentFilterFinal403();
+ensureBudgetHistoryYear403();
+syncLegacyBudgetCarryovers403();
+renderInvestments353();
+renderInvestmentExpenses388();
+renderBudgetHistory402();
+renderBudgetRolloverReminder401();
+
+window.addEventListener('load',()=>{
+  forceVersion403();
+  releaseAfterFinalData403();
+});
+
+setTimeout(forceVersion403,500);
 </script>
 
 </body>
