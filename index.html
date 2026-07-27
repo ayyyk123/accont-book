@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=37.8" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=37.8" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 38.5차</title>
+<title>가계부 38.6차</title>
 <link href="manifest.json" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -5498,13 +5498,98 @@ html,body,button,[role="button"],tr[role="button"]{
 }
 </style>
 
+
+<style id="v386-tab-order-style">
+/* ===== 38.6차: 사용자가 직접 탭 순서 변경 ===== */
+#tabOrderSettings386{
+  grid-column:1/-1;
+}
+.tab-order-note-386{
+  margin:4px 0 12px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+.tab-order-list-386{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px;
+}
+.tab-order-row-386{
+  display:grid;
+  grid-template-columns:30px minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+  padding:8px 9px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--panel);
+}
+.tab-order-row-386.dragging-386{
+  opacity:.5;
+}
+.tab-order-number-386{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:28px;
+  height:28px;
+  border-radius:9px;
+  background:var(--primary-soft);
+  color:var(--primary);
+  font-weight:900;
+  font-size:11px;
+  cursor:grab;
+  user-select:none;
+}
+.tab-order-label-386{
+  min-width:0;
+  font-size:12px;
+  font-weight:850;
+  line-height:1.35;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.tab-order-actions-386{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+.tab-order-actions-386 .small-btn{
+  min-width:34px;
+  min-height:30px;
+  padding:4px 7px;
+  font-size:11px;
+}
+.tab-order-footer-386{
+  display:flex;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px;
+}
+@media(max-width:760px){
+  .tab-order-list-386{grid-template-columns:1fr;}
+  .tab-order-row-386{padding:7px 8px;}
+  .tab-order-label-386{font-size:11.5px;}
+  .tab-order-actions-386 .small-btn{
+    min-height:32px!important;
+    min-width:36px!important;
+    padding:4px 7px!important;
+    font-size:10.5px!important;
+  }
+}
+</style>
+
 </head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">38.5차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">38.6차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">38.5차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">38.6차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="desktop-actions">
 <button class="ghost-btn" onclick="openAccountModal()" type="button">통장 등록</button>
 <button class="ghost-btn" onclick="openCardModal()" type="button">카드 등록</button>
@@ -5655,7 +5740,7 @@ html,body,button,[role="button"],tr[role="button"]{
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:smart:2:즐겨찾기 관리" data-collapse-title320="즐겨찾기 관리"><div class="section-head"><div><h2>즐겨찾기 관리</h2><div class="subtle" style="margin-top:5px">자주 입력하는 거래를 저장해 한 번에 불러옵니다.</div></div><button class="small-btn primary" onclick="openFavoriteModal()" type="button">+ 즐겨찾기 만들기</button><button aria-expanded="false" aria-label="즐겨찾기 관리 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="grid-3" id="favoriteManager"></div></div></div>
 </section>
 <section class="panel" id="settings"><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:settings:0:백업·설정·기능 안내" data-collapse-title320="백업·설정·기능 안내"><div class="section-head"><h2>백업·설정·기능 안내</h2><button aria-expanded="false" aria-label="백업·설정·기능 안내 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="settings-grid">
-<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 38.5차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 38.5차</span></div></div>
+<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 38.6차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 38.6차</span></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:1:☁️ Firebase 자동 동기화" data-collapse-title320="☁️ Firebase 자동 동기화" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>☁️ Firebase 자동 동기화</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" onclick="forceCloudUpload()" type="button">현재 자료를 클라우드에 저장</button></div><button aria-expanded="false" aria-label="☁️ Firebase 자동 동기화 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_1"><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:2:선택 백업" data-collapse-title320="선택 백업" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>선택 백업</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="exportBackup()" type="button">백업 파일 저장</button></div><button aria-expanded="false" aria-label="선택 백업 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_2"><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions settings-body-controls-315"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select></div><div class="backup-proof" id="lastBackupProof"></div></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:3:백업 불러오기" data-collapse-title320="백업 불러오기"><div class="settings-title-row-315"><h3>백업 불러오기</h3><button aria-expanded="false" aria-label="백업 불러오기 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input accept=".json" id="backupInput" onchange="importBackup(event)" type="file"/></div></div>
@@ -5820,7 +5905,7 @@ function normalizeState(raw){
   const purposeFundingStatus=raw?.purposeFundingStatus&&typeof raw.purposeFundingStatus==='object'?{...raw.purposeFundingStatus}:{};
   return {version:12,categories,accounts,cards,purchases,cashflows,recurringItems,recurringSkips,monthlyBudgets,debts,purposeFunds,loans,purposeFundingStatus,
     favorites:Array.isArray(raw?.favorites)?raw.favorites:[],
-    preferences:{darkMode:Boolean(raw?.preferences?.darkMode),lastSearch:raw?.preferences?.lastSearch||''}
+    preferences:{darkMode:Boolean(raw?.preferences?.darkMode),lastSearch:raw?.preferences?.lastSearch||'',tabOrder:Array.isArray(raw?.preferences?.tabOrder)?raw.preferences.tabOrder:[]}
   };
 }
 function migrateV1(old){
@@ -5971,7 +6056,7 @@ function deleteSubCategory(majorId,subId){const major=categoryById(majorId),sub=
 
 function download(name,content,type='application/json'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return '\ufeff'+rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n')}
-function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="38.5";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"38.5",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_38.5차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
+function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="38.6";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"38.6",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_38.6차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
 function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=normalizeState(JSON.parse(r.result));saveState();alert('백업을 불러왔습니다.')}catch(err){console.error(err);alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f,'utf-8')}
 function exportPurchaseCSV(){const rows=[['사용일','카드','카드종류','예산구분','사용처','대분류','소분류','총 구매금액','할부개월','청구월별 금액','메모']];state.purchases.forEach(p=>rows.push([p.date,cardById(p.cardId)?.name||'',cardById(p.cardId)?.cardType==='debit'?'체크카드':'신용카드',(p.budgetSource&&p.budgetSource!=='personal')?(purposeFundById(p.budgetSource)?.name||'목적자금'):'내 생활비',p.merchant,p.majorCategory,p.subCategory,p.totalAmount,p.installmentMonths,p.schedules.map(s=>`${s.billingMonth}:${s.amount}:${s.paid?'납부완료':'예정'}`).join(' / '),p.memo||'']));download(`마파가계부_카드사용_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
 function exportLedgerCSV(){const rows=[['날짜','구분','항목','대분류','소분류','통장','금액','메모','자동반영']];state.cashflows.forEach(f=>rows.push([f.date,f.type,f.description,f.majorCategory||'',f.subCategory||'',accountById(f.accountId)?.name||'',f.amount,f.memo||'',f.recurringItemId?'매월 자동':'']));allSchedules().filter(s=>s.paid).forEach(s=>rows.push([s.paidDate,'카드값 출금',`${s.card?.name||''} ${s.purchase.merchant}`,'카드값','',accountById(s.paidAccountId)?.name||'',-s.amount,'']));download(`마파가계부_통장내역_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
@@ -5989,7 +6074,7 @@ const thisYear=new Date().getFullYear();document.getElementById('mainMonth').val
 
 
 // ===== 9차 확장 기능 =====
-function ensureV9State(){state.favorites=Array.isArray(state.favorites)?state.favorites:[];state.preferences=state.preferences||{darkMode:false,lastSearch:''}}
+function ensureV9State(){state.favorites=Array.isArray(state.favorites)?state.favorites:[];state.preferences=state.preferences||{darkMode:false,lastSearch:'',tabOrder:[]};state.preferences.tabOrder=Array.isArray(state.preferences.tabOrder)?state.preferences.tabOrder:[]}
 function applyTheme(){ensureV9State();document.body.classList.toggle('dark',Boolean(state.preferences.darkMode));const b=document.getElementById('darkModeButton');if(b)b.textContent=state.preferences.darkMode?'라이트모드로 바꾸기':'다크모드 켜기';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',state.preferences.darkMode?'#11131a':'#5b6df6')}
 function toggleDarkMode(){ensureV9State();state.preferences.darkMode=!state.preferences.darkMode;localStorage.setItem(STORE_KEY,JSON.stringify(state));applyTheme();scheduleCloudSave()}
 function historicalAccountBalance(accountId,endDate){let total=Number(accountById(accountId)?.initialBalance||0);state.cashflows.forEach(f=>{const date=(f.recurringItemId&&!f.recurringOverride)?(f.settledDate||''):f.date;if(!date||date>endDate)return;let amt=Number((f.recurringItemId&&!f.recurringOverride)?(f.settledAmount||f.amount||0):f.amount||0);if(f.recurringItemId&&!f.recurringOverride&&!f.settled)return;const aid=(f.recurringItemId&&!f.recurringOverride)?(f.settledAccountId||f.accountId):f.accountId;if(f.type==='income'&&aid===accountId)total+=amt;if(f.type==='expense'&&aid===accountId)total-=amt;if(f.type==='transfer'){if(f.accountId===accountId)total-=amt;if(f.targetAccountId===accountId)total+=amt}});allSchedules().forEach(s=>{if(s.paid&&s.paidAccountId===accountId&&(s.paidDate||'')<=endDate)total-=Number(s.amount||0)});return total}
@@ -6233,9 +6318,9 @@ function buildBackup27(scope='all'){
   if(scope==='all')payload=full;else{payload={categories:full.categories};if(scope==='transactions')Object.assign(payload,{purchases:full.purchases,cashflows:full.cashflows,debts:full.debts});if(scope==='cards')payload.cards=full.cards;if(scope==='accounts')payload.accounts=full.accounts;if(scope==='recurring')Object.assign(payload,{recurringItems:full.recurringItems,recurringSkips:full.recurringSkips,loans:full.loans});if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds})}
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 }
-exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_38.5차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
+exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_38.6차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
 function renderBackupProof27(){const el=document.getElementById('lastBackupProof');if(!el)return;try{const m=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');el.textContent=m?`최근 백업: ${new Date(m.createdAt).toLocaleString('ko-KR')} · ${m.scope==='all'?'전체':'선택'} · 검증코드 ${m.checksum} · ${(m.size/1024).toFixed(1)}KB`:'이 기기에서 저장한 백업 기록이 아직 없습니다.'}catch{el.textContent='백업 기록을 읽을 수 없습니다.'}}
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_38.5차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_38.6차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 function integrityIssues27(st){const issues=[],checkIds=(name,arr)=>{const seen=new Set();(arr||[]).forEach(x=>{if(!x.id)issues.push(`${name}: ID 없음`);else if(seen.has(x.id))issues.push(`${name}: 중복 ID ${x.id}`);seen.add(x.id)})};[['통장',st.accounts],['카드',st.cards],['카드사용',st.purchases],['통장내역',st.cashflows],['고정항목',st.recurringItems],['대출',st.loans],['받을·줄 돈',st.debts],['목적자금',st.purposeFunds]].forEach(x=>checkIds(...x));
   (st.cards||[]).forEach(c=>{if(c.accountId&&!st.accounts.some(a=>a.id===c.accountId))issues.push(`카드 ${c.name}: 출금통장 연결 오류`)});(st.purchases||[]).forEach(p=>{if(!st.cards.some(c=>c.id===p.cardId))issues.push(`카드사용 ${p.merchant}: 카드 연결 오류`);if(!Number.isFinite(Number(p.totalAmount)))issues.push(`카드사용 ${p.merchant}: 금액 오류`)});(st.cashflows||[]).forEach(f=>{if(f.accountId&&!st.accounts.some(a=>a.id===f.accountId))issues.push(`통장내역 ${f.description}: 출금·입금통장 오류`);if(f.type==='transfer'&&f.targetAccountId&&!st.accounts.some(a=>a.id===f.targetAccountId))issues.push(`이체 ${f.description}: 대상통장 오류`);if(!Number.isFinite(Number(f.amount)))issues.push(`통장내역 ${f.description}: 금액 오류`)});(st.recurringItems||[]).forEach(r=>{if(r.type==='savings'){if(!st.accounts.some(a=>a.id===r.accountId)||!st.accounts.some(a=>a.id===r.targetAccountId))issues.push(`고정저축 ${r.description}: 통장 연결 오류`);if(r.accountId===r.targetAccountId)issues.push(`고정저축 ${r.description}: 출금·입금통장이 같음`)}else if(r.paymentMethod==='card'&&!st.cards.some(c=>c.id===r.cardId))issues.push(`고정항목 ${r.description}: 카드 연결 오류`);else if(r.accountId&&!st.accounts.some(a=>a.id===r.accountId))issues.push(`고정항목 ${r.description}: 통장 연결 오류`)});(st.loans||[]).forEach(l=>{if(l.interestAccountId&&!st.accounts.some(a=>a.id===l.interestAccountId))issues.push(`대출 ${l.name}: 이자 출금통장 연결 오류`);if(l.recurringItemId&&!st.recurringItems.some(r=>r.id===l.recurringItemId))issues.push(`대출 ${l.name}: 이자 고정지출 연결 오류`)});return issues;
@@ -6308,7 +6393,7 @@ buildBackup27=function(scope='all'){
   if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds});
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),includedKeys:Object.keys(payload),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 };
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_38.5차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_38.6차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 const runDataDiagnostics27Base=runDataDiagnostics;
 runDataDiagnostics=async function(){await runDataDiagnostics27Base();const el=document.getElementById('diagnosticResult'),last=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');if(el&&last)el.innerHTML=el.innerHTML.replace('최근 전체백업:',`최근 백업(${last.scope==='all'?'전체':'선택'}):`)};
@@ -22347,6 +22432,180 @@ window.addEventListener('resize',()=>{
 });
 
 installAllTableTopScroll385();
+</script>
+
+
+<script id="v386-tab-order-script">
+// ===== 38.6차: 탭 순서를 설정 화면에서 직접 변경 =====
+const TAB_ORDER_DEFAULT_386=[
+  'purchases','accounts','recurring','payments','loans','investments',
+  'debts','budget','statistics','smart','settings'
+];
+const TAB_ORDER_LABELS_386={
+  purchases:'All',
+  accounts:'통장,카드관리',
+  recurring:'고정내역',
+  payments:'카드값',
+  loans:'대출,저축',
+  investments:'투자',
+  debts:'금전거래',
+  budget:'예산',
+  statistics:'분류,통계',
+  smart:'검색,자산비서',
+  settings:'백업,설정'
+};
+
+function normalizedTabOrder386(order){
+  const valid=new Set(TAB_ORDER_DEFAULT_386);
+  const clean=[];
+  (Array.isArray(order)?order:[]).forEach(id=>{
+    if(valid.has(id)&&!clean.includes(id))clean.push(id);
+  });
+  TAB_ORDER_DEFAULT_386.forEach(id=>{
+    if(!clean.includes(id))clean.push(id);
+  });
+  return clean;
+}
+
+function getTabOrder386(){
+  ensureV9State();
+  const current=normalizedTabOrder386(state.preferences.tabOrder);
+  if(!Array.isArray(state.preferences.tabOrder)||
+     current.join('|')!==state.preferences.tabOrder.join('|')){
+    state.preferences.tabOrder=current;
+  }
+  return current;
+}
+
+function applyTabOrder386(){
+  const order=getTabOrder386();
+  const desktop=document.querySelector('nav.tabs');
+  const mobile=document.querySelector('nav.bottom-nav');
+  order.forEach(id=>{
+    const desktopButton=desktop?.querySelector(`[data-tab="${id}"]`);
+    const mobileButton=mobile?.querySelector(`[data-tab="${id}"]`);
+    if(desktopButton)desktop.appendChild(desktopButton);
+    if(mobileButton)mobile.appendChild(mobileButton);
+  });
+}
+
+function saveTabOrder386(order){
+  ensureV9State();
+  state.preferences.tabOrder=normalizedTabOrder386(order);
+  localStorage.setItem(STORE_KEY,JSON.stringify(state));
+  if(typeof scheduleCloudSave==='function')scheduleCloudSave();
+  applyTabOrder386();
+  renderTabOrderSettings386();
+}
+
+function moveTabOrder386(id,direction){
+  const order=[...getTabOrder386()];
+  const index=order.indexOf(id);
+  const target=index+direction;
+  if(index<0||target<0||target>=order.length)return;
+  [order[index],order[target]]=[order[target],order[index]];
+  saveTabOrder386(order);
+}
+
+function resetTabOrder386(){
+  saveTabOrder386(TAB_ORDER_DEFAULT_386);
+}
+
+function putAccountsNextToAll386(){
+  const order=[...getTabOrder386()].filter(id=>id!=='accounts');
+  const allIndex=order.indexOf('purchases');
+  order.splice(allIndex>=0?allIndex+1:0,0,'accounts');
+  saveTabOrder386(order);
+}
+
+let draggedTab386='';
+function startTabDrag386(event,id){
+  draggedTab386=id;
+  event.currentTarget.classList.add('dragging-386');
+  event.dataTransfer.effectAllowed='move';
+  event.dataTransfer.setData('text/plain',id);
+}
+function endTabDrag386(event){
+  event.currentTarget.classList.remove('dragging-386');
+  draggedTab386='';
+}
+function dropTabOrder386(event,targetId){
+  event.preventDefault();
+  const sourceId=draggedTab386||event.dataTransfer.getData('text/plain');
+  if(!sourceId||sourceId===targetId)return;
+  const order=[...getTabOrder386()];
+  const sourceIndex=order.indexOf(sourceId);
+  const targetIndex=order.indexOf(targetId);
+  if(sourceIndex<0||targetIndex<0)return;
+  order.splice(sourceIndex,1);
+  order.splice(targetIndex,0,sourceId);
+  saveTabOrder386(order);
+}
+
+function renderTabOrderSettings386(){
+  const box=document.getElementById('tabOrderSettings386');
+  if(!box)return;
+  const order=getTabOrder386();
+  const list=box.querySelector('#tabOrderList386');
+  if(!list)return;
+  list.innerHTML=order.map((id,index)=>`
+    <div class="tab-order-row-386" draggable="true"
+      ondragstart="startTabDrag386(event,'${id}')"
+      ondragend="endTabDrag386(event)"
+      ondragover="event.preventDefault()"
+      ondrop="dropTabOrder386(event,'${id}')">
+      <span class="tab-order-number-386" title="PC에서는 끌어서 이동">${index+1}</span>
+      <span class="tab-order-label-386">${TAB_ORDER_LABELS_386[id]||id}</span>
+      <span class="tab-order-actions-386">
+        <button type="button" class="small-btn" aria-label="위로 이동"
+          onclick="moveTabOrder386('${id}',-1)" ${index===0?'disabled':''}>↑</button>
+        <button type="button" class="small-btn" aria-label="아래로 이동"
+          onclick="moveTabOrder386('${id}',1)" ${index===order.length-1?'disabled':''}>↓</button>
+      </span>
+    </div>`).join('');
+}
+
+function installTabOrderSettings386(){
+  const grid=document.querySelector('#settings .settings-grid');
+  if(!grid)return;
+  let box=document.getElementById('tabOrderSettings386');
+  if(!box){
+    box=document.createElement('div');
+    box.id='tabOrderSettings386';
+    box.className='settings-box';
+    box.innerHTML=`
+      <h3>탭 순서 설정</h3>
+      <div class="tab-order-note-386">
+        위·아래 버튼으로 순서를 바꾸면 PC 상단 탭과 모바일 하단 메뉴에 바로 적용됩니다.
+        PC에서는 번호를 끌어서 이동할 수도 있습니다.
+      </div>
+      <div class="tab-order-list-386" id="tabOrderList386"></div>
+      <div class="tab-order-footer-386">
+        <button type="button" class="small-btn primary" onclick="putAccountsNextToAll386()">통장,카드관리 All 옆으로</button>
+        <button type="button" class="small-btn" onclick="resetTabOrder386()">기본 순서로 초기화</button>
+      </div>`;
+    grid.insertBefore(box,grid.firstChild);
+  }
+  renderTabOrderSettings386();
+}
+
+const renderAllBefore386=renderAll;
+renderAll=function(){
+  renderAllBefore386();
+  applyTabOrder386();
+  installTabOrderSettings386();
+};
+
+// 38.6차의 최초 기본값은 통장,카드관리를 All 바로 옆에 둡니다.
+ensureV9State();
+if(!Array.isArray(state.preferences.tabOrder)||!state.preferences.tabOrder.length){
+  state.preferences.tabOrder=[...TAB_ORDER_DEFAULT_386];
+  localStorage.setItem(STORE_KEY,JSON.stringify(state));
+  if(typeof scheduleCloudSave==='function')scheduleCloudSave();
+}
+applyTabOrder386();
+installTabOrderSettings386();
+renderAll();
 </script>
 
 </body>
