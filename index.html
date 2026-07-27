@@ -6012,6 +6012,104 @@ html,body,button,[role="button"],tr[role="button"]{
 }
 </style>
 
+
+<style id="v397-investment-closed-profit-style">
+/* ===== 39.7차: 투자 완료일 + 완료 투자수익 모아보기 ===== */
+.investment-closed-date-field-397{
+  min-width:0;
+}
+.investment-closed-summary-397{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:8px 0 10px;
+  padding:8px 10px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--soft);
+}
+.investment-closed-summary-397 .summary-main-397{
+  font-weight:850;
+  color:var(--text);
+}
+.investment-closed-summary-397 .summary-profit-397{
+  font-weight:900;
+}
+.investment-closed-summary-397 .summary-actions-397{
+  display:flex;
+  gap:5px;
+  margin-left:auto;
+  flex-wrap:nowrap;
+}
+.investment-closed-date-label-397{
+  color:var(--positive);
+  font-weight:800;
+}
+.completed-profit-list-397{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.completed-profit-row-397{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:7px 12px;
+  padding:9px 10px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--panel);
+}
+.completed-profit-row-397 .completed-profit-title-397{
+  min-width:0;
+}
+.completed-profit-row-397 .completed-profit-title-397 b{
+  display:block;
+  color:var(--text);
+  font-size:12px;
+  line-height:1.35;
+}
+.completed-profit-row-397 .completed-profit-title-397 small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.4;
+}
+.completed-profit-row-397 .completed-profit-value-397{
+  text-align:right;
+  white-space:nowrap;
+  font-size:13px;
+  font-weight:900;
+}
+.completed-profit-row-397 .completed-profit-detail-397{
+  grid-column:1/-1;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.4;
+}
+.completed-profit-row-397 .completed-profit-actions-397{
+  grid-column:1/-1;
+  display:flex;
+  justify-content:flex-end;
+  gap:5px;
+}
+@media(max-width:640px){
+  .investment-closed-summary-397{
+    align-items:flex-start;
+    padding:7px 8px;
+    font-size:10.5px;
+  }
+  .investment-closed-summary-397 .summary-actions-397{
+    width:100%;
+    margin-left:0;
+  }
+  .investment-closed-summary-397 .summary-actions-397 .small-btn{
+    flex:1 1 0;
+  }
+}
+</style>
+
 </head>
 <body data-active-tab351="purchases">
 <div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">39.5차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
@@ -25342,6 +25440,374 @@ renderInvestments353=function(){
   return result;
 };
 
+renderInvestments353();
+</script>
+
+
+<script id="v397-investment-closed-profit-script">
+// ===== 39.7차: 회수 완료일 저장·표시 + 완료 투자수익 합계 =====
+
+// 기존 정규화 과정에서도 완료일을 보존합니다.
+const normalizeInvestmentBefore397=normalizeInvestment355;
+normalizeInvestment355=function(item={}){
+  const normalized=normalizeInvestmentBefore397(item);
+  const existing=(state?.investments||[])
+    .find(row=>row.id===normalized.id);
+
+  let closedDate397=
+    item.closedDate397||
+    item.closedDate||
+    existing?.closedDate397||
+    '';
+
+  const dialog=document.getElementById('investmentModal353');
+  const editingId=document.getElementById('investmentId353')?.value||'';
+  const closedInput=document.getElementById('investmentClosedDate397');
+
+  if(
+    normalized.status==='closed'&&
+    dialog?.open&&
+    editingId===normalized.id&&
+    closedInput
+  ){
+    closedDate397=closedInput.value||closedDate397;
+  }
+
+  if(normalized.status!=='closed'){
+    closedDate397='';
+  }
+
+  return {
+    ...normalized,
+    closedDate397
+  };
+};
+normalizeInvestment354=normalizeInvestment355;
+
+// 로컬 저장 데이터에서 기존 완료일을 복원합니다.
+try{
+  const raw397=JSON.parse(localStorage.getItem(STORE_KEY)||'null');
+  const rawMap397=new Map(
+    (Array.isArray(raw397?.investments)?raw397.investments:[])
+      .map(item=>[item.id,item])
+  );
+
+  state.investments=(state.investments||[]).map(item=>{
+    const raw=rawMap397.get(item.id)||{};
+    return normalizeInvestment355({
+      ...item,
+      closedDate397:
+        raw.closedDate397||
+        raw.closedDate||
+        item.closedDate397||
+        ''
+    });
+  });
+}catch(error){
+  console.warn('39.7 투자 완료일 복원 실패',error);
+}
+
+function ensureInvestmentClosedDateField397(){
+  let wrap=document.getElementById('investmentClosedDateWrap397');
+  if(wrap)return wrap;
+
+  const status=document.getElementById('investmentStatus353');
+  const statusWrap=status?.parentElement;
+  if(!statusWrap)return null;
+
+  wrap=document.createElement('div');
+  wrap.id='investmentClosedDateWrap397';
+  wrap.className='investment-closed-date-field-397';
+  wrap.hidden=true;
+  wrap.innerHTML=`
+    <label>회수 완료일</label>
+    <input id="investmentClosedDate397" type="date">
+    <div class="hint">
+      진행 중에서 회수 완료로 바꾸면 오늘 날짜가 자동 입력되며 직접 수정할 수 있습니다.
+    </div>`;
+
+  statusWrap.insertAdjacentElement('afterend',wrap);
+  return wrap;
+}
+
+function syncInvestmentClosedDateField397(autoToday=false){
+  const wrap=ensureInvestmentClosedDateField397();
+  const status=document.getElementById('investmentStatus353');
+  const input=document.getElementById('investmentClosedDate397');
+  const form=document.getElementById('investmentForm353');
+  if(!wrap||!status||!input)return;
+
+  const closed=status.value==='closed';
+  wrap.hidden=!closed;
+
+  if(closed&&autoToday&&!input.value){
+    input.value=
+      form?.dataset.originalClosedDate397||
+      today();
+  }
+}
+
+function installInvestmentClosedDateEvents397(){
+  ensureInvestmentClosedDateField397();
+
+  const status=document.getElementById('investmentStatus353');
+  if(status&&status.dataset.closedDate397!=='1'){
+    status.dataset.closedDate397='1';
+    status.addEventListener('change',()=>{
+      syncInvestmentClosedDateField397(true);
+    });
+  }
+}
+
+const openInvestmentModalBefore397=openInvestmentModal353;
+openInvestmentModal353=function(id=''){
+  const result=openInvestmentModalBefore397(id);
+
+  installInvestmentClosedDateEvents397();
+
+  const item=(state.investments||[])
+    .find(investment=>investment.id===id);
+  const form=document.getElementById('investmentForm353');
+  const input=document.getElementById('investmentClosedDate397');
+
+  if(form){
+    form.dataset.originalClosedDate397=
+      item?.closedDate397||'';
+  }
+  if(input){
+    input.value=item?.closedDate397||'';
+  }
+
+  syncInvestmentClosedDateField397(false);
+  return result;
+};
+
+// 완료 투자의 수익은 평가금액이 아닌 확정손익 기준으로 합산합니다.
+function completedInvestmentProfit397(item){
+  if(!item||item.status!=='closed')return 0;
+  return Number(investmentRealizedProfit388(item)||0)
+    -Number(investmentProfitExpenseTotal389(item.id)||0);
+}
+
+function completedInvestments397(){
+  return (state.investments||[])
+    .filter(item=>item.status==='closed')
+    .sort((a,b)=>
+      String(b.closedDate397||b.startDate||'')
+        .localeCompare(String(a.closedDate397||a.startDate||''))||
+      String(a.name||'').localeCompare(String(b.name||''),'ko')
+    );
+}
+
+function ensureCompletedInvestmentSummary397(){
+  let box=document.getElementById('completedInvestmentSummary397');
+  if(box)return box;
+
+  const filterSummary=document.getElementById('investmentFilterSummary353');
+  if(!filterSummary)return null;
+
+  box=document.createElement('div');
+  box.id='completedInvestmentSummary397';
+  box.className='investment-closed-summary-397';
+  filterSummary.insertAdjacentElement('afterend',box);
+  return box;
+}
+
+function renderCompletedInvestmentSummary397(){
+  const box=ensureCompletedInvestmentSummary397();
+  if(!box)return;
+
+  const rows=completedInvestments397();
+  const profit=rows.reduce(
+    (sum,item)=>sum+completedInvestmentProfit397(item),
+    0
+  );
+
+  box.innerHTML=`
+    <span class="summary-main-397">
+      회수 완료 투자 <b>${rows.length}건</b>
+    </span>
+    <span class="summary-profit-397 ${profit>=0?'positive':'negative'}">
+      완료 투자수익 ${investmentProfitText389(profit)}
+    </span>
+    <span class="summary-actions-397">
+      <button type="button" class="small-btn"
+        onclick="showOnlyClosedInvestments397()">완료 투자만 보기</button>
+      <button type="button" class="small-btn primary"
+        onclick="openCompletedInvestmentProfit397()">수익 모아보기</button>
+    </span>`;
+}
+
+function showOnlyClosedInvestments397(){
+  const filter=document.getElementById('investmentStatusFilter353');
+  if(filter){
+    filter.value='closed';
+    filter.dispatchEvent(new Event('change',{bubbles:true}));
+  }
+
+  document.getElementById('investmentList353')
+    ?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function ensureCompletedInvestmentProfitModal397(){
+  let dialog=document.getElementById('completedInvestmentProfitModal397');
+  if(dialog)return dialog;
+
+  dialog=document.createElement('dialog');
+  dialog.id='completedInvestmentProfitModal397';
+  dialog.innerHTML=`
+    <div class="modal">
+      <div class="modal-head">
+        <h2>완료된 투자수익 모아보기</h2>
+        <button type="button" class="icon-btn"
+          onclick="closeDialog('completedInvestmentProfitModal397')"
+          aria-label="닫기">×</button>
+      </div>
+      <div class="investment-history-summary-394"
+        id="completedInvestmentProfitSummary397"></div>
+      <div class="completed-profit-list-397"
+        id="completedInvestmentProfitList397"></div>
+      <div class="form-actions">
+        <button type="button" class="ghost-btn"
+          onclick="closeDialog('completedInvestmentProfitModal397')">닫기</button>
+      </div>
+    </div>`;
+
+  document.body.appendChild(dialog);
+  return dialog;
+}
+
+function openCompletedInvestmentProfit397(){
+  ensureCompletedInvestmentProfitModal397();
+
+  const rows=completedInvestments397();
+  const totalProfit=rows.reduce(
+    (sum,item)=>sum+completedInvestmentProfit397(item),
+    0
+  );
+  const totalInvestment=rows.reduce(
+    (sum,item)=>sum+investmentPrincipalTotal354(item),
+    0
+  );
+  const totalRecovered=rows.reduce(
+    (sum,item)=>sum+investmentRecoveredTotal354(item),
+    0
+  );
+
+  document.getElementById('completedInvestmentProfitSummary397').innerHTML=`
+    <span class="investment-summary-chip-353">
+      완료 투자 <b>${rows.length}건</b>
+    </span>
+    <span class="investment-summary-chip-353">
+      총 투자액 <b>${won(totalInvestment)}</b>
+    </span>
+    <span class="investment-summary-chip-353">
+      총 회수 <b>${won(totalRecovered)}</b>
+    </span>
+    <span class="investment-summary-chip-353">
+      완료 투자수익
+      <b class="${totalProfit>=0?'positive':'negative'}">
+        ${investmentProfitText389(totalProfit)}
+      </b>
+    </span>`;
+
+  const list=document.getElementById('completedInvestmentProfitList397');
+  list.innerHTML=rows.length
+    ?rows.map(item=>{
+      const profit=completedInvestmentProfit397(item);
+      const used=investmentProfitExpenseTotal389(item.id);
+      return `<div class="completed-profit-row-397">
+        <span class="completed-profit-title-397">
+          <b>${esc(item.name)}</b>
+          <small>
+            ${esc(investmentTypeLabel353(item.investmentType))} ·
+            완료일 ${esc(item.closedDate397||'미입력')}
+          </small>
+        </span>
+        <span class="completed-profit-value-397 ${profit>=0?'positive':'negative'}">
+          ${investmentProfitText389(profit)}
+        </span>
+        <span class="completed-profit-detail-397">
+          총 투자액 ${won(investmentPrincipalTotal354(item))} ·
+          총 회수 ${won(investmentRecoveredTotal354(item))} ·
+          확정손익 ${investmentProfitText389(investmentRealizedProfit388(item))}
+          ${used?` · 투자수익 사용 ${won(used)}`:''}
+        </span>
+        <span class="completed-profit-actions-397">
+          <button type="button" class="small-btn"
+            onclick="closeDialog('completedInvestmentProfitModal397');openInvestmentHistory394('${item.id}')">
+            거래내역
+          </button>
+          <button type="button" class="small-btn"
+            onclick="closeDialog('completedInvestmentProfitModal397');openInvestmentModal353('${item.id}')">
+            수정
+          </button>
+        </span>
+      </div>`;
+    }).join('')
+    :'<div class="empty">회수 완료된 투자건이 없습니다.</div>';
+
+  openDialog('completedInvestmentProfitModal397');
+}
+
+function applyInvestmentClosedDates397(){
+  const typeFilter=document.getElementById('investmentTypeFilter353')?.value||'';
+  const statusFilter=document.getElementById('investmentStatusFilter353')?.value||'';
+
+  const visible=(state.investments||[])
+    .filter(item=>
+      (!typeFilter||item.investmentType===typeFilter)&&
+      (!statusFilter||item.status===statusFilter)
+    )
+    .sort((a,b)=>
+      (b.startDate||'').localeCompare(a.startDate||'')||
+      String(a.name||'').localeCompare(String(b.name||''),'ko')
+    );
+
+  document.querySelectorAll('#investmentList353 .investment-row-353')
+    .forEach((row,index)=>{
+      row.querySelector('.investment-closed-date-label-397')?.remove();
+
+      const item=visible[index];
+      if(!item||item.status!=='closed')return;
+
+      const detail=row.querySelector('.investment-detail-353');
+      if(!detail)return;
+
+      const label=document.createElement('span');
+      label.className='investment-closed-date-label-397';
+      label.innerHTML=`<br>회수 완료일 ${esc(item.closedDate397||'미입력')}`;
+      detail.appendChild(label);
+    });
+}
+
+// 투자 거래내역 팝업에도 완료일을 표시합니다.
+const openInvestmentHistoryBefore397=openInvestmentHistory394;
+openInvestmentHistory394=function(investmentId,open=true){
+  const result=openInvestmentHistoryBefore397(investmentId,open);
+  const item=(state.investments||[])
+    .find(investment=>investment.id===investmentId);
+  const summary=document.getElementById('investmentHistorySummary394');
+
+  if(item?.status==='closed'&&summary){
+    const chip=document.createElement('span');
+    chip.className='investment-summary-chip-353';
+    chip.innerHTML=`회수 완료일 <b>${esc(item.closedDate397||'미입력')}</b>`;
+    summary.appendChild(chip);
+  }
+  return result;
+};
+
+const renderInvestmentsBefore397=renderInvestments353;
+renderInvestments353=function(){
+  const result=renderInvestmentsBefore397();
+  applyInvestmentClosedDates397();
+  renderCompletedInvestmentSummary397();
+  return result;
+};
+
+installInvestmentClosedDateEvents397();
+ensureCompletedInvestmentProfitModal397();
 renderInvestments353();
 </script>
 
