@@ -8,10 +8,10 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="가계부" name="apple-mobile-web-app-title"/>
-<link href="apple-touch-icon.png?v=41.1" rel="apple-touch-icon" sizes="180x180"/>
-<link href="icon-192.png?v=41.1" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 41.1차</title>
-<link href="manifest.json?v=41.1" rel="manifest"/>
+<link href="apple-touch-icon.png?v=41.2" rel="apple-touch-icon" sizes="180x180"/>
+<link href="icon-192.png?v=41.2" rel="icon" sizes="192x192" type="image/png"/>
+<title>가계부 41.2차</title>
+<link href="manifest.json?v=41.2" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
@@ -7471,17 +7471,17 @@ html,body,button,[role="button"],tr[role="button"]{
 
 </head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">41.1차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">41.2차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">41.1차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">41.2차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="desktop-actions"><button class="primary-btn" onclick="openTransactionRegister389()" type="button">거래등록</button></div>
 <button class="primary-btn mobile-only" onclick="openQuickMenu()" type="button">+ 입력</button>
 </header>
 <div class="cloud-bar">
 <div class="cloud-user"><span class="cloud-dot" id="cloudDot"></span><div class="cloud-info"><b id="cloudTitle">이 기기에만 저장 중</b><span id="cloudSubtitle">로그인하면 PC·휴대폰에서 같은 내용을 사용할 수 있어요.</span></div></div>
-<div class="auth-actions"><button class="small-btn primary" id="loginButton" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" id="signupButton" onclick="openAuthModal('signup')" type="button">회원가입</button><button class="small-btn" id="logoutButton" onclick="logoutFirebase()" style="display:none" type="button">로그아웃</button></div>
+<div class="auth-actions"><button class="small-btn primary" id="loginButton" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" id="signupButton" onclick="openAuthModal('signup')" type="button">회원가입</button><button aria-label="데이터 최신 불러오기" class="small-btn sync-icon-btn-412" id="refreshLatestButton412" onclick="refreshLatestData412()" title="데이터 최신 불러오기" type="button">↻</button><button class="small-btn save-latest-btn-412" id="saveLatestButton412" onclick="saveLatestData412()" title="가계부를 닫기 전에 현재 자료를 즉시 저장" type="button">최신자료 저장</button><button class="small-btn" id="logoutButton" onclick="logoutFirebase()" style="display:none" type="button">로그아웃</button></div>
 </div>
 <div aria-label="월 이동" class="month-row month-nav-276">
 <button aria-label="이전 달" class="ghost-btn month-step-btn" onclick="changeMainMonth274(-1)" type="button">‹ 이전 달</button>
@@ -7516,7 +7516,7 @@ html,body,button,[role="button"],tr[role="button"]{
 <section class="panel active" id="purchases">
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:purchases:0:월 총내역" data-collapse-title320="월 총내역">
 <div class="section-head"><div><h2>월 총내역</h2><div class="subtle" style="margin-top:5px">선택한 달의 소득·통장 입금과 카드·통장 소비를 날짜순으로 함께 검색합니다.</div></div><div class="actions"><button class="small-btn primary" onclick="openPurchaseModal()" type="button">+ 카드 사용</button><button class="small-btn" data-open-reimbursable367="" onclick="openReimbursablePurchase367()" type="button">+ 대신 결제</button><button class="small-btn" onclick="openCashflowModal('income')" type="button">+ 소득</button><button class="small-btn" onclick="openCashflowModal('deposit')" type="button">+ 통장 입금</button><button class="small-btn" onclick="openCashflowModal('withdrawal')" type="button">+ 통장 출금</button><button class="small-btn" onclick="openCashflowModal('expense')" type="button">+ 통장 지출</button><button class="small-btn" onclick="openCashflowModal('transfer')" type="button">+ 통장 이체</button></div><button aria-expanded="false" aria-label="월 총내역 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div>
-<div class="collapse-body-320"><div class="all-fixed-filters-360" id="allFixedFilters360"><label class="all-fixed-month-field-360" id="purchaseMonthField350"><span id="purchaseMonthLabel350">조회월</span><input id="purchaseMonthFilter" type="month"/></label><label class="all-fixed-month-field-360" id="purchasePurposeEndField350"><span class="month-field-label-line-361"><span>종료월</span><small class="month-field-inline-hint-361">선택 시 기간 적용</small></span><input id="purchasePurposeEndMonth350" type="month"/></label><button class="all-fixed-filter-button-360" data-fixed-filter360="types" id="allTypeFilterButton360" type="button"><span class="all-fixed-filter-label-360">거래유형 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="paymentKind" id="allPaymentFilterButton360" type="button"><span class="all-fixed-filter-label-360">결제구분 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="cardId" id="allCardFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 카드</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="accountId" id="allAccountFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 통장</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="majorId" id="allMajorFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 대분류</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="subId" id="allSubFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 소분류</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="purposeFund" id="allPurposeFilterButton360" type="button"><span class="all-fixed-filter-label-360">목적자금 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="receiptStatus" id="allReceiptFilterButton360" type="button"><span class="all-fixed-filter-label-360">수령상태 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><input class="all-fixed-search-360" id="purchaseSearch" placeholder="소득·사용처·항목 검색"/></div><div aria-hidden="true" class="legacy-all-filters-360">
+<div class="collapse-body-320"><div class="all-fixed-filters-360" id="allFixedFilters360"><label class="all-fixed-month-field-360" id="purchaseMonthField350"><span id="purchaseMonthLabel350">조회월</span><input id="purchaseMonthFilter" type="month"/></label><label class="all-fixed-month-field-360" id="purchasePurposeEndField350"><span class="month-field-label-line-361"><span>종료월</span><small class="month-field-inline-hint-361">선택 시 기간 적용</small></span><input id="purchasePurposeEndMonth350" type="month"/></label><button class="all-fixed-filter-button-360" data-fixed-filter360="types" id="allTypeFilterButton360" type="button"><span class="all-fixed-filter-label-360">거래유형 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="paymentKind" id="allPaymentFilterButton360" type="button"><span class="all-fixed-filter-label-360">결제구분 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="cardId" id="allCardFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 카드</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="accountId" id="allAccountFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 통장</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="majorId" id="allMajorFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 대분류</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="subId" id="allSubFilterButton360" type="button"><span class="all-fixed-filter-label-360">모든 소분류</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="purposeFund" id="allPurposeFilterButton360" type="button"><span class="all-fixed-filter-label-360">예산구분 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><button class="all-fixed-filter-button-360" data-fixed-filter360="receiptStatus" id="allReceiptFilterButton360" type="button"><span class="all-fixed-filter-label-360">수령상태 전체</span><span class="all-fixed-filter-arrow-360">▼</span></button><input class="all-fixed-search-360" id="purchaseSearch" placeholder="소득·사용처·항목 검색"/></div><div aria-hidden="true" class="legacy-all-filters-360">
 <select id="purchaseFlowTypeFilter310"><option value="">소득+입금+출금+지출 전체</option><option value="income">소득만</option><option value="deposit">통장 입금만</option><option value="withdrawal">통장 출금만</option><option value="expense">지출만</option></select>
 <select id="purchaseSourceFilter275"><option value="">카드+통장 전체</option><option value="card">카드만</option><option value="account">통장만</option><option value="purpose">목적자금만</option></select><select class="purpose-only-filter-350" hidden="" id="purchasePurposeFundFilter350"><option value="">모든 목적자금</option></select><select class="purpose-only-filter-350" hidden="" id="purchasePurposeReceiptFilter350"><option value="">수령상태 전체</option><option value="unreceived">미수령 있음</option><option value="received">수령완료</option></select>
 <select id="purchaseCardFilter"><option value="">모든 카드</option></select>
@@ -7622,7 +7622,7 @@ html,body,button,[role="button"],tr[role="button"]{
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:smart:2:즐겨찾기 관리" data-collapse-title320="즐겨찾기 관리"><div class="section-head"><div><h2>즐겨찾기 관리</h2><div class="subtle" style="margin-top:5px">자주 입력하는 거래를 저장해 한 번에 불러옵니다.</div></div><button class="small-btn primary" onclick="openFavoriteModal()" type="button">+ 즐겨찾기 만들기</button><button aria-expanded="false" aria-label="즐겨찾기 관리 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="grid-3" id="favoriteManager"></div></div></div>
 </section>
 <section class="panel" id="settings"><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:settings:0:백업·설정·기능 안내" data-collapse-title320="백업·설정·기능 안내"><div class="section-head"><h2>백업·설정·기능 안내</h2><button aria-expanded="false" aria-label="백업·설정·기능 안내 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="settings-grid">
-<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 41.1차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 41.1차</span></div></div>
+<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 41.2차</b>가 적용되어 있습니다. 제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.</p><span class="badge fixed">현재 버전 41.2차</span></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:1:☁️ Firebase 자동 동기화" data-collapse-title320="☁️ Firebase 자동 동기화" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>☁️ Firebase 자동 동기화</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" onclick="forceCloudUpload()" type="button">현재 자료를 클라우드에 저장</button></div><button aria-expanded="false" aria-label="☁️ Firebase 자동 동기화 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_1"><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:2:선택 백업" data-collapse-title320="선택 백업" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>선택 백업</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="exportBackup()" type="button">백업 파일 저장</button></div><button aria-expanded="false" aria-label="선택 백업 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_2"><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions settings-body-controls-315"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select></div><div class="backup-proof" id="lastBackupProof"></div></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:3:백업 불러오기" data-collapse-title320="백업 불러오기"><div class="settings-title-row-315"><h3>백업 불러오기</h3><button aria-expanded="false" aria-label="백업 불러오기 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input accept=".json" id="backupInput" onchange="importBackup(event)" type="file"/></div></div>
@@ -7758,11 +7758,11 @@ function storeSyncBackup411(source,value){
   if(!value||typeof value!=='object')return false;
   try{
     localStorage.setItem(SYNC_BACKUP_KEY_411,JSON.stringify({
-      backupVersion:'41.1',createdAt:new Date().toISOString(),source,state:value
+      backupVersion:'41.2',createdAt:new Date().toISOString(),source,state:value
     }));
     return true;
   }catch(error){
-    console.warn('41.1차 동기화 안전백업 저장 실패',error);
+    console.warn('41.2차 동기화 안전백업 저장 실패',error);
     return false;
   }
 }
@@ -7975,6 +7975,124 @@ async function forceCloudUpload(){
     alert('현재 자료를 클라우드에 저장했습니다.');
   }catch(error){alert(`저장 실패: ${error.message}`)}
 }
+
+
+// ===== 41.2차: 시작 선택팝업 제거 + 최신자료 안전 동기화 =====
+let cloudConflictHeld412=false;
+let cloudHoldBackupHash412='';
+function cloudStateHash412(value){
+  try{return stableSerialize411(value)}catch(error){return ''}
+}
+function backupCloudOnce412(cloudState,source='최신 여부 불확실한 클라우드 자료'){
+  const hash=cloudStateHash412(cloudState);
+  if(hash&&hash===cloudHoldBackupHash412)return;
+  if(storeSyncBackup411(source,cloudState))cloudHoldBackupHash412=hash;
+}
+resolveCloudDifference411=async function(ref,user,data,{initial=false,manualRefresh=false}={}){
+  const cloudState=normalizeState(data.state);
+  const localState=JSON.parse(JSON.stringify(state));
+  const localStamp=localUpdatedAt411();
+  const cloudStamp=Math.max(cloudTimestampMillis411(data.clientUpdatedAt411),cloudTimestampMillis411(data.updatedAt));
+  if(statesEqual411(localState,cloudState)){
+    const stamp=Math.max(localStamp,cloudStamp)||Date.now();
+    setLocalUpdatedAt411(stamp);
+    cloudConflictHeld412=false;
+    if(!data.clientUpdatedAt411)await uploadLocalState411(ref,user,stamp);
+    return 'same';
+  }
+  const localWeight=stateWeight411(localState);
+  const cloudWeight=stateWeight411(cloudState);
+  if(!localWeight&&cloudWeight){
+    storeSyncBackup411('클라우드 반영 전 빈 이 기기 자료',localState);
+    applyCloudState411(data);
+    cloudConflictHeld412=false;
+    return 'cloud';
+  }
+  if(localWeight&&!cloudWeight){
+    storeSyncBackup411('덮어쓰기 전 빈 클라우드 자료',cloudState);
+    await uploadLocalState411(ref,user,localStamp||Date.now());
+    cloudConflictHeld412=false;
+    return 'local';
+  }
+  if(localStamp&&cloudStamp&&localStamp!==cloudStamp){
+    if(cloudStamp>localStamp){
+      storeSyncBackup411('클라우드 반영 전 이 기기 자료',localState);
+      applyCloudState411(data);
+      cloudConflictHeld412=false;
+      return 'cloud';
+    }
+    storeSyncBackup411('덮어쓰기 전 클라우드 자료',cloudState);
+    await uploadLocalState411(ref,user,localStamp);
+    cloudConflictHeld412=false;
+    return 'local';
+  }
+  // 기존 자료처럼 수정시각이 없거나 같은 시각인데 내용이 다르면,
+  // 내용을 볼 수 없는 선택창을 띄우지 않고 현재 화면의 이 기기 자료를 유지합니다.
+  backupCloudOnce412(cloudState,manualRefresh?'수동 최신 불러오기 중 보관한 클라우드 자료':'최신 여부 불확실한 클라우드 자료');
+  cloudConflictHeld412=true;
+  return 'local-hold';
+};
+processRemoteSnapshot411=async function(ref,user,data){
+  if(!data?.state||data.clientId===CLIENT_ID)return;
+  try{
+    if(cloudConflictHeld412){
+      backupCloudOnce412(normalizeState(data.state));
+      setCloudStatus('','이 기기 자료 사용 중','클라우드 자료는 안전백업했습니다. ↻ 버튼으로 다시 확인하거나 최신자료 저장을 눌러 확정하세요.');
+      return;
+    }
+    const result=await resolveCloudDifference411(ref,user,data);
+    if(result==='local-hold'){
+      cloudInitialized=false;
+      setCloudStatus('','이 기기 자료 사용 중','내용을 먼저 확인할 수 있도록 자동 덮어쓰기를 멈췄습니다.');
+      return;
+    }
+    cloudInitialized=true;
+    setCloudStatus('online',result==='cloud'?'다른 기기의 변경사항 반영됨':'이 기기의 최신 자료 유지됨',user.email||'');
+  }catch(error){
+    console.error(error);
+    setCloudStatus('','동기화 비교 오류',error.message||'자료 비교 중 오류가 발생했습니다.');
+  }
+};
+handleAuthState=async function(user){
+  currentFirebaseUser=user||null;
+  updateAuthUI();
+  if(cloudUnsubscribe){cloudUnsubscribe();cloudUnsubscribe=null}
+  if(!user){
+    cloudInitialized=false;
+    cloudConflictHeld412=false;
+    setCloudStatus('','이 기기에만 저장 중','로그인하면 PC·휴대폰에서 같은 내용을 사용할 수 있어요.');
+    return;
+  }
+  setCloudStatus('syncing','클라우드 자료 확인 중',user.email||'');
+  const ref=cloudDocRef();
+  try{
+    const snap=await ref.get();
+    let result='local';
+    if(snap.exists&&snap.data()?.state){
+      result=await resolveCloudDifference411(ref,user,snap.data(),{initial:true});
+    }else{
+      await uploadLocalState411(ref,user,localUpdatedAt411()||Date.now());
+    }
+    if(result==='local-hold'){
+      cloudInitialized=false;
+      setCloudStatus('','이 기기 자료 사용 중','클라우드 자료는 안전백업했습니다. 내용을 확인한 뒤 최신자료 저장을 누르면 됩니다.');
+    }else{
+      cloudInitialized=true;
+      setCloudStatus('online','자동 동기화 중',user.email||'');
+    }
+    cloudUnsubscribe=ref.onSnapshot(doc=>{
+      if(!doc.exists)return;
+      processRemoteSnapshot411(ref,user,doc.data());
+    },error=>{
+      console.error(error);
+      setCloudStatus('','동기화 오류',error.message);
+    });
+  }catch(error){
+    console.error(error);
+    cloudApplying=false;
+    setCloudStatus('','클라우드 연결 또는 화면 반영 실패',error.message);
+  }
+};
 
 const OLD_KEY='mapa-household-book-v1';
 
@@ -8193,7 +8311,7 @@ function deleteSubCategory(majorId,subId){const major=categoryById(majorId),sub=
 
 function download(name,content,type='application/json'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return '\ufeff'+rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n')}
-function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="41.1";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"41.1",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_41.1차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
+function exportBackup(){const scope=document.getElementById('backupScope')?.value||'all';let data;if(scope==='all'){data=JSON.parse(JSON.stringify(state));data.backupVersion="41.2";data.backupScope='all';data.backupCreatedAt=new Date().toISOString();data.backupCounts={cards:(state.cards||[]).length,accounts:(state.accounts||[]).length,purchases:(state.purchases||[]).length,cashflows:(state.cashflows||[]).length,categories:(state.categories||[]).length,recurringItems:(state.recurringItems||[]).length,recurringSkips:(state.recurringSkips||[]).length,debts:(state.debts||[]).length,purposeFunds:(state.purposeFunds||[]).length,loans:(state.loans||[]).length,monthlyBudgets:Object.keys(state.monthlyBudgets||{}).length}}else{data={backupVersion:"41.2",backupScope:scope,backupCreatedAt:new Date().toISOString(),categories:state.categories||[]};if(scope==='transactions'){data.purchases=state.purchases||[];data.cashflows=state.cashflows||[];data.debts=state.debts||[]}if(scope==='cards')data.cards=state.cards||[];if(scope==='accounts')data.accounts=state.accounts||[];if(scope==='recurring'){data.recurringItems=state.recurringItems||[];data.recurringSkips=state.recurringSkips||[]}if(scope==='budget'){data.monthlyBudgets=state.monthlyBudgets||{};data.purposeFunds=state.purposeFunds||[]}}download(`가계부_41.2차_${scope}_백업_${today()}.json`,JSON.stringify(data,null,2));if(scope==='all')alert(`전체 백업 완료\n카드 ${data.backupCounts.cards}개 · 통장 ${data.backupCounts.accounts}개 · 카드사용 ${data.backupCounts.purchases}건 · 통장내역 ${data.backupCounts.cashflows}건 · 고정항목 ${data.backupCounts.recurringItems}건 · 받을/줄 돈 ${data.backupCounts.debts}건 · 목적자금 ${data.backupCounts.purposeFunds}개`)}
 function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=normalizeState(JSON.parse(r.result));saveState();alert('백업을 불러왔습니다.')}catch(err){console.error(err);alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f,'utf-8')}
 function exportPurchaseCSV(){const rows=[['사용일','카드','카드종류','예산구분','사용처','대분류','소분류','총 구매금액','할부개월','청구월별 금액','메모']];state.purchases.forEach(p=>rows.push([p.date,cardById(p.cardId)?.name||'',cardById(p.cardId)?.cardType==='debit'?'체크카드':'신용카드',(p.budgetSource&&p.budgetSource!=='personal')?(purposeFundById(p.budgetSource)?.name||'목적자금'):'내 생활비',p.merchant,p.majorCategory,p.subCategory,p.totalAmount,p.installmentMonths,p.schedules.map(s=>`${s.billingMonth}:${s.amount}:${s.paid?'납부완료':'예정'}`).join(' / '),p.memo||'']));download(`마파가계부_카드사용_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
 function exportLedgerCSV(){const rows=[['날짜','구분','항목','대분류','소분류','통장','금액','메모','자동반영']];state.cashflows.forEach(f=>rows.push([f.date,f.type,f.description,f.majorCategory||'',f.subCategory||'',accountById(f.accountId)?.name||'',f.amount,f.memo||'',f.recurringItemId?'매월 자동':'']));allSchedules().filter(s=>s.paid).forEach(s=>rows.push([s.paidDate,'카드값 출금',`${s.card?.name||''} ${s.purchase.merchant}`,'카드값','',accountById(s.paidAccountId)?.name||'',-s.amount,'']));download(`마파가계부_통장내역_${today()}.csv`,csv(rows),'text/csv;charset=utf-8')}
@@ -8295,7 +8413,7 @@ TAB_INFO.loans=['대출·저축','마이너스통장과 일반대출, 고정저�
 
 
 // ===== 27차 실제 안정화·검증 레이어 =====
-const APP_VERSION_27='41.1';
+const APP_VERSION_27='41.2';
 const BACKUP_META_KEY_27='mapa-household-book-last-backup-v27-4';
 
 function expenseCategoryForLoan27(){
@@ -8455,9 +8573,9 @@ function buildBackup27(scope='all'){
   if(scope==='all')payload=full;else{payload={categories:full.categories};if(scope==='transactions')Object.assign(payload,{purchases:full.purchases,cashflows:full.cashflows,debts:full.debts});if(scope==='cards')payload.cards=full.cards;if(scope==='accounts')payload.accounts=full.accounts;if(scope==='recurring')Object.assign(payload,{recurringItems:full.recurringItems,recurringSkips:full.recurringSkips,loans:full.loans});if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds})}
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 }
-exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_41.1차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
+exportBackup=function(){const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}download(`가계부_41.2차_${scope}_백업_${today()}.json`,text);localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27();alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts.accounts||0}개 · 카드 ${data.counts.cards||0}개 · 카드사용 ${data.counts.purchases||0}건 · 통장내역 ${data.counts.cashflows||0}건 · 고정항목 ${data.counts.recurringItems||0}건 · 대출 ${data.counts.loans||0}개`)};
 function renderBackupProof27(){const el=document.getElementById('lastBackupProof');if(!el)return;try{const m=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');el.textContent=m?`최근 백업: ${new Date(m.createdAt).toLocaleString('ko-KR')} · ${m.scope==='all'?'전체':'선택'} · 검증코드 ${m.checksum} · ${(m.size/1024).toFixed(1)}KB`:'이 기기에서 저장한 백업 기록이 아직 없습니다.'}catch{el.textContent='백업 기록을 읽을 수 없습니다.'}}
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_41.1차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed;if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_41.2차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));const normalized=normalizeState(payload),expected=wrapped&&parsed.backupScope==='all'?parsed.counts:null,actual=stateCounts27(normalized);if(expected){for(const k of Object.keys(expected)){if((expected[k]||0)!==(actual[k]||0))throw new Error(`${k} 개수 검증 실패 (${expected[k]} → ${actual[k]})`)}}state=normalized;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();alert(`백업 복원 완료\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 function integrityIssues27(st){const issues=[],checkIds=(name,arr)=>{const seen=new Set();(arr||[]).forEach(x=>{if(!x.id)issues.push(`${name}: ID 없음`);else if(seen.has(x.id))issues.push(`${name}: 중복 ID ${x.id}`);seen.add(x.id)})};[['통장',st.accounts],['카드',st.cards],['카드사용',st.purchases],['통장내역',st.cashflows],['고정항목',st.recurringItems],['대출',st.loans],['받을·줄 돈',st.debts],['목적자금',st.purposeFunds]].forEach(x=>checkIds(...x));
   (st.cards||[]).forEach(c=>{if(c.accountId&&!st.accounts.some(a=>a.id===c.accountId))issues.push(`카드 ${c.name}: 출금통장 연결 오류`)});(st.purchases||[]).forEach(p=>{if(!st.cards.some(c=>c.id===p.cardId))issues.push(`카드사용 ${p.merchant}: 카드 연결 오류`);if(!Number.isFinite(Number(p.totalAmount)))issues.push(`카드사용 ${p.merchant}: 금액 오류`)});(st.cashflows||[]).forEach(f=>{if(f.accountId&&!st.accounts.some(a=>a.id===f.accountId))issues.push(`통장내역 ${f.description}: 출금·입금통장 오류`);if(f.type==='transfer'&&f.targetAccountId&&!st.accounts.some(a=>a.id===f.targetAccountId))issues.push(`이체 ${f.description}: 대상통장 오류`);if(!Number.isFinite(Number(f.amount)))issues.push(`통장내역 ${f.description}: 금액 오류`)});(st.recurringItems||[]).forEach(r=>{if(r.type==='savings'){if(!st.accounts.some(a=>a.id===r.accountId)||!st.accounts.some(a=>a.id===r.targetAccountId))issues.push(`고정저축 ${r.description}: 통장 연결 오류`);if(r.accountId===r.targetAccountId)issues.push(`고정저축 ${r.description}: 출금·입금통장이 같음`)}else if(r.paymentMethod==='card'&&!st.cards.some(c=>c.id===r.cardId))issues.push(`고정항목 ${r.description}: 카드 연결 오류`);else if(r.accountId&&!st.accounts.some(a=>a.id===r.accountId))issues.push(`고정항목 ${r.description}: 통장 연결 오류`)});(st.loans||[]).forEach(l=>{if(l.interestAccountId&&!st.accounts.some(a=>a.id===l.interestAccountId))issues.push(`대출 ${l.name}: 이자 출금통장 연결 오류`);if(l.recurringItemId&&!st.recurringItems.some(r=>r.id===l.recurringItemId))issues.push(`대출 ${l.name}: 이자 고정지출 연결 오류`)});return issues;
@@ -8530,7 +8648,7 @@ buildBackup27=function(scope='all'){
   if(scope==='budget')Object.assign(payload,{monthlyBudgets:full.monthlyBudgets,purposeFunds:full.purposeFunds});
   const canonical=stableStringify27(payload);return {backupFormat:'mapa-household-book',backupVersion:APP_VERSION_27,backupScope:scope,backupCreatedAt:new Date().toISOString(),includedKeys:Object.keys(payload),counts:stateCounts27(payload),checksum:checksum27(canonical),state:payload};
 };
-importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_41.1차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
+importBackup=function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const parsed=JSON.parse(r.result),wrapped=parsed?.backupFormat==='mapa-household-book',payload=wrapped?parsed.state:parsed,scope=wrapped?parsed.backupScope:(parsed.backupScope||'all');if(!payload||typeof payload!=='object')throw new Error('백업 데이터가 비어 있습니다.');if(wrapped&&parsed.checksum!==checksum27(stableStringify27(payload)))throw new Error('검증코드가 맞지 않습니다. 파일이 손상되었을 수 있습니다.');const before=buildBackup27('all');download(`가계부_41.2차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));let candidate;if(scope==='all'){candidate=normalizeState(payload)}else{const merged=JSON.parse(JSON.stringify(state));Object.keys(payload).forEach(k=>merged[k]=payload[k]);candidate=normalizeState(merged)}const included=wrapped?(parsed.includedKeys||Object.keys(payload)):Object.keys(payload);for(const k of included){if(Array.isArray(payload[k])&&payload[k].length!==(candidate[k]||[]).length)throw new Error(`${k} 개수 검증 실패 (${payload[k].length} → ${(candidate[k]||[]).length})`);if(k==='monthlyBudgets'&&Object.keys(payload[k]||{}).length!==Object.keys(candidate[k]||{}).length)throw new Error('monthlyBudgets 개수 검증 실패')}state=candidate;sanitizeState27();localStorage.setItem(STORE_KEY,JSON.stringify(state));renderAll();scheduleCloudSave();const actual=stateCounts27(state);alert(`백업 복원 완료 (${scope==='all'?'전체 교체':'선택 영역 병합'})\n복원 전 현재 데이터는 자동 백업 파일로 함께 저장했습니다.\n통장 ${actual.accounts}개 · 카드 ${actual.cards}개 · 거래 ${actual.purchases+actual.cashflows}건`)}catch(err){console.error(err);alert('백업을 불러오지 못했습니다: '+err.message)}finally{e.target.value=''}};r.readAsText(f,'utf-8')};
 
 const runDataDiagnostics27Base=runDataDiagnostics;
 runDataDiagnostics=async function(){await runDataDiagnostics27Base();const el=document.getElementById('diagnosticResult'),last=JSON.parse(localStorage.getItem(BACKUP_META_KEY_27)||'null');if(el&&last)el.innerHTML=el.innerHTML.replace('최근 전체백업:',`최근 백업(${last.scope==='all'?'전체':'선택'}):`)};
@@ -25368,7 +25486,7 @@ buildBackup27=function(scope='all'){
     data.state.investmentExpenses=JSON.parse(JSON.stringify(state.investmentExpenses||[]));
     data.includedKeys=Object.keys(data.state);data.counts=stateCounts27(data.state);data.checksum=checksum27(stableStringify27(data.state));
   }
-  data.backupVersion="41.1";return data;
+  data.backupVersion="41.2";return data;
 };
 
 const renderAllBefore388=renderAll;
@@ -27870,10 +27988,10 @@ function forceVersion399(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 41.1차';
+    if(badge)badge.textContent='현재 버전 41.2차';
   }
 }
 
@@ -28500,9 +28618,9 @@ window.addEventListener('load',()=>{
 let investmentProfitFilterValue400='';
 
 function forceVersion400(){
-  document.title='가계부 41.1차';
+  document.title='가계부 41.2차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='41.1차');
+    .forEach(element=>element.textContent='41.2차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -28511,10 +28629,10 @@ function forceVersion400(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 41.1차';
+    if(badge)badge.textContent='현재 버전 41.2차';
   }
 }
 
@@ -28887,9 +29005,9 @@ window.addEventListener('load',()=>{
 // ===== 40.1차: 월말 예산 이월 선택 =====
 
 function forceVersion401(){
-  document.title='가계부 41.1차';
+  document.title='가계부 41.2차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='41.1차');
+    .forEach(element=>element.textContent='41.2차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -28898,10 +29016,10 @@ function forceVersion401(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 41.1차';
+    if(badge)badge.textContent='현재 버전 41.2차';
   }
 }
 
@@ -29218,7 +29336,7 @@ buildBackup27=function(scope='all'){
     }
   }
 
-  data.backupVersion="41.1";
+  data.backupVersion="41.2";
   return data;
 };
 
@@ -29284,9 +29402,9 @@ document.addEventListener('visibilitychange',()=>{
 // ===== 40.2차: 월별 예산 내역 + 원하는 월로 이월 =====
 
 function forceVersion402(){
-  document.title='가계부 41.1차';
+  document.title='가계부 41.2차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='41.1차');
+    .forEach(element=>element.textContent='41.2차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -29295,10 +29413,10 @@ function forceVersion402(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 41.1차';
+    if(badge)badge.textContent='현재 버전 41.2차';
   }
 }
 
@@ -30022,7 +30140,7 @@ renderBudgetRolloverReminder401=function(){
 const buildBackupBefore402=buildBackup27;
 buildBackup27=function(scope='all'){
   const data=buildBackupBefore402(scope);
-  data.backupVersion="41.1";
+  data.backupVersion="41.2";
   return data;
 };
 
@@ -30069,9 +30187,9 @@ window.addEventListener('load',()=>{
 // ===== 40.3차 최종 수정 =====
 
 function forceVersion403(){
-  document.title='가계부 41.1차';
+  document.title='가계부 41.2차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='41.1차');
+    .forEach(element=>element.textContent='41.2차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -30082,10 +30200,10 @@ function forceVersion403(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 41.1차';
+    if(badge)badge.textContent='현재 버전 41.2차';
   }
 }
 
@@ -31158,7 +31276,7 @@ renderBudgetHistory402=function(){
 const buildBackupBefore403=buildBackup27;
 buildBackup27=function(scope='all'){
   const data=buildBackupBefore403(scope);
-  data.backupVersion="41.1";
+  data.backupVersion="41.2";
   return data;
 };
 
@@ -31211,9 +31329,9 @@ setTimeout(forceVersion403,500);
 // ===== 40.4차: 투자지출 독립 표시 + 월별예산 기간 조회 =====
 
 function forceVersion404(){
-  document.title='가계부 41.1차';
+  document.title='가계부 41.2차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='41.1차');
+    .forEach(element=>element.textContent='41.2차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -31224,10 +31342,10 @@ function forceVersion404(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 41.1차';
+    if(badge)badge.textContent='현재 버전 41.2차';
   }
 }
 
@@ -31798,7 +31916,7 @@ renderAll=function(){
 const buildBackupBefore404=buildBackup27;
 buildBackup27=function(scope='all'){
   const data=buildBackupBefore404(scope);
-  data.backupVersion="41.1";
+  data.backupVersion="41.2";
   return data;
 };
 
@@ -31828,9 +31946,9 @@ setTimeout(()=>{
 // ===== 40.5차: 직접 지출의 투자수익 사용도 투자지출 내역에 표시 =====
 
 function forceVersion405(){
-  document.title='가계부 41.1차';
+  document.title='가계부 41.2차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='41.1차');
+    .forEach(element=>element.textContent='41.2차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -31841,10 +31959,10 @@ function forceVersion405(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 41.1차';
+    if(badge)badge.textContent='현재 버전 41.2차';
   }
 }
 
@@ -32165,7 +32283,7 @@ renderAll=function(){
 const buildBackupBefore405=buildBackup27;
 buildBackup27=function(scope='all'){
   const data=buildBackupBefore405(scope);
-  data.backupVersion="41.1";
+  data.backupVersion="41.2";
   return data;
 };
 
@@ -32193,9 +32311,9 @@ setTimeout(()=>{
 // ===== 40.6차: 투자수익으로 결제할 때 처리방식 선택 =====
 
 function forceVersion406(){
-  document.title='가계부 41.1차';
+  document.title='가계부 41.2차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='41.1차');
+    .forEach(element=>element.textContent='41.2차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -32206,10 +32324,10 @@ function forceVersion406(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 41.1차';
+    if(badge)badge.textContent='현재 버전 41.2차';
   }
 }
 
@@ -32959,7 +33077,7 @@ function treatmentBadgeForExpense406(row){
 const buildBackupBefore406=buildBackup27;
 buildBackup27=function(scope='all'){
   const data=buildBackupBefore406(scope);
-  data.backupVersion="41.1";
+  data.backupVersion="41.2";
   return data;
 };
 
@@ -32998,10 +33116,10 @@ setTimeout(()=>{
 // ===== 40.7차: 투자 처리기능 유지 + 시작화면 반드시 해제 =====
 
 function forceVersion407(){
-  document.title='가계부 41.1차';
+  document.title='가계부 41.2차';
 
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='41.1차');
+    .forEach(element=>element.textContent='41.2차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -33012,12 +33130,12 @@ function forceVersion407(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '투자지출 처리방식 선택 기능을 유지하면서 시작화면 멈춤을 수정했습니다.';
     }
 
     if(badge){
-      badge.textContent='현재 버전 41.1차';
+      badge.textContent='현재 버전 41.2차';
     }
   }
 }
@@ -33174,10 +33292,10 @@ setTimeout(forceVersion407,2000);
 // ===== 40.8차: 월별 예산 함수 상호 재귀 차단 =====
 
 function forceVersion408(){
-  document.title='가계부 41.1차';
+  document.title='가계부 41.2차';
 
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='41.1차');
+    .forEach(element=>element.textContent='41.2차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -33188,12 +33306,12 @@ function forceVersion408(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '투자지출 처리방식은 유지하고 클라우드 불러오기 재귀호출 오류를 수정했습니다.';
     }
 
     if(badge){
-      badge.textContent='현재 버전 41.1차';
+      badge.textContent='현재 버전 41.2차';
     }
   }
 }
@@ -33336,7 +33454,7 @@ setCloudStatus=function(kind,title,detail){
 const buildBackupBefore408=buildBackup27;
 buildBackup27=function(scope='all'){
   const data=buildBackupBefore408(scope);
-  data.backupVersion="41.1";
+  data.backupVersion="41.2";
   return data;
 };
 
@@ -33385,10 +33503,10 @@ setTimeout(forceVersion408,2200);
 // ===== 41차: 원가 추가지출 / 개인소비 지출 구분조회 =====
 
 function forceVersion409(){
-  document.title='가계부 41.1차';
+  document.title='가계부 41.2차';
 
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='41.1차');
+    .forEach(element=>element.textContent='41.2차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -33399,12 +33517,12 @@ function forceVersion409(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 41.1차</b>가 적용되어 있습니다. '+
+        '<b>가계부 41.2차</b>가 적용되어 있습니다. '+
         '투자 관련 지출을 원가 추가지출과 개인소비 지출로 구분해 조회할 수 있습니다.';
     }
 
     if(badge){
-      badge.textContent='현재 버전 41.1차';
+      badge.textContent='현재 버전 41.2차';
     }
   }
 }
@@ -33716,7 +33834,7 @@ const buildBackupBefore409=buildBackup27;
 
 buildBackup27=function(scope='all'){
   const data=buildBackupBefore409(scope);
-  data.backupVersion='41.1';
+  data.backupVersion='41.2';
   return data;
 };
 
@@ -33778,24 +33896,24 @@ investmentRealizedProfit388=function(item,excludeFlowId=''){
 };
 
 function forceVersion410(){
-  document.title='가계부 41.1차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='41.1차');
+  document.title='가계부 41.2차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='41.2차');
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
   if(versionBox){
     const paragraph=versionBox.querySelector('p');
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
-      paragraph.innerHTML='<b>가계부 41.1차</b>가 적용되어 있습니다. 투자원가의 확정손익 반영과 고정항목 실제 처리일 반영을 수정했습니다.';
+      paragraph.innerHTML='<b>가계부 41.2차</b>가 적용되어 있습니다. 투자원가의 확정손익 반영과 고정항목 실제 처리일 반영을 수정했습니다.';
     }
-    if(badge)badge.textContent='현재 버전 41.1차';
+    if(badge)badge.textContent='현재 버전 41.2차';
   }
 }
 
 const buildBackupBefore410=buildBackup27;
 buildBackup27=function(scope='all'){
   const data=buildBackupBefore410(scope);
-  data.backupVersion='41.1';
+  data.backupVersion='41.2';
   return data;
 };
 
@@ -33837,17 +33955,17 @@ setTimeout(()=>{
 .cloud-sync-safety-411 .actions{display:flex;gap:6px;flex-wrap:wrap}
 </style>
 <script id="v411-recurring-history-all-status-cloud-safety-script">
-// ===== 41.1차: 고정항목 과거상태 보존 + All 확인상태 + 최신자료 보호 =====
+// ===== 41.2차: 고정항목 과거상태 보존 + All 확인상태 + 최신자료 보호 =====
 
 function forceVersion411(){
-  document.title='가계부 41.1차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='41.1차');
+  document.title='가계부 41.2차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='41.2차');
   const versionBox=[...document.querySelectorAll('.settings-box')].find(box=>box.textContent.includes('현재 앱 버전'));
   if(versionBox){
     const paragraph=versionBox.querySelector('p');
     const badge=versionBox.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 41.1차</b>가 적용되어 있습니다. 고정항목 삭제 시 적용 시작월부터 이번 달까지의 상태를 보존하고, All 확인상태와 최신자료 보호 동기화를 추가했습니다.';
-    if(badge)badge.textContent='현재 버전 41.1차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 41.2차</b>가 적용되어 있습니다. 고정항목 삭제 시 적용 시작월부터 이번 달까지의 상태를 보존하고, All 확인상태와 최신자료 보호 동기화를 추가했습니다.';
+    if(badge)badge.textContent='현재 버전 41.2차';
   }
 }
 
@@ -34003,12 +34121,12 @@ function installSyncSafetyBox411(){
     grid.appendChild(box);
   }
   const backup=latestSyncBackup411();
-  box.innerHTML=`<h3>최신자료 보호·동기화 안전백업</h3><p>이 기기와 클라우드의 수정시각을 비교하며, 어느 쪽이 최신인지 확실하지 않으면 자동으로 덮어쓰지 않고 선택창을 표시합니다.</p><div class="sync-backup-meta-411">${backup?`최근 안전백업: ${esc(new Date(backup.createdAt).toLocaleString('ko-KR'))} · ${esc(backup.source||'자료')}`:'저장된 동기화 안전백업이 없습니다.'}</div><div class="actions"><button type="button" class="small-btn" onclick="downloadSyncBackup411()" ${backup?'':'disabled'}>안전백업 다운로드</button><button type="button" class="small-btn" onclick="restoreSyncBackup411()" ${backup?'':'disabled'}>최근 안전백업 복원</button><button type="button" class="small-btn primary" onclick="recheckCloudSync411()">클라우드 자료 다시 비교</button></div>`;
+  box.innerHTML=`<h3>최신자료 보호·동기화 안전백업</h3><p>이 기기와 클라우드의 수정시각을 비교하며, 수정시각이 명확하면 최신 자료를 적용하고, 불확실하면 현재 이 기기 자료를 유지한 채 클라우드 자료를 안전백업합니다.</p><div class="sync-backup-meta-411">${backup?`최근 안전백업: ${esc(new Date(backup.createdAt).toLocaleString('ko-KR'))} · ${esc(backup.source||'자료')}`:'저장된 동기화 안전백업이 없습니다.'}</div><div class="actions"><button type="button" class="small-btn" onclick="downloadSyncBackup411()" ${backup?'':'disabled'}>안전백업 다운로드</button><button type="button" class="small-btn" onclick="restoreSyncBackup411()" ${backup?'':'disabled'}>최근 안전백업 복원</button><button type="button" class="small-btn primary" onclick="recheckCloudSync411()">클라우드 자료 다시 비교</button></div>`;
 }
 function downloadSyncBackup411(){
   const backup=latestSyncBackup411();
   if(!backup){alert('저장된 동기화 안전백업이 없습니다.');return}
-  download(`가계부_41.1차_동기화안전백업_${today()}.json`,JSON.stringify(backup,null,2));
+  download(`가계부_41.2차_동기화안전백업_${today()}.json`,JSON.stringify(backup,null,2));
 }
 function restoreSyncBackup411(){
   const backup=latestSyncBackup411();
@@ -34036,7 +34154,7 @@ saveState=function(){
 const buildBackupBefore411=buildBackup27;
 buildBackup27=function(scope='all'){
   const data=buildBackupBefore411(scope);
-  data.backupVersion='41.1';
+  data.backupVersion='41.2';
   return data;
 };
 
@@ -34050,11 +34168,345 @@ renderAll=function(){
 
 forceVersion411();
 installSyncSafetyBox411();
-try{renderPurchases()}catch(error){console.error('41.1차 All 확인상태 렌더링 오류',error)}
+try{renderPurchases()}catch(error){console.error('41.2차 All 확인상태 렌더링 오류',error)}
 document.addEventListener('DOMContentLoaded',()=>{forceVersion411();installSyncSafetyBox411();setTimeout(()=>{forceVersion411();installSyncSafetyBox411();try{renderPurchases()}catch(error){}},400)});
 window.addEventListener('load',()=>{forceVersion411();installSyncSafetyBox411();setTimeout(()=>{forceVersion411();try{renderPurchases()}catch(error){}},250)});
 setTimeout(()=>{forceVersion411();installSyncSafetyBox411()},1400);
 setTimeout(forceVersion411,2600);
+</script>
+
+
+<style id="v412-ui-style">
+/* ===== 41.2차: 상단 저장·새로고침, All 압축배열, 상세내역 ===== */
+.auth-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.sync-icon-btn-412{font-size:20px!important;line-height:1!important;width:36px;height:34px;padding:0!important;display:inline-flex;align-items:center;justify-content:center}
+.sync-icon-btn-412.loading-412{animation:spin412 .8s linear infinite}
+.save-latest-btn-412{white-space:nowrap;font-weight:800}
+@keyframes spin412{to{transform:rotate(360deg)}}
+.summary-item.detail-clickable-412,.budget-balance-chip.detail-clickable-412{cursor:pointer}
+.summary-item.detail-clickable-412:hover,.budget-balance-chip.detail-clickable-412:hover{background:var(--primary-soft)}
+.budget-usage-table-412 .budget-source-badge-278{white-space:nowrap}
+.budget-usage-impact-412{font-size:10.5px;color:var(--muted);margin-top:3px}
+#purchaseTable .all-source-main-380{display:block!important}
+#purchaseTable .all-source-meta-380{display:block!important;margin-top:3px!important;text-align:left!important;font-size:10.5px!important;line-height:1.3!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;color:var(--muted)!important}
+#purchaseTable .table-wrap td:nth-child(1),#purchaseTable .table-wrap th:nth-child(1){min-width:96px!important;width:96px!important}
+#purchaseTable .table-wrap td:nth-child(2),#purchaseTable .table-wrap th:nth-child(2){min-width:104px!important;width:104px!important}
+#purchaseTable .table-wrap td:nth-child(3),#purchaseTable .table-wrap th:nth-child(3){min-width:175px!important;width:175px!important}
+#purchaseTable .table-wrap td:nth-child(4),#purchaseTable .table-wrap th:nth-child(4){min-width:205px!important}
+#purchaseTable .table-wrap td:nth-child(5),#purchaseTable .table-wrap th:nth-child(5){min-width:112px!important;width:112px!important;text-align:right!important}
+#purchaseTable .table-wrap td:nth-child(6),#purchaseTable .table-wrap th:nth-child(6){min-width:180px!important;width:auto!important;text-align:left!important}
+#purchaseTable .table-wrap td:nth-child(7),#purchaseTable .table-wrap th:nth-child(7){min-width:92px!important;width:92px!important}
+#purchaseTable .table-wrap td:nth-child(8),#purchaseTable .table-wrap th:nth-child(8){min-width:180px!important}
+@media(max-width:720px){
+  .auth-actions{gap:4px}
+  .save-latest-btn-412{font-size:10.5px!important;padding:7px 8px!important}
+  .sync-icon-btn-412{width:32px;height:31px;font-size:18px!important}
+  #purchaseTable .all-source-meta-380{font-size:10px!important}
+}
+</style>
+<script id="v412-requested-features-script">
+// ===== 41.2차: 최신자료 버튼 · 예산 상세 · 예산구분 필터 · All 금액 우선배치 =====
+function setSyncButtonBusy412(button,busy){
+  if(!button)return;
+  button.disabled=Boolean(busy);
+  button.classList.toggle('loading-412',Boolean(busy)&&button.id==='refreshLatestButton412');
+}
+async function saveLatestData412(){
+  const button=document.getElementById('saveLatestButton412');
+  const original=button?.textContent||'최신자료 저장';
+  setSyncButtonBusy412(button,true);
+  if(button)button.textContent='저장 중…';
+  try{
+    localStorage.setItem(STORE_KEY,JSON.stringify(state));
+    const stamp=setLocalUpdatedAt411(Date.now());
+    clearTimeout(cloudSaveTimer);
+    if(currentFirebaseUser&&firebaseDb){
+      await uploadLocalState411(cloudDocRef(),currentFirebaseUser,stamp);
+      cloudInitialized=true;
+      cloudConflictHeld412=false;
+      setCloudStatus('online','최신자료 저장 완료',currentFirebaseUser.email||'');
+      if(button)button.textContent='저장 완료';
+    }else{
+      setCloudStatus('','이 기기에 저장 완료','로그인 상태가 아니어서 이 기기에만 저장했습니다.');
+      if(button)button.textContent='기기 저장 완료';
+    }
+  }catch(error){
+    console.error(error);
+    setCloudStatus('','최신자료 저장 실패',error.message||'저장 중 오류가 발생했습니다.');
+    if(button)button.textContent='저장 실패';
+  }finally{
+    setTimeout(()=>{if(button){button.textContent=original;setSyncButtonBusy412(button,false)}},1100);
+  }
+}
+async function refreshLatestData412(){
+  const button=document.getElementById('refreshLatestButton412');
+  setSyncButtonBusy412(button,true);
+  try{
+    if(!currentFirebaseUser||!firebaseDb){openAuthModal('login');return}
+    setCloudStatus('syncing','최신자료 확인 중',currentFirebaseUser.email||'');
+    const ref=cloudDocRef();
+    const snap=await ref.get();
+    if(!snap.exists||!snap.data()?.state){
+      await uploadLocalState411(ref,currentFirebaseUser,localUpdatedAt411()||Date.now());
+      cloudInitialized=true;
+      cloudConflictHeld412=false;
+      setCloudStatus('online','현재 자료가 최신입니다',currentFirebaseUser.email||'');
+      return;
+    }
+    const data=snap.data();
+    const cloudState=normalizeState(data.state);
+    const localState=JSON.parse(JSON.stringify(state));
+    const localStamp=localUpdatedAt411();
+    const cloudStamp=Math.max(cloudTimestampMillis411(data.clientUpdatedAt411),cloudTimestampMillis411(data.updatedAt));
+    if(statesEqual411(localState,cloudState)){
+      setLocalUpdatedAt411(Math.max(localStamp,cloudStamp)||Date.now());
+      cloudInitialized=true;
+      cloudConflictHeld412=false;
+      setCloudStatus('online','현재 자료가 최신입니다',currentFirebaseUser.email||'');
+      return;
+    }
+    if(cloudStamp&&(!localStamp||cloudStamp>localStamp)){
+      storeSyncBackup411('최신 불러오기 전 이 기기 자료',localState);
+      applyCloudState411(data);
+      cloudInitialized=true;
+      cloudConflictHeld412=false;
+      setCloudStatus('online','다른 기기의 최신 변경사항 반영됨',currentFirebaseUser.email||'');
+      return;
+    }
+    backupCloudOnce412(cloudState,'최신 불러오기 중 보관한 클라우드 자료');
+    cloudInitialized=Boolean(localStamp&&cloudStamp&&localStamp>cloudStamp);
+    cloudConflictHeld412=!cloudInitialized;
+    setCloudStatus(cloudInitialized?'online':'','현재 이 기기 자료가 더 최신입니다',cloudInitialized?(currentFirebaseUser.email||''):'클라우드 자료는 안전백업했습니다. 현재 화면을 확인한 뒤 최신자료 저장을 누르세요.');
+  }catch(error){
+    console.error(error);
+    setCloudStatus('','최신자료 불러오기 실패',error.message||'클라우드 확인 중 오류가 발생했습니다.');
+  }finally{
+    setSyncButtonBusy412(button,false);
+  }
+}
+function persistLocalBeforeClose412(){
+  try{
+    localStorage.setItem(STORE_KEY,JSON.stringify(state));
+    setLocalUpdatedAt411(Date.now());
+  }catch(error){console.warn('41.2 종료 전 로컬 저장 실패',error)}
+}
+window.addEventListener('pagehide',persistLocalBeforeClose412);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')persistLocalBeforeClose412()});
+
+function budgetInfoType412(row){
+  try{return spendingBudgetInfo278(row).type||'personal'}catch(error){return 'personal'}
+}
+function budgetImpactAmount412(row){
+  const raw=row?.raw||{};
+  if(row?.kind==='card'&&typeof cardBudgetSpend368==='function')return cardBudgetSpend368(raw);
+  if(raw.excludeFromExpense388)return 0;
+  return Number(row?.amount||0);
+}
+function budgetUsageRows412(month,type){
+  return allMonthlySpendingRows275(month)
+    .filter(row=>budgetInfoType412(row)===type)
+    .map(row=>({...row,budgetImpact412:budgetImpactAmount412(row)}))
+    .filter(row=>row.budgetImpact412>0)
+    .sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+}
+function budgetUsageTable412(rows){
+  if(!rows.length)return '<div class="empty">조건에 맞는 사용내역이 없습니다.</div>';
+  return `<div class="table-wrap budget-usage-table-412"><table><thead><tr><th>날짜</th><th>결제수단</th><th>항목</th><th>예산 구분</th><th>분류</th><th>예산 반영액</th></tr></thead><tbody>${rows.map(row=>{
+    const info=spendingBudgetInfo278(row);
+    const isCard=row.kind==='card';
+    const raw=row.raw||{};
+    const meta=isCard
+      ?`${Number(raw.installmentMonths||1)>1?Number(raw.installmentMonths)+'개월 할부':'일시불'}${(raw.schedules||[]).length?' · '+(raw.schedules||[]).map(x=>`${x.billingMonth} ${won(x.amount)}`).join(' / '):''}`
+      :(raw.settled?`${raw.type==='income'?'입금':'출금'} 확인 ${raw.settledDate||raw.date||''}`:'');
+    const original=Number(row.amount||0);
+    const impact=Number(row.budgetImpact412||0);
+    const editor=isCard?'purchase':'cashflow';
+    return `<tr class="editable-row-277" tabindex="0" role="button" onclick='openDetailEditor277(${JSON.stringify(editor)},${JSON.stringify(row.id)})'>
+      <td data-label="날짜">${esc(row.date||'')}</td>
+      <td data-label="결제수단"><span class="badge ${isCard?'card':'transfer'}" style="border-left:4px solid ${row.sourceColor}">${esc(row.sourceName||'')}</span>${meta?`<div class="all-source-meta-380">${esc(meta)}</div>`:''}</td>
+      <td data-label="항목"><b>${esc(row.title||'')}</b>${row.memo?`<div class="spending-meta-275">${esc(row.memo)}</div>`:''}</td>
+      <td data-label="예산 구분"><span class="budget-source-badge-278 ${info.type}">${esc(info.label)}</span></td>
+      <td data-label="분류">${esc(categoryDisplay(row.major,row.sub,row.majorId))}</td>
+      <td data-label="예산 반영액" class="amount all-flow-negative-310">-${won(impact)}${original!==impact?`<div class="budget-usage-impact-412">결제 ${won(original)}</div>`:''}</td>
+    </tr>`;
+  }).join('')}</tbody></table></div>`;
+}
+function showBudgetUsageDetail412(type='personal',month=''){
+  const m=month||document.getElementById('mainMonth')?.value||currentMonth();
+  const rows=budgetUsageRows412(m,type);
+  const metrics=budgetMetrics27(m);
+  const total=rows.reduce((sum,row)=>sum+Number(row.budgetImpact412||0),0);
+  const body=document.getElementById('monthlyDetailBody');
+  const summary=document.getElementById('monthlyDetailSummary');
+  const title=document.getElementById('monthlyDetailTitle');
+  if(type==='purpose'){
+    title.textContent=`${Number(m.slice(5,7))}월 목적자금 사용내역`;
+    summary.innerHTML=`목적자금 사용 <b>${won(total)}</b> · 목적자금 남음 <b class="${metrics.purposeAvailableTotal<0?'negative':'positive'}">${signedWon273(metrics.purposeAvailableTotal)}</b> · ${rows.length}건`;
+  }else{
+    title.textContent=`${Number(m.slice(5,7))}월 내 생활비 사용내역`;
+    summary.innerHTML=`내 생활비 예산 <b>${won(metrics.budgetBase)}</b> · 사용 <b>${won(total)}</b> · 남음 <b class="${metrics.remainingBudget<0?'negative':'positive'}">${signedWon273(metrics.remainingBudget)}</b> · ${rows.length}건`;
+  }
+  body.innerHTML=budgetUsageTable412(rows);
+  openDialog('monthlyDetailModal');
+}
+const openMonthlyDetailBefore412=openMonthlyDetail;
+openMonthlyDetail=function(kind){
+  if(kind==='budget')return showBudgetUsageDetail412('personal');
+  return openMonthlyDetailBefore412(kind);
+};
+const openDetailEditorBefore412=openDetailEditor277;
+openDetailEditor277=function(kind,id){
+  if(kind==='spending'||kind==='personalUsage412'){closeDialog('monthlyDetailModal');return setTimeout(()=>showBudgetUsageDetail412('personal'),0)}
+  if(kind==='purposeUsage412'){closeDialog('monthlyDetailModal');return setTimeout(()=>showBudgetUsageDetail412('purpose'),0)}
+  return openDetailEditorBefore412(kind,id);
+};
+function installBudgetDetailClicks412(){
+  const bind=(element,type)=>{
+    if(!element||element.dataset.detail412)return;
+    element.dataset.detail412='1';
+    element.classList.add('detail-clickable-412');
+    element.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();showBudgetUsageDetail412(type)});
+  };
+  bind(document.getElementById('budgetPersonalSpent')?.closest('.summary-item'),'personal');
+  bind(document.getElementById('budgetPersonalRemaining')?.closest('.summary-item'),'personal');
+  bind(document.getElementById('budgetPurposeSpent')?.closest('.summary-item'),'purpose');
+  const chips=document.querySelectorAll('#statBudgetSub .budget-balance-chip');
+  if(chips[0])bind(chips[0],'personal');
+  if(chips[1])bind(chips[1],'purpose');
+}
+
+// All의 기존 목적자금 개별 필터를 예산 구분(내 생활비·목적자금·투자수익)으로 변경합니다.
+purposeMatches360=function(row,value){
+  if(!value)return true;
+  const type=budgetInfoType412(row);
+  if(value==='personal')return type==='personal';
+  if(value==='__purpose__')return type==='purpose';
+  if(value==='__investment__')return type==='investment';
+  return true;
+};
+const valueForFixedFilterBefore412=valueForFixedFilter360;
+valueForFixedFilter360=function(row,key){
+  if(key!=='purposeFund')return valueForFixedFilterBefore412(row,key);
+  const type=budgetInfoType412(row);
+  return type==='purpose'?'__purpose__':type==='investment'?'__investment__':'personal';
+};
+const fixedCandidatesBefore412=fixedCandidates360;
+fixedCandidates360=function(key,rows){
+  if(key!=='purposeFund')return fixedCandidatesBefore412(key,rows);
+  return [
+    {value:'',label:'예산구분 전체'},
+    {value:'personal',label:'내 생활비 예산'},
+    {value:'__purpose__',label:'목적자금 사용'},
+    {value:'__investment__',label:'투자수익 사용'}
+  ];
+};
+const filterTitleBefore412=filterTitle360;
+filterTitle360=function(key){return key==='purposeFund'?'예산 구분':filterTitleBefore412(key)};
+const filterButtonLabelBefore412=filterButtonLabel360;
+filterButtonLabel360=function(key){
+  if(key!=='purposeFund')return filterButtonLabelBefore412(key);
+  const value=allFixedFilterState360.purposeFund;
+  if(!value)return '예산구분 전체';
+  if(value==='personal')return '내 생활비 예산';
+  if(value==='__purpose__')return '목적자금 사용';
+  if(value==='__investment__')return '투자수익 사용';
+  return '예산구분 전체';
+};
+const optionDisabledBefore412=optionDisabled360;
+optionDisabled360=function(key,value,count){
+  if(key==='receiptStatus'&&allFixedFilterState360.purposeFund!=='__purpose__')return true;
+  return optionDisabledBefore412(key,value,count);
+};
+const validateFixedFiltersBefore412=validateFixedFilters360;
+validateFixedFilters360=function(rows){
+  validateFixedFiltersBefore412(rows);
+  if(allFixedFilterState360.purposeFund!=='__purpose__')allFixedFilterState360.receiptStatus='';
+};
+const applyFixedOptionBefore412=applyFixedOption360;
+applyFixedOption360=function(value){
+  const key=currentFixedFilterKey360;
+  applyFixedOptionBefore412(value);
+  if(key==='purposeFund'&&value!=='__purpose__')allFixedFilterState360.receiptStatus='';
+  updateBudgetSourceFilterUI412();
+};
+function updateBudgetSourceFilterUI412(){
+  const purposeButton=document.getElementById('allPurposeFilterButton360');
+  if(purposeButton)purposeButton.querySelector('.all-fixed-filter-label-360').textContent=filterButtonLabel360('purposeFund');
+  const receipt=document.getElementById('allReceiptFilterButton360');
+  if(receipt)receipt.style.display=allFixedFilterState360.purposeFund==='__purpose__'?'':'none';
+}
+
+// 금액을 분류보다 앞에 두고 카드 청구정보는 카드명 아래 작은 글씨로 표시합니다.
+allTableHtml310=function(rows,{compact=false}={}){
+  if(!rows.length)return '<div class="empty">선택한 달의 소득·통장 입출금·소비 내역이 없습니다.</div>';
+  return `<div class="table-wrap"><table><thead><tr><th>날짜</th><th>구분·확인</th><th>카드·통장</th><th>항목</th><th>금액</th><th>분류·거래처</th>${compact?'':'<th>관리</th>'}<th>메모</th></tr></thead><tbody>${rows.map(sourceRow=>{
+    const row=sourceRow.investmentExpense388?{...sourceRow,flowType:'expense'}:sourceRow;
+    const raw=row.raw||{};
+    const isCard=row.kind==='card';
+    const isIncome=row.flowType==='income';
+    const isDeposit=row.flowType==='deposit';
+    const isWithdrawal=row.flowType==='withdrawal';
+    const editorKind=isCard?'purchase':'cashflow';
+    const badgeClass=isIncome?'income':isDeposit?'deposit-353':isWithdrawal?'withdrawal-354':isCard?'card':'expense';
+    const kindText=isIncome?'소득':isDeposit?'통장입금':isWithdrawal?'통장출금':isCard?'카드지출':'통장지출';
+    const sourceBadge=`<span class="badge ${isCard?'card':'transfer'}" style="border-left:4px solid ${row.sourceColor}">${esc(row.sourceName)}</span>`;
+    const status=recurringStatus411(row);
+    const recurring=status?`<div class="${status.archived?'recurring-archived-note-411':'generated-note'}">${esc(status.note)}</div>`:'';
+    const cardMeta=isCard?`${Number(raw.installmentMonths||1)>1?Number(raw.installmentMonths)+'개월 할부':'일시불'}${(raw.schedules||[]).length?' · '+(raw.schedules||[]).map(schedule=>`${schedule.billingMonth} ${won(schedule.amount)}`).join(' / '):''}`:'';
+    const settleMeta=!isCard&&raw.settled?`${isIncome||isDeposit?'입금':'출금'} 확인 ${esc(raw.settledDate||raw.date||'')}`:'';
+    const cardSettleMeta=isCard&&raw.recurringSettled?`승인 확인 ${esc(raw.recurringSettledDate||raw.date||'')}`:'';
+    const movementMeta=isDeposit||isWithdrawal?`${row.counterpartyName354||'거래처 미지정'} · ${isDeposit?'소득 제외':'지출 제외'}`:'';
+    const sourceMeta=[cardMeta,settleMeta,cardSettleMeta].filter(Boolean).join(' · ');
+    const bottomMeta=[movementMeta,row.movementBreakdown354,row.memo].filter(Boolean).join(' · ');
+    const positive=isIncome||isDeposit;
+    const amountClass=isIncome?'all-flow-positive-310':isDeposit?'all-flow-deposit-353':isWithdrawal?'all-flow-withdrawal-354':'all-flow-negative-310';
+    const signedAmount=`${positive?'+':'-'}${won(row.amount)}`;
+    const categoryText=isDeposit||isWithdrawal?`${raw.counterpartyType==='investment'?investmentTypeLabel353(raw.investmentType):'현금계좌'} · ${esc(row.counterpartyName354||'미지정')}`:categoryDisplay(row.major,row.sub,row.majorId);
+    const actions=isCard?`<button type="button" class="small-btn" onclick="event.stopPropagation();editPurchase('${row.id}')">수정</button><button type="button" class="small-btn danger" onclick="event.stopPropagation();deletePurchase('${row.id}')">삭제</button>`:`<button type="button" class="small-btn" onclick="event.stopPropagation();editCashflow('${row.id}')">수정</button><button type="button" class="small-btn danger" onclick="event.stopPropagation();deleteCashflow('${row.id}')">삭제</button>`;
+    return `<tr class="editable-row-277" tabindex="0" role="button" onclick='openDetailEditor277(${JSON.stringify(editorKind)},${JSON.stringify(row.id)})' onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
+      <td data-label="날짜">${esc(row.date)}</td>
+      <td data-label="구분·확인"><span class="badge ${badgeClass}">${kindText}</span>${status?` <span class="badge ${status.className} recurring-state-411">${esc(status.label)}</span>`:''}</td>
+      <td data-label="카드·통장"><span class="all-source-main-380">${sourceBadge}</span>${sourceMeta?`<span class="all-source-meta-380">${esc(sourceMeta)}</span>`:''}</td>
+      <td data-label="항목"><b>${esc(row.title)}</b>${recurring}</td>
+      <td data-label="금액" class="amount ${amountClass}">${signedAmount}</td>
+      <td data-label="분류·거래처">${categoryText}</td>
+      ${compact?'':`<td data-label="관리">${actions}</td>`}
+      <td data-label="메모">${bottomMeta?esc(bottomMeta):''}</td>
+    </tr>`;
+  }).join('')}</tbody></table></div>`;
+};
+monthlySpendingTableHtml275=allTableHtml310;
+
+const renderAllBefore412=renderAll;
+renderAll=function(){
+  const result=renderAllBefore412();
+  installBudgetDetailClicks412();
+  updateBudgetSourceFilterUI412();
+  return result;
+};
+const renderTopBefore412=renderTop;
+renderTop=function(){const result=renderTopBefore412();installBudgetDetailClicks412();return result};
+const renderBudgetBefore412=renderBudget;
+renderBudget=function(){const result=renderBudgetBefore412();installBudgetDetailClicks412();return result};
+
+function forceVersion412(){
+  document.title='가계부 41.2차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='41.2차');
+  const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+  if(box){
+    const paragraph=box.querySelector('p');
+    const badge=box.querySelector('.badge');
+    if(paragraph)paragraph.innerHTML='<b>가계부 41.2차</b>가 적용되어 있습니다. 최신자료 불러오기·즉시 저장, 예산 사용 상세내역, 예산구분 필터와 All 금액 우선배치를 반영했습니다.';
+    if(badge)badge.textContent='현재 버전 41.2차';
+  }
+}
+const buildBackupBefore412=buildBackup27;
+buildBackup27=function(scope='all'){const data=buildBackupBefore412(scope);data.backupVersion='41.2';return data};
+forceVersion412();
+installBudgetDetailClicks412();
+updateBudgetSourceFilterUI412();
+try{renderPurchases()}catch(error){console.error('41.2차 All 렌더링 오류',error)}
+setTimeout(()=>{forceVersion412();installBudgetDetailClicks412();updateBudgetSourceFilterUI412();},400);
 </script>
 
 </body>
