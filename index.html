@@ -8703,7 +8703,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=42.1',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=42.2',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
@@ -36198,6 +36198,399 @@ renderCloudSyncStatus42(
 setTimeout(forceVersion42,0);
 setTimeout(forceVersion42,700);
 setTimeout(forceVersion42,1600);
+</script>
+
+
+<script id="v421-cloud-conflict-guard-script">
+// ===== 42차 동기화 충돌 방지 패치 =====
+// 가계부 state/백업 구조는 변경하지 않고 Firebase 문서의 바깥쪽 동기화 메타정보만 사용합니다.
+const SYNC_REV_FIELD_421='syncRevision421';
+const SYNC_HASH_FIELD_421='syncStateHash421';
+const SYNC_WRITER_FIELD_421='syncWriter421';
+const SYNC_GUARD_TIME_FIELD_421='syncGuardUpdatedAt421';
+const SYNC_BASE_PREFIX_421='household_book_cloud_base_421_';
+const SYNC_DIRTY_KEY_421='household_book_cloud_dirty_421';
+const RESTORE_PENDING_KEY_421='household_book_restore_pending_421';
+let syncConflictBlocked421=false;
+let cloudWriteInFlight421=false;
+let manualRecheckRequested421=false;
+
+function cloneState421(value=state){
+  try{return JSON.parse(JSON.stringify(value))}catch(error){return value}
+}
+function stateHash421(value){
+  return checksum27(stableStringify27(value&&typeof value==='object'?value:{}));
+}
+function syncUserKey421(user=currentFirebaseUser){
+  return String(user?.uid||user?.email||'').trim();
+}
+function syncBaseKey421(user=currentFirebaseUser){
+  return SYNC_BASE_PREFIX_421+syncUserKey421(user);
+}
+function readSyncBase421(user=currentFirebaseUser){
+  const key=syncBaseKey421(user);if(!key||key===SYNC_BASE_PREFIX_421)return null;
+  try{
+    const value=JSON.parse(localStorage.getItem(key)||'null');
+    return value&&Number(value.revision)>0&&value.hash?{revision:Number(value.revision),hash:String(value.hash)}:null;
+  }catch(error){return null}
+}
+function writeSyncBase421(revision,hash,user=currentFirebaseUser){
+  const key=syncBaseKey421(user);if(!key||key===SYNC_BASE_PREFIX_421)return;
+  try{localStorage.setItem(key,JSON.stringify({revision:Number(revision)||0,hash:String(hash||''),at:Date.now()}))}catch(error){}
+}
+function isSyncDirty421(){return localStorage.getItem(SYNC_DIRTY_KEY_421)==='1'}
+function markSyncDirty421(){try{localStorage.setItem(SYNC_DIRTY_KEY_421,'1')}catch(error){}}
+function clearSyncDirty421(){try{localStorage.removeItem(SYNC_DIRTY_KEY_421)}catch(error){}}
+function isRestorePending421(){return localStorage.getItem(RESTORE_PENDING_KEY_421)==='1'}
+function markRestorePending421(){try{localStorage.setItem(RESTORE_PENDING_KEY_421,'1')}catch(error){}}
+function clearRestorePending421(){try{localStorage.removeItem(RESTORE_PENDING_KEY_421)}catch(error){}}
+function syncError421(code,message){const error=new Error(message);error.code=code;return error}
+function cloudGuardInfo421(data={}){
+  const rawState=data?.state&&typeof data.state==='object'?data.state:null;
+  const actualHash=rawState?stateHash421(rawState):'';
+  const revision=Math.max(0,Number(data?.[SYNC_REV_FIELD_421])||0);
+  const guardHash=String(data?.[SYNC_HASH_FIELD_421]||'');
+  const hasGuard=Boolean(revision>0&&guardHash);
+  return {rawState,actualHash,revision,guardHash,hasGuard,valid:hasGuard&&actualHash===guardHash};
+}
+function blockCloudSync421(message){
+  syncConflictBlocked421=true;
+  cloudInitialized=true;
+  setCloudStatus('','자동 동기화 일시 중지',message||'다른 기기의 자료와 충돌해 자동 덮어쓰기를 막았습니다.');
+}
+function acceptCloudBase421(data,user=currentFirebaseUser){
+  const info=cloudGuardInfo421(data);
+  if(info.valid)writeSyncBase421(info.revision,info.guardHash,user);
+  return info;
+}
+
+async function guardedCloudWrite421(snapshot,{force=false,reason='자동 저장'}={}){
+  if(!currentFirebaseUser||!firebaseDb)throw syncError421('SYNC_NOT_READY','Firebase 로그인이 필요합니다.');
+  const ref=cloudDocRef();
+  if(!ref)throw syncError421('SYNC_NOT_READY','클라우드 저장 위치를 확인하지 못했습니다.');
+  const desiredState=cloneState421(snapshot);
+  const desiredHash=stateHash421(desiredState);
+  const base=readSyncBase421(currentFirebaseUser);
+  const clientStamp=Date.now();
+  if(force){
+    try{
+      const before=await ref.get();
+      if(before.exists&&before.data()?.state)storeSyncBackup411(`${reason} 전 클라우드 자료`,normalizeState(before.data().state));
+    }catch(error){console.warn('강제 저장 전 클라우드 안전백업 실패',error)}
+  }
+  let committed=null;
+  cloudWriteInFlight421=true;
+  try{
+    await firebaseDb.runTransaction(async transaction=>{
+      const snap=await transaction.get(ref);
+      const data=snap.exists?snap.data():{};
+      const info=cloudGuardInfo421(data);
+      if(!force){
+        if(info.hasGuard&&!info.valid){
+          throw syncError421('UNGUARDED_CLOUD_CHANGE','이전 버전의 탭 또는 기기가 클라우드 자료를 변경했습니다. 자동 저장을 중지했습니다.');
+        }
+        if(info.hasGuard){
+          if(!base||base.revision!==info.revision||base.hash!==info.guardHash){
+            throw syncError421('SYNC_CONFLICT','다른 기기에서 더 최신 자료가 저장되어 현재 기기의 자동 저장을 중지했습니다.');
+          }
+        }else if(snap.exists&&info.rawState&&info.actualHash!==desiredHash){
+          throw syncError421('SYNC_MIGRATION_REQUIRED','기존 클라우드 자료와 이 기기 자료가 달라 먼저 자료 선택이 필요합니다.');
+        }
+      }
+      const nextRevision=Math.max(info.revision,Number(base?.revision)||0)+1;
+      transaction.set(ref,{
+        state:desiredState,
+        updatedAt:firebase.firestore.FieldValue.serverTimestamp(),
+        clientUpdatedAt411:clientStamp,
+        clientId:CLIENT_ID,
+        email:currentFirebaseUser.email||'',
+        [SYNC_REV_FIELD_421]:nextRevision,
+        [SYNC_HASH_FIELD_421]:desiredHash,
+        [SYNC_WRITER_FIELD_421]:CLIENT_ID,
+        [SYNC_GUARD_TIME_FIELD_421]:firebase.firestore.FieldValue.serverTimestamp()
+      },{merge:true});
+      committed={revision:nextRevision,hash:desiredHash};
+    });
+    if(!committed)throw syncError421('SYNC_WRITE_FAILED','클라우드 저장 결과를 확인하지 못했습니다.');
+    writeSyncBase421(committed.revision,committed.hash,currentFirebaseUser);
+    clearSyncDirty421();
+    clearRestorePending421();
+    syncConflictBlocked421=false;
+    cloudInitialized=true;
+    markCloudSyncSuccess42(currentFirebaseUser);
+    return clientStamp;
+  }finally{
+    cloudWriteInFlight421=false;
+  }
+}
+
+async function resolveCloudChoice421(ref,user,data,reason='자료 충돌'){
+  const cloudState=normalizeState(data?.state||{});
+  const localState=cloneState421(state);
+  const localStamp=localUpdatedAt411();
+  const cloudStamp=Math.max(cloudTimestampMillis411(data?.clientUpdatedAt411),cloudTimestampMillis411(data?.updatedAt));
+  const choice=await chooseCloudState411(localState,cloudState,localStamp,cloudStamp);
+  if(choice==='local'){
+    storeSyncBackup411(`${reason} · 교체 전 클라우드 자료`,cloudState);
+    await guardedCloudWrite421(localState,{force:true,reason:'이 기기 자료 선택'});
+    return 'local';
+  }
+  if(choice==='cloud'){
+    storeSyncBackup411(`${reason} · 반영 전 이 기기 자료`,localState);
+    applyCloudState411(data);
+    await guardedCloudWrite421(cloneState421(state),{force:true,reason:'클라우드 자료 선택'});
+    return 'cloud';
+  }
+  blockCloudSync421('자료 선택을 미뤘습니다. 설정의 ‘클라우드 자료 다시 비교’에서 다시 선택할 수 있습니다.');
+  return 'later';
+}
+
+async function initializeGuardedSync421(ref,user,{manual=false}={}){
+  const snap=await ref.get();
+  if(!snap.exists||!snap.data()?.state){
+    await guardedCloudWrite421(cloneState421(state),{force:true,reason:'최초 클라우드 등록'});
+    return 'local';
+  }
+  const data=snap.data();
+  const info=cloudGuardInfo421(data);
+  const localState=cloneState421(state);
+  const cloudState=normalizeState(data.state);
+  const localEqualsCloud=statesEqual411(localState,cloudState);
+
+  if(isRestorePending421()){
+    await guardedCloudWrite421(localState,{force:true,reason:'전체백업 복원본 저장'});
+    return 'local';
+  }
+
+  if(!info.hasGuard){
+    if(localEqualsCloud){
+      await guardedCloudWrite421(localState,{force:true,reason:'동기화 보호 초기화'});
+      return 'same';
+    }
+    return resolveCloudChoice421(ref,user,data,'동기화 보호 최초 적용');
+  }
+
+  if(!info.valid){
+    if(manual)return resolveCloudChoice421(ref,user,data,'이전 버전 기기의 변경 감지');
+    storeSyncBackup411('검증되지 않은 클라우드 자료',cloudState);
+    blockCloudSync421('이전 버전의 탭 또는 기기가 클라우드를 변경한 흔적을 발견해 자동 반영과 자동 저장을 막았습니다. 전체백업 복원은 안전하게 사용할 수 있습니다.');
+    return 'blocked';
+  }
+
+  const base=readSyncBase421(user);
+  if(!base){
+    if(!localEqualsCloud)storeSyncBackup411('검증된 클라우드 반영 전 이 기기 자료',localState);
+    if(!localEqualsCloud)applyCloudState411(data);
+    writeSyncBase421(info.revision,info.guardHash,user);
+    clearSyncDirty421();
+    syncConflictBlocked421=false;
+    return localEqualsCloud?'same':'cloud';
+  }
+
+  if(base.revision<info.revision||base.hash!==info.guardHash){
+    if(isSyncDirty421()&&!localEqualsCloud){
+      if(manual)return resolveCloudChoice421(ref,user,data,'다른 기기 최신자료와 이 기기 수정사항 충돌');
+      storeSyncBackup411('충돌 중 보관한 최신 클라우드 자료',cloudState);
+      blockCloudSync421('다른 기기에 최신자료가 있고 이 기기에도 저장되지 않은 변경이 있어 자동 덮어쓰기를 막았습니다.');
+      return 'blocked';
+    }
+    if(!localEqualsCloud)storeSyncBackup411('최신 클라우드 반영 전 이 기기 자료',localState);
+    if(!localEqualsCloud)applyCloudState411(data);
+    writeSyncBase421(info.revision,info.guardHash,user);
+    clearSyncDirty421();
+    syncConflictBlocked421=false;
+    return localEqualsCloud?'same':'cloud';
+  }
+
+  if(base.revision===info.revision&&base.hash===info.guardHash){
+    if(localEqualsCloud){
+      clearSyncDirty421();
+      syncConflictBlocked421=false;
+      return 'same';
+    }
+    if(isSyncDirty421()){
+      await guardedCloudWrite421(localState,{reason:'미완료 변경사항 재저장'});
+      return 'local';
+    }
+    storeSyncBackup411('검증된 클라우드 재반영 전 이 기기 자료',localState);
+    applyCloudState411(data);
+    clearSyncDirty421();
+    syncConflictBlocked421=false;
+    return 'cloud';
+  }
+
+  if(manual)return resolveCloudChoice421(ref,user,data,'동기화 기준번호 충돌');
+  blockCloudSync421('동기화 기준번호가 맞지 않아 자동 저장을 막았습니다.');
+  return 'blocked';
+}
+
+async function processRemoteSnapshot421(ref,user,data){
+  if(!data?.state||cloudWriteInFlight421)return;
+  const info=cloudGuardInfo421(data);
+  const cloudState=normalizeState(data.state);
+  if(!info.hasGuard||!info.valid){
+    storeSyncBackup411('이전 버전 기기의 변경으로 감지된 클라우드 자료',cloudState);
+    blockCloudSync421('이전 버전의 탭 또는 기기가 클라우드 자료를 바꿔 자동 반영을 차단했습니다.');
+    return;
+  }
+  const base=readSyncBase421(user);
+  if(data.clientId===CLIENT_ID){
+    writeSyncBase421(info.revision,info.guardHash,user);
+    return;
+  }
+  if(!base||info.revision>base.revision||info.guardHash!==base.hash){
+    const localState=cloneState421(state);
+    if(isSyncDirty421()&&!statesEqual411(localState,cloudState)){
+      storeSyncBackup411('다른 기기 최신자료와 충돌한 클라우드 자료',cloudState);
+      blockCloudSync421('다른 기기의 최신자료와 이 기기의 미저장 변경이 충돌해 자동 반영을 막았습니다.');
+      return;
+    }
+    if(!statesEqual411(localState,cloudState)){
+      storeSyncBackup411('다른 기기 최신자료 반영 전 이 기기 자료',localState);
+      applyCloudState411(data);
+    }
+    writeSyncBase421(info.revision,info.guardHash,user);
+    clearSyncDirty421();
+    syncConflictBlocked421=false;
+    setCloudStatus('online','다른 기기의 최신 변경사항 반영됨',user.email||'');
+  }
+}
+
+// 기존 직접 업로드 경로도 모두 충돌검사를 통과하게 합니다.
+uploadLocalState411=async function(ref,user,stamp=Date.now()){
+  return guardedCloudWrite421(cloneState421(state),{reason:'직접 저장'});
+};
+
+scheduleCloudSave=function(){
+  markSyncDirty421();
+  try{localStorage.setItem(STORE_KEY,JSON.stringify(state))}catch(error){}
+  if(!currentFirebaseUser||!firebaseDb)return;
+  const restore=Boolean(isRestorePending421());
+  if(syncConflictBlocked421&&!restore){
+    blockCloudSync421('다른 기기 자료와 충돌해 자동 저장이 중지되어 있습니다. 전체백업 복원 또는 ‘클라우드 자료 다시 비교’를 사용하세요.');
+    return;
+  }
+  clearTimeout(cloudSaveTimer);
+  const snapshot=cloneState421(state);
+  setCloudStatus('syncing','저장 중',currentFirebaseUser.email||'');
+  cloudSaveTimer=setTimeout(async()=>{
+    try{
+      await guardedCloudWrite421(snapshot,{force:restore,reason:restore?'전체백업 복원본 저장':'자동 저장'});
+      setCloudStatus('online','자동 저장 완료',currentFirebaseUser.email||'');
+    }catch(error){
+      console.error(error);
+      if(['UNGUARDED_CLOUD_CHANGE','SYNC_CONFLICT','SYNC_MIGRATION_REQUIRED'].includes(error.code)){
+        blockCloudSync421(error.message);
+      }else{
+        setCloudStatus('','자동 저장 실패',error.message||'네트워크 연결을 확인해주세요. 이 기기에는 계속 저장되어 있습니다.');
+      }
+    }
+  },650);
+};
+
+handleAuthState=async function(user){
+  currentFirebaseUser=user||null;
+  updateAuthUI();
+  if(cloudUnsubscribe){cloudUnsubscribe();cloudUnsubscribe=null}
+  if(!user){
+    cloudInitialized=false;
+    syncConflictBlocked421=false;
+    setCloudStatus('','이 기기에 자동 저장 중','로그인하면 PC·휴대폰에서도 같은 자료를 사용합니다.');
+    return;
+  }
+  const manual=manualRecheckRequested421;
+  manualRecheckRequested421=false;
+  setCloudStatus('syncing','최신 자료 확인 중',user.email||'');
+  const ref=cloudDocRef();
+  try{
+    const result=await initializeGuardedSync421(ref,user,{manual});
+    cloudInitialized=true;
+    if(result!=='blocked'&&result!=='later'){
+      setCloudStatus('online',result==='cloud'?'다른 기기의 최신 변경사항 반영됨':'자동 동기화 연결됨',user.email||'');
+    }
+    cloudUnsubscribe=ref.onSnapshot(doc=>{
+      if(doc.exists)processRemoteSnapshot421(ref,user,doc.data()).catch(error=>{
+        console.error(error);blockCloudSync421(error.message||'다른 기기 자료 확인 중 오류가 발생했습니다.');
+      });
+    },error=>{
+      console.error(error);
+      setCloudStatus('','동기화 연결 오류',error.message||'클라우드 연결 오류');
+    });
+  }catch(error){
+    console.error(error);
+    cloudInitialized=true;
+    if(['UNGUARDED_CLOUD_CHANGE','SYNC_CONFLICT','SYNC_MIGRATION_REQUIRED'].includes(error.code))blockCloudSync421(error.message);
+    else setCloudStatus('','클라우드 연결 실패','이 기기에는 계속 저장됩니다. '+(error.message||''));
+  }
+};
+
+recheckCloudSync411=async function(){
+  if(!currentFirebaseUser){openAuthModal('login');return}
+  manualRecheckRequested421=true;
+  await handleAuthState(currentFirebaseUser);
+};
+refreshLatestData412=recheckCloudSync411;
+
+forceCloudUpload=async function(){
+  if(!currentFirebaseUser){openAuthModal('login');return}
+  if(!confirm('현재 이 기기의 자료를 클라우드 기준자료로 저장할까요? 기존 클라우드 자료는 먼저 동기화 안전백업에 보관됩니다.'))return;
+  try{
+    await guardedCloudWrite421(cloneState421(state),{force:true,reason:'사용자 직접 클라우드 저장'});
+    setCloudStatus('online','현재 자료를 클라우드에 저장 완료',currentFirebaseUser.email||'');
+    alert('현재 자료를 클라우드 기준자료로 저장했습니다.');
+  }catch(error){
+    console.error(error);alert('클라우드 저장에 실패했습니다: '+(error.message||'알 수 없는 오류'));
+  }
+};
+
+// 전체 JSON 복원은 사용자가 명시적으로 선택한 기준자료이므로 충돌이 있어도 안전백업 후 새 기준으로 저장합니다.
+const importBackupBefore421=importBackup;
+importBackup=function(event){
+  const beforeHash=stateHash421(cloneState421(state));
+  markRestorePending421();
+  importBackupBefore421(event);
+  setTimeout(()=>{
+    if(isRestorePending421()&&!isSyncDirty421()&&stateHash421(cloneState421(state))===beforeHash)clearRestorePending421();
+  },15000);
+};
+
+// 화면을 숨기거나 닫을 때는 로컬 저장만 수행하고 Firebase 전체자료를 쓰지 않습니다.
+const persistLocalBeforeCloseOriginal421=persistLocalBeforeClose412;
+try{window.removeEventListener('pagehide',persistLocalBeforeCloseOriginal421)}catch(error){}
+persistLocalBeforeClose412=function(){
+  try{localStorage.setItem(STORE_KEY,JSON.stringify(state))}catch(error){console.warn('종료 전 로컬 저장 실패',error)}
+};
+persistLatest417=function(){
+  try{localStorage.setItem(STORE_KEY,JSON.stringify(state))}catch(error){console.warn('종료 전 로컬 저장 실패',error)}
+};
+
+window.addEventListener('online',()=>{
+  if(currentFirebaseUser&&isSyncDirty421()&&!syncConflictBlocked421)scheduleCloudSave();
+});
+
+// 설정 설명을 실제 충돌 방지 방식에 맞춥니다.
+installSyncSafetyBox411=function(){
+  const grid=document.querySelector('#settings .settings-grid');if(!grid)return;
+  let box=document.getElementById('cloudSyncSafety411');
+  if(!box){box=document.createElement('div');box.id='cloudSyncSafety411';box.className='settings-box cloud-sync-safety-411';grid.appendChild(box)}
+  const backup=latestSyncBackup411();
+  box.innerHTML=`<h3>최신자료 보호·동기화 안전백업</h3><p>각 기기는 마지막으로 확인한 클라우드 기준번호와 검증값이 일치할 때만 저장합니다. 오래된 탭이나 다른 기기가 최신자료를 덮어쓰려 하면 자동 저장을 중지하고 자료를 안전백업합니다.</p><div class="sync-backup-meta-411">${backup?`최근 안전백업: ${esc(new Date(backup.createdAt).toLocaleString('ko-KR'))} · ${esc(backup.source||'자료')}`:'저장된 동기화 안전백업이 없습니다.'}</div><div class="actions"><button type="button" class="small-btn" onclick="downloadSyncBackup411()" ${backup?'':'disabled'}>안전백업 다운로드</button><button type="button" class="small-btn" onclick="restoreSyncBackup411()" ${backup?'':'disabled'}>최근 안전백업 복원</button><button type="button" class="small-btn primary" onclick="recheckCloudSync411()">클라우드 자료 다시 비교</button></div>`;
+};
+
+function applySyncGuardVersionText421(){
+  document.title='가계부 42차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='42차');
+  const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+  if(box){
+    const p=box.querySelector('p'),b=box.querySelector('.badge');
+    if(p)p.innerHTML='<b>가계부 42차</b>가 적용되어 있습니다. PC 행선, 실제 동기화 성공시각, 회수완료 투자잔금과 오래된 기기의 클라우드 덮어쓰기 방지를 반영했습니다.';
+    if(b)b.textContent='현재 버전 42차';
+  }
+  installSyncSafetyBox411();
+}
+applySyncGuardVersionText421();
+setTimeout(applySyncGuardVersionText421,800);
+setTimeout(applySyncGuardVersionText421,1800);
 </script>
 
 </body>
