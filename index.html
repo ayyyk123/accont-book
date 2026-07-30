@@ -8107,7 +8107,13 @@ function defaultCategories(){
   ];
 }
 function emptyState(){return {version:12,cards:[],accounts:[],purchases:[],cashflows:[],categories:defaultCategories(),recurringItems:[],recurringSkips:[],monthlyBudgets:{},debts:[],purposeFunds:[],loans:[]}}
-function today(){return new Date().toISOString().slice(0,10)}
+function today(){
+  const d=new Date();
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
 function currentMonth(){return today().slice(0,7)}
 function won(n){return new Intl.NumberFormat('ko-KR').format(Number(n||0))+'원'}
 function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
@@ -36009,7 +36015,9 @@ function cloudUserId42(user=currentFirebaseUser){
 function readLastCloudSync42(){
   try{
     const value=JSON.parse(localStorage.getItem(LAST_CLOUD_SYNC_KEY_42)||'null');
-    return value&&Number(value.at)>0?value:null;
+    const at=Number(value?.at||0);
+    const earliest=Date.UTC(2025,0,1);
+    return value&&Number.isFinite(at)&&at>=earliest?{...value,at}:null;
   }catch(error){return null}
 }
 function formatCloudSyncTime42(value){
@@ -36583,7 +36591,7 @@ function applySyncGuardVersionText421(){
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 42차</b>가 적용되어 있습니다. PC 행선, 실제 동기화 성공시각, 회수완료 투자잔금과 오래된 기기의 클라우드 덮어쓰기 방지를 반영했습니다.';
+    if(p)p.innerHTML='<b>가계부 42차</b>가 적용되어 있습니다. 한국시간 날짜 계산, 고정지출·이체완료 잔액 반영, 이체예정 알림·삭제와 오래된 기기의 클라우드 덮어쓰기 방지를 반영했습니다.';
     if(b)b.textContent='현재 버전 42차';
   }
   installSyncSafetyBox411();
@@ -36593,5 +36601,101 @@ setTimeout(applySyncGuardVersionText421,800);
 setTimeout(applySyncGuardVersionText421,1800);
 </script>
 
+
+<script id="v42-local-date-transfer-fix-script">
+// ===== 42차 긴급수정: 한국시간 날짜·이체예정 삭제·완료 잔액 반영 =====
+function localToday42Fix(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+// 오래 열린 탭에서도 한국 현지 날짜를 기준으로 다시 계산합니다.
+today=localToday42Fix;
+currentMonth=function(){return today().slice(0,7)};
+
+function deletePlannedTransfer42Fix(id){
+  const flow=(state.cashflows||[]).find(item=>item.id===id&&item.plannedTopup);
+  if(!flow)return;
+  const source=accountById(flow.accountId)?.name||'보내는 통장';
+  const target=accountById(flow.targetAccountId)?.name||'받는 통장';
+  const status=flow.plannedCompleted?'완료된 이체 기록':'이체 예정';
+  if(!confirm(`${source} → ${target} ${won(flow.amount)} ${status}을 삭제할까요?`))return;
+  state.cashflows=(state.cashflows||[]).filter(item=>item.id!==id);
+  saveState();
+  try{closeDialog('monthlyDetailModal')}catch(error){}
+  renderTransferReminder365();
+}
+
+pendingTransferRowHtml366=function(flow){
+  const source=accountById(flow.accountId);
+  const target=accountById(flow.targetAccountId);
+  const dateInfo=plannedTransferDateLabel365(flow);
+  const memo=String(flow.memo||'').trim();
+  return `
+    <div class="transfer-reminder-row-365 ${dateInfo.overdue?'overdue-row-365':''}">
+      <div class="transfer-reminder-main-365">
+        <div class="transfer-reminder-route-365">
+          <span>${esc(source?.name||'보내는 통장')}</span>
+          <span class="transfer-reminder-arrow-365">→</span>
+          <span>${esc(target?.name||'받는 통장')}</span>
+        </div>
+        <div class="transfer-reminder-meta-365">
+          <span class="transfer-reminder-date-365 ${dateInfo.overdue?'overdue-365':'today-365'}">${esc(dateInfo.label)}</span>
+          ${memo?`<span class="transfer-reminder-memo-365">${esc(memo)}</span>`:''}
+        </div>
+        <div class="transfer-reminder-amount-365">${won(flow.amount)}</div>
+      </div>
+      <div class="transfer-reminder-actions-365">
+        <button type="button" class="small-btn transfer-reminder-view-365" data-view-planned-transfer365="${esc(flow.id)}">내역 보기</button>
+        <button type="button" class="small-btn transfer-reminder-complete-365" data-complete-planned-transfer365="${esc(flow.id)}">이체 완료</button>
+        <button type="button" class="small-btn danger" data-delete-planned-transfer42fix="${esc(flow.id)}">삭제</button>
+      </div>
+    </div>`;
+};
+
+document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-delete-planned-transfer42fix]');
+  if(!button)return;
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+  deletePlannedTransfer42Fix(button.dataset.deletePlannedTransfer42fix);
+},true);
+
+// 어느 화면의 이체완료 버튼을 눌러도 같은 방식으로 실제 잔액에 반영합니다.
+completePlannedTransfer365=function(id){
+  const flow=(state.cashflows||[]).find(item=>item.id===id&&item.plannedTopup&&!item.plannedCompleted);
+  if(!flow)return;
+  const source=accountById(flow.accountId);
+  const target=accountById(flow.targetAccountId);
+  if(!confirm(
+    `${source?.name||'보내는 통장'}에서 ${target?.name||'받는 통장'}으로 `+
+    `${won(flow.amount)}을 실제로 이체했나요?\n\n완료 처리하면 오늘 날짜로 두 통장 잔액에 반영됩니다.`
+  ))return;
+  flow.plannedCompleted=true;
+  flow.plannedCompletedDate=localToday42Fix();
+  saveState();
+  renderTransferReminder365();
+};
+
+completeTopup280=function(id){
+  const flow=(state.cashflows||[]).find(item=>item.id===id&&item.plannedTopup&&!item.plannedCompleted);
+  if(!flow)return;
+  if(!confirm(`${won(flow.amount)} 이체를 실제로 완료했나요? 완료 처리하면 두 통장 실제 잔액에 반영됩니다.`))return;
+  flow.plannedCompleted=true;
+  flow.plannedCompletedDate=localToday42Fix();
+  saveState();
+  try{closeDialog('monthlyDetailModal')}catch(error){}
+  renderTransferReminder365();
+};
+
+// 이미 화면이 열린 상태였다면 현지 날짜 기준으로 즉시 다시 계산합니다.
+try{
+  renderAll();
+  renderTransferReminder365();
+}catch(error){
+  console.error('42차 날짜·이체 긴급수정 재계산 오류',error);
+}
+</script>
 </body>
 </html>
