@@ -37720,5 +37720,343 @@ installVisibleDateSort42();
 window.addEventListener('load',()=>setTimeout(()=>{forceVersion421();installVisibleDateSort42()},0));
 </script>
 
+
+<style id="v422-account-month-recurring-reminder-style">
+/* ===== 42.2차: 통장 거래 조회월 연동 + 고정수입·지출 당일 알림 ===== */
+.fixed-recurring-reminder-422{
+  margin:0 0 12px;
+  padding:12px;
+  border:1px solid #cbb8ef;
+  border-radius:15px;
+  background:#faf6ff;
+  box-shadow:0 5px 18px rgba(108,76,166,.08);
+}
+.fixed-recurring-reminder-422[hidden]{display:none!important}
+.fixed-recurring-reminder-head-422{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.fixed-recurring-reminder-title-422{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-width:0;
+}
+.fixed-recurring-reminder-icon-422{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  flex:0 0 auto;
+  border-radius:10px;
+  background:#ede4fb;
+  font-size:17px;
+}
+.fixed-recurring-reminder-title-422 b{
+  display:block;
+  color:#6743a6;
+  font-size:13px;
+}
+.fixed-recurring-reminder-title-422 span:not(.fixed-recurring-reminder-icon-422){
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:10px;
+}
+.fixed-recurring-reminder-count-422{
+  padding:5px 8px;
+  border-radius:999px;
+  background:#eadffc;
+  color:#6743a6;
+  font-size:9px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.fixed-recurring-reminder-rows-422{
+  display:grid;
+  gap:7px;
+  margin-top:10px;
+}
+.fixed-recurring-reminder-row-422{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px 12px;
+  align-items:center;
+  padding:10px 11px;
+  border:1px solid rgba(122,87,186,.22);
+  border-radius:12px;
+  background:rgba(255,255,255,.9);
+}
+.fixed-recurring-reminder-row-422.overdue-422{
+  border-color:rgba(211,78,94,.30);
+  background:#fff8f8;
+}
+.fixed-recurring-main-422{min-width:0}
+.fixed-recurring-name-422{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  min-width:0;
+  font-size:11px;
+  font-weight:900;
+}
+.fixed-recurring-name-422 strong{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.fixed-recurring-meta-422{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:5px 8px;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:9px;
+}
+.fixed-recurring-date-422.today-422{color:#6743a6;font-weight:850}
+.fixed-recurring-date-422.overdue-422{color:#b42337;font-weight:850}
+.fixed-recurring-amount-422{
+  margin-top:5px;
+  color:var(--text);
+  font-size:13px;
+  font-weight:950;
+}
+.fixed-recurring-actions-422{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:5px;
+}
+.fixed-recurring-actions-422 .small-btn{
+  min-height:30px!important;
+  padding:5px 8px!important;
+  font-size:9px!important;
+}
+@media(max-width:640px){
+  .fixed-recurring-reminder-422{margin-bottom:9px;padding:10px;border-radius:12px}
+  .fixed-recurring-reminder-icon-422{width:29px;height:29px;font-size:15px}
+  .fixed-recurring-reminder-row-422{grid-template-columns:1fr;padding:9px}
+  .fixed-recurring-actions-422{justify-content:flex-start}
+  .fixed-recurring-actions-422 .small-btn{flex:1 1 110px}
+}
+</style>
+<script id="v422-account-month-recurring-reminder-script">
+// ===== 42.2차: 통장 거래 조회월 연동 + 고정수입·지출 당일 알림 =====
+function monthRange422(month){
+  const safe=/^\d{4}-\d{2}$/.test(month||'')?month:currentMonth();
+  return {
+    start:`${safe}-01`,
+    end:`${safe}-${String(daysInMonth(safe)).padStart(2,'0')}`
+  };
+}
+
+function syncAccountHistoryToMainMonth422({render=false}={}){
+  const month=document.getElementById('mainMonth')?.value||currentMonth();
+  const range=monthRange422(month);
+  const start=document.getElementById('accountHistoryStart364');
+  const end=document.getElementById('accountHistoryEnd364');
+  if(start)start.value=range.start;
+  if(end)end.value=range.end;
+  if(render&&typeof renderAccountHistory364==='function')renderAccountHistory364();
+}
+
+if(typeof openAccountHistory364==='function'&&!openAccountHistory364.__v422){
+  const openAccountHistoryBefore422=openAccountHistory364;
+  openAccountHistory364=function(accountId=''){
+    syncAccountHistoryToMainMonth422({render:false});
+    return openAccountHistoryBefore422(accountId);
+  };
+  openAccountHistory364.__v422=true;
+}
+
+if(typeof setAccountHistoryCurrentMonth364==='function'){
+  setAccountHistoryCurrentMonth364=function(){
+    syncAccountHistoryToMainMonth422({render:true});
+  };
+}
+
+document.getElementById('mainMonth')?.addEventListener('change',()=>{
+  syncAccountHistoryToMainMonth422({render:true});
+});
+
+function recurringDefinition422(recurringItemId){
+  return (state.recurringItems||[]).find(item=>item.id===recurringItemId)||null;
+}
+
+function recurringScheduledDate422(record){
+  const definition=recurringDefinition422(record?.recurringItemId);
+  const month=record?.recurringMonth||currentMonth();
+  return record?.recurringScheduledDate410||
+    (definition?recurringDate(definition,month):record?.date||'');
+}
+
+function recurringDefinitionActive422(record){
+  const definition=recurringDefinition422(record?.recurringItemId);
+  if(!definition||definition.active===false)return false;
+  const month=record?.recurringMonth||'';
+  if(month&&definition.startMonth&&month<definition.startMonth)return false;
+  if(month&&definition.endMonth&&month>definition.endMonth)return false;
+  if(month&&state.recurringSkips?.includes(recurringSkipKey(definition.id,month)))return false;
+  return true;
+}
+
+function dueFixedRecurring422(){
+  const now=today();
+  const month=currentMonth();
+  const rows=[];
+  let order=0;
+
+  (state.cashflows||[]).forEach(flow=>{
+    if(!flow?.recurringItemId||flow.recurringSavings)return;
+    if(flow.recurringMonth!==month)return;
+    if(flow.type!=='income'&&flow.type!=='expense')return;
+    if(flow.settled||!recurringDefinitionActive422(flow))return;
+    const date=recurringScheduledDate422(flow);
+    if(!date||date>now)return;
+    rows.push({
+      kind:'account',
+      id:flow.id,
+      date,
+      type:flow.type,
+      description:flow.description||recurringDefinition422(flow.recurringItemId)?.description||'고정항목',
+      amount:Number(flow.amount||0),
+      target:accountById(flow.accountId)?.name||'통장',
+      order:order++
+    });
+  });
+
+  (state.purchases||[]).forEach(purchase=>{
+    if(!purchase?.recurringItemId||purchase.recurringMonth!==month)return;
+    if(purchase.recurringSettled||!recurringDefinitionActive422(purchase))return;
+    const date=recurringScheduledDate422(purchase);
+    if(!date||date>now)return;
+    rows.push({
+      kind:'card',
+      id:purchase.id,
+      date,
+      type:'expense',
+      description:purchase.merchant||recurringDefinition422(purchase.recurringItemId)?.description||'카드 고정지출',
+      amount:Number(purchase.totalAmount||0),
+      target:cardById(purchase.cardId)?.name||'카드',
+      order:order++
+    });
+  });
+
+  return rows.sort((a,b)=>a.date.localeCompare(b.date)||a.order-b.order);
+}
+
+function ensureFixedRecurringReminder422(){
+  let box=document.getElementById('fixedRecurringReminder422');
+  if(box)return box;
+  const transfer=document.getElementById('transferReminder365');
+  if(!transfer?.parentElement)return null;
+  box=document.createElement('section');
+  box.id='fixedRecurringReminder422';
+  box.className='fixed-recurring-reminder-422';
+  box.hidden=true;
+  box.setAttribute('aria-label','오늘 고정수입·지출 알림');
+  box.setAttribute('aria-live','polite');
+  box.innerHTML=`
+    <div class="fixed-recurring-reminder-head-422">
+      <div class="fixed-recurring-reminder-title-422">
+        <span class="fixed-recurring-reminder-icon-422" aria-hidden="true">📌</span>
+        <div><b>고정수입·지출 알림</b><span>오늘까지 확인하지 않은 고정항목입니다.</span></div>
+      </div>
+      <span class="fixed-recurring-reminder-count-422" id="fixedRecurringReminderCount422">0건</span>
+    </div>
+    <div class="fixed-recurring-reminder-rows-422" id="fixedRecurringReminderRows422"></div>`;
+  transfer.parentElement.insertBefore(box,transfer);
+  return box;
+}
+
+function openFixedRecurringSettlement422(kind,id){
+  if(kind==='card'){
+    if(typeof openRecurringCardSettleModal294==='function')openRecurringCardSettleModal294(id);
+    else if(typeof toggleRecurringCardSettlement==='function')toggleRecurringCardSettlement(id,true);
+    return;
+  }
+  if(typeof openRecurringSettleModal==='function')openRecurringSettleModal(id);
+}
+
+function renderFixedRecurringReminder422(){
+  const box=ensureFixedRecurringReminder422();
+  if(!box)return;
+  const rows=dueFixedRecurring422();
+  const list=document.getElementById('fixedRecurringReminderRows422');
+  const count=document.getElementById('fixedRecurringReminderCount422');
+  box.hidden=rows.length===0;
+  if(count)count.textContent=`${rows.length}건`;
+  if(!list)return;
+  list.innerHTML=rows.map(row=>{
+    const overdue=row.date<today();
+    const typeText=row.type==='income'?'고정수입':'고정지출';
+    const actionText=row.type==='income'?'입금 확인':row.kind==='card'?'승인 확인':'납부 확인';
+    return `<div class="fixed-recurring-reminder-row-422 ${overdue?'overdue-422':''}">
+      <div class="fixed-recurring-main-422">
+        <div class="fixed-recurring-name-422">
+          <span class="badge ${row.type==='income'?'income':'expense'}">${typeText}</span>
+          <strong>${esc(row.description)}</strong>
+        </div>
+        <div class="fixed-recurring-meta-422">
+          <span class="fixed-recurring-date-422 ${overdue?'overdue-422':'today-422'}">${overdue?'미확인 ': '오늘 '}${esc(row.date)}</span>
+          <span>${row.kind==='card'?'카드':'통장'} · ${esc(row.target)}</span>
+        </div>
+        <div class="fixed-recurring-amount-422">${won(row.amount)}</div>
+      </div>
+      <div class="fixed-recurring-actions-422">
+        <button type="button" class="small-btn primary" onclick='openFixedRecurringSettlement422(${JSON.stringify(row.kind)},${JSON.stringify(row.id)})'>${actionText}</button>
+        <button type="button" class="small-btn" onclick="switchTab('recurring')">고정내역 보기</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function forceVersion422(){
+  document.title='가계부 42.2차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='42.2차');
+  const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+  if(box){
+    const paragraph=box.querySelector('p');
+    const badge=box.querySelector('.badge');
+    if(paragraph)paragraph.innerHTML='<b>가계부 42.2차</b>가 적용되어 있습니다. 상단 월 변경 시 통장 거래 조회기간을 같은 월로 맞추고, 해당 날짜의 미확인 고정수입·고정지출을 상단에 알려줍니다.';
+    if(badge)badge.textContent='현재 버전 42.2차';
+  }
+}
+
+// 42.1차의 기존 버전 표시 호출도 42.2차 문구를 사용하도록 연결합니다.
+forceVersion421=forceVersion422;
+
+if(typeof renderAll==='function'&&!renderAll.__v422){
+  const renderAllBefore422=renderAll;
+  renderAll=function(){
+    const result=renderAllBefore422();
+    renderFixedRecurringReminder422();
+    forceVersion422();
+    return result;
+  };
+  renderAll.__v422=true;
+}
+
+syncAccountHistoryToMainMonth422({render:false});
+renderFixedRecurringReminder422();
+forceVersion422();
+window.addEventListener('load',()=>setTimeout(()=>{
+  syncAccountHistoryToMainMonth422({render:false});
+  renderFixedRecurringReminder422();
+  forceVersion422();
+},0));
+[900,1900,2800,4200,6500].forEach(delay=>setTimeout(forceVersion422,delay));
+const versionTitle422=document.querySelector('title');
+if(versionTitle422){
+  new MutationObserver(()=>{
+    if(document.title!=='가계부 42.2차')forceVersion422();
+  }).observe(versionTitle422,{childList:true,characterData:true,subtree:true});
+}
+</script>
+
 </body>
 </html>
