@@ -37059,5 +37059,375 @@ installPurposeExcelButtons42();
 window.addEventListener('load',()=>setTimeout(installPurposeExcelButtons42,0));
 </script>
 
+
+<!-- ===== 42차: 날짜정렬 + 목적자금 상세내역/엑셀 안정화 ===== -->
+<style id="v42-purpose-detail-sort-style">
+  .date-sort-toolbar-42{
+    display:flex;justify-content:flex-end;align-items:center;gap:8px;
+    margin:0 0 10px;padding:0;
+  }
+  .date-sort-button-42,.purpose-detail-action-42{
+    white-space:nowrap;
+  }
+  #purposeFundList .purpose-fund-detail-row-42{
+    cursor:pointer;
+  }
+  #purposeFundList .purpose-fund-detail-row-42:focus-visible{
+    outline:3px solid rgba(91,109,246,.24);outline-offset:3px;border-radius:16px;
+  }
+  #purposeFundList .purpose-fund-detail-row-42:hover{
+    border-color:rgba(91,109,246,.34);
+  }
+  .purpose-detail-controls-42{
+    display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:7px;
+    margin-top:9px;
+  }
+  .purpose-detail-summary-main-42{
+    display:block;
+  }
+  @media(max-width:720px){
+    .date-sort-toolbar-42{margin-bottom:8px}
+    .purpose-detail-controls-42{justify-content:stretch}
+    .purpose-detail-controls-42 .small-btn{flex:1 1 auto;text-align:center}
+  }
+</style>
+<script id="v42-purpose-detail-sort-script">
+// 데이터 배열과 저장 구조는 변경하지 않고, 표시 순서와 내보내기만 확장합니다.
+const DATE_SORT_KEY_42='household_book_date_sort_direction_42';
+let purposeDetailContext42={fundId:'',month:''};
+let dateSortInstallTimer42=0;
+
+function dateSortDirection42(){
+  try{
+    const saved=localStorage.getItem(DATE_SORT_KEY_42);
+    if(saved==='asc'||saved==='desc')return saved;
+  }catch(error){}
+  return 'asc';
+}
+function dateSortLabel42(direction=dateSortDirection42()){
+  return direction==='desc'?'최근순':'오래된순';
+}
+function setDateSortDirection42(direction,{refreshPurpose=true}={}){
+  const next=direction==='desc'?'desc':'asc';
+  try{localStorage.setItem(DATE_SORT_KEY_42,next)}catch(error){}
+  document.querySelectorAll('[data-date-sort-button42]').forEach(button=>{
+    button.textContent=`⇅ ${dateSortLabel42(next)}`;
+    button.title=next==='desc'?'최근 날짜부터 표시합니다.':'오래된 날짜부터 표시합니다.';
+  });
+  applyVisibleDateSort42();
+  if(refreshPurpose&&purposeDetailContext42.fundId&&document.getElementById('monthlyDetailModal')?.classList.contains('show')){
+    showPurposeFundDetail42(purposeDetailContext42.fundId,purposeDetailContext42.month,false);
+  }
+}
+function toggleDateSort42(options={}){
+  setDateSortDirection42(dateSortDirection42()==='asc'?'desc':'asc',options);
+}
+function fullDateFromText42(value){
+  const match=String(value||'').match(/(?:19|20)\d{2}[-./]\d{1,2}[-./]\d{1,2}/);
+  if(!match)return '';
+  const parts=match[0].replace(/[./]/g,'-').split('-');
+  return `${parts[0]}-${String(Number(parts[1])).padStart(2,'0')}-${String(Number(parts[2])).padStart(2,'0')}`;
+}
+function rowDate42(row){
+  if(!row)return '';
+  const preferred=[
+    ...row.querySelectorAll('[data-label*="날짜"],[data-label*="일자"],[data-label*="반영일"],[data-label*="사용일"]')
+  ];
+  for(const element of preferred){
+    const date=fullDateFromText42(element.textContent);
+    if(date)return date;
+  }
+  return fullDateFromText42(row.textContent);
+}
+function sortTableBody42(tbody){
+  if(!tbody)return false;
+  const rows=[...tbody.children].filter(row=>row.tagName==='TR');
+  if(rows.length<2)return false;
+  const dated=rows.map((row,index)=>{
+    if(!row.dataset.dateSortOriginal42)row.dataset.dateSortOriginal42=String(index);
+    return {row,date:rowDate42(row),original:Number(row.dataset.dateSortOriginal42||index)};
+  });
+  if(dated.some(item=>!item.date))return false;
+  const direction=dateSortDirection42();
+  dated.sort((a,b)=>{
+    const compared=a.date.localeCompare(b.date);
+    if(compared!==0)return direction==='desc'?-compared:compared;
+    return a.original-b.original;
+  });
+  const changed=dated.some((item,index)=>rows[index]!==item.row);
+  if(changed)dated.forEach(item=>tbody.appendChild(item.row));
+  return true;
+}
+function ensureTableSortToolbar42(table){
+  if(!table||!table.getClientRects().length)return;
+  if(table.closest('#monthlyDetailBody')&&purposeDetailContext42.fundId){
+    table.dataset.dateSortInstalled42='1';
+    table.querySelectorAll('tbody').forEach(sortTableBody42);
+    return;
+  }
+  if(table.dataset.dateSortInstalled42==='1'){
+    table?.querySelectorAll('tbody').forEach(sortTableBody42);
+    return;
+  }
+  const body=[...table.tBodies].find(tbody=>{
+    const rows=[...tbody.rows];
+    return rows.length>=2&&rows.every(row=>Boolean(rowDate42(row)));
+  });
+  if(!body)return;
+  const host=table.closest('.table-wrap')||table;
+  let toolbar=host.previousElementSibling;
+  if(!toolbar?.matches?.('[data-date-sort-toolbar42]')){
+    toolbar=document.createElement('div');
+    toolbar.className='date-sort-toolbar-42';
+    toolbar.dataset.dateSortToolbar42='1';
+    toolbar.innerHTML=`<button type="button" class="small-btn date-sort-button-42" data-date-sort-button42="1" title="날짜 정렬을 바꿉니다.">⇅ ${dateSortLabel42()}</button>`;
+    toolbar.querySelector('button')?.addEventListener('click',event=>{
+      event.preventDefault();event.stopPropagation();toggleDateSort42({refreshPurpose:false});
+    });
+    host.insertAdjacentElement('beforebegin',toolbar);
+  }else{
+    const button=toolbar.querySelector('[data-date-sort-button42]');
+    if(button){button.textContent=`⇅ ${dateSortLabel42()}`;button.title='날짜 정렬을 바꿉니다.'}
+  }
+  table.dataset.dateSortInstalled42='1';
+  sortTableBody42(body);
+}
+function applyVisibleDateSort42(){
+  document.querySelectorAll('table[data-date-sort-installed42="1"] tbody').forEach(sortTableBody42);
+}
+function installVisibleDateSort42(){
+  document.querySelectorAll('table').forEach(table=>{
+    const style=getComputedStyle(table);
+    if(style.display==='none'||table.closest('[hidden]')||!table.getClientRects().length)return;
+    ensureTableSortToolbar42(table);
+  });
+  applyVisibleDateSort42();
+}
+function scheduleVisibleDateSort42(){
+  clearTimeout(dateSortInstallTimer42);
+  dateSortInstallTimer42=setTimeout(installVisibleDateSort42,80);
+}
+
+function purposeRowsForFund42(month,fundId){
+  const rows=typeof budgetUsageRows412==='function'
+    ?budgetUsageRows412(month,'purpose')
+    :[];
+  return rows.filter(row=>{
+    const source=row?.purposeFundId||row?.budgetSource||row?.raw?.budgetSource||'';
+    return source===fundId;
+  });
+}
+function sortedPurposeRows42(month,fundId){
+  const direction=dateSortDirection42();
+  return purposeRowsForFund42(month,fundId)
+    .map((row,index)=>({row,index}))
+    .sort((a,b)=>{
+      const compared=String(a.row?.date||'').localeCompare(String(b.row?.date||''));
+      if(compared!==0)return direction==='desc'?-compared:compared;
+      return a.index-b.index;
+    })
+    .map(item=>item.row);
+}
+function purposeAvailableForDetail42(fund,month){
+  try{
+    const metrics=budgetMetrics27(month);
+    const detail=(metrics?.purposeFundDetails||metrics?.purposeDetails||[]).find(item=>item.id===fund.id);
+    if(detail)return Number(detail.available||0);
+  }catch(error){}
+  try{return Number(purposeAvailable(fund,month)||0)}catch(error){return 0}
+}
+function showPurposeFundDetail42(fundId,month='',open=true){
+  const fund=typeof purposeFundById==='function'?purposeFundById(fundId):null;
+  if(!fund){alert('목적자금을 찾을 수 없습니다.');return}
+  const selectedMonth=month||document.getElementById('mainMonth')?.value||currentMonth();
+  const rows=sortedPurposeRows42(selectedMonth,fundId);
+  const used=rows.reduce((sum,row)=>sum+Number(row.budgetImpact412??row.amount??0),0);
+  const available=purposeAvailableForDetail42(fund,selectedMonth);
+  const title=document.getElementById('monthlyDetailTitle');
+  const summary=document.getElementById('monthlyDetailSummary');
+  const body=document.getElementById('monthlyDetailBody');
+  if(!title||!summary||!body)return;
+  purposeDetailContext42={fundId,month:selectedMonth};
+  title.textContent=`${Number(selectedMonth.slice(5,7))}월 ${fund.name} 사용내역`;
+  summary.innerHTML=`
+    <span class="purpose-detail-summary-main-42">
+      사용 <b>${won(used)}</b> · 남음
+      <b class="${available<0?'negative':'positive'}">${signedWon273(available)}</b> · ${rows.length}건
+    </span>
+    <span class="purpose-detail-controls-42">
+      <button type="button" class="small-btn date-sort-button-42" data-date-sort-button42="1"
+        onclick="toggleDateSort42()">⇅ ${dateSortLabel42()}</button>
+      <button type="button" class="small-btn purpose-detail-action-42"
+        onclick="exportPurposeFundExcel42('${fund.id}')">엑셀 저장</button>
+    </span>`;
+  body.innerHTML=typeof budgetUsageTable412==='function'
+    ?budgetUsageTable412(rows)
+    :'<div class="empty">사용내역을 표시할 수 없습니다.</div>';
+  body.querySelectorAll('[data-date-sort-toolbar42]').forEach(element=>element.remove());
+  if(open)openDialog('monthlyDetailModal');
+  scheduleVisibleDateSort42();
+}
+
+function installPurposeFundDetailRows42(){
+  const list=document.getElementById('purposeFundList');
+  if(!list)return;
+  // 이전 버전에서 목록에 직접 붙였던 엑셀 버튼은 제거합니다.
+  list.querySelectorAll('[data-purpose-excel-sort42],[data-purpose-excel-export42]').forEach(button=>button.remove());
+  const month=document.getElementById('mainMonth')?.value||currentMonth();
+  let funds=[];
+  try{
+    const metrics=typeof mainDateMetrics361==='function'?mainDateMetrics361():null;
+    funds=(metrics?.purposeDetails||metrics?.purposeFundDetails||[]).map(item=>purposeFundById(item.id)||item);
+  }catch(error){}
+  if(!funds.length){
+    funds=(state.purposeFunds||[]).filter(fund=>!fund.startMonth||fund.startMonth<=month);
+  }
+  const rows=[...list.children].filter(element=>element.classList?.contains('two-line-row'));
+  rows.forEach((row,index)=>{
+    const fund=funds[index];
+    if(!fund)return;
+    row.classList.add('purpose-fund-detail-row-42');
+    row.dataset.purposeFundDetail42=fund.id;
+    row.tabIndex=0;
+    row.setAttribute('role','button');
+    row.title=`${fund.name} 사용내역 보기`;
+    const actions=row.querySelector('.row-sub>span:last-child');
+    if(actions&&!actions.querySelector('[data-purpose-detail-open42]')){
+      const button=document.createElement('button');
+      button.type='button';
+      button.className='small-btn purpose-detail-action-42';
+      button.dataset.purposeDetailOpen42=fund.id;
+      button.textContent='내역 보기';
+      button.addEventListener('click',event=>{
+        event.preventDefault();event.stopPropagation();showPurposeFundDetail42(fund.id,month);
+      });
+      actions.prepend(button);
+    }
+  });
+  if(list.dataset.purposeDetailBound42!=='1'){
+    list.dataset.purposeDetailBound42='1';
+    list.addEventListener('click',event=>{
+      if(event.target.closest('button,a,input,select,textarea,label'))return;
+      const row=event.target.closest('[data-purpose-fund-detail42]');
+      if(row)showPurposeFundDetail42(row.dataset.purposeFundDetail42,document.getElementById('mainMonth')?.value||currentMonth());
+    });
+    list.addEventListener('keydown',event=>{
+      if(event.key!=='Enter'&&event.key!==' ')return;
+      if(event.target.closest('button,a,input,select,textarea,label'))return;
+      const row=event.target.closest('[data-purpose-fund-detail42]');
+      if(!row)return;
+      event.preventDefault();
+      showPurposeFundDetail42(row.dataset.purposeFundDetail42,document.getElementById('mainMonth')?.value||currentMonth());
+    });
+  }
+}
+
+// 기존 renderBudget 래퍼가 이 함수를 호출하므로, 목록 버튼 대신 상세 연결만 설치하도록 교체합니다.
+installPurposeExcelButtons42=function(){
+  installPurposeFundDetailRows42();
+  scheduleVisibleDateSort42();
+};
+
+// 화면과 엑셀의 날짜 순서를 같은 설정으로 사용합니다.
+purposeExcelSortDirection42=function(){return dateSortDirection42()};
+purposeExcelSortLabel42=function(){return dateSortLabel42()};
+togglePurposeExcelSort42=function(){toggleDateSort42()};
+
+// 목적자금 상세화면과 동일한 거래 원본을 엑셀에도 사용합니다.
+purposeExcelUsageRows42=function(fundId,month){
+  return sortedPurposeRows42(month,fundId).map(row=>{
+    const raw=row?.raw||{};
+    const isCard=row?.kind==='card';
+    const allocation=row?.budgetAllocation414||{};
+    const impact=Number(row?.budgetImpact412??row?.amount??0);
+    const excluded=isCard&&typeof cardReimbursementBudgetExcluded368==='function'
+      ?Number(cardReimbursementBudgetExcluded368(raw)||0)
+      :0;
+    const installment=isCard
+      ?(allocation.mode==='schedule'
+        ?`${Number(allocation.scheduleIndex||0)+1}/${Number(allocation.count||1)}회 · 청구월별 반영`
+        :'사용월 전체 반영')
+      :'직접 지출';
+    const memo=[row?.memo||raw.memo||'',excluded>0?`대신 받을 금액 ${won(excluded)} 제외`:'' ]
+      .filter(Boolean).join(' · ');
+    return {
+      sortDate:row?.date||raw.date||'',
+      reflectedDate:row?.date||raw.date||'',
+      actualDate:raw.date||row?.date||'',
+      paymentType:isCard?'카드':'통장',
+      source:row?.sourceName||(isCard?(cardById(raw.cardId)?.name||'삭제된 카드'):(accountById(raw.accountId)?.name||'삭제된 통장')),
+      title:row?.title||(isCard?(raw.merchant||'카드 사용'):(raw.description||'통장 지출')),
+      major:row?.major||raw.majorCategory||'',
+      sub:row?.sub||raw.subCategory||'',
+      amount:impact,
+      memo,
+      installment
+    };
+  });
+};
+purposeExcelReceiptRows42=function(fundId,month){
+  const direction=dateSortDirection42();
+  return (Array.isArray(state.purposeFundingReceipts)?state.purposeFundingReceipts:[])
+    .filter(row=>row.fundId===fundId&&(row.date||'').slice(0,7)===month)
+    .map((row,index)=>({row,index}))
+    .sort((a,b)=>{
+      const compared=String(a.row.date||'').localeCompare(String(b.row.date||''));
+      if(compared!==0)return direction==='desc'?-compared:compared;
+      return a.index-b.index;
+    })
+    .map(({row})=>({
+      date:row.date||'',amount:Number(row.amount||0),
+      account:accountById(row.accountId)?.name||'통장 미반영',memo:row.memo||''
+    }));
+};
+
+// 모바일 미리보기에서도 빈 문서로 보이지 않도록 워크시트 XML 순서와 사용범위를 보완합니다.
+const purposeExcelWorkbookFilesBeforeStable42=purposeExcelWorkbookFiles42;
+purposeExcelWorkbookFiles42=function(fund,month,usageRows,receiptRows){
+  const files=purposeExcelWorkbookFilesBeforeStable42(fund,month,usageRows,receiptRows);
+  const key='xl/worksheets/sheet1.xml';
+  let xml=String(files[key]||'');
+  if(!xml)return files;
+  const rowNumbers=[...xml.matchAll(/<row\s+r="(\d+)"/g)].map(match=>Number(match[1]||0));
+  const lastRow=Math.max(1,...rowNumbers);
+  if(!/<dimension\s+ref=/.test(xml)){
+    xml=xml.replace(
+      /(<worksheet[^>]*>)/,
+      `$1\n  <dimension ref="A1:K${lastRow}"/>`
+    );
+  }
+  if(!/<sheetFormatPr\b/.test(xml)){
+    xml=xml.replace('</sheetViews>','</sheetViews>\n  <sheetFormatPr defaultRowHeight="15"/>');
+  }
+  const auto=(xml.match(/\s*<autoFilter\b[^>]*\/>/)||[])[0]||'';
+  const merges=(xml.match(/\s*<mergeCells\b[\s\S]*?<\/mergeCells>/)||[])[0]||'';
+  xml=xml.replace(/\s*<autoFilter\b[^>]*\/>/,'').replace(/\s*<mergeCells\b[\s\S]*?<\/mergeCells>/,'');
+  const tail=`${auto?`\n  ${auto.trim()}`:''}${merges?`\n  ${merges.trim()}`:''}\n  <pageMargins left="0.3" right="0.3" top="0.5" bottom="0.5" header="0.2" footer="0.2"/>\n`;
+  xml=xml.replace(/\s*<\/worksheet>\s*$/,`${tail}</worksheet>`);
+  files[key]=xml;
+  return files;
+};
+
+// 모달을 닫으면 목적자금 상세 문맥만 해제합니다.
+const closeDialogBeforePurposeDetail42=closeDialog;
+closeDialog=function(id){
+  const result=closeDialogBeforePurposeDetail42(id);
+  if(id==='monthlyDetailModal')purposeDetailContext42={fundId:'',month:''};
+  return result;
+};
+
+installPurposeFundDetailRows42();
+scheduleVisibleDateSort42();
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    installPurposeFundDetailRows42();
+    installVisibleDateSort42();
+  },0);
+});
+const dateSortObserver42=new MutationObserver(scheduleVisibleDateSort42);
+dateSortObserver42.observe(document.body,{childList:true,subtree:true});
+document.addEventListener('click',scheduleVisibleDateSort42,true);
+</script>
+
 </body>
 </html>
