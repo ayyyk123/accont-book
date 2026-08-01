@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=42.1" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=42.1" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 42.1차</title>
+<title>가계부 42.3차</title>
 <link href="manifest.json?v=42.1" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -7471,11 +7471,11 @@ html,body,button,[role="button"],tr[role="button"]{
 
 </head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">42.1차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">42.3차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">42.1차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">42.3차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="desktop-actions"><button class="primary-btn" onclick="openTransactionRegister389()" type="button">거래등록</button></div>
 <button class="primary-btn mobile-only" onclick="openQuickMenu()" type="button">+ 입력</button>
 </header>
@@ -7622,7 +7622,7 @@ html,body,button,[role="button"],tr[role="button"]{
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:smart:2:즐겨찾기 관리" data-collapse-title320="즐겨찾기 관리"><div class="section-head"><div><h2>즐겨찾기 관리</h2><div class="subtle" style="margin-top:5px">자주 입력하는 거래를 저장해 한 번에 불러옵니다.</div></div><button class="small-btn primary" onclick="openFavoriteModal()" type="button">+ 즐겨찾기 만들기</button><button aria-expanded="false" aria-label="즐겨찾기 관리 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="grid-3" id="favoriteManager"></div></div></div>
 </section>
 <section class="panel" id="settings"><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:settings:0:백업·설정·기능 안내" data-collapse-title320="백업·설정·기능 안내"><div class="section-head"><h2>백업·설정·기능 안내</h2><button aria-expanded="false" aria-label="백업·설정·기능 안내 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="settings-grid">
-<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 42.1차</b>가 적용되어 있습니다. 날짜 정렬과 목적자금 상세·엑셀 기능을 보완했습니다.</p><span class="badge fixed">현재 버전 42.1차</span></div></div>
+<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 42.3차</b>가 적용되어 있습니다. 42.2차 기능을 유지하면서 날짜 정렬 버튼 재부착을 보완했습니다.</p><span class="badge fixed">현재 버전 42.3차</span></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:1:☁️ Firebase 자동 동기화" data-collapse-title320="☁️ Firebase 자동 동기화" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>☁️ Firebase 자동 동기화</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" onclick="forceCloudUpload()" type="button">현재 자료를 클라우드에 저장</button></div><button aria-expanded="false" aria-label="☁️ Firebase 자동 동기화 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_1"><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:2:선택 백업" data-collapse-title320="선택 백업" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>선택 백업</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="exportBackup()" type="button">백업 파일 저장</button></div><button aria-expanded="false" aria-label="선택 백업 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_2"><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions settings-body-controls-315"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select></div><div class="backup-proof" id="lastBackupProof"></div></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:3:백업 불러오기" data-collapse-title320="백업 불러오기"><div class="settings-title-row-315"><h3>백업 불러오기</h3><button aria-expanded="false" aria-label="백업 불러오기 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input accept=".json" id="backupInput" onchange="importBackup(event)" type="file"/></div></div>
@@ -38056,6 +38056,100 @@ if(versionTitle422){
     if(document.title!=='가계부 42.2차')forceVersion422();
   }).observe(versionTitle422,{childList:true,characterData:true,subtree:true});
 }
+</script>
+
+
+
+<!-- ===== 42.3차: 날짜정렬 버튼 재부착 안정화 ===== -->
+<style id="v423-date-sort-reattach-style">
+  .date-sort-toolbar-42{display:flex!important;align-items:center;justify-content:flex-end;gap:6px}
+  .date-sort-toolbar-42[hidden]{display:none!important}
+</style>
+<script id="v423-date-sort-reattach-script">
+// 42.3차는 저장 데이터와 계산식을 바꾸지 않고, 화면이 다시 그려질 때 날짜 정렬 버튼을 재부착합니다.
+let dateSortRefreshTimer423=0;
+
+function ensureDateSortControls423(){
+  try{
+    if(typeof installVisibleDateSort42==='function')installVisibleDateSort42();
+  }catch(error){console.warn('42.3 날짜표 정렬 설치 실패',error)}
+  try{
+    if(typeof installAccountHistorySort421==='function')installAccountHistorySort421();
+  }catch(error){console.warn('42.3 통장 거래 정렬 설치 실패',error)}
+  try{
+    if(typeof installExtraDateLists421==='function')installExtraDateLists421();
+  }catch(error){console.warn('42.3 날짜목록 정렬 설치 실패',error)}
+  try{
+    document.querySelectorAll('table').forEach(table=>{
+      if(table.closest('[hidden]'))return;
+      const style=getComputedStyle(table);
+      if(style.display==='none'||!table.getClientRects().length)return;
+      if(typeof ensureTableSortToolbar42==='function')ensureTableSortToolbar42(table);
+    });
+  }catch(error){console.warn('42.3 날짜표 재확인 실패',error)}
+  try{
+    if(typeof applyVisibleDateSort42==='function')applyVisibleDateSort42();
+  }catch(error){console.warn('42.3 날짜 정렬 적용 실패',error)}
+}
+
+function scheduleDateSortControls423(delay=30){
+  clearTimeout(dateSortRefreshTimer423);
+  dateSortRefreshTimer423=setTimeout(()=>{
+    ensureDateSortControls423();
+    setTimeout(ensureDateSortControls423,120);
+  },Math.max(0,Number(delay)||0));
+}
+
+function wrapDateSortRefresh423(name){
+  const original=window[name];
+  if(typeof original!=='function'||original.__v423DateSort)return;
+  const wrapped=function(...args){
+    const result=original.apply(this,args);
+    scheduleDateSortControls423(0);
+    return result;
+  };
+  Object.defineProperty(wrapped,'__v423DateSort',{value:true});
+  window[name]=wrapped;
+}
+
+[
+  'renderAll','renderPurchases','renderPayments','renderAccounts','renderCards',
+  'renderBudget','renderRecurring','renderGlobalSearch','renderAccountHistory364',
+  'openAccountHistory364','showPurposeFundDetail42','openInvestmentHistory394',
+  'switchTab','openDialog'
+].forEach(wrapDateSortRefresh423);
+
+function forceVersion423(){
+  document.title='가계부 42.3차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='42.3차');
+  const box=[...document.querySelectorAll('#settings .settings-box')]
+    .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+  if(box){
+    const paragraph=box.querySelector('p');
+    const badge=box.querySelector('.badge');
+    if(paragraph)paragraph.innerHTML='<b>가계부 42.3차</b>가 적용되어 있습니다. 42.2차 기능을 유지하면서 날짜별 내역 화면이 다시 그려져도 오래된순·최근순 정렬 버튼이 빠지지 않도록 보완했습니다.';
+    if(badge)badge.textContent='현재 버전 42.3차';
+  }
+}
+
+try{forceVersion422=forceVersion423}catch(error){}
+try{forceVersion421=forceVersion423}catch(error){}
+
+['click','change'].forEach(type=>document.addEventListener(type,()=>scheduleDateSortControls423(20),true));
+window.addEventListener('load',()=>scheduleDateSortControls423(0));
+window.addEventListener('pageshow',()=>scheduleDateSortControls423(0));
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden)scheduleDateSortControls423(0);
+});
+
+const dateSortObserver423=new MutationObserver(()=>scheduleDateSortControls423(20));
+dateSortObserver423.observe(document.body,{childList:true,subtree:true});
+
+forceVersion423();
+[0,120,400,900,1800].forEach(delay=>setTimeout(()=>{
+  forceVersion423();
+  ensureDateSortControls423();
+},delay));
 </script>
 
 </body>
