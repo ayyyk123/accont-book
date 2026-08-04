@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
   <link rel="shortcut icon" href="./favicon.ico" />
-  <title>경매 입찰·대출 자금 계산기 v1.9</title>
+  <title>경매 입찰·대출 자금 계산기 v1.9.1</title>
   <style>
     :root{
       --bg:#f3f4f6; --card:#ffffff; --text:#111827; --muted:#6b7280;
@@ -169,6 +169,7 @@
     .header-tools-row{display:flex;align-items:center;justify-content:flex-end;gap:7px;width:100%}
     .header-tools-row .tools-details{flex:1;min-width:0}
     .header-tools-row > .btn{white-space:nowrap}
+    #changeEmailBtn{border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8}
     .tools-details{width:100%}
     .tools-details summary{cursor:pointer;color:#475569;font-size:12px;font-weight:800;text-align:right;list-style:none}
     .tools-details summary::-webkit-details-marker{display:none}
@@ -410,12 +411,12 @@
       <div class="auth-row">
         <span class="user-email" id="userEmail">로그인하지 않음</span>
         <button class="btn" id="loginBtn" type="button">이메일 로그인</button>
-        <button class="btn light" id="changeEmailBtn" type="button" hidden>이메일 수정</button>
         <button class="btn light" id="logoutBtn" type="button" hidden>로그아웃</button>
       </div>
       <div class="sync-status" id="syncStatus">이메일 로그인 후 PC·핸드폰 자동동기화</div>
       <div class="header-tools-row">
         <button class="btn secondary" id="syncAllBtn" type="button">최신자료 저장</button>
+        <button class="btn light" id="changeEmailBtn" type="button">로그인 이메일 수정</button>
         <details class="tools-details">
           <summary>백업·인쇄 도구 ▾</summary>
           <div class="actions" style="margin-top:7px">
@@ -899,7 +900,7 @@
     <button class="btn light" id="mobileNewBtn" type="button">새 계산</button>
   </div>
 
-  <footer>이메일·비밀번호 로그인 · Firebase 자동동기화 · v1.9 자동세금·이메일수정 · 실제 대출한도는 금융사 심사에 따라 달라질 수 있습니다.</footer>
+  <footer>이메일·비밀번호 로그인 · Firebase 자동동기화 · v1.9.1 이메일수정버튼 고정 · 실제 대출한도는 금융사 심사에 따라 달라질 수 있습니다.</footer>
 </div>
 
 
@@ -2520,7 +2521,7 @@ const db = getFirestore(firebaseApp);
     const loggedIn = !!currentUser;
     $("userEmail").textContent = loggedIn ? `이메일: ${friendlyUserId(currentUser)}` : "로그인하지 않음";
     $("loginBtn").hidden = loggedIn;
-    $("changeEmailBtn").hidden = !loggedIn;
+    $("changeEmailBtn").disabled = !loggedIn;
     $("logoutBtn").hidden = !loggedIn;
     setSaveButtonsDisabled(!cloudReady);
     $("importFile").disabled = !cloudReady;
@@ -2837,7 +2838,10 @@ const db = getFirestore(firebaseApp);
   $("actualBidModal").addEventListener("click", e => { if (e.target === $("actualBidModal")) closeActualBid(); });
 
   $("changeEmailBtn").addEventListener("click", () => {
-    if (!auth.currentUser) return;
+    if (!auth.currentUser){
+      alert("먼저 현재 경매계산기 계정으로 로그인해주세요.");
+      return;
+    }
     $("currentLoginEmail").value = auth.currentUser.email || "";
     $("newLoginEmail").value = "";
     $("emailChangePassword").value = "";
