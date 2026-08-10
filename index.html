@@ -39065,5 +39065,209 @@ window.addEventListener('load',()=>setTimeout(()=>{
 [900,1900,3400,5100,6800,8200].forEach(delay=>setTimeout(forceVersion431,delay));
 </script>
 
+
+<style id="v432-payment-header-and-fixed-count-style">
+/* ===== 43.2차: 카드명세서 상태 상단표시 + 고정알림 건수 표시 통일 ===== */
+.fixed-recurring-group-count-432{
+  padding:3px 6px;
+  border-radius:999px;
+  background:#eadffc;
+  color:#6743a6;
+  font-size:8px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.fixed-recurring-group-count-432.completed-432{
+  background:#dff5e8;
+  color:#21794e;
+}
+.statement-card-text-432.done-432{color:#16855a;font-weight:850}
+.statement-card-text-432.partial-432{color:#4b5563;font-weight:850}
+.statement-card-text-432.stale-432{color:#b45309;font-weight:850}
+</style>
+<script id="v432-payment-header-and-fixed-count-script">
+// ===== 43.2차: 카드값 상단 명세서 상태 표시 · 납부 미확인 문구 명확화 · 고정알림 건수표시 통일 =====
+function cardStatementRangeStatus432(card,months){
+  const statuses=(months||[]).map(monthData=>
+    cardStatementCheckStatus431(card.id,monthData.month,monthData.total)
+  );
+  if(!statuses.length)return 'none';
+  if(statuses.some(status=>status==='stale'))return 'stale';
+  if(statuses.every(status=>status==='done'))return 'done';
+  if(statuses.some(status=>status==='done'))return 'partial';
+  return 'none';
+}
+function cardStatementRangeText432(status){
+  if(status==='done')return '<span class="statement-card-text-432 done-432">명세서 확인완료</span>';
+  if(status==='stale')return '<span class="statement-card-text-432 stale-432">명세서 재확인 필요</span>';
+  if(status==='partial')return '<span class="statement-card-text-432 partial-432">명세서 일부 확인</span>';
+  return '';
+}
+
+paymentStatusText340=function(rows){
+  const total=(rows||[]).reduce((sum,row)=>sum+Number(row.amount||0),0);
+  const unpaid=(rows||[]).filter(row=>!row.paid).reduce((sum,row)=>sum+Number(row.amount||0),0);
+  if(!rows?.length)return '내역 없음';
+  if(unpaid===0)return '납부 완료';
+  if(unpaid===total)return `납부 미확인 ${won(unpaid)}`;
+  return `일부 납부 미확인 ${won(unpaid)}`;
+};
+
+paymentRangeSummaryHtml340=function(range,groups){
+  const total=(groups||[]).reduce((sum,group)=>sum+Number(group.total||0),0);
+  const unpaid=(groups||[]).reduce((sum,group)=>sum+Number(group.unpaid||0),0);
+  const monthCount=range.months.length;
+  return `
+    <div class="payment-range-summary-item-340">
+      <span>조회 기간</span><b>${range.start} ~ ${range.end}</b>
+    </div>
+    <div class="payment-range-summary-item-340">
+      <span>기간 합계</span><b>${won(total)}</b>
+    </div>
+    <div class="payment-range-summary-item-340">
+      <span>납부 미확인 금액</span><b>${won(unpaid)}</b>
+    </div>
+    <div class="payment-range-summary-item-340">
+      <span>조회 결과</span><b>${groups.length}개 카드 · ${monthCount}개월</b>
+    </div>`;
+};
+
+renderPayments=function(){
+  const range=normalizedPaymentRange340();
+  const summary=document.getElementById('paymentRangeSummary340');
+  const list=document.getElementById('paymentGroups');
+  if(!range||!summary||!list)return;
+
+  const schedules=allSchedules().filter(
+    row=>row.billingMonth>=range.start&&row.billingMonth<=range.end
+  );
+
+  const groups=(state.cards||[]).map(card=>{
+    const months=range.months.map(month=>{
+      const rows=schedules.filter(row=>row.card?.id===card.id&&row.billingMonth===month);
+      return {
+        month,rows,
+        total:rows.reduce((sum,row)=>sum+Number(row.amount||0),0),
+        unpaid:rows.filter(row=>!row.paid).reduce((sum,row)=>sum+Number(row.amount||0),0)
+      };
+    }).filter(item=>item.rows.length);
+    return {
+      card,months,
+      total:months.reduce((sum,item)=>sum+item.total,0),
+      unpaid:months.reduce((sum,item)=>sum+item.unpaid,0)
+    };
+  }).filter(group=>group.months.length);
+
+  summary.innerHTML=paymentRangeSummaryHtml340(range,groups);
+
+  list.innerHTML=groups.length?groups.map(group=>{
+    const open=Boolean(paymentCardOpenState340[group.card.id]);
+    const paid=group.total-group.unpaid;
+    const paymentStatus=group.unpaid===0
+      ?'기간 내 모두 납부 완료'
+      :paid>0
+        ?`납부 ${won(paid)} · 납부 미확인 ${won(group.unpaid)}`
+        :`납부 미확인 ${won(group.unpaid)}`;
+    const statementStatus=cardStatementRangeStatus432(group.card,group.months);
+    const statementText=cardStatementRangeText432(statementStatus);
+    const account=accountById(group.card.accountId)?.name||'통장 미지정';
+    return `
+      <div class="payment-card-range-340${open?' open-340':''}"
+        data-payment-card340="${esc(group.card.id)}">
+        <div class="payment-card-head-340">
+          <button type="button" class="payment-card-name-340"
+            onclick='togglePaymentCardRange340(${JSON.stringify(group.card.id)})'>
+            <span class="color-dot" style="background:${safeColor(group.card.color,'#6b7280')}"></span>
+            ${esc(group.card.name)}
+          </button>
+          <span class="payment-card-total-340">${won(group.total)}</span>
+          <span class="payment-card-meta-340">
+            ${range.start} ~ ${range.end} · ${group.months.length}개월 ·
+            ${esc(paymentStatus)}${statementText?` · ${statementText}`:''} · ${esc(account)}
+          </span>
+          <button type="button" class="payment-card-toggle-340"
+            onclick='togglePaymentCardRange340(${JSON.stringify(group.card.id)})'
+            aria-expanded="${open}"
+            aria-label="${esc(group.card.name)} 월별 금액 ${open?'접기':'펼치기'}">
+            ${open?'−':'+'}
+          </button>
+        </div>
+        <div class="payment-card-months-340">
+          ${group.months.map(monthData=>paymentMonthHtml340(group.card,monthData)).join('')}
+        </div>
+      </div>`;
+  }).join(''):'<div class="empty">선택한 기간에 결제예정인 카드값이 없습니다.</div>';
+};
+
+renderFixedRecurringReminder422=function(){
+  const box=ensureFixedRecurringReminder422();
+  if(!box)return;
+  const pending=dueFixedRecurring422();
+  const completed=completedFixedRecurringToday425();
+  const total=pending.length+completed.length;
+  box.hidden=total===0;
+  if(!total){box.innerHTML='';return}
+
+  const countText=pending.length&&completed.length
+    ?`미완료 ${pending.length} · 완료 ${completed.length}`
+    :pending.length?`미완료 ${pending.length}`:`완료 ${completed.length}`;
+
+  const group432=(key,title,rows,rowRenderer)=>{
+    if(!rows.length)return '';
+    const collapsed=Boolean(fixedRecurringGroupCollapsed430[key]);
+    const countClass=key==='completed'?' completed-432':'';
+    return `<section class="fixed-recurring-group-425">
+      <button type="button" class="fixed-recurring-group-toggle-430" aria-expanded="${collapsed?'false':'true'}" onclick="toggleFixedRecurringGroup430('${key}')">
+        <span class="fixed-recurring-group-head-425"><b>${title}</b><span class="fixed-recurring-group-count-432${countClass}">${rows.length}건</span></span>
+        <span class="fixed-recurring-group-arrow-430" aria-hidden="true">${collapsed?'+':'−'}</span>
+      </button>
+      <div class="fixed-recurring-group-body-430" ${collapsed?'hidden':''}>
+        <div class="fixed-recurring-reminder-rows-422">${rows.map(rowRenderer).join('')}</div>
+      </div>
+    </section>`;
+  };
+
+  box.innerHTML=`
+    <div class="fixed-recurring-reminder-head-422">
+      <div class="fixed-recurring-reminder-title-422">
+        <span class="fixed-recurring-reminder-icon-422" aria-hidden="true">📌</span>
+        <div><b>고정수입·지출 알림</b><span>${pending.length?'확인할 항목과 오늘 완료한 내역입니다.':'오늘 완료한 내역입니다.'}</span></div>
+      </div>
+      <span class="fixed-recurring-reminder-count-422">${countText}</span>
+    </div>
+    <div class="fixed-recurring-groups-425">
+      ${group432('pending','미완료 고정항목',pending,fixedRecurringPendingRow425)}
+      ${group432('completed','오늘 완료한 고정항목',completed,fixedRecurringCompletedRow425)}
+    </div>`;
+};
+
+function forceVersion432(){
+  document.title='가계부 43.2차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.2차');
+  const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+  if(box){
+    const paragraph=box.querySelector('p');
+    const badge=box.querySelector('.badge');
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.2차</b>가 적용되어 있습니다. 카드값 상단에서도 명세서 확인상태를 바로 확인할 수 있고, 카드값의 미확인 문구를 납부 미확인으로 명확히 했으며, 고정수입·지출 알림의 건수 표시를 이체 알림과 같은 배지 방식으로 통일했습니다.';
+    if(badge)badge.textContent='현재 버전 43.2차';
+  }
+}
+forceVersion431=forceVersion432;
+forceVersion430=forceVersion432;
+forceVersion426=forceVersion432;
+forceVersion425=forceVersion432;
+forceVersion422=forceVersion432;
+forceVersion421=forceVersion432;
+forceVersion42=forceVersion432;
+
+try{renderPayments();renderFixedRecurringReminder422();}catch(error){console.error('43.2 화면 초기화 오류',error)}
+forceVersion432();
+window.addEventListener('load',()=>setTimeout(()=>{
+  try{renderPayments();renderFixedRecurringReminder422();}catch(error){console.error('43.2 화면 로드 오류',error)}
+  forceVersion432();
+},0));
+[900,1900,3400,5100,6800,8200].forEach(delay=>setTimeout(forceVersion432,delay));
+</script>
+
 </body>
 </html>
