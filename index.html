@@ -8,10 +8,10 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="가계부" name="apple-mobile-web-app-title"/>
-<link href="apple-touch-icon.png?v=43.5" rel="apple-touch-icon" sizes="180x180"/>
-<link href="icon-192.png?v=43.5" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 43.5차</title>
-<link href="manifest.json?v=43.5" rel="manifest"/>
+<link href="apple-touch-icon.png?v=43.6" rel="apple-touch-icon" sizes="180x180"/>
+<link href="icon-192.png?v=43.6" rel="icon" sizes="192x192" type="image/png"/>
+<title>가계부 43.6차</title>
+<link href="manifest.json?v=43.6" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
@@ -7469,13 +7469,26 @@ html,body,button,[role="button"],tr[role="button"]{
 }
 </style>
 
+<style id="v436-planned-income-style">
+.planned-income-option-436{margin-top:2px}
+.planned-income-toggle-436{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1px solid #cfe9dc;background:#f4fbf7;border-radius:14px;color:var(--text);cursor:pointer}
+.planned-income-toggle-436 input{margin-top:3px;width:18px;height:18px;accent-color:var(--good)}
+.planned-income-toggle-436 span{display:flex;flex-direction:column;gap:4px}
+.planned-income-toggle-436 small{font-size:12px;line-height:1.45;color:var(--muted)}
+.planned-income-reminder-436{border-color:#a9dfc2!important;background:#f3fbf6!important}
+.planned-income-icon-436{background:#ddf5e8!important}
+.planned-income-settle-hint-436{padding:12px 14px;border-radius:12px;background:#f6f7fb;color:var(--muted);line-height:1.6}
+.planned-income-list-section-436 .row-top,.planned-income-list-section-436 .row-sub{gap:10px}
+@media(max-width:640px){.planned-income-toggle-436{padding:11px 12px}.planned-income-list-section-436 .row-sub{align-items:flex-start;flex-direction:column}}
+</style>
+
 </head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">43.5차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">43.6차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">43.5차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">43.6차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="desktop-actions"><button class="primary-btn" onclick="openTransactionRegister389()" type="button">거래등록</button></div>
 <button class="primary-btn mobile-only" onclick="openQuickMenu()" type="button">+ 입력</button>
 </header>
@@ -7622,7 +7635,7 @@ html,body,button,[role="button"],tr[role="button"]{
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:smart:2:즐겨찾기 관리" data-collapse-title320="즐겨찾기 관리"><div class="section-head"><div><h2>즐겨찾기 관리</h2><div class="subtle" style="margin-top:5px">자주 입력하는 거래를 저장해 한 번에 불러옵니다.</div></div><button class="small-btn primary" onclick="openFavoriteModal()" type="button">+ 즐겨찾기 만들기</button><button aria-expanded="false" aria-label="즐겨찾기 관리 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="grid-3" id="favoriteManager"></div></div></div>
 </section>
 <section class="panel" id="settings"><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:settings:0:백업·설정·기능 안내" data-collapse-title320="백업·설정·기능 안내"><div class="section-head"><h2>백업·설정·기능 안내</h2><button aria-expanded="false" aria-label="백업·설정·기능 안내 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="settings-grid">
-<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.</p><span class="badge fixed">현재 버전 43.5차</span></div></div>
+<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.</p><span class="badge fixed">현재 버전 43.6차</span></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:1:☁️ Firebase 자동 동기화" data-collapse-title320="☁️ Firebase 자동 동기화" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>☁️ Firebase 자동 동기화</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" onclick="forceCloudUpload()" type="button">현재 자료를 클라우드에 저장</button></div><button aria-expanded="false" aria-label="☁️ Firebase 자동 동기화 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_1"><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:2:선택 백업" data-collapse-title320="선택 백업" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>선택 백업</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="exportBackup()" type="button">백업 파일 저장</button></div><button aria-expanded="false" aria-label="선택 백업 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_2"><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions settings-body-controls-315"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select></div><div class="backup-proof" id="lastBackupProof"></div></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:3:백업 불러오기" data-collapse-title320="백업 불러오기"><div class="settings-title-row-315"><h3>백업 불러오기</h3><button aria-expanded="false" aria-label="백업 불러오기 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input accept=".json" id="backupInput" onchange="importBackup(event)" type="file"/></div></div>
@@ -8710,7 +8723,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=43.5',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=43.6',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
@@ -27984,9 +27997,9 @@ renderInvestments353();
 const INVESTMENT_STATUS_FILTER399='investmentStatusFilter353';
 
 function forceVersion399(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -27995,10 +28008,10 @@ function forceVersion399(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -28625,9 +28638,9 @@ window.addEventListener('load',()=>{
 let investmentProfitFilterValue400='';
 
 function forceVersion400(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -28636,10 +28649,10 @@ function forceVersion400(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -29012,9 +29025,9 @@ window.addEventListener('load',()=>{
 // ===== 40.1차: 월말 예산 이월 선택 =====
 
 function forceVersion401(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -29023,10 +29036,10 @@ function forceVersion401(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -29409,9 +29422,9 @@ document.addEventListener('visibilitychange',()=>{
 // ===== 40.2차: 월별 예산 내역 + 원하는 월로 이월 =====
 
 function forceVersion402(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -29420,10 +29433,10 @@ function forceVersion402(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -30194,9 +30207,9 @@ window.addEventListener('load',()=>{
 // ===== 40.3차 최종 수정 =====
 
 function forceVersion403(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -30207,10 +30220,10 @@ function forceVersion403(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -31336,9 +31349,9 @@ setTimeout(forceVersion403,500);
 // ===== 40.4차: 투자지출 독립 표시 + 월별예산 기간 조회 =====
 
 function forceVersion404(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -31349,10 +31362,10 @@ function forceVersion404(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -31953,9 +31966,9 @@ setTimeout(()=>{
 // ===== 40.5차: 직접 지출의 투자수익 사용도 투자지출 내역에 표시 =====
 
 function forceVersion405(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -31966,10 +31979,10 @@ function forceVersion405(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -32319,9 +32332,9 @@ setTimeout(()=>{
 // ===== 40.6차: 투자수익으로 결제할 때 처리방식 선택 =====
 
 function forceVersion406(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -32332,10 +32345,10 @@ function forceVersion406(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -33124,10 +33137,10 @@ setTimeout(()=>{
 // ===== 40.7차: 투자 처리기능 유지 + 시작화면 반드시 해제 =====
 
 function forceVersion407(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
 
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -33138,12 +33151,12 @@ function forceVersion407(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '투자지출 처리방식 선택 기능을 유지하면서 시작화면 멈춤을 수정했습니다.';
     }
 
     if(badge){
-      badge.textContent='현재 버전 43.5차';
+      badge.textContent='현재 버전 43.6차';
     }
   }
 }
@@ -33300,10 +33313,10 @@ setTimeout(forceVersion407,2000);
 // ===== 40.8차: 월별 예산 함수 상호 재귀 차단 =====
 
 function forceVersion408(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
 
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -33314,12 +33327,12 @@ function forceVersion408(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '투자지출 처리방식은 유지하고 클라우드 불러오기 재귀호출 오류를 수정했습니다.';
     }
 
     if(badge){
-      badge.textContent='현재 버전 43.5차';
+      badge.textContent='현재 버전 43.6차';
     }
   }
 }
@@ -33511,10 +33524,10 @@ setTimeout(forceVersion408,2200);
 // ===== 41차: 원가 추가지출 / 개인소비 지출 구분조회 =====
 
 function forceVersion409(){
-  document.title='가계부 43.5차';
+  document.title='가계부 43.6차';
 
   document.querySelectorAll('.version-pill')
-    .forEach(element=>element.textContent='43.5차');
+    .forEach(element=>element.textContent='43.6차');
 
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -33525,12 +33538,12 @@ function forceVersion409(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 43.5차</b>가 적용되어 있습니다. '+
+        '<b>가계부 43.6차</b>가 적용되어 있습니다. '+
         '투자 관련 지출을 원가 추가지출과 개인소비 지출로 구분해 조회할 수 있습니다.';
     }
 
     if(badge){
-      badge.textContent='현재 버전 43.5차';
+      badge.textContent='현재 버전 43.6차';
     }
   }
 }
@@ -33904,17 +33917,17 @@ investmentRealizedProfit388=function(item,excludeFlowId=''){
 };
 
 function forceVersion410(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
   if(versionBox){
     const paragraph=versionBox.querySelector('p');
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
-      paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 투자원가의 확정손익 반영과 고정항목 실제 처리일 반영을 수정했습니다.';
+      paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 투자원가의 확정손익 반영과 고정항목 실제 처리일 반영을 수정했습니다.';
     }
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -33966,14 +33979,14 @@ setTimeout(()=>{
 // ===== 42차: 고정항목 과거상태 보존 + All 확인상태 + 최신자료 보호 =====
 
 function forceVersion411(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const versionBox=[...document.querySelectorAll('.settings-box')].find(box=>box.textContent.includes('현재 앱 버전'));
   if(versionBox){
     const paragraph=versionBox.querySelector('p');
     const badge=versionBox.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -34498,14 +34511,14 @@ const renderBudgetBefore412=renderBudget;
 renderBudget=function(){const result=renderBudgetBefore412();installBudgetDetailClicks412();return result};
 
 function forceVersion412(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 const buildBackupBefore412=buildBackup27;
@@ -34788,14 +34801,14 @@ const renderSelectorsBefore413=renderSelectors;
 renderSelectors=function(){const result=renderSelectorsBefore413();updatePurposeDetailFilter413();return result};
 
 function forceVersion413(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 const buildBackupBefore413=buildBackup27;
@@ -35435,15 +35448,15 @@ renderSelectors=function(){
   return result;
 };
 function forceVersion414(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 const buildBackupBefore414=buildBackup27;
@@ -35728,7 +35741,7 @@ function updateBudgetSourceFilterUI412(){const button=document.getElementById('a
 function installRepairStatus415(result){
   document.getElementById('repairStatus415')?.remove();
 }
-function forceVersion415(){document.title='가계부 43.5차';document.querySelectorAll('.version-pill').forEach(el=>el.textContent='43.5차');const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');if(box){const p=box.querySelector('p'),b=box.querySelector('.badge');if(p)p.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';if(b)b.textContent='현재 버전 43.5차'}}
+function forceVersion415(){document.title='가계부 43.6차';document.querySelectorAll('.version-pill').forEach(el=>el.textContent='43.6차');const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');if(box){const p=box.querySelector('p'),b=box.querySelector('.badge');if(p)p.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';if(b)b.textContent='현재 버전 43.6차'}}
 const buildBackupBefore415=buildBackup27;buildBackup27=function(scope='all'){const data=buildBackupBefore415(scope);data.backupVersion='42';return data};
 
 const resolveCloudDifferenceBefore415=resolveCloudDifference411;
@@ -35751,13 +35764,13 @@ setTimeout(()=>{forceVersion415();updateBudgetSourceFilterUI412();updateFixedFil
 const APP_VERSION_417='42';
 
 function forceVersion417(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(b)b.textContent='현재 버전 43.5차';
+    if(p)p.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(b)b.textContent='현재 버전 43.6차';
   }
   document.getElementById('refreshLatestButton412')?.remove();
   document.getElementById('repairStatus415')?.remove();
@@ -35991,14 +36004,14 @@ const APP_VERSION_42='42';
 const LAST_CLOUD_SYNC_KEY_42='household_book_last_cloud_sync_success_42';
 
 function forceVersion42(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(b)b.textContent='현재 버전 43.5차';
+    if(p)p.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(b)b.textContent='현재 버전 43.6차';
   }
 }
 
@@ -36588,13 +36601,13 @@ installSyncSafetyBox411=function(){
 };
 
 function applySyncGuardVersionText421(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(b)b.textContent='현재 버전 43.5차';
+    if(p)p.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(b)b.textContent='현재 버전 43.6차';
   }
   installSyncSafetyBox411();
 }
@@ -37706,14 +37719,14 @@ setDateSortDirection42=function(direction,{refreshPurpose=true}={}){
 };
 
 function forceVersion421(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 if(typeof renderAll==='function'&&!renderAll.__v421){
@@ -38028,14 +38041,14 @@ function renderFixedRecurringReminder422(){
 }
 
 function forceVersion422(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 
@@ -38065,7 +38078,7 @@ window.addEventListener('load',()=>setTimeout(()=>{
 const versionTitle422=document.querySelector('title');
 if(versionTitle422){
   new MutationObserver(()=>{
-    if(document.title!=='가계부 43.5차')forceVersion422();
+    if(document.title!=='가계부 43.6차')forceVersion422();
   }).observe(versionTitle422,{childList:true,characterData:true,subtree:true});
 }
 </script>
@@ -38475,14 +38488,14 @@ deleteCashflow=function(id){
 };
 
 function forceVersion425(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 forceVersion422=forceVersion425;
@@ -38590,14 +38603,14 @@ function repairPurposeDebtLinks426(){
 }
 
 function forceVersion426(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 forceVersion425=forceVersion426;
@@ -38865,14 +38878,14 @@ renderFixedRecurringReminder422=function(){
 };
 
 function forceVersion430(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 forceVersion426=forceVersion430;
@@ -39041,14 +39054,14 @@ paymentMonthHtml340=function(card,monthData){
 };
 
 function forceVersion431(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 forceVersion430=forceVersion431;
@@ -39244,14 +39257,14 @@ renderFixedRecurringReminder422=function(){
 };
 
 function forceVersion433(){
-  document.title='가계부 43.5차';
-  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.5차');
+  document.title='가계부 43.6차';
+  document.querySelectorAll('.version-pill').forEach(element=>element.textContent='43.6차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 43.5차</b>가 적용되어 있습니다. 카드 관리에 카드 메모 입력·표시 기능을 추가했습니다. 기존 카드·거래·계산 데이터 구조는 그대로 유지합니다.';
-    if(badge)badge.textContent='현재 버전 43.5차';
+    if(paragraph)paragraph.innerHTML='<b>가계부 43.6차</b>가 적용되어 있습니다. 소득 입력에서 예정소득 등록과 예정일 입금 확인 알림 기능을 추가했습니다. 확인 전에는 통장잔액·실제 소득에 반영되지 않습니다.';
+    if(badge)badge.textContent='현재 버전 43.6차';
   }
 }
 forceVersion431=forceVersion433;
@@ -39273,7 +39286,7 @@ window.addEventListener('load',()=>setTimeout(()=>{
 
 
 <script id="v434-savings-total-transfer-route-script">
-// ===== 43.5차: 대출·저축 탭 누적 저축액 표시 + 이체예정 상대 통장 표시 =====
+// ===== 43.6차: 대출·저축 탭 누적 저축액 표시 + 이체예정 상대 통장 표시 =====
 
 function savingsAccumulatedTotal434(recurringId){
   if(typeof savingsHistoryRows425==='function'){
@@ -39385,6 +39398,374 @@ pendingRowHtml280=function(row,accountId,month){
 
 // 현재 화면에도 즉시 반영합니다. 데이터는 읽기만 하며 저장값은 변경하지 않습니다.
 try{renderFixedSavingsPortfolio434();}catch(error){console.error('저축 누계 표시 초기화 오류',error)}
+</script>
+
+<script id="v436-planned-income-script">
+// ===== 43.6차: 예정소득 입력 + 예정일 입금확인 알림 =====
+const PLANNED_INCOME_TYPE436='planned_income';
+
+function isPlannedIncome436(flow){
+  return Boolean(flow&&flow.type===PLANNED_INCOME_TYPE436);
+}
+
+function ensurePlannedIncomeInput436(){
+  const form=document.getElementById('cashflowForm');
+  const type=document.getElementById('cashflowType');
+  const date=document.getElementById('cashflowDate');
+  if(!form||!type||!date)return null;
+
+  let wrap=document.getElementById('cashflowPlannedIncomeWrap436');
+  if(!wrap){
+    wrap=document.createElement('div');
+    wrap.id='cashflowPlannedIncomeWrap436';
+    wrap.className='full planned-income-option-436';
+    wrap.innerHTML=`
+      <label class="planned-income-toggle-436">
+        <input id="cashflowPlannedIncome436" type="checkbox"/>
+        <span><b>예정소득으로 등록</b><small>예정일 전에는 통장잔액·실제 소득에 반영되지 않고, 예정일이 되면 상단 알림에서 입금 여부를 확인합니다.</small></span>
+      </label>`;
+    const dateWrap=date.closest('div');
+    if(dateWrap?.parentElement)dateWrap.insertAdjacentElement('afterend',wrap);
+    else form.querySelector('.form-grid')?.prepend(wrap);
+  }
+
+  if(type.dataset.plannedIncome436!=='1'){
+    type.dataset.plannedIncome436='1';
+    type.addEventListener('change',syncPlannedIncomeInput436);
+  }
+  return wrap;
+}
+
+function syncPlannedIncomeInput436(){
+  const wrap=ensurePlannedIncomeInput436();
+  const type=document.getElementById('cashflowType');
+  const check=document.getElementById('cashflowPlannedIncome436');
+  if(!wrap||!type||!check)return;
+  const income=type.value==='income';
+  wrap.style.display=income?'block':'none';
+  if(!income)check.checked=false;
+}
+
+const openCashflowModalBefore436=openCashflowModal;
+openCashflowModal=function(type='income'){
+  const result=openCashflowModalBefore436.apply(this,arguments);
+  ensurePlannedIncomeInput436();
+  const check=document.getElementById('cashflowPlannedIncome436');
+  if(check)check.checked=false;
+  syncPlannedIncomeInput436();
+  return result;
+};
+
+function editPlannedIncome436(id){
+  const flow=(state.cashflows||[]).find(item=>item.id===id);
+  if(!isPlannedIncome436(flow))return;
+  ensurePlannedIncomeInput436();
+  renderSelectors();
+  const form=document.getElementById('cashflowForm');
+  form?.reset();
+  document.getElementById('cashflowId').value=flow.id;
+  document.getElementById('cashflowType').value='income';
+  document.getElementById('cashflowDate').value=flow.date||today();
+  document.getElementById('cashflowAccount').value=flow.accountId||'';
+  document.getElementById('cashflowDescription').value=flow.description||'';
+  document.getElementById('cashflowAmount').value=Number(flow.amount||0).toLocaleString('ko-KR');
+  document.getElementById('cashflowMemo').value=flow.memo||'';
+  updateCashflowUI(flow.majorCategoryId||'',flow.subCategoryId||'');
+  const check=document.getElementById('cashflowPlannedIncome436');
+  if(check)check.checked=true;
+  syncPlannedIncomeInput436();
+  updateLoanCategoryHint();
+  openDialog('cashflowModal');
+  installMoneyInputs();
+}
+
+const editCashflowBefore436=editCashflow;
+editCashflow=function(id){
+  const flow=(state.cashflows||[]).find(item=>item.id===id);
+  if(isPlannedIncome436(flow))return editPlannedIncome436(id);
+  return editCashflowBefore436.apply(this,arguments);
+};
+
+const deleteCashflowBefore436=deleteCashflow;
+deleteCashflow=function(id){
+  const flow=(state.cashflows||[]).find(item=>item.id===id);
+  if(!isPlannedIncome436(flow))return deleteCashflowBefore436.apply(this,arguments);
+  if(!confirm(`예정소득 ${esc(flow.description||'')} ${won(flow.amount||0)}을(를) 삭제할까요?\n\n통장 잔액과 실제 소득에는 아직 반영되지 않은 항목입니다.`))return;
+  state.cashflows=(state.cashflows||[]).filter(item=>item.id!==id);
+  saveState();
+};
+
+function installPlannedIncomeSubmit436(){
+  const form=document.getElementById('cashflowForm');
+  if(!form||form.dataset.plannedIncomeSubmit436==='1')return;
+  form.dataset.plannedIncomeSubmit436='1';
+  ensurePlannedIncomeInput436();
+
+  form.addEventListener('submit',event=>{
+    const type=document.getElementById('cashflowType')?.value||'';
+    const planned=document.getElementById('cashflowPlannedIncome436')?.checked;
+    if(type!=='income'||!planned)return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if(!form.reportValidity())return;
+
+    const category=selectedCategory(
+      document.getElementById('cashflowMajor'),
+      document.getElementById('cashflowSub')
+    );
+    if(!category){
+      alert('대분류와 소분류를 선택해주세요.');
+      return;
+    }
+    if(linkedDebtType('income',category)){
+      alert('차입금은 예정소득으로 등록할 수 없습니다. 실제 입금된 날 소득으로 등록해주세요.');
+      return;
+    }
+
+    const amount=parseMoney(document.getElementById('cashflowAmount').value);
+    if(amount<=0){
+      alert('예정소득 금액은 0원보다 크게 입력해주세요.');
+      return;
+    }
+
+    const id=document.getElementById('cashflowId').value||uid('flow');
+    const oldFlow=(state.cashflows||[]).find(item=>item.id===id);
+    const flow={
+      id,
+      type:PLANNED_INCOME_TYPE436,
+      date:document.getElementById('cashflowDate').value,
+      accountId:document.getElementById('cashflowAccount').value,
+      targetAccountId:'',
+      description:document.getElementById('cashflowDescription').value.trim(),
+      amount,
+      ...category,
+      memo:document.getElementById('cashflowMemo').value.trim(),
+      debtId:'',
+      budgetSource:'personal',
+      excludeFromIncome:true,
+      plannedIncome436:true,
+      plannedCreatedAt436:oldFlow?.plannedCreatedAt436||new Date().toISOString()
+    };
+
+    state.cashflows=(state.cashflows||[]).some(item=>item.id===id)
+      ?state.cashflows.map(item=>item.id===id?flow:item)
+      :[...state.cashflows,flow];
+
+    closeDialog('cashflowModal');
+    saveState();
+  },true);
+}
+
+function duePlannedIncomes436(){
+  const now=today();
+  return (state.cashflows||[])
+    .filter(flow=>isPlannedIncome436(flow)&&(flow.date||'')&&flow.date<=now)
+    .sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))||String(a.id).localeCompare(String(b.id)));
+}
+
+function ensurePlannedIncomeReminder436(){
+  let box=document.getElementById('plannedIncomeReminder436');
+  if(box)return box;
+  const fixed=document.getElementById('fixedRecurringReminder422');
+  const transfer=document.getElementById('transferReminder365');
+  const anchor=fixed||transfer;
+  if(!anchor?.parentElement)return null;
+  box=document.createElement('section');
+  box.id='plannedIncomeReminder436';
+  box.className='fixed-recurring-reminder-422 planned-income-reminder-436';
+  box.hidden=true;
+  box.setAttribute('aria-label','예정소득 입금 확인');
+  box.setAttribute('aria-live','polite');
+  box.innerHTML=`
+    <div class="fixed-recurring-reminder-head-422">
+      <div class="fixed-recurring-reminder-title-422">
+        <span class="fixed-recurring-reminder-icon-422 planned-income-icon-436" aria-hidden="true">💰</span>
+        <div><b>예정소득 입금 확인</b><span>예정일이 된 소득이 실제로 들어왔는지 확인해주세요.</span></div>
+      </div>
+      <span class="fixed-recurring-reminder-count-422" id="plannedIncomeReminderCount436">0건</span>
+    </div>
+    <div class="fixed-recurring-reminder-rows-422" id="plannedIncomeReminderRows436"></div>`;
+  anchor.parentElement.insertBefore(box,anchor);
+  return box;
+}
+
+function renderPlannedIncomeReminder436(){
+  ensureFixedRecurringReminder422?.();
+  const box=ensurePlannedIncomeReminder436();
+  if(!box)return;
+  const rows=duePlannedIncomes436();
+  const count=document.getElementById('plannedIncomeReminderCount436');
+  const list=document.getElementById('plannedIncomeReminderRows436');
+  box.hidden=rows.length===0;
+  if(count)count.textContent=`${rows.length}건`;
+  if(!list)return;
+  list.innerHTML=rows.map(flow=>{
+    const overdue=(flow.date||'')<today();
+    const account=accountById(flow.accountId)?.name||'통장 미지정';
+    return `<div class="fixed-recurring-reminder-row-422 ${overdue?'overdue-422':''}">
+      <div class="fixed-recurring-main-422">
+        <div class="fixed-recurring-name-422">
+          <span class="badge income">예정소득</span>
+          <strong>${esc(flow.description||'소득')}</strong>
+        </div>
+        <div class="fixed-recurring-meta-422">
+          <span class="fixed-recurring-date-422 ${overdue?'overdue-422':'today-422'}">${overdue?'미확인 ':'오늘 '}${esc(flow.date||'')}</span>
+          <span>예정 통장 · ${esc(account)}</span>
+        </div>
+        <div class="fixed-recurring-amount-422">${won(flow.amount||0)}</div>
+      </div>
+      <div class="fixed-recurring-actions-422">
+        <button type="button" class="small-btn primary" onclick="openPlannedIncomeSettle436('${flow.id}')">입금 확인</button>
+        <button type="button" class="small-btn" onclick="editPlannedIncome436('${flow.id}')">수정</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function ensurePlannedIncomeSettleDialog436(){
+  let dialog=document.getElementById('plannedIncomeSettleModal436');
+  if(dialog)return dialog;
+  dialog=document.createElement('dialog');
+  dialog.id='plannedIncomeSettleModal436';
+  dialog.innerHTML=`
+    <form class="modal" id="plannedIncomeSettleForm436">
+      <div class="modal-head">
+        <h2 id="plannedIncomeSettleTitle436">예정소득 입금 확인</h2>
+        <button type="button" class="icon-btn" onclick="closeDialog('plannedIncomeSettleModal436')" aria-label="닫기">×</button>
+      </div>
+      <input id="plannedIncomeSettleId436" type="hidden"/>
+      <div class="form-grid">
+        <div><label>실제 입금일</label><input id="plannedIncomeSettleDate436" type="date" required/></div>
+        <div><label>실제 입금 통장</label><select id="plannedIncomeSettleAccount436" required></select></div>
+        <div class="full"><label>실제 입금액</label><input class="money-input" id="plannedIncomeSettleAmount436" type="text" inputmode="numeric" required/></div>
+        <div class="full planned-income-settle-hint-436" id="plannedIncomeSettleHint436"></div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="ghost-btn" onclick="closeDialog('plannedIncomeSettleModal436')">취소</button>
+        <button type="submit" class="primary-btn">실제소득으로 반영</button>
+      </div>
+    </form>`;
+  document.body.appendChild(dialog);
+
+  dialog.querySelector('#plannedIncomeSettleForm436')?.addEventListener('submit',event=>{
+    event.preventDefault();
+    if(!event.currentTarget.reportValidity())return;
+    const id=document.getElementById('plannedIncomeSettleId436').value;
+    const flow=(state.cashflows||[]).find(item=>item.id===id);
+    if(!isPlannedIncome436(flow)){
+      closeDialog('plannedIncomeSettleModal436');
+      return;
+    }
+    const amount=parseMoney(document.getElementById('plannedIncomeSettleAmount436').value);
+    if(amount<=0){
+      alert('실제 입금액은 0원보다 크게 입력해주세요.');
+      return;
+    }
+    const actual={
+      ...flow,
+      type:'income',
+      date:document.getElementById('plannedIncomeSettleDate436').value,
+      accountId:document.getElementById('plannedIncomeSettleAccount436').value,
+      amount,
+      excludeFromIncome:false,
+      plannedIncome436:false,
+      plannedIncomeCompleted436:true,
+      plannedIncomeExpectedDate436:flow.date||'',
+      plannedIncomeExpectedAmount436:Number(flow.amount||0),
+      plannedIncomeProcessedAt436:new Date().toISOString()
+    };
+    state.cashflows=(state.cashflows||[]).map(item=>item.id===id?actual:item);
+    closeDialog('plannedIncomeSettleModal436');
+    saveState();
+  });
+  installMoneyInputs();
+  return dialog;
+}
+
+function openPlannedIncomeSettle436(id){
+  const flow=(state.cashflows||[]).find(item=>item.id===id);
+  if(!isPlannedIncome436(flow))return;
+  ensurePlannedIncomeSettleDialog436();
+  const accountSelect=document.getElementById('plannedIncomeSettleAccount436');
+  accountSelect.innerHTML=(state.accounts||[]).map(account=>`<option value="${esc(account.id)}">${esc(account.name)}${account.bank?' · '+esc(account.bank):''}</option>`).join('');
+  if(flow.accountId&&[...accountSelect.options].some(option=>option.value===flow.accountId))accountSelect.value=flow.accountId;
+  document.getElementById('plannedIncomeSettleId436').value=flow.id;
+  document.getElementById('plannedIncomeSettleDate436').value=today();
+  document.getElementById('plannedIncomeSettleAmount436').value=Number(flow.amount||0).toLocaleString('ko-KR');
+  document.getElementById('plannedIncomeSettleTitle436').textContent=`${flow.description||'예정소득'} 입금 확인`;
+  document.getElementById('plannedIncomeSettleHint436').innerHTML=`예정일 <b>${esc(flow.date||'')}</b> · 예정금액 <b>${won(flow.amount||0)}</b><br>확인 후에만 실제 소득과 통장 잔액에 반영됩니다.`;
+  openDialog('plannedIncomeSettleModal436');
+  installMoneyInputs();
+}
+
+function ensurePlannedIncomeList436(){
+  let section=document.getElementById('plannedIncomeListSection436');
+  if(section)return section;
+  const anchor=document.getElementById('purchaseTable')?.closest('.section');
+  if(!anchor?.parentElement)return null;
+  section=document.createElement('div');
+  section.id='plannedIncomeListSection436';
+  section.className='section collapsible-320 collapsed-320 planned-income-list-section-436';
+  section.dataset.collapseKey320='section:purchases:planned-income-436';
+  section.dataset.collapseTitle320='예정소득';
+  section.innerHTML=`
+    <div class="section-head">
+      <div><h2>예정소득</h2><div class="subtle" style="margin-top:5px">선택한 달에 실제 입금 확인을 기다리는 예정소득입니다.</div></div>
+      <span class="badge income" id="plannedIncomeListCount436">0건</span>
+      <button aria-expanded="false" aria-label="예정소득 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button>
+    </div>
+    <div class="collapse-body-320"><div class="line-list" id="plannedIncomeList436"></div></div>`;
+  anchor.insertAdjacentElement('afterend',section);
+  try{initializeCollapseStates320?.()}catch(error){}
+  return section;
+}
+
+function renderPlannedIncomeList436(){
+  const section=ensurePlannedIncomeList436();
+  if(!section)return;
+  const month=document.getElementById('purchaseMonthFilter')?.value||document.getElementById('mainMonth')?.value||currentMonth();
+  const rows=(state.cashflows||[])
+    .filter(flow=>isPlannedIncome436(flow)&&(flow.date||'').slice(0,7)===month)
+    .sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))||String(a.id).localeCompare(String(b.id)));
+  section.style.display=rows.length?'block':'none';
+  const count=document.getElementById('plannedIncomeListCount436');
+  const list=document.getElementById('plannedIncomeList436');
+  if(count)count.textContent=`${rows.length}건`;
+  if(!list)return;
+  list.innerHTML=rows.map(flow=>{
+    const account=accountById(flow.accountId)?.name||'통장 미지정';
+    return `<div class="two-line-row planned-income-row-436">
+      <div class="row-top"><span><span class="badge income">예정소득</span> <b>${esc(flow.description||'소득')}</b></span><span class="positive">+${won(flow.amount||0)}</span></div>
+      <div class="row-sub"><span>${esc(flow.date||'')} · ${esc(account)} · ${esc(categoryDisplay(flow.majorCategory,flow.subCategory,flow.majorCategoryId))}${flow.memo?' · '+esc(flow.memo):''}</span><span><button type="button" class="small-btn" onclick="editPlannedIncome436('${flow.id}')">수정</button> <button type="button" class="small-btn danger" onclick="deleteCashflow('${flow.id}')">삭제</button></span></div>
+    </div>`;
+  }).join('');
+}
+
+function installPlannedIncome436(){
+  ensurePlannedIncomeInput436();
+  syncPlannedIncomeInput436();
+  installPlannedIncomeSubmit436();
+  ensurePlannedIncomeSettleDialog436();
+  renderPlannedIncomeReminder436();
+  renderPlannedIncomeList436();
+}
+
+const renderAllBefore436=renderAll;
+renderAll=function(){
+  const result=renderAllBefore436.apply(this,arguments);
+  installPlannedIncome436();
+  return result;
+};
+
+const purchaseMonth436=document.getElementById('purchaseMonthFilter');
+if(purchaseMonth436&&purchaseMonth436.dataset.plannedIncome436!=='1'){
+  purchaseMonth436.dataset.plannedIncome436='1';
+  purchaseMonth436.addEventListener('change',renderPlannedIncomeList436);
+}
+
+installPlannedIncome436();
+window.addEventListener('load',()=>setTimeout(installPlannedIncome436,0));
 </script>
 
 </body>
