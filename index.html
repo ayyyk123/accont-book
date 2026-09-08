@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=44.7" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=44.7" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 47.3차</title>
+<title>가계부 47.4차</title>
 <link href="manifest.json?v=44.7" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -7714,7 +7714,7 @@ html,body,button,[role="button"],tr[role="button"]{
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:smart:2:즐겨찾기 관리" data-collapse-title320="즐겨찾기 관리"><div class="section-head"><div><h2>즐겨찾기 관리</h2><div class="subtle" style="margin-top:5px">자주 입력하는 거래를 저장해 한 번에 불러옵니다.</div></div><button class="small-btn primary" onclick="openFavoriteModal()" type="button">+ 즐겨찾기 만들기</button><button aria-expanded="false" aria-label="즐겨찾기 관리 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="grid-3" id="favoriteManager"></div></div></div>
 </section>
 <section class="panel" id="settings"><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:settings:0:백업·설정·기능 안내" data-collapse-title320="백업·설정·기능 안내"><div class="section-head"><h2>백업·설정·기능 안내</h2><button aria-expanded="false" aria-label="백업·설정·기능 안내 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="settings-grid">
-<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.</p><span class="badge fixed">현재 버전 47.3차</span></div></div>
+<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.</p><span class="badge fixed">현재 버전 47.3차</span></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:1:☁️ Firebase 자동 동기화" data-collapse-title320="☁️ Firebase 자동 동기화" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>☁️ Firebase 자동 동기화</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" onclick="forceCloudUpload()" type="button">현재 자료를 클라우드에 저장</button></div><button aria-expanded="false" aria-label="☁️ Firebase 자동 동기화 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_1"><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:2:선택 백업" data-collapse-title320="선택 백업" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>선택 백업</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="exportBackup()" type="button">백업 파일 저장</button></div><button aria-expanded="false" aria-label="선택 백업 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_2"><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions settings-body-controls-315"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select></div><div class="backup-proof" id="lastBackupProof"></div></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:3:백업 불러오기" data-collapse-title320="백업 불러오기"><div class="settings-title-row-315"><h3>백업 불러오기</h3><button aria-expanded="false" aria-label="백업 불러오기 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input accept=".json" id="backupInput" onchange="importBackup(event)" type="file"/></div></div>
@@ -28166,7 +28166,7 @@ renderInvestments353();
 const INVESTMENT_STATUS_FILTER399='investmentStatusFilter353';
 
 function forceVersion399(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
 
@@ -28177,7 +28177,7 @@ function forceVersion399(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
     if(badge)badge.textContent='현재 버전 47.3차';
@@ -28807,7 +28807,7 @@ window.addEventListener('load',()=>{
 let investmentProfitFilterValue400='';
 
 function forceVersion400(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
 
@@ -28818,7 +28818,7 @@ function forceVersion400(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
     if(badge)badge.textContent='현재 버전 47.3차';
@@ -29194,7 +29194,7 @@ window.addEventListener('load',()=>{
 // ===== 40.1차: 월말 예산 이월 선택 =====
 
 function forceVersion401(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
 
@@ -29205,7 +29205,7 @@ function forceVersion401(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
     if(badge)badge.textContent='현재 버전 47.3차';
@@ -29591,7 +29591,7 @@ document.addEventListener('visibilitychange',()=>{
 // ===== 40.2차: 월별 예산 내역 + 원하는 월로 이월 =====
 
 function forceVersion402(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
 
@@ -29602,7 +29602,7 @@ function forceVersion402(){
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
     if(badge)badge.textContent='현재 버전 47.3차';
@@ -30376,7 +30376,7 @@ window.addEventListener('load',()=>{
 // ===== 40.3차 최종 수정 =====
 
 function forceVersion403(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
 
@@ -30389,7 +30389,7 @@ function forceVersion403(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
     if(badge)badge.textContent='현재 버전 47.3차';
@@ -31518,7 +31518,7 @@ setTimeout(forceVersion403,500);
 // ===== 40.4차: 투자지출 독립 표시 + 월별예산 기간 조회 =====
 
 function forceVersion404(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
 
@@ -31531,7 +31531,7 @@ function forceVersion404(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
     if(badge)badge.textContent='현재 버전 47.3차';
@@ -32135,7 +32135,7 @@ setTimeout(()=>{
 // ===== 40.5차: 직접 지출의 투자수익 사용도 투자지출 내역에 표시 =====
 
 function forceVersion405(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
 
@@ -32148,7 +32148,7 @@ function forceVersion405(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
     if(badge)badge.textContent='현재 버전 47.3차';
@@ -32501,7 +32501,7 @@ setTimeout(()=>{
 // ===== 40.6차: 투자수익으로 결제할 때 처리방식 선택 =====
 
 function forceVersion406(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
 
@@ -32514,7 +32514,7 @@ function forceVersion406(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '제목 옆의 차수와 이 표시가 같으면 최신 파일이 정상 적용된 상태입니다.';
     }
     if(badge)badge.textContent='현재 버전 47.3차';
@@ -33306,7 +33306,7 @@ setTimeout(()=>{
 // ===== 40.7차: 투자 처리기능 유지 + 시작화면 반드시 해제 =====
 
 function forceVersion407(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
 
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
@@ -33320,7 +33320,7 @@ function forceVersion407(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '투자지출 처리방식 선택 기능을 유지하면서 시작화면 멈춤을 수정했습니다.';
     }
 
@@ -33482,7 +33482,7 @@ setTimeout(forceVersion407,2000);
 // ===== 40.8차: 월별 예산 함수 상호 재귀 차단 =====
 
 function forceVersion408(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
 
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
@@ -33496,7 +33496,7 @@ function forceVersion408(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '투자지출 처리방식은 유지하고 클라우드 불러오기 재귀호출 오류를 수정했습니다.';
     }
 
@@ -33693,7 +33693,7 @@ setTimeout(forceVersion408,2200);
 // ===== 41차: 원가 추가지출 / 개인소비 지출 구분조회 =====
 
 function forceVersion409(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
 
   document.querySelectorAll('.version-pill')
     .forEach(element=>element.textContent='47.3차');
@@ -33707,7 +33707,7 @@ function forceVersion409(){
 
     if(paragraph){
       paragraph.innerHTML=
-        '<b>가계부 47.3차</b>가 적용되어 있습니다. '+
+        '<b>가계부 47.4차</b>가 적용되어 있습니다. '+
         '투자 관련 지출을 원가 추가지출과 개인소비 지출로 구분해 조회할 수 있습니다.';
     }
 
@@ -34086,7 +34086,7 @@ investmentRealizedProfit388=function(item,excludeFlowId=''){
 };
 
 function forceVersion410(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const versionBox=[...document.querySelectorAll('.settings-box')]
     .find(box=>box.textContent.includes('현재 앱 버전'));
@@ -34094,7 +34094,7 @@ function forceVersion410(){
     const paragraph=versionBox.querySelector('p');
     const badge=versionBox.querySelector('.badge');
     if(paragraph){
-      paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 투자원가의 확정손익 반영과 고정항목 실제 처리일 반영을 수정했습니다.';
+      paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 투자원가의 확정손익 반영과 고정항목 실제 처리일 반영을 수정했습니다.';
     }
     if(badge)badge.textContent='현재 버전 47.3차';
   }
@@ -34148,13 +34148,13 @@ setTimeout(()=>{
 // ===== 42차: 고정항목 과거상태 보존 + All 확인상태 + 최신자료 보호 =====
 
 function forceVersion411(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const versionBox=[...document.querySelectorAll('.settings-box')].find(box=>box.textContent.includes('현재 앱 버전'));
   if(versionBox){
     const paragraph=versionBox.querySelector('p');
     const badge=versionBox.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -34680,13 +34680,13 @@ const renderBudgetBefore412=renderBudget;
 renderBudget=function(){const result=renderBudgetBefore412();installBudgetDetailClicks412();return result};
 
 function forceVersion412(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -34970,13 +34970,13 @@ const renderSelectorsBefore413=renderSelectors;
 renderSelectors=function(){const result=renderSelectorsBefore413();updatePurposeDetailFilter413();return result};
 
 function forceVersion413(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -35617,14 +35617,14 @@ renderSelectors=function(){
   return result;
 };
 function forceVersion414(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -35910,7 +35910,7 @@ function updateBudgetSourceFilterUI412(){const button=document.getElementById('a
 function installRepairStatus415(result){
   document.getElementById('repairStatus415')?.remove();
 }
-function forceVersion415(){document.title='가계부 47.3차';document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');if(box){const p=box.querySelector('p'),b=box.querySelector('.badge');if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';if(b)b.textContent='현재 버전 47.3차'}}
+function forceVersion415(){document.title='가계부 47.4차';document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');if(box){const p=box.querySelector('p'),b=box.querySelector('.badge');if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';if(b)b.textContent='현재 버전 47.4차'}}
 const buildBackupBefore415=buildBackup27;buildBackup27=function(scope='all'){const data=buildBackupBefore415(scope);data.backupVersion='42';return data};
 
 const resolveCloudDifferenceBefore415=resolveCloudDifference411;
@@ -35933,13 +35933,13 @@ setTimeout(()=>{forceVersion415();updateBudgetSourceFilterUI412();updateFixedFil
 const APP_VERSION_417='42';
 
 function forceVersion417(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
   document.getElementById('refreshLatestButton412')?.remove();
   document.getElementById('repairStatus415')?.remove();
@@ -36173,14 +36173,14 @@ const APP_VERSION_42='42';
 const LAST_CLOUD_SYNC_KEY_42='household_book_last_cloud_sync_success_42';
 
 function forceVersion42(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 
@@ -36770,13 +36770,13 @@ installSyncSafetyBox411=function(){
 };
 
 function applySyncGuardVersionText421(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
   installSyncSafetyBox411();
 }
@@ -37888,13 +37888,13 @@ setDateSortDirection42=function(direction,{refreshPurpose=true}={}){
 };
 
 function forceVersion421(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -38210,13 +38210,13 @@ function renderFixedRecurringReminder422(){
 }
 
 function forceVersion422(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -38247,7 +38247,7 @@ window.addEventListener('load',()=>setTimeout(()=>{
 const versionTitle422=document.querySelector('title');
 if(versionTitle422){
   new MutationObserver(()=>{
-    if(document.title!=='가계부 47.3차')forceVersion422();
+    if(document.title!=='가계부 47.4차')forceVersion422();
   }).observe(versionTitle422,{childList:true,characterData:true,subtree:true});
 }
 </script>
@@ -38657,13 +38657,13 @@ deleteCashflow=function(id){
 };
 
 function forceVersion425(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -38772,13 +38772,13 @@ function repairPurposeDebtLinks426(){
 }
 
 function forceVersion426(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -39047,13 +39047,13 @@ renderFixedRecurringReminder422=function(){
 };
 
 function forceVersion430(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -39223,13 +39223,13 @@ paymentMonthHtml340=function(card,monthData){
 };
 
 function forceVersion431(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -39426,13 +39426,13 @@ renderFixedRecurringReminder422=function(){
 };
 
 function forceVersion433(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 대여금은 통장·받을 돈에는 반영하고 생활비·소비통계에서는 제외하며, All 월 총내역의 중복 거래입력 버튼을 정리했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -40367,7 +40367,7 @@ const renderAccountsBefore445=renderAccounts;
 renderAccounts=function(){const result=renderAccountsBefore445();ensureTemporaryAccountOption445();renderTemporaryAccountCard445();return result};
 const saveStateBefore445=saveState;
 saveState=function(){const result=saveStateBefore445();try{renderTemporaryAccountCard445();if(document.getElementById('temporaryHistoryModal445')?.open)renderTemporaryHistory445()}catch(error){console.warn('44.7 임시계정 화면 갱신 오류',error)}return result};
-function forceVersion445(){document.title='가계부 47.3차';document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');if(box){const paragraph=box.querySelector('p'),badge=box.querySelector('.badge');if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 임시계정으로 원인 미확인 통장 차액을 보관할 수 있고, 통장 거래내역의 카드값은 카드별 결제일 합계 1건으로 표시되며 눌러 세부내역을 확인할 수 있습니다.';if(badge)badge.textContent='현재 버전 47.3차'}}
+function forceVersion445(){document.title='가계부 47.4차';document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');if(box){const paragraph=box.querySelector('p'),badge=box.querySelector('.badge');if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 임시계정으로 원인 미확인 통장 차액을 보관할 수 있고, 통장 거래내역의 카드값은 카드별 결제일 합계 1건으로 표시되며 눌러 세부내역을 확인할 수 있습니다.';if(badge)badge.textContent='현재 버전 47.3차'}}
 ensureTemporaryAccountOption445();forceVersion445();
 window.addEventListener('load',()=>setTimeout(()=>{ensureTemporaryAccountOption445();renderTemporaryAccountCard445();forceVersion445()},0));
 [100,500,1200,3000,7000].forEach(delay=>setTimeout(()=>{forceVersion445();renderTemporaryAccountCard445()},delay));
@@ -40434,14 +40434,14 @@ installAccountHistorySort421=function(){
 };
 
 function forceVersion446(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 임시계정과 카드값 결제일 합계 표시를 유지하면서, 카드값 합계행도 일반 거래와 동일하게 날짜순으로 정렬됩니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 임시계정과 카드값 결제일 합계 표시를 유지하면서, 카드값 합계행도 일반 거래와 동일하게 날짜순으로 정렬됩니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -40552,14 +40552,14 @@ window.addEventListener('pageshow',refreshTemporaryUI447);
 [0,300,1000,2500,6000].forEach(delay=>setTimeout(refreshTemporaryUI447,delay));
 
 function forceVersion447(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 모바일 PWA에서도 임시계정 거래 표식과 잔액을 동일하게 복원·계산하며, 클라우드 반영 직후 임시계정 잔액을 다시 계산합니다. 카드값 결제일 합계/세부내역 및 날짜정렬 기능은 그대로 유지됩니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 모바일 PWA에서도 임시계정 거래 표식과 잔액을 동일하게 복원·계산하며, 클라우드 반영 직후 임시계정 잔액을 다시 계산합니다. 카드값 결제일 합계/세부내역 및 날짜정렬 기능은 그대로 유지됩니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -40836,14 +40836,14 @@ window.addEventListener('load',()=>scheduleCardPaymentReminder448(0));
 [0,300,1000,2500,6000].forEach(delay=>setTimeout(()=>scheduleCardPaymentReminder448(0),delay));
 
 function forceVersion448(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 카드 결제일 당일에는 상단에 “오늘 카드값 나가는 날” 알림이 표시되고, 납부 미확인 상태라면 결제일 이후에도 출금 확인 알림이 유지됩니다. 임시계정과 카드값 통합·세부내역·날짜정렬·모바일 잔액 동기화 기능은 그대로 유지됩니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 카드 결제일 당일에는 상단에 “오늘 카드값 나가는 날” 알림이 표시되고, 납부 미확인 상태라면 결제일 이후에도 출금 확인 알림이 유지됩니다. 임시계정과 카드값 통합·세부내역·날짜정렬·모바일 잔액 동기화 기능은 그대로 유지됩니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -41104,12 +41104,12 @@ if(typeof renderCardPaymentReminder448==='function'&&!renderCardPaymentReminder4
 
 // 44.8에서 이전 버전 표시 함수가 뒤늦게 실행되던 문제까지 이번 버전에서 고정합니다.
 function forceVersion449(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 받을 돈·줄 돈 항목을 누르면 발생 근거와 분할 입금·상환 내역을 볼 수 있고, 목적자금에서 생긴 받을 돈은 목적자금 이름을 눌러 해당 사용내역까지 이어서 확인할 수 있습니다. 상단 이체·고정항목·카드값 알림 박스는 전체 접기·펴기를 지원하며 접힌 상태에서도 건수가 보입니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 받을 돈·줄 돈 항목을 누르면 발생 근거와 분할 입금·상환 내역을 볼 수 있고, 목적자금에서 생긴 받을 돈은 목적자금 이름을 눌러 해당 사용내역까지 이어서 확인할 수 있습니다. 상단 이체·고정항목·카드값 알림 박스는 전체 접기·펴기를 지원하며 접힌 상태에서도 건수가 보입니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -41385,12 +41385,12 @@ openDebtPurposeUsage449=function(fundId,month){
 };
 
 function forceVersion450(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 예정소득·카드값·고정항목·이체 알림의 건수와 접기/펴기 버튼 위치를 한 줄로 통일하고, 예정소득에도 접기/펴기를 추가했습니다. 받을 돈 상세의 목적자금 이름을 누르면 연결된 목적자금 실제 사용내역을 직접 조회합니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 예정소득·카드값·고정항목·이체 알림의 건수와 접기/펴기 버튼 위치를 한 줄로 통일하고, 예정소득에도 접기/펴기를 추가했습니다. 받을 돈 상세의 목적자금 이름을 누르면 연결된 목적자금 실제 사용내역을 직접 조회합니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -41585,12 +41585,12 @@ function refreshAllReminderSummaries451(){
 });
 
 function forceVersion451(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 예정소득·카드값·고정수입/지출·이체 알림 모두 헤더에 건수와 합계금액을 함께 표시하고, 건수·금액 배지와 접기/펼치기 버튼을 오른쪽 한 줄에 고정했습니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 예정소득·카드값·고정수입/지출·이체 알림 모두 헤더에 건수와 합계금액을 함께 표시하고, 건수·금액 배지와 접기/펼치기 버튼을 오른쪽 한 줄에 고정했습니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -41733,14 +41733,14 @@ window.addEventListener('load',()=>setTimeout(()=>{try{refreshAllReminderSummari
   });
 
   function forceVersion452(){
-    document.title='가계부 47.3차';
+    document.title='가계부 47.4차';
     document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
     const box=[...document.querySelectorAll('#settings .settings-box')]
       .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
     if(box){
       const paragraph=box.querySelector('p');
       const badge=box.querySelector('.badge');
-      if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 접기/펴기 전용 버튼을 없애고 제목과 제목 옆 빈 공간을 눌러 접고 펼치도록 PC·모바일 조작 방식을 통일했습니다. 기존 기능과 계산 방식은 그대로 유지됩니다.';
+      if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 접기/펴기 전용 버튼을 없애고 제목과 제목 옆 빈 공간을 눌러 접고 펼치도록 PC·모바일 조작 방식을 통일했습니다. 기존 기능과 계산 방식은 그대로 유지됩니다.';
       if(badge)badge.textContent='현재 버전 47.3차';
     }
   }
@@ -41843,13 +41843,13 @@ function repairTodayManualTransfer453(){
 }
 
 function forceVersion453(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 수기 이체예정을 완료할 때 실제 이체금액과 날짜를 확인·수정할 수 있고, 완료 후 통장 거래내역에서 금액을 수정해도 이체예정 출신·완료상태·완료일이 유지됩니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 수기 이체예정을 완료할 때 실제 이체금액과 날짜를 확인·수정할 수 있고, 완료 후 통장 거래내역에서 금액을 수정해도 이체예정 출신·완료상태·완료일이 유지됩니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
@@ -42150,27 +42150,27 @@ const downloadBefore454=download;
 download=function(filename,...args){
   let next=String(filename||'');
   if(/^가계부_[0-9]+(?:\.[0-9]+)?차_.*백업/i.test(next)){
-    next=next.replace(/^가계부_[0-9]+(?:\.[0-9]+)?차_/,'가계부_47.3차_');
+    next=next.replace(/^가계부_[0-9]+(?:\.[0-9]+)?차_/,'가계부_47.4차_');
   }
   return downloadBefore454(next,...args);
 };
 
 // 화면/PWA에 남아 있던 과거 버전 표시도 최종 현재 차수로 고정
 function forceVersion454(){
-  document.title='가계부 47.3차';
+  document.title='가계부 47.4차';
   document.querySelectorAll('.version-pill').forEach(element=>element.textContent='47.3차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const paragraph=box.querySelector('p');
     const badge=box.querySelector('.badge');
-    if(paragraph)paragraph.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 45.4차에서 서로 다른 버전 표시 감시가 충돌해 화면이 느려질 수 있던 문제를 제거했고, 결제수단 변경·투자금 반환·백업 버전 기능은 그대로 유지됩니다.';
+    if(paragraph)paragraph.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 45.4차에서 서로 다른 버전 표시 감시가 충돌해 화면이 느려질 수 있던 문제를 제거했고, 결제수단 변경·투자금 반환·백업 버전 기능은 그대로 유지됩니다.';
     if(badge)badge.textContent='현재 버전 47.3차';
   }
 }
 forceVersion454();
 const versionTitle454=document.querySelector('title');
 if(versionTitle454){
-  new MutationObserver(()=>{if(document.title!=='가계부 47.3차')forceVersion454()}).observe(versionTitle454,{childList:true,characterData:true,subtree:true});
+  new MutationObserver(()=>{if(document.title!=='가계부 47.4차')forceVersion454()}).observe(versionTitle454,{childList:true,characterData:true,subtree:true});
 }
 [50,250,900,2000,4000,7200,10000].forEach(delay=>setTimeout(forceVersion454,delay));
 window.addEventListener('load',()=>setTimeout(()=>{forceVersion454();try{renderInvestments353()}catch(error){}},0));
@@ -42762,13 +42762,13 @@ installSyncSafetyBox411=function(){
 };
 
 function forceVersion458(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 로그인 상태에서는 로컬 자료 비교 없이 Firebase의 최신 저장본을 기준으로 자동 불러오기·자동 동기화합니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 로그인 상태에서는 로컬 자료 비교 없이 Firebase의 최신 저장본을 기준으로 자동 불러오기·자동 동기화합니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
   installSyncSafetyBox411();
 }
@@ -43041,14 +43041,14 @@ processCloudMasterSnapshot458=async function(data){
 // 앱 시작 후 최초 클라우드 반영은 기존 45.8 방식 그대로 유지합니다.
 // 이후 사용자가 실제로 수정한 순간부터만 위 저장 보호가 동작합니다.
 function forceVersion460(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 카드·통장 등 수정 직후 저장 전의 이전 클라우드 스냅샷이 수정값을 되돌리지 않도록 저장 대기/저장 중 원격 롤백을 차단합니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 카드·통장 등 수정 직후 저장 전의 이전 클라우드 스냅샷이 수정값을 되돌리지 않도록 저장 대기/저장 중 원격 롤백을 차단합니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 
@@ -43338,14 +43338,14 @@ saveState=function(...args){
 };
 
 function forceVersion461(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 상단에 실제 클라우드 기준 저장시각과 최근 입력·수정 거래를 따로 표시하여 저장 여부를 헷갈리지 않게 확인할 수 있습니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 상단에 실제 클라우드 기준 저장시각과 최근 입력·수정 거래를 따로 표시하여 저장 여부를 헷갈리지 않게 확인할 수 있습니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 
@@ -43467,14 +43467,14 @@ cloudMasterServerGet458=async function(ref){
 };
 
 function forceVersion462(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 최근 입력·수정·삭제 내역도 클라우드 메타데이터로 함께 저장하여 PC와 모바일에서 동일한 최근 활동을 표시합니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 최근 입력·수정·삭제 내역도 클라우드 메타데이터로 함께 저장하여 PC와 모바일에서 동일한 최근 활동을 표시합니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 
@@ -43638,14 +43638,14 @@ setTimeout(()=>{
 },0);
 
 function forceVersion463(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')]
     .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 투자 목록은 현재 투자금과 현재 상태만 표시하고, 거래내역 팝업에서는 누적 투자금·누적 회수금·현재 투자금을 함께 확인합니다. 회수 완료 뒤 새 투자금이 다시 들어오면 자동으로 진행 중 상태로 돌아갑니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 투자 목록은 현재 투자금과 현재 상태만 표시하고, 거래내역 팝업에서는 누적 투자금·누적 회수금·현재 투자금을 함께 확인합니다. 회수 완료 뒤 새 투자금이 다시 들어오면 자동으로 진행 중 상태로 돌아갑니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 forceVersion463();
@@ -43826,13 +43826,13 @@ document.getElementById('cardPerformanceCurrent464')?.addEventListener('click',(
 ['recurringType','recurringPaymentMethod'].forEach(id=>document.getElementById(id)?.addEventListener('change',()=>updateRecurringPaymentUI()));
 
 function forceVersion464(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 카드값 메뉴에서 카드별 현재 실적과 실적 반영 고정지출 포함 후 예상 실적을 확인할 수 있고, 카드 연결 고정지출마다 실적 반영 여부를 선택할 수 있습니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 카드값 메뉴에서 카드별 현재 실적과 실적 반영 고정지출 포함 후 예상 실적을 확인할 수 있고, 카드 연결 고정지출마다 실적 반영 여부를 선택할 수 있습니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 const buildBackupBefore464=buildBackup27;
@@ -44106,14 +44106,14 @@ saveState=function(){
 
 // 현재 버전 표시와 백업 파일명을 47.3차로 통일합니다.
 function forceVersion465(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p');
     const b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 카드 대신 결제에서 카드 사용금액과 받을 돈이 다를 때 차액을 이번 달 예산에 반영할지 거래별로 선택할 수 있습니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 카드 대신 결제에서 카드 사용금액과 받을 돈이 다를 때 차액을 이번 달 예산에 반영할지 거래별로 선택할 수 있습니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 forceVersion465();
@@ -44215,19 +44215,19 @@ if(typeof buildBackup27==='function'){
   const buildBackupBefore467=buildBackup27;
   buildBackup27=function(scope='all'){
     const data=buildBackupBefore467(scope);
-    if(data&&typeof data==='object')data.backupVersion='47.3';
+    if(data&&typeof data==='object')data.backupVersion='47.4';
     return data;
   };
 }
 
 function forceVersion467(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 카드별 실적현황에 수기로 입력한 실제 카드사용도 사용일 기준 현재 실적에 즉시 반영되고, 실적반영 고정지출은 승인완료/예정 상태에 따라 현재·예상 실적으로 구분됩니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 카드별 실적현황에 수기로 입력한 실제 카드사용도 사용일 기준 현재 실적에 즉시 반영되고, 실적반영 고정지출은 승인완료/예정 상태에 따라 현재·예상 실적으로 구분됩니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 forceVersion467();
@@ -44397,19 +44397,19 @@ if(typeof buildBackup27==='function'){
   const buildBackupBefore468=buildBackup27;
   buildBackup27=function(scope='all'){
     const data=buildBackupBefore468(scope);
-    if(data&&typeof data==='object')data.backupVersion='47.3';
+    if(data&&typeof data==='object')data.backupVersion='47.4';
     return data;
   };
 }
 
 function forceVersion468(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 일반 카드지출을 입력·수정할 때 카드 실적 포함 여부를 거래별로 선택할 수 있으며 새 거래는 기본 포함입니다. 기존 일반 카드지출도 기본 포함으로 유지됩니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 일반 카드지출을 입력·수정할 때 카드 실적 포함 여부를 거래별로 선택할 수 있으며 새 거래는 기본 포함입니다. 기존 일반 카드지출도 기본 포함으로 유지됩니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 // 앞선 차수의 예약된 버전 표시도 46.8로 통일합니다.
@@ -44616,18 +44616,18 @@ if(typeof buildBackup27==='function'){
   const buildBackupBefore469=buildBackup27;
   buildBackup27=function(scope='all'){
     const data=buildBackupBefore469(scope);
-    if(data&&typeof data==='object')data.backupVersion='47.3';
+    if(data&&typeof data==='object')data.backupVersion='47.4';
     return data;
   };
 }
 function forceVersion469(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 카드 연결 고정지출의 실적 반영 여부를 수정하면 수정한 달부터 앞으로 적용되고, 이전 월 실적은 당시 설정 그대로 유지됩니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 카드 연결 고정지출의 실적 반영 여부를 수정하면 수정한 달부터 앞으로 적용되고, 이전 월 실적은 당시 설정 그대로 유지됩니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 // 과거 버전 강제표시 함수와 감시가 46.9만 가리키도록 통일합니다.
@@ -44827,18 +44827,18 @@ if(typeof buildBackup27==='function'){
   const buildBackupBefore470=buildBackup27;
   buildBackup27=function(scope='all'){
     const data=buildBackupBefore470(scope);
-    if(data&&typeof data==='object')data.backupVersion='47.3';
+    if(data&&typeof data==='object')data.backupVersion='47.4';
     return data;
   };
 }
 function forceVersion470(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 카드별 실적현황에서 현재 실적·남은 실적반영 고정지출·반영 후 예상 금액을 누르면 인정 내역이 펼쳐지고, 다시 누르면 접힙니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 카드별 실적현황에서 현재 실적·남은 실적반영 고정지출·반영 후 예상 금액을 누르면 인정 내역이 펼쳐지고, 다시 누르면 접힙니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 try{forceVersion454=forceVersion470}catch(_){ }
@@ -44996,18 +44996,18 @@ if(typeof buildBackup27==='function'){
   const buildBackupBefore471=buildBackup27;
   buildBackup27=function(scope='all'){
     const data=buildBackupBefore471(scope);
-    if(data&&typeof data==='object')data.backupVersion='47.3';
+    if(data&&typeof data==='object')data.backupVersion='47.4';
     return data;
   };
 }
 function forceVersion471(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 카드 고정지출에서 실제 청구금액과 카드 실적 인정금액을 따로 관리할 수 있고, 승인 확인 시 이번 달의 두 금액을 각각 수정할 수 있습니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 카드 고정지출에서 실제 청구금액과 카드 실적 인정금액을 따로 관리할 수 있고, 승인 확인 시 이번 달의 두 금액을 각각 수정할 수 있습니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 
@@ -45104,14 +45104,14 @@ overdraftMetrics280=function(account,projection){
 };
 
 function forceVersion472(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p');
     const b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 예정 출금 잔액 보충 알림에서 마이너스통장만 제한하지 않고 등록된 전체 통장 중 보내는 통장을 선택해 이체예정을 등록할 수 있습니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 예정 출금 잔액 보충 알림에서 마이너스통장만 제한하지 않고 등록된 전체 통장 중 보내는 통장을 선택해 이체예정을 등록할 수 있습니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 
@@ -45120,7 +45120,7 @@ if(typeof buildBackup27==='function'){
   const buildBackupBefore472=buildBackup27;
   buildBackup27=function(scope='all'){
     const data=buildBackupBefore472(scope);
-    if(data&&typeof data==='object')data.backupVersion='47.3';
+    if(data&&typeof data==='object')data.backupVersion='47.4';
     return data;
   };
 }
@@ -45402,7 +45402,7 @@ renderCardPerformance464=function(){
     const forecastLines=[...(currentLines||[]),...(pendingLines||[])];
     const excludedLines=(excludedFixed||[]).map(row=>`<div class="card-performance-fixed-line-464 excluded-464"><span>실적 제외 · ${esc(row.description)}</span><b>${won(row.amount)}</b></div>`).join('');
     const targetHtml=target>0
-      ?`<div class="card-performance-target-473"><span class="card-performance-target-chip-473">목표 <b>${won(target)}</b></span><span class="card-performance-target-status-473 ${achievedNow?'done':'pending'}">${achievedNow?'✓ 현재 달성':`${won(remaining)} 더 필요`}</span>${!achievedNow&&forecastAchieved?`<span class="card-performance-target-status-473 done">✓ 고정지출 반영 후 달성 예상</span>`:!achievedNow&&!forecastAchieved?`<span class="card-performance-target-chip-473">예상 후에도 <b>${won(forecastRemaining)} 부족</b></span>`:''}</div>`
+      ?`<div class="card-performance-target-473"><span class="card-performance-target-chip-473">목표 <b>${won(target)}</b></span>${achievedNow?`<span class="card-performance-target-status-473 done">✓ 현재 실적 달성 · 추가 사용 0원</span>`:forecastAchieved?`<span class="card-performance-target-status-473 done">✓ 고정지출 반영 후 달성 예상 · 추가 사용 0원</span>`:`<span class="card-performance-target-status-473 pending">고정지출 반영 후 <b>${won(forecastRemaining)}</b> 더 필요</span>`}</div>`
       :`<div class="card-performance-target-473"><span class="card-performance-target-status-473 none">실적 목표 미설정</span></div>`;
     return `<div class="card-performance-card-464" style="--item-color:${safeColor(card.color,'#6b7280')}">
       <div class="card-performance-head-464"><div class="card-performance-name-464"><span class="color-dot" style="background:${safeColor(card.color,'#6b7280')}"></span>${esc(card.name)}</div><span class="badge card">${Number(card.paymentDay||0)?`결제일 ${card.paymentDay}일`:'카드'}</span></div>
@@ -45428,7 +45428,7 @@ if(typeof buildBackup27==='function'){
   const buildBackupBefore473=buildBackup27;
   buildBackup27=function(scope='all'){
     const data=buildBackupBefore473(scope);
-    if(data&&typeof data==='object')data.backupVersion='47.3';
+    if(data&&typeof data==='object')data.backupVersion='47.4';
     return data;
   };
 }
@@ -45436,19 +45436,19 @@ if(typeof exportBackup==='function'){
   exportBackup=function(){
     const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);
     if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}
-    download(`가계부_47.3차_${scope}_백업_${today()}.json`,text);
+    download(`가계부_47.4차_${scope}_백업_${today()}.json`,text);
     try{localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27()}catch(_){ }
     alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts?.accounts||0}개 · 카드 ${data.counts?.cards||0}개 · 카드사용 ${data.counts?.purchases||0}건 · 통장내역 ${data.counts?.cashflows||0}건 · 고정항목 ${data.counts?.recurringItems||0}건 · 대출 ${data.counts?.loans||0}개`);
   };
 }
 function forceVersion473(){
-  document.title='가계부 47.3차';
-  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+  document.title='가계부 47.4차';
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
   const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
   if(box){
     const p=box.querySelector('p'),b=box.querySelector('.badge');
-    if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 최근 활동은 실제 사용자 입력·수정·삭제만 기록하고, 생활비 상세에서 소득을 제외하며, 카드별 월 실적 목표·달성여부·추가 필요금액을 표시합니다.';
-    if(b)b.textContent='현재 버전 47.3차';
+    if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 최근 활동은 실제 사용자 입력·수정·삭제만 기록하고, 생활비 상세에서 소득을 제외하며, 카드별 월 실적 목표·달성여부·추가 필요금액을 표시합니다.';
+    if(b)b.textContent='현재 버전 47.4차';
   }
 }
 forceVersion473();
@@ -45607,13 +45607,13 @@ window.addEventListener('load',()=>setTimeout(()=>{ensureCardPerformanceTargetFi
 
   // 모든 과거 버전 강제표시 함수가 남아 있어도 최종 화면은 항상 47.3으로 통일합니다.
   function forceVersion473Final(){
-    document.title='가계부 47.3차';
-    document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.3차');
+    document.title='가계부 47.4차';
+    document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.4차');
     const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
     if(box){
       const p=box.querySelector('p'),b=box.querySelector('.badge');
-      if(p)p.innerHTML='<b>가계부 47.3차</b>가 적용되어 있습니다. 최근 저장내용은 Firebase 최신자료를 기준으로 표시하고, 실제 사용자 작업이 생기면 입력·수정·삭제 내역을 기기간 동일하게 기록합니다. 생활비 소득 제외와 카드 실적 목표 기능도 포함됩니다.';
-      if(b)b.textContent='현재 버전 47.3차';
+      if(p)p.innerHTML='<b>가계부 47.4차</b>가 적용되어 있습니다. 최근 저장내용은 Firebase 최신자료를 기준으로 표시하고, 실제 사용자 작업이 생기면 입력·수정·삭제 내역을 기기간 동일하게 기록합니다. 생활비 소득 제외와 카드 실적 목표는 남은 고정지출 반영 후 기준으로 추가 사용 필요금액을 표시합니다.';
+      if(b)b.textContent='현재 버전 47.4차';
     }
   }
   forceVersion473=forceVersion473Final;
