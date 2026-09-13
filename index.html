@@ -45455,6 +45455,90 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
 
 
 
+
+<script id="v4711-specific-stale-date-debt-delete-fix2">
+// ===== 47.11차 삭제 수정 2: 2026-08 데이트비에 남은 미처리 자동 받을 돈 삭제 허용 + 재생성 방지 =====
+// 다른 금전거래/목적자금 계산은 건드리지 않고, 사용자가 삭제한 이 미처리 자동 받을 돈만 다시 만들지 않습니다.
+(function(){
+  function n4711d(v){const n=Number(v);return Number.isFinite(n)?n:0}
+  function processed4711d(d){return (d?.payments||[]).reduce((s,p)=>s+n4711d(p.amount),0)}
+  function suppressionStore4711d(){
+    state.autoPurposeDebtDeleteSuppress4711=state.autoPurposeDebtDeleteSuppress4711&&typeof state.autoPurposeDebtDeleteSuppress4711==='object'?state.autoPurposeDebtDeleteSuppress4711:{};
+    return state.autoPurposeDebtDeleteSuppress4711;
+  }
+  function key4711d(d){
+    if(!d)return '';
+    return `${String(d.purposeFundId||'')}|${String(d.purposeMonth||'')}|${String(d.title||'')}`;
+  }
+  function isExactStaleDateDebt4711d(d){
+    if(!d||d.type!=='receivable'||!d.autoPurposeReceivable)return false;
+    if(processed4711d(d)!==0||n4711d(d.waivedAmount)!==0||n4711d(d.budgetWriteoffAmount478)!==0)return false;
+    const fund=typeof purposeFundById==='function'?purposeFundById(d.purposeFundId):null;
+    const text=`${String(d.title||'')} ${String(fund?.name||'')}`;
+    return String(d.purposeMonth||'')==='2026-08'&&text.includes('데이트비');
+  }
+  function removeSuppressedUnprocessed4711d(){
+    const store=suppressionStore4711d();
+    const before=(state.debts||[]).length;
+    state.debts=(state.debts||[]).filter(d=>{
+      if(!d?.autoPurposeReceivable)return true;
+      if(!store[key4711d(d)])return true;
+      // 이미 실제 입금/면제/생활비부담이 있는 정상 기록은 절대 삭제하지 않습니다.
+      return !(processed4711d(d)===0&&n4711d(d.waivedAmount)===0&&n4711d(d.budgetWriteoffAmount478)===0);
+    });
+    return (state.debts||[]).length!==before;
+  }
+
+  // 목적자금 자동계산이 같은 미처리 항목을 다시 생성해도, 사용자가 삭제한 정확한 항목만 즉시 제거합니다.
+  if(typeof syncPurposeReceivable290==='function'){
+    const syncPurposeReceivableBefore4711Delete2=syncPurposeReceivable290;
+    syncPurposeReceivable290=function(fundId,month){
+      const result=syncPurposeReceivableBefore4711Delete2.apply(this,arguments);
+      removeSuppressedUnprocessed4711d();
+      return result;
+    };
+  }
+
+  if(typeof deleteDebt==='function'){
+    const deleteDebtBefore4711Delete2=deleteDebt;
+    deleteDebt=function(id){
+      const debt=(state.debts||[]).find(item=>item.id===id);
+      if(!isExactStaleDateDebt4711d(debt))return deleteDebtBefore4711Delete2(id);
+      if(!confirm('이 2026-08 데이트비 자동 받을 돈을 삭제할까요?'))return;
+
+      suppressionStore4711d()[key4711d(debt)]=true;
+      state.debts=(state.debts||[]).filter(item=>item.id!==id);
+
+      // 확인을 누른 즉시 현재 화면에서 사라지게 합니다.
+      try{if(typeof renderDebts==='function')renderDebts()}catch(error){console.warn('47.11 데이트비 삭제 화면 반영 실패',error)}
+      try{if(typeof safeStateLocalWrite476==='function')safeStateLocalWrite476()}catch(_){ }
+      try{
+        const r=saveState();
+        if(r&&typeof r.catch==='function')r.catch(error=>console.warn('47.11 데이트비 삭제 Firebase 저장 실패',error));
+      }catch(error){console.warn('47.11 데이트비 삭제 저장 실패',error)}
+      return;
+    };
+  }
+
+  // 클라우드 자료가 적용되는 순간에도 이미 삭제 표시된 미처리 항목이 되살아나지 않게 합니다.
+  if(typeof applyCloudMaster458==='function'){
+    const applyCloudMasterBefore4711Delete2=applyCloudMaster458;
+    applyCloudMaster458=function(...args){
+      const localSuppress={...(state.autoPurposeDebtDeleteSuppress4711||{})};
+      const result=applyCloudMasterBefore4711Delete2.apply(this,args);
+      state.autoPurposeDebtDeleteSuppress4711={...(state.autoPurposeDebtDeleteSuppress4711||{}),...localSuppress};
+      if(removeSuppressedUnprocessed4711d()){
+        try{if(typeof safeStateLocalWrite476==='function')safeStateLocalWrite476()}catch(_){ }
+        setTimeout(()=>{try{saveState()}catch(error){console.warn('47.11 데이트비 삭제상태 재저장 실패',error)}},0);
+      }
+      return result;
+    };
+  }
+
+  // 현재 메모리에 삭제표시가 이미 있으면 렌더 전에 한 번 정리합니다.
+  try{if(removeSuppressedUnprocessed4711d()&&typeof renderDebts==='function')renderDebts()}catch(_){ }
+})();
+</script>
 </body>
 </html>
 
