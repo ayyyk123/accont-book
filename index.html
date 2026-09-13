@@ -47187,3 +47187,44 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
   [300,900,1800,3500,7000,12000].forEach(delay=>setTimeout(forceVersion4711,delay));
 })();
 </script>
+
+<script id="v4711-duplicate-purpose-debt-delete-hotfix">
+// ===== 47.11차 수정본: 중복으로 남은 목적자금 자동 받을 돈만 삭제 허용 =====
+// 같은 목적자금/같은 월의 자동 받을 돈이 2개 이상 존재하고,
+// 선택한 항목에 실제 입금/상환 처리나 0원 완료가 전혀 없는 경우에만
+// 기존 삭제 버튼으로 그 중복 항목을 제거합니다. 그 외 삭제 동작은 47.11 그대로 유지합니다.
+(function(){
+  if(typeof deleteDebt!=='function')return;
+  const deleteDebtBefore4711DuplicateHotfix=deleteDebt;
+
+  deleteDebt=function(id){
+    const debt=(state.debts||[]).find(item=>item.id===id);
+    if(!debt?.autoPurposeReceivable){
+      return deleteDebtBefore4711DuplicateHotfix(id);
+    }
+
+    const siblings=(state.debts||[]).filter(item=>
+      item.id!==debt.id&&
+      item.autoPurposeReceivable&&
+      item.purposeFundId===debt.purposeFundId&&
+      item.purposeMonth===debt.purposeMonth
+    );
+    const processed=(debt.payments||[]).reduce((sum,p)=>sum+Number(p.amount||0),0);
+    const waived=Number(debt.waivedAmount||0);
+    const budgetWriteoff=Number(debt.budgetWriteoffAmount478||0);
+
+    // 47.11에서 생긴 것처럼 같은 월/목적자금에 중복된 미처리 자동 받을 돈만 예외 삭제.
+    if(siblings.length>0&&processed===0&&waived===0&&budgetWriteoff===0){
+      if(!confirm('중복으로 남은 이 자동 받을 돈을 삭제할까요?'))return;
+      state.debts=(state.debts||[]).filter(item=>item.id!==id);
+
+      // 삭제 직후 화면에서도 바로 사라지게 합니다.
+      try{ if(typeof renderDebts==='function')renderDebts(); }catch(_){ }
+      try{ saveState(); }catch(error){ console.warn('47.11 중복 자동 받을 돈 삭제 저장 실패',error); }
+      return;
+    }
+
+    return deleteDebtBefore4711DuplicateHotfix(id);
+  };
+})();
+</script>
