@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=44.7" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=44.7" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 47.16차</title>
+<title>가계부 47.18차</title>
 <link href="manifest.json?v=44.7" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -7666,7 +7666,7 @@ html,body,button,[role="button"],tr[role="button"]{
 </section>
 <section class="panel" id="loans">
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:0:대출·저축 현황" data-collapse-title320="대출·저축 현황"><div class="section-head"><div><h2>대출·저축 현황</h2><div class="subtle" style="margin-top:5px">마이너스통장·일반대출과 고정저축 현황을 관리합니다.</div></div><div class="actions"><button class="small-btn primary" onclick="openLoanModal()" type="button">+ 일반대출</button><button class="small-btn" onclick="openRecurringModal('savings')" type="button">+ 고정저축</button></div><button aria-expanded="false" aria-label="대출·저축 현황 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div>
-<div class="collapse-body-320"><div class="summary-strip"><div class="summary-item"><span>마이너스통장 사용액</span><b id="overdraftTotal">0원</b></div><div class="summary-item"><span>일반대출 합계</span><b id="generalLoanTotal">0원</b></div><div class="summary-item"><span>총 대출 합계</span><b id="allLoanTotal">0원</b></div><div class="summary-item"><span>이번 달 저축</span><b id="monthlySavingsTotal">0원</b></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:1:대출 목록" data-collapse-title320="대출 목록" style="margin:14px 0"><div class="section-head"><h2>대출 목록</h2><button aria-expanded="false" aria-label="대출 목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="loanList"></div></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:2:저축 목록" data-collapse-title320="저축 목록" style="margin:0"><div class="section-head"><h2>저축 목록</h2><button aria-expanded="false" aria-label="저축 목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="fixedSavingsList"></div></div></div></div></div>
+<div class="collapse-body-320"><div class="summary-strip"><div class="summary-item"><span>마이너스통장 사용액</span><b id="overdraftTotal">0원</b></div><div class="summary-item"><span>일반대출 합계</span><b id="generalLoanTotal">0원</b></div><div class="summary-item"><span>총 대출 합계</span><b id="allLoanTotal">0원</b></div><div class="summary-item"><span>이번 달 저축</span><b id="monthlySavingsTotal">0원</b></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:1:대출 목록" data-collapse-title320="대출 목록" style="margin:14px 0"><div class="section-head"><h2>대출 목록</h2><button aria-expanded="false" aria-label="대출 목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="loanList"></div></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:1b:상환완료 대출" data-collapse-title320="상환완료 대출" style="margin:0 0 14px"><div class="section-head"><h2>상환완료 대출</h2><button aria-expanded="false" aria-label="상환완료 대출 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="completedLoanList4718"></div></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:2:저축 목록" data-collapse-title320="저축 목록" style="margin:0"><div class="section-head"><h2>저축 목록</h2><button aria-expanded="false" aria-label="저축 목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="fixedSavingsList"></div></div></div></div></div>
 </section><section class="panel" id="investments"><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:investments:0:투자 현황" data-collapse-title320="투자 현황"><div class="section-head"><div><h2>투자 현황</h2><div class="subtle" style="margin-top:5px">경매·주식·기타 투자의 총 투자액, 회수금, 현재 투자금과 투자수익을 관리합니다.</div></div><div class="actions"><button class="small-btn primary" onclick="openInvestmentModal353()" type="button">+ 투자 등록</button></div><button aria-expanded="false" aria-label="투자 현황 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="summary-strip"><div class="summary-item"><span>투자원금</span><b id="investmentPrincipal353">0원</b></div><div class="summary-item"><span>현재 평가금액</span><b id="investmentCurrentValue353">0원</b></div><div class="summary-item"><span>회수금</span><b id="investmentRecovered353">0원</b></div><div class="summary-item"><span>투자 손익</span><b id="investmentProfit353">0원</b></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:investments:1:투자 목록" data-collapse-title320="투자 목록" style="margin:14px 0 0"><div class="section-head"><div><h2>투자 목록</h2><div class="subtle" style="margin-top:5px">투자처를 먼저 등록한 뒤 All 탭의 통장 출금·입금에서 연결합니다. 투자원금과 회수금은 연결된 거래까지 자동 합산됩니다.</div></div><div class="actions"><select id="investmentTypeFilter353"><option value="">전체 투자</option><option value="auction">경매투자</option><option value="stock">주식투자</option><option value="other">기타투자</option></select><select id="investmentStatusFilter353"><option value="">전체 상태</option><option value="active">진행 중</option><option value="closed">회수 완료</option></select><button class="small-btn primary" onclick="openInvestmentModal353()" type="button">+ 투자 등록</button></div><button aria-expanded="false" aria-label="투자 목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="investment-filter-summary-353" id="investmentFilterSummary353"></div><div class="line-list" id="investmentList353"></div></div></div></div></div></section>
 <section class="panel" id="debts">
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:debts:0:받을 돈·줄 돈" data-collapse-title320="받을 돈·줄 돈">
@@ -45703,6 +45703,12 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
   refresh4715();
 })();
 </script>
+
+
+
+
+
+
 </body>
 </html>
 
@@ -48149,5 +48155,225 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
     try{renderLoans()}catch(_){ }
   },300));
   [800,2200,5000,10000,22000].forEach(ms=>setTimeout(forceVersion4716,ms));
+})();
+</script>
+
+<!-- ===== 47.17차: 전액상환 일반대출 자동 완료처리 ===== -->
+<script id="v4717-loan-fully-repaid-close-script">
+(()=>{
+  const VERSION4717='47.17';
+
+  function principalRepayments4717(loanId){
+    if(typeof repaymentFlows4716==='function')return repaymentFlows4716(loanId);
+    return (state.cashflows||[]).filter(flow=>
+      (flow?.loanRepayment4716===true||flow?.loanRepayment===true)&&
+      flow.loanId===loanId
+    );
+  }
+
+  function syncFullyRepaidLoans4717(){
+    let changed=false;
+    if(!Array.isArray(state.loans))return false;
+
+    state.loans=state.loans.map(loan=>{
+      if(!loan||loan.loanType==='overdraft')return loan;
+      const balance=Math.max(0,Number(loan.balance||0));
+      const hasPrincipalHistory=principalRepayments4717(loan.id).length>0;
+
+      if(balance<=0&&hasPrincipalHistory){
+        let next=loan;
+        if(loan.autoClosedByRepayment4717!==true||loan.active!==false){
+          next={
+            ...loan,
+            activeBeforeAutoClose4717:loan.autoClosedByRepayment4717===true
+              ?loan.activeBeforeAutoClose4717
+              :loan.active!==false,
+            active:false,
+            autoClosedByRepayment4717:true
+          };
+          changed=true;
+        }
+        if(next.recurringItemId){
+          const idx=(state.recurringItems||[]).findIndex(item=>item.id===next.recurringItemId);
+          if(idx>=0){
+            const recurring=state.recurringItems[idx];
+            if(recurring.autoPausedByLoanClose4717!==true||recurring.active!==false){
+              const replacement={
+                ...recurring,
+                activeBeforeLoanClose4717:recurring.autoPausedByLoanClose4717===true
+                  ?recurring.activeBeforeLoanClose4717
+                  :recurring.active!==false,
+                active:false,
+                autoPausedByLoanClose4717:true
+              };
+              state.recurringItems=[...state.recurringItems];
+              state.recurringItems[idx]=replacement;
+              changed=true;
+            }
+          }
+        }
+        return next;
+      }
+
+      if(balance>0&&loan.autoClosedByRepayment4717===true){
+        const restoreActive=loan.activeBeforeAutoClose4717!==false;
+        const next={...loan,active:restoreActive,autoClosedByRepayment4717:false};
+        delete next.activeBeforeAutoClose4717;
+        if(next.recurringItemId){
+          const idx=(state.recurringItems||[]).findIndex(item=>item.id===next.recurringItemId);
+          if(idx>=0){
+            const recurring=state.recurringItems[idx];
+            if(recurring.autoPausedByLoanClose4717===true){
+              const replacement={...recurring,active:recurring.activeBeforeLoanClose4717!==false};
+              delete replacement.autoPausedByLoanClose4717;
+              delete replacement.activeBeforeLoanClose4717;
+              state.recurringItems=[...state.recurringItems];
+              state.recurringItems[idx]=replacement;
+            }
+          }
+        }
+        changed=true;
+        return next;
+      }
+
+      return loan;
+    });
+    return changed;
+  }
+
+  // 앞으로도 원금 상환/상환취소 시 저장 직전에 완료 상태를 자동 정리합니다.
+  if(typeof saveState==='function'){
+    const saveStateBefore4717=saveState;
+    saveState=function(...args){
+      syncFullyRepaidLoans4717();
+      return saveStateBefore4717.apply(this,args);
+    };
+  }
+
+  function forceVersion4717(){
+    document.title=`가계부 ${VERSION4717}차`;
+    document.querySelectorAll('.version-pill').forEach(el=>el.textContent=`${VERSION4717}차`);
+    const box=[...document.querySelectorAll('#settings .settings-box')]
+      .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+    if(box){
+      const p=box.querySelector('p');
+      const b=box.querySelector('.badge');
+      if(p)p.innerHTML=`<b>가계부 ${VERSION4717}차</b>가 적용되어 있습니다. 일반대출 원금을 전액 상환해 잔액이 0원이 되면 활성 대출 목록에서 자동으로 빠지고, 연결된 월 이자 자동항목도 중지됩니다. 상환내역을 수정·삭제해 잔액이 다시 생기면 기존 활성 상태로 돌아옵니다.`;
+      if(b)b.textContent=`현재 버전 ${VERSION4717}차`;
+    }
+  }
+
+  if(typeof buildBackup27==='function'){
+    const buildBackupBefore4717=buildBackup27;
+    buildBackup27=function(scope='all'){
+      const data=buildBackupBefore4717(scope);
+      if(data&&typeof data==='object')data.backupVersion=VERSION4717;
+      return data;
+    };
+  }
+
+  // 기존 47.16에서 이미 0원인데 활성 상태로 남아 있던 대출도 한 번 정리합니다.
+  try{
+    const changed=syncFullyRepaidLoans4717();
+    if(changed&&typeof saveState==='function')saveState();
+    else if(typeof renderLoans==='function')renderLoans();
+  }catch(error){
+    console.warn('47.17 전액상환 대출 자동완료 초기화 실패',error);
+  }
+
+  forceVersion4717();
+  window.addEventListener('load',()=>setTimeout(()=>{
+    forceVersion4717();
+    try{renderLoans()}catch(_){}
+  },360));
+  [500,800,1200,2200,5000,10000,22000].forEach(ms=>setTimeout(forceVersion4717,ms));
+})();
+</script>
+
+<!-- ===== 47.18차: 상환완료 일반대출 별도 구분 표시 ===== -->
+<script id="v4718-completed-loan-section-script">
+(()=>{
+  const VERSION4718='47.18';
+
+  function principalRepayments4718(loanId){
+    if(typeof repaymentFlows4716==='function')return repaymentFlows4716(loanId);
+    return (state.cashflows||[]).filter(flow=>(flow?.loanRepayment4716===true||flow?.loanRepayment===true)&&flow.loanId===loanId);
+  }
+
+  function completedLoans4718(){
+    return (state.loans||[]).filter(loan=>{
+      if(!loan||loan.loanType==='overdraft')return false;
+      const balance=Math.max(0,Number(loan.balance||0));
+      const hasPrincipalHistory=principalRepayments4718(loan.id).length>0;
+      return balance<=0&&hasPrincipalHistory&&loan.autoClosedByRepayment4717===true;
+    });
+  }
+
+  function completedDate4718(loanId){
+    const rows=principalRepayments4718(loanId).filter(row=>row?.date).slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+    return rows[0]?.date||'';
+  }
+
+  function renderCompletedLoans4718(){
+    const list=document.getElementById('completedLoanList4718');
+    if(!list)return;
+    const loans=completedLoans4718();
+    list.innerHTML=loans.length?loans.map(loan=>{
+      const doneDate=completedDate4718(loan.id);
+      return `<div class="two-line-row loan-list-clickable-364" role="button" tabindex="0"
+        onclick='openLoanHistory364("general",${JSON.stringify(loan.id)})'
+        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
+        <div class="row-top">
+          <span>${esc(loan.name)} <span class="badge income">상환완료</span></span>
+          <span>0원</span>
+        </div>
+        <div class="row-sub">
+          <span>${esc(loan.bank||'')}${doneDate?` · 상환완료 ${esc(doneDate)}`:' · 상환완료'}</span>
+          <span>
+            <span class="loan-history-hint-364">상환내역 ›</span>
+            <button class="small-btn" onclick="event.stopPropagation();openLoanModal('${loan.id}')">수정</button>
+          </span>
+        </div>
+      </div>`;
+    }).join(''):'<div class="empty">상환완료된 일반대출이 없습니다.</div>';
+  }
+
+  if(typeof renderLoans==='function'){
+    const renderLoansBefore4718=renderLoans;
+    renderLoans=function(...args){
+      const result=renderLoansBefore4718.apply(this,args);
+      renderCompletedLoans4718();
+      return result;
+    };
+  }
+
+  function forceVersion4718(){
+    document.title=`가계부 ${VERSION4718}차`;
+    document.querySelectorAll('.version-pill').forEach(el=>el.textContent=`${VERSION4718}차`);
+    const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+    if(box){
+      const p=box.querySelector('p');
+      const b=box.querySelector('.badge');
+      if(p)p.innerHTML=`<b>가계부 ${VERSION4718}차</b>가 적용되어 있습니다. 현재 잔액이 있는 일반대출은 대출 목록에, 전액 상환된 일반대출은 상환완료 대출에 따로 표시되며 상환내역은 그대로 확인할 수 있습니다.`;
+      if(b)b.textContent=`현재 버전 ${VERSION4718}차`;
+    }
+  }
+
+  if(typeof buildBackup27==='function'){
+    const buildBackupBefore4718=buildBackup27;
+    buildBackup27=function(scope='all'){
+      const data=buildBackupBefore4718(scope);
+      if(data&&typeof data==='object')data.backupVersion=VERSION4718;
+      return data;
+    };
+  }
+
+  try{renderLoans()}catch(error){console.warn('47.18 상환완료 대출 표시 초기화 실패',error)}
+  forceVersion4718();
+  window.addEventListener('load',()=>setTimeout(()=>{
+    forceVersion4718();
+    try{renderLoans()}catch(_){}
+  },420));
+  [550,850,1250,2300,5200,10200,22200].forEach(ms=>setTimeout(forceVersion4718,ms));
 })();
 </script>
