@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=44.7" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=44.7" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 47.19차</title>
+<title>가계부 47.20차</title>
 <link href="manifest.json?v=44.7" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -48293,7 +48293,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 <!-- ===== 47.18차: 상환완료 일반대출 별도 구분 표시 ===== -->
 <script id="v4718-completed-loan-section-script">
 (()=>{
-  const VERSION4718='47.19';
+  const VERSION4718='47.20';
 
   function principalRepayments4718(loanId){
     if(typeof repaymentFlows4716==='function')return repaymentFlows4716(loanId);
@@ -48370,12 +48370,172 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
     };
   }
 
-  try{renderLoans()}catch(error){console.warn('47.19 상환완료 대출 표시 초기화 실패',error)}
+  try{renderLoans()}catch(error){console.warn('47.20 상환완료 대출 표시 초기화 실패',error)}
   forceVersion4718();
   window.addEventListener('load',()=>setTimeout(()=>{
     forceVersion4718();
     try{renderLoans()}catch(_){}
   },420));
   [550,850,1250,2300,5200,10200,22200].forEach(ms=>setTimeout(forceVersion4718,ms));
+})();
+</script>
+
+
+<!-- ===== 47.20차: 삭제한 고정항목 이번 달 내역 유지 + 통장잔액/거래내역 일치 ===== -->
+<script id="v4720-recurring-archive-current-month-consistency-script">
+(()=>{
+  const VERSION4720='47.20';
+
+  // '이번 달까지 내역 유지'로 보관한 고정항목은 반복 정의가 삭제되어도
+  // 해당 월의 납부·입금 확인 목록에는 계속 보여야 합니다.
+  const renderRecurringMonthlyStatusBefore4720=renderRecurringMonthlyStatus;
+  renderRecurringMonthlyStatus=function(...args){
+    const result=renderRecurringMonthlyStatusBefore4720.apply(this,args);
+    const el=document.getElementById('recurringMonthlyStatus');
+    if(!el)return result;
+    const month=document.getElementById('mainMonth')?.value||currentMonth();
+
+    const archivedCash=(state.cashflows||[]).filter(flow=>
+      flow?.recurringArchived411===true&&
+      (flow.recurringArchiveMonth411||flow.recurringMonth||(flow.recurringScheduledDate410||flow.date||'').slice(0,7))===month
+    );
+    const archivedCards=(state.purchases||[]).filter(purchase=>
+      purchase?.recurringArchived411===true&&
+      (purchase.recurringArchiveMonth411||purchase.recurringMonth||(purchase.recurringScheduledDate410||purchase.date||'').slice(0,7))===month
+    );
+
+    const rows=[];
+    archivedCash.forEach(flow=>{
+      const kind=flow.recurringArchiveKind411||(
+        flow.recurringSavings?'savings':flow.type==='income'?'income':'account'
+      );
+      const settled=kind==='savings'?true:Boolean(flow.settled);
+      const amount=settled&&kind!=='savings'
+        ?Number(flow.settledAmount??flow.amount??0)
+        :Number(flow.amount||0);
+      const date=settled&&kind!=='savings'
+        ?(flow.settledDate||flow.date||flow.recurringScheduledDate410||'')
+        :(flow.date||flow.recurringScheduledDate410||'');
+      let target='';
+      if(kind==='savings'){
+        const src=accountById(flow.accountId)?.name||'출금통장';
+        const dst=accountById(flow.targetAccountId)?.name||'입금통장';
+        target=`${src} → ${dst}`;
+      }else{
+        target=accountById((settled?flow.settledAccountId:'')||flow.accountId)?.name||'통장';
+      }
+      const type=kind==='income'?'income':kind==='savings'?'savings':'expense';
+      const status=kind==='income'
+        ?(settled?'입금 완료':'입금 대기')
+        :kind==='savings'
+          ?'이체 완료'
+          :(settled?'납부 완료':'납부 대기');
+      rows.push({date,description:flow.recurringArchiveDescription411||flow.description||'고정항목',amount,target,type,status,id:flow.id});
+    });
+    archivedCards.forEach(purchase=>{
+      const settled=Boolean(purchase.recurringSettled);
+      rows.push({
+        date:settled?(purchase.recurringSettledDate||purchase.date||''):(purchase.date||purchase.recurringScheduledDate410||''),
+        description:purchase.recurringArchiveDescription411||purchase.merchant||'카드 고정지출',
+        amount:Number(purchase.totalAmount||0),
+        target:cardById(purchase.cardId)?.name||'카드',
+        type:'expense',
+        status:settled?'승인 확인':'승인 대기',
+        id:purchase.id
+      });
+    });
+
+    if(rows.length){
+      const html=rows.sort((a,b)=>(a.date||'').localeCompare(b.date||'')).map(row=>
+        `<div class="two-line-row archived-recurring-current-4720" data-archived-recurring-id4720="${esc(row.id)}"><div class="row-top"><span>${esc(row.description)} <span class="badge ${row.type==='income'?'income':row.type==='savings'?'transfer':'expense'}">${row.type==='income'?'수입':row.type==='savings'?'저축':'지출'}</span> <span class="badge fixed">이번 달 내역 유지</span></span><span>${won(row.amount)}</span></div><div class="row-sub"><span>${esc(row.date)} · ${esc(row.target)} · ${esc(row.status)} · 반복항목 삭제 후 보존</span><span></span></div></div>`
+      ).join('');
+      if(el.querySelector('.empty'))el.innerHTML='';
+      el.insertAdjacentHTML('beforeend',html);
+    }
+    return result;
+  };
+
+  // 삭제 후 보관된 통장 고정항목은 recurringItemId가 없어도 '실제 납부값' 기준으로
+  // 통장 전체 거래내역을 계산해야 통장목록 잔액과 거래 후 잔액이 동일해집니다.
+  if(typeof actualFlowDate364==='function'){
+    const actualFlowDateBefore4720=actualFlowDate364;
+    actualFlowDate364=function(flow){
+      if(flow?.recurringArchived411===true&&(flow.type==='income'||flow.type==='expense')){
+        return flow.settled?(flow.settledDate||flow.date||''):'';
+      }
+      return actualFlowDateBefore4720(flow);
+    };
+  }
+  if(typeof actualFlowAmount364==='function'){
+    const actualFlowAmountBefore4720=actualFlowAmount364;
+    actualFlowAmount364=function(flow){
+      if(flow?.recurringArchived411===true&&(flow.type==='income'||flow.type==='expense')){
+        return Number(flow.settledAmount??flow.amount??0);
+      }
+      return actualFlowAmountBefore4720(flow);
+    };
+  }
+  if(typeof actualFlowAccount364==='function'){
+    const actualFlowAccountBefore4720=actualFlowAccount364;
+    actualFlowAccount364=function(flow){
+      if(flow?.recurringArchived411===true&&(flow.type==='income'||flow.type==='expense')){
+        return flow.settledAccountId||flow.accountId||'';
+      }
+      return actualFlowAccountBefore4720(flow);
+    };
+  }
+
+  // All에서도 삭제 후 유지된 통장 고정항목은 실제 납부일·실제 납부액을 우선 표시합니다.
+  if(typeof allMonthlyRows310==='function'){
+    const allMonthlyRowsBefore4720=allMonthlyRows310;
+    allMonthlyRows310=function(month){
+      return allMonthlyRowsBefore4720(month).map(row=>{
+        const flow=row?.raw;
+        if(!flow?.recurringArchived411||!(flow.type==='income'||flow.type==='expense')||!flow.settled)return row;
+        const accountId=flow.settledAccountId||flow.accountId||row.sourceId||'';
+        const account=accountById(accountId);
+        return {
+          ...row,
+          date:flow.settledDate||row.date,
+          amount:Number(flow.settledAmount??flow.amount??row.amount??0),
+          sourceId:accountId,
+          sourceName:account?.name||row.sourceName,
+          sourceColor:safeColor(account?.color,row.sourceColor||'#16855a')
+        };
+      });
+    };
+    allMonthlySpendingRows275=allMonthlyRows310;
+  }
+
+  function forceVersion4720(){
+    document.title=`가계부 ${VERSION4720}차`;
+    document.querySelectorAll('.version-pill').forEach(el=>el.textContent=`${VERSION4720}차`);
+    const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+    if(box){
+      const p=box.querySelector('p');
+      const b=box.querySelector('.badge');
+      if(p)p.innerHTML=`<b>가계부 ${VERSION4720}차</b>가 적용되어 있습니다. 고정항목을 ‘이번 달까지 내역 유지’로 삭제해도 이번 달 납부·입금 확인에 계속 표시되고, 실제 납부액 기준으로 통장목록 잔액과 전체 거래내역의 거래 후 잔액이 일치하도록 보정했습니다.`;
+      if(b)b.textContent=`현재 버전 ${VERSION4720}차`;
+    }
+  }
+
+  if(typeof buildBackup27==='function'){
+    const buildBackupBefore4720=buildBackup27;
+    buildBackup27=function(scope='all'){
+      const data=buildBackupBefore4720(scope);
+      if(data&&typeof data==='object')data.backupVersion=VERSION4720;
+      return data;
+    };
+  }
+
+  try{renderRecurringMonthlyStatus()}catch(error){console.warn('47.20 이번 달 고정항목 유지내역 표시 초기화 실패',error)}
+  try{if(typeof renderAccountHistory364==='function')renderAccountHistory364()}catch(_){ }
+  forceVersion4720();
+  window.addEventListener('load',()=>setTimeout(()=>{
+    forceVersion4720();
+    try{renderRecurringMonthlyStatus()}catch(_){ }
+    try{if(typeof renderAccountHistory364==='function')renderAccountHistory364()}catch(_){ }
+  },460));
+  [600,900,1300,2400,5400,10400,22400].forEach(ms=>setTimeout(forceVersion4720,ms));
 })();
 </script>
