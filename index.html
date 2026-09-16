@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=44.7" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=44.7" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 47.21차</title>
+<title>가계부 47.22차</title>
 <link href="manifest.json?v=44.7" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -256,7 +256,13 @@
       }
     }
 
-  </style>
+  
+/* ===== 47.22차: 대출·저축 현황 마이너스통장 총 한도액 표시 ===== */
+#loans .summary-value-stack-4722{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:3px;min-width:0}
+#loans .summary-limit-4722{font-size:11.5px;line-height:1.25;color:var(--muted);font-weight:700;text-align:right;white-space:nowrap}
+#loans .summary-limit-4722 strong{font:inherit;color:inherit;font-weight:850}
+@media(max-width:600px){#loans .summary-limit-4722{font-size:10.5px}}
+</style>
 <style id="v273-budget-split-style">
   .budget-balance-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:7px 0 5px}
   .budget-balance-chip{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 9px;border:1px solid var(--line,#e5e7eb);border-radius:10px;background:rgba(255,255,255,.58)}
@@ -7555,11 +7561,11 @@ html,body,button,[role="button"],tr[role="button"]{
 </style>
 </head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">47.21차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">47.22차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">47.21차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">47.22차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="desktop-actions"><button class="primary-btn" onclick="openTransactionRegister389()" type="button">거래등록</button></div>
 <button class="primary-btn mobile-only" onclick="openQuickMenu()" type="button">+ 입력</button>
 </header>
@@ -7666,7 +7672,7 @@ html,body,button,[role="button"],tr[role="button"]{
 </section>
 <section class="panel" id="loans">
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:0:대출·저축 현황" data-collapse-title320="대출·저축 현황"><div class="section-head"><div><h2>대출·저축 현황</h2><div class="subtle" style="margin-top:5px">마이너스통장·일반대출과 고정저축 현황을 관리합니다.</div></div><div class="actions"><button class="small-btn primary" onclick="openLoanModal()" type="button">+ 일반대출</button><button class="small-btn" onclick="openRecurringModal('savings')" type="button">+ 고정저축</button></div><button aria-expanded="false" aria-label="대출·저축 현황 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div>
-<div class="collapse-body-320"><div class="summary-strip"><div class="summary-item"><span>마이너스통장 사용액</span><b id="overdraftTotal">0원</b></div><div class="summary-item"><span>일반대출 합계</span><b id="generalLoanTotal">0원</b></div><div class="summary-item"><span>총 대출 합계</span><b id="allLoanTotal">0원</b></div><div class="summary-item"><span>이번 달 저축</span><b id="monthlySavingsTotal">0원</b></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:1:대출 목록" data-collapse-title320="대출 목록" style="margin:14px 0"><div class="section-head"><h2>대출 목록</h2><button aria-expanded="false" aria-label="대출 목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="loanList"></div></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:1b:상환완료 대출" data-collapse-title320="상환완료 대출" style="margin:0 0 14px"><div class="section-head"><h2>상환완료 대출</h2><button aria-expanded="false" aria-label="상환완료 대출 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="completedLoanList4718"></div></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:2:저축 목록" data-collapse-title320="저축 목록" style="margin:0"><div class="section-head"><h2>저축 목록</h2><button aria-expanded="false" aria-label="저축 목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="fixedSavingsList"></div></div></div></div></div>
+<div class="collapse-body-320"><div class="summary-strip"><div class="summary-item"><span>마이너스통장 사용액</span><div class="summary-value-stack-4722"><b id="overdraftTotal">0원</b><div class="summary-limit-4722">총 한도액 <strong id="overdraftLimitTotal4722">0원</strong></div></div></div><div class="summary-item"><span>일반대출 합계</span><b id="generalLoanTotal">0원</b></div><div class="summary-item"><span>총 대출 합계</span><b id="allLoanTotal">0원</b></div><div class="summary-item"><span>이번 달 저축</span><b id="monthlySavingsTotal">0원</b></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:1:대출 목록" data-collapse-title320="대출 목록" style="margin:14px 0"><div class="section-head"><h2>대출 목록</h2><button aria-expanded="false" aria-label="대출 목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="loanList"></div></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:1b:상환완료 대출" data-collapse-title320="상환완료 대출" style="margin:0 0 14px"><div class="section-head"><h2>상환완료 대출</h2><button aria-expanded="false" aria-label="상환완료 대출 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="completedLoanList4718"></div></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:loans:2:저축 목록" data-collapse-title320="저축 목록" style="margin:0"><div class="section-head"><h2>저축 목록</h2><button aria-expanded="false" aria-label="저축 목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="line-list" id="fixedSavingsList"></div></div></div></div></div>
 </section><section class="panel" id="investments"><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:investments:0:투자 현황" data-collapse-title320="투자 현황"><div class="section-head"><div><h2>투자 현황</h2><div class="subtle" style="margin-top:5px">경매·주식·기타 투자의 총 투자액, 회수금, 현재 투자금과 투자수익을 관리합니다.</div></div><div class="actions"><button class="small-btn primary" onclick="openInvestmentModal353()" type="button">+ 투자 등록</button></div><button aria-expanded="false" aria-label="투자 현황 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="summary-strip"><div class="summary-item"><span>투자원금</span><b id="investmentPrincipal353">0원</b></div><div class="summary-item"><span>현재 평가금액</span><b id="investmentCurrentValue353">0원</b></div><div class="summary-item"><span>회수금</span><b id="investmentRecovered353">0원</b></div><div class="summary-item"><span>투자 손익</span><b id="investmentProfit353">0원</b></div></div><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:investments:1:투자 목록" data-collapse-title320="투자 목록" style="margin:14px 0 0"><div class="section-head"><div><h2>투자 목록</h2><div class="subtle" style="margin-top:5px">투자처를 먼저 등록한 뒤 All 탭의 통장 출금·입금에서 연결합니다. 투자원금과 회수금은 연결된 거래까지 자동 합산됩니다.</div></div><div class="actions"><select id="investmentTypeFilter353"><option value="">전체 투자</option><option value="auction">경매투자</option><option value="stock">주식투자</option><option value="other">기타투자</option></select><select id="investmentStatusFilter353"><option value="">전체 상태</option><option value="active">진행 중</option><option value="closed">회수 완료</option></select><button class="small-btn primary" onclick="openInvestmentModal353()" type="button">+ 투자 등록</button></div><button aria-expanded="false" aria-label="투자 목록 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="investment-filter-summary-353" id="investmentFilterSummary353"></div><div class="line-list" id="investmentList353"></div></div></div></div></div></section>
 <section class="panel" id="debts">
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:debts:0:받을 돈·줄 돈" data-collapse-title320="받을 돈·줄 돈">
@@ -7714,7 +7720,7 @@ html,body,button,[role="button"],tr[role="button"]{
 <div class="section collapsible-320 collapsed-320" data-collapse-key320="section:smart:2:즐겨찾기 관리" data-collapse-title320="즐겨찾기 관리"><div class="section-head"><div><h2>즐겨찾기 관리</h2><div class="subtle" style="margin-top:5px">자주 입력하는 거래를 저장해 한 번에 불러옵니다.</div></div><button class="small-btn primary" onclick="openFavoriteModal()" type="button">+ 즐겨찾기 만들기</button><button aria-expanded="false" aria-label="즐겨찾기 관리 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="grid-3" id="favoriteManager"></div></div></div>
 </section>
 <section class="panel" id="settings"><div class="section collapsible-320 collapsed-320" data-collapse-key320="section:settings:0:백업·설정·기능 안내" data-collapse-title320="백업·설정·기능 안내"><div class="section-head"><h2>백업·설정·기능 안내</h2><button aria-expanded="false" aria-label="백업·설정·기능 안내 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><div class="settings-grid">
-<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 47.21차</b>가 적용되어 있습니다. 삭제한 고정항목의 이번 달 보존 거래도 실제 출금일·출금액·출금통장 기준으로 통장 거래내역과 잔액에 동일하게 반영합니다.</p><span class="badge fixed">현재 버전 47.21차</span></div></div>
+<div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:0:현재 앱 버전" data-collapse-title320="현재 앱 버전"><div class="settings-title-row-315"><h3>현재 앱 버전</h3><button aria-expanded="false" aria-label="현재 앱 버전 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p><b>가계부 47.22차</b>가 적용되어 있습니다. 마이너스통장 사용액 아래에 등록된 마이너스통장의 총 한도액을 함께 표시합니다.</p><span class="badge fixed">현재 버전 47.22차</span></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:1:☁️ Firebase 자동 동기화" data-collapse-title320="☁️ Firebase 자동 동기화" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>☁️ Firebase 자동 동기화</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="openAuthModal('login')" type="button">로그인</button><button class="small-btn" onclick="forceCloudUpload()" type="button">현재 자료를 클라우드에 저장</button></div><button aria-expanded="false" aria-label="☁️ Firebase 자동 동기화 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_1"><p id="firebaseSettingsText">로그인하면 카드·통장·예산·목적자금·고정항목을 포함한 모든 변경사항이 Firebase에 자동 저장되고 PC와 휴대폰에 실시간 반영됩니다.</p></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:2:선택 백업" data-collapse-title320="선택 백업" data-title-buttons314="1" data-title-buttons315="1"><div class="settings-title-row-315"><h3>선택 백업</h3><div class="settings-title-actions-315"><button class="small-btn primary" onclick="exportBackup()" type="button">백업 파일 저장</button></div><button aria-expanded="false" aria-label="선택 백업 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320" id="settingsCollapseBody317_2"><p>전체 백업은 현재 가계부의 모든 데이터 묶음(카드·통장·거래·분류·고정항목·예산·목적자금·받을 돈/줄 돈·건너뛴 고정항목 기록)을 JSON 파일 하나에 저장합니다. 저장 후 항목별 개수·검증코드까지 확인할 수 있습니다. 전체 백업은 현재 상태 전체를 한 묶음으로 저장합니다.</p><div class="actions settings-body-controls-315"><select id="backupScope" style="min-width:150px"><option value="all">전체 백업</option><option value="transactions">거래만</option><option value="cards">카드만</option><option value="accounts">통장만</option><option value="recurring">고정항목만</option><option value="budget">예산·목적자금만</option></select></div><div class="backup-proof" id="lastBackupProof"></div></div></div>
 <div class="settings-box collapsible-320 collapsed-320" data-collapse-key320="settings-box:3:백업 불러오기" data-collapse-title320="백업 불러오기"><div class="settings-title-row-315"><h3>백업 불러오기</h3><button aria-expanded="false" aria-label="백업 불러오기 펼치기" class="collapse-toggle-320" title="펼치기" type="button">+</button></div><div class="collapse-body-320"><p>이전 버전의 JSON 백업과 최신 버전 백업을 불러올 수 있습니다. 기존 데이터는 최신 구조로 자동 변환됩니다.</p><input accept=".json" id="backupInput" onchange="importBackup(event)" type="file"/></div></div>
@@ -42222,7 +42228,7 @@ const downloadBefore454=download;
 download=function(filename,...args){
   let next=String(filename||'');
   if(/^가계부_[0-9]+(?:\.[0-9]+)?차_.*백업/i.test(next)){
-    next=next.replace(/^가계부_[0-9]+(?:\.[0-9]+)?차_/,'가계부_47.21차_');
+    next=next.replace(/^가계부_[0-9]+(?:\.[0-9]+)?차_/,'가계부_47.22차_');
   }
   return downloadBefore454(next,...args);
 };
@@ -45336,7 +45342,7 @@ importBackup=function(event){
 
       // 복원 직전 현재 자료를 파일로 자동 보관합니다(localStorage를 더 점유하지 않음).
       const before=buildBackup27('all');
-      download(`가계부_47.21차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));
+      download(`가계부_47.22차_복원전_자동백업_${today()}.json`,JSON.stringify(before,null,2));
 
       let candidate;
       if(scope==='all')candidate=normalizeState(payload);
@@ -45713,6 +45719,40 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
 
 
 
+
+<script id="v4722-overdraft-total-limit-script">
+(()=>{
+  function overdraftAccounts4722(){
+    return (state.accounts||[]).filter(account=>
+      account?.accountType==='overdraft'||
+      Number(account?.overdraftLimit||0)>0||
+      Number(account?.initialBalance||0)<0
+    );
+  }
+
+  function renderOverdraftLimitTotal4722(){
+    const element=document.getElementById('overdraftLimitTotal4722');
+    if(!element)return;
+    const total=overdraftAccounts4722().reduce(
+      (sum,account)=>sum+Math.max(0,Number(account.overdraftLimit||0)),
+      0
+    );
+    element.textContent=won(total);
+  }
+
+  if(typeof renderLoans==='function'){
+    const renderLoansBefore4722=renderLoans;
+    renderLoans=function(...args){
+      const result=renderLoansBefore4722.apply(this,args);
+      renderOverdraftLimitTotal4722();
+      return result;
+    };
+  }
+
+  renderOverdraftLimitTotal4722();
+  window.addEventListener('load',()=>setTimeout(renderOverdraftLimitTotal4722,520));
+})();
+</script>
 </body>
 </html>
 
@@ -46021,7 +46061,7 @@ if(typeof exportBackup==='function'){
   exportBackup=function(){
     const scope=document.getElementById('backupScope')?.value||'all',data=buildBackup27(scope),text=JSON.stringify(data,null,2);
     if(!text||text.length<50){alert('백업 생성에 실패했습니다.');return}
-    download(`가계부_47.21차_${scope}_백업_${today()}.json`,text);
+    download(`가계부_47.22차_${scope}_백업_${today()}.json`,text);
     try{localStorage.setItem(BACKUP_META_KEY_27,JSON.stringify({createdAt:data.backupCreatedAt,scope,counts:data.counts,checksum:data.checksum,size:text.length}));renderBackupProof27()}catch(_){ }
     alert(`${scope==='all'?'전체':'선택'} 백업 완료\n검증코드 ${data.checksum}\n통장 ${data.counts?.accounts||0}개 · 카드 ${data.counts?.cards||0}개 · 카드사용 ${data.counts?.purchases||0}건 · 통장내역 ${data.counts?.cashflows||0}건 · 고정항목 ${data.counts?.recurringItems||0}건 · 대출 ${data.counts?.loans||0}개`);
   };
@@ -48544,10 +48584,10 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 })();
 </script>
 
-<!-- ===== 47.21차: 보존 고정항목 통장내역 복구 + 버전 단일화 ===== -->
-<script id="v4721-archived-recurring-account-history-version-script">
+<!-- ===== 47.22차: 보존 고정항목 통장내역 유지 + 마이너스통장 총 한도 표시 + 버전 단일화 ===== -->
+<script id="v4722-archived-recurring-account-history-version-script">
 (()=>{
-  const VERSION4721='47.21';
+  const VERSION4722='47.22';
 
   function archivedSettledFlow4721(flow){
     return Boolean(
@@ -48623,25 +48663,25 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
     const saveStateBefore4721=saveState;
     saveState=function(...args){
       const result=saveStateBefore4721.apply(this,args);
-      try{if(typeof renderAccountHistory364==='function')renderAccountHistory364()}catch(error){console.warn('47.21 통장 거래내역 즉시 갱신 실패',error)}
+      try{if(typeof renderAccountHistory364==='function')renderAccountHistory364()}catch(error){console.warn('47.22 통장 거래내역 즉시 갱신 실패',error)}
       return result;
     };
   }
 
-  function forceVersion4721(){
-    const target=`가계부 ${VERSION4721}차`;
+  function forceVersion4722(){
+    const target=`가계부 ${VERSION4722}차`;
     if(document.title!==target)document.title=target;
     document.querySelectorAll('.version-pill').forEach(el=>{
-      if(el.textContent!==`${VERSION4721}차`)el.textContent=`${VERSION4721}차`;
+      if(el.textContent!==`${VERSION4722}차`)el.textContent=`${VERSION4722}차`;
     });
     const box=[...document.querySelectorAll('#settings .settings-box')]
       .find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
     if(box){
       const p=box.querySelector('p');
       const b=box.querySelector('.badge');
-      const html=`<b>가계부 ${VERSION4721}차</b>가 적용되어 있습니다. 고정항목을 ‘이번 달까지 내역 유지’로 삭제해도 완료된 통장 거래는 실제 출금일·실제 출금액·실제 출금통장 기준으로 통장 전체 거래내역과 통장목록 잔액에 동일하게 반영되며, 버전 표시는 ${VERSION4721}차로 단일화했습니다.`;
+      const html=`<b>가계부 ${VERSION4722}차</b>가 적용되어 있습니다. 고정항목 통장내역·잔액 일치 수정은 그대로 유지하고, 대출·저축 현황의 마이너스통장 사용액 아래에 등록된 마이너스통장의 총 한도액 합계를 함께 표시합니다.`;
       if(p&&p.innerHTML!==html)p.innerHTML=html;
-      if(b&&b.textContent!==`현재 버전 ${VERSION4721}차`)b.textContent=`현재 버전 ${VERSION4721}차`;
+      if(b&&b.textContent!==`현재 버전 ${VERSION4722}차`)b.textContent=`현재 버전 ${VERSION4722}차`;
     }
   }
 
@@ -48649,23 +48689,23 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
     const buildBackupBefore4721=buildBackup27;
     buildBackup27=function(scope='all'){
       const data=buildBackupBefore4721(scope);
-      if(data&&typeof data==='object')data.backupVersion=VERSION4721;
+      if(data&&typeof data==='object')data.backupVersion=VERSION4722;
       return data;
     };
   }
 
-  // 과거 차수의 타이머가 잠깐 버전을 바꾸더라도 즉시 47.21로 되돌립니다.
+  // 과거 차수의 타이머가 잠깐 버전을 바꾸더라도 즉시 47.22로 되돌립니다.
   const titleNode=document.querySelector('title');
   if(titleNode){
-    new MutationObserver(()=>forceVersion4721())
+    new MutationObserver(()=>forceVersion4722())
       .observe(titleNode,{childList:true,characterData:true,subtree:true});
   }
 
-  forceVersion4721();
+  forceVersion4722();
   try{if(typeof renderAccounts==='function')renderAccounts()}catch(_){ }
   try{if(typeof renderAccountHistory364==='function')renderAccountHistory364()}catch(_){ }
   window.addEventListener('load',()=>setTimeout(()=>{
-    forceVersion4721();
+    forceVersion4722();
     try{if(typeof renderAccounts==='function')renderAccounts()}catch(_){ }
     try{if(typeof renderAccountHistory364==='function')renderAccountHistory364()}catch(_){ }
   },500));
