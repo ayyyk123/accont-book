@@ -46045,6 +46045,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
 })();
 </script>
 
+
 </body>
 </html>
 
@@ -51812,3 +51813,295 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
   [1800,3600,7000,12000,22000].forEach(delay=>setTimeout(forceVersion4731,delay));
 })();
 </script>
+
+<style id="v4734-auto-funding-style">
+/* ===== 47.34차: 카드·대출 납부계좌 자동 이체예정 + 계좌별 목표잔액 ===== */
+.auto-funding-section-4734{margin:14px 0}
+.auto-funding-toolbar-4734{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.auto-funding-toolbar-4734 .meta{font-size:9px;color:var(--muted);line-height:1.45}
+.auto-funding-list-4734{display:grid;gap:10px}
+.auto-funding-card-4734{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:12px}
+.auto-funding-head-4734{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.auto-funding-account-4734{display:flex;align-items:center;gap:7px;font-weight:900}
+.auto-funding-total-4734{text-align:right;font-size:11px;font-weight:900;white-space:nowrap}
+.auto-funding-controls-4734{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:10px}
+.auto-funding-controls-4734 label{display:block;font-size:9px;color:var(--muted);font-weight:800;margin-bottom:4px}
+.auto-funding-controls-4734 select,.auto-funding-controls-4734 input{width:100%}
+.auto-funding-reserve-note-4734{margin-top:5px;font-size:8.5px;color:var(--muted);line-height:1.4}
+.auto-funding-reserve-note-4734.low{color:#b45309;font-weight:800}
+.auto-funding-obligations-4734{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;display:grid;gap:5px}
+.auto-funding-obligation-4734,.auto-funding-plan-row-4734{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:9px}
+.auto-funding-obligation-4734 span:first-child,.auto-funding-plan-row-4734 span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.auto-funding-plan-4734{margin-top:9px;background:var(--soft);border-radius:10px;padding:8px;display:grid;gap:5px}
+.auto-funding-plan-title-4734{font-size:9px;font-weight:900;margin-bottom:1px}
+.auto-funding-status-4734{margin-top:8px;font-size:9px;line-height:1.45;color:var(--muted)}
+.auto-funding-status-4734.ready{color:#047857;font-weight:800}
+.auto-funding-status-4734.need{color:#b45309;font-weight:800}
+@media(max-width:720px){.auto-funding-controls-4734{grid-template-columns:1fr}.auto-funding-head-4734{align-items:center}.auto-funding-total-4734{font-size:10px}}
+</style>
+<script id="v4734-auto-funding-script">
+(()=>{
+  'use strict';
+  const VERSION4734='47.34';
+  const AUTO_DESC4734='자동 이체예정 · 카드/대출 납부';
+
+  function ensureAutoFundingState4734(target=state){
+    if(!target||typeof target!=='object')return;
+    if(!target.autoFundingSources4734||typeof target.autoFundingSources4734!=='object'||Array.isArray(target.autoFundingSources4734))target.autoFundingSources4734={};
+    if(!target.autoFundingReserve4734||typeof target.autoFundingReserve4734!=='object'||Array.isArray(target.autoFundingReserve4734))target.autoFundingReserve4734={};
+  }
+  ensureAutoFundingState4734();
+
+  const normalizeStateBefore4734=normalizeState;
+  normalizeState=function(raw){
+    const normalized=normalizeStateBefore4734(raw);
+    normalized.autoFundingSources4734=(raw?.autoFundingSources4734&&typeof raw.autoFundingSources4734==='object'&&!Array.isArray(raw.autoFundingSources4734))?{...raw.autoFundingSources4734}:{};
+    normalized.autoFundingReserve4734=(raw?.autoFundingReserve4734&&typeof raw.autoFundingReserve4734==='object'&&!Array.isArray(raw.autoFundingReserve4734))?{...raw.autoFundingReserve4734}:{};
+    Object.keys(normalized.autoFundingReserve4734).forEach(id=>normalized.autoFundingReserve4734[id]=Math.max(0,Number(normalized.autoFundingReserve4734[id]||0)));
+    return normalized;
+  };
+
+  function fundingKey4734(month,targetId){return `${month}|${targetId}`}
+  function reserve4734(accountId){ensureAutoFundingState4734();return Math.max(0,Number(state.autoFundingReserve4734[accountId]||0))}
+  function fundingSource4734(month,targetId){ensureAutoFundingState4734();const id=state.autoFundingSources4734[fundingKey4734(month,targetId)]||'';return (state.accounts||[]).some(a=>a.id===id&&a.id!==targetId)?id:''}
+  function loanRecurringIds4734(){return new Set((state.loans||[]).filter(l=>l&&l.loanType!=='overdraft').map(l=>l.recurringItemId).filter(Boolean))}
+  function isAutoFundingFlow4734(flow){return !!flow?.autoFunding4734}
+
+  function targetEvents4734(accountId,month){
+    const loanIds=loanRecurringIds4734();
+    const all=(typeof pendingAccountItems280==='function'?pendingAccountItems280(accountId,month):[]).filter(row=>{
+      if(row?.flowId){
+        const flow=(state.cashflows||[]).find(item=>item.id===row.flowId);
+        // 이 계좌로 들어오는 47.34 자동보충은 지금 다시 계산할 대상이므로 제외합니다.
+        // 반대로 이 계좌가 다른 납부계좌로 보내는 자동이체는 실제 예정출금이므로 포함합니다.
+        if(isAutoFundingFlow4734(flow)&&flow.targetAccountId===accountId)return false;
+      }
+      return true;
+    });
+    const triggers=all.filter(row=>row.kind==='cardDue'||(row.recurringId&&loanIds.has(row.recurringId)));
+    return {events:all,triggers};
+  }
+
+  function targetIdsForMonth4734(month){
+    const ids=new Set();
+    (state.cards||[]).forEach(card=>{
+      if(card?.cardType!=='debit'&&card?.accountId&&allSchedules().some(s=>s.card?.id===card.id&&s.billingMonth===month&&!s.paid&&Number(s.amount||0)>0))ids.add(card.accountId);
+    });
+    const loanIds=loanRecurringIds4734();
+    (state.accounts||[]).forEach(account=>{
+      const rows=typeof pendingAccountItems280==='function'?pendingAccountItems280(account.id,month):[];
+      if(rows.some(row=>row.recurringId&&loanIds.has(row.recurringId)))ids.add(account.id);
+    });
+    Object.keys(state.autoFundingSources4734||{}).forEach(key=>{const [m,id]=String(key).split('|');if(m===month&&id)ids.add(id)});
+    return [...ids].filter(id=>accountById(id));
+  }
+
+  function autoFundingPlan4734(accountId,month){
+    const account=accountById(accountId);
+    const keep=reserve4734(accountId);
+    const {events,triggers}=targetEvents4734(accountId,month);
+    const triggerDates=new Set(triggers.map(row=>row.date));
+    const byDate=new Map();
+    events.forEach(row=>{if(!byDate.has(row.date))byDate.set(row.date,[]);byDate.get(row.date).push(row)});
+    let balance=Number(accountBalance(accountId)||0);
+    const startBalance=balance;
+    const plans=[];
+    [...byDate.keys()].sort().forEach(date=>{
+      const rows=byDate.get(date)||[];
+      const net=rows.reduce((sum,row)=>sum+Number(row.amount||0),0);
+      balance+=net;
+      if(triggerDates.has(date)&&balance<keep){
+        const amount=Math.max(0,Math.round(keep-balance));
+        if(amount>0){plans.push({date,amount,balanceBeforeFunding:balance,balanceAfterFunding:balance+amount});balance+=amount;}
+      }
+    });
+    return {account,month,reserve:keep,startBalance,events,triggers,plans,projectedAfter:balance,total:plans.reduce((s,p)=>s+p.amount,0)};
+  }
+
+  function autoFlowBaseKey4734(month,targetId,date){return `${month}|${targetId}|${date}`}
+  function pendingAutoFlows4734(month,targetId){return (state.cashflows||[]).filter(flow=>isAutoFundingFlow4734(flow)&&!flow.plannedCompleted&&flow.autoFundingMonth4734===month&&flow.targetAccountId===targetId)}
+
+  function syncTargetAutoFunding4734(month,targetId){
+    ensureAutoFundingState4734();
+    const sourceId=fundingSource4734(month,targetId);
+    const existing=pendingAutoFlows4734(month,targetId);
+    if(!sourceId){
+      if(existing.length){state.cashflows=state.cashflows.filter(flow=>!existing.includes(flow));return true;}
+      return false;
+    }
+    const plan=autoFundingPlan4734(targetId,month);
+    const desired=new Map(plan.plans.map(item=>[autoFlowBaseKey4734(month,targetId,item.date),item]));
+    let changed=false;
+    const seen=new Set();
+    for(const flow of [...existing]){
+      const key=flow.autoFundingBaseKey4734||autoFlowBaseKey4734(month,targetId,flow.date||'');
+      const want=desired.get(key);
+      if(!want||seen.has(key)){
+        state.cashflows=state.cashflows.filter(item=>item!==flow);changed=true;continue;
+      }
+      seen.add(key);
+      const nextAmount=Math.max(0,Math.round(Number(want.amount||0)));
+      if(flow.accountId!==sourceId||flow.targetAccountId!==targetId||flow.date!==want.date||Number(flow.amount||0)!==nextAmount||flow.description!==AUTO_DESC4734){
+        Object.assign(flow,{accountId:sourceId,targetAccountId:targetId,date:want.date,amount:nextAmount,description:AUTO_DESC4734,autoFundingBaseKey4734:key,autoFundingMonth4734:month,memo:`${accountById(targetId)?.name||'납부계좌'} 카드·대출 납부 자동보충 · 목표잔액 ${won(reserve4734(targetId))}`});
+        changed=true;
+      }
+    }
+    desired.forEach((want,key)=>{
+      if(seen.has(key)||Number(want.amount||0)<=0)return;
+      state.cashflows.push({
+        id:uid('flow'),type:'transfer',date:want.date,accountId:sourceId,targetAccountId:targetId,
+        description:AUTO_DESC4734,amount:Math.max(0,Math.round(Number(want.amount||0))),
+        majorCategoryId:'',subCategoryId:'',majorCategory:'',subCategory:'',
+        memo:`${accountById(targetId)?.name||'납부계좌'} 카드·대출 납부 자동보충 · 목표잔액 ${won(reserve4734(targetId))}`,
+        plannedTopup:true,plannedCompleted:false,plannedCompletedDate:'',manualScheduledTransfer368:false,
+        autoFunding4734:true,autoFundingBaseKey4734:key,autoFundingMonth4734:month,cardBillingMonth:month,
+        overdraftPriorityMode:'auto-funding-4734',excludeFromIncome:false,budgetSource:'personal',purposeReceiptId:''
+      });
+      changed=true;
+    });
+    return changed;
+  }
+
+  function configuredMonths4734(){
+    ensureAutoFundingState4734();
+    const set=new Set([document.getElementById('mainMonth')?.value||currentMonth()]);
+    Object.keys(state.autoFundingSources4734||{}).forEach(key=>{const month=String(key).slice(0,7);if(/^\d{4}-\d{2}$/.test(month))set.add(month)});
+    return [...set];
+  }
+  function syncAutoFunding4734(){
+    ensureAutoFundingState4734();
+    let any=false;
+    // A통장이 B통장의 출금원천이 되는 경우도 있어 3회 이내에서 안정화합니다.
+    for(let pass=0;pass<3;pass++){
+      let changed=false;
+      for(const month of configuredMonths4734()){
+        for(const targetId of targetIdsForMonth4734(month))changed=syncTargetAutoFunding4734(month,targetId)||changed;
+      }
+      any=any||changed;
+      if(!changed)break;
+    }
+    return any;
+  }
+
+  window.setAutoFundingSource4734=function(month,targetId,sourceId){
+    ensureAutoFundingState4734();
+    const key=fundingKey4734(month,targetId);
+    if(sourceId&&sourceId!==targetId)state.autoFundingSources4734[key]=sourceId;else delete state.autoFundingSources4734[key];
+    saveState();
+  };
+  window.setAutoFundingReserve4734=function(accountId,value){
+    ensureAutoFundingState4734();
+    const amount=Math.max(0,Math.round(parseMoney(value||0)));
+    if(amount>0)state.autoFundingReserve4734[accountId]=amount;else delete state.autoFundingReserve4734[accountId];
+    saveState();
+  };
+
+  function sourceOptions4734(month,targetId){
+    const selected=fundingSource4734(month,targetId);
+    return `<option value="">송금할 통장 선택</option>`+(state.accounts||[]).filter(a=>a.id!==targetId).map(a=>`<option value="${esc(a.id)}" ${a.id===selected?'selected':''}>${esc(a.name)} · 현재 ${signedWon279(accountBalance(a.id))}</option>`).join('');
+  }
+  function obligationLabel4734(row){
+    if(row.kind==='cardDue')return `${row.date.slice(5)} · ${row.title}${row.count?` ${row.count}건`:''}`;
+    return `${row.date.slice(5)} · ${row.title}`;
+  }
+  function renderAutoFunding4734(){
+    ensureAutoFundingSection4734();
+    const list=document.getElementById('autoFundingList4734'),summary=document.getElementById('autoFundingSummary4734');if(!list)return;
+    const month=document.getElementById('mainMonth')?.value||currentMonth();
+    const targetIds=targetIdsForMonth4734(month);
+    const rows=targetIds.map(id=>autoFundingPlan4734(id,month)).filter(row=>row.triggers.length||fundingSource4734(month,row.account.id));
+    const total=rows.reduce((s,row)=>s+row.total,0);
+    if(summary)summary.textContent=`${month} · 납부계좌 ${rows.length}개 · 현재 필요한 자동이체 ${won(total)}`;
+    list.innerHTML=rows.length?rows.map(row=>{
+      const a=row.account,source=fundingSource4734(month,a.id),current=Number(accountBalance(a.id)||0),gap=Math.max(0,row.reserve-current);
+      const obligations=row.triggers.map(item=>`<div class="auto-funding-obligation-4734"><span>${esc(obligationLabel4734(item))}</span><b>${won(Math.abs(Number(item.amount||0)))}</b></div>`).join('');
+      const planRows=row.plans.map(item=>`<div class="auto-funding-plan-row-4734"><span>${esc(item.date)} 이체예정</span><b>${won(item.amount)}</b></div>`).join('');
+      const sourceName=accountById(source)?.name||'';
+      let status='';
+      if(!source)status='<div class="auto-funding-status-4734 need">송금할 통장만 선택하면 필요한 이체예정이 자동 등록됩니다.</div>';
+      else if(row.total>0)status=`<div class="auto-funding-status-4734 ready">${esc(sourceName)} → ${esc(a.name)} · 금액은 카드값/대출이자 변경 시 자동으로 다시 계산됩니다.</div>`;
+      else status=`<div class="auto-funding-status-4734 ready">현재 잔액과 예정 입출금을 반영하면 추가 이체가 필요하지 않습니다.</div>`;
+      return `<div class="auto-funding-card-4734">
+        <div class="auto-funding-head-4734"><div><div class="auto-funding-account-4734"><span class="color-dot" style="background:${safeColor(a.color)}"></span>${esc(a.name)} <span class="badge card">납부계좌</span></div><div class="meta">현재잔액 ${signedWon279(current)} · 목표로 남길 금액 ${won(row.reserve)}</div></div><div class="auto-funding-total-4734">필요 ${won(row.total)}</div></div>
+        <div class="auto-funding-controls-4734">
+          <div><label>이번 달 송금할 통장</label><select onchange='setAutoFundingSource4734(${JSON.stringify(month)},${JSON.stringify(a.id)},this.value)'>${sourceOptions4734(month,a.id)}</select></div>
+          <div><label>이 통장에 목표로 남겨둘 금액</label><input class="money-input" inputmode="numeric" value="${Number(row.reserve||0).toLocaleString('ko-KR')}" onchange='setAutoFundingReserve4734(${JSON.stringify(a.id)},this.value)'/><div class="auto-funding-reserve-note-4734 ${gap>0?'low':''}">${gap>0?`현재 ${won(gap)} 적지만 오류가 아닙니다. 다음 자동이체 계산에 부족분을 포함합니다.`:'실제 잔액이 이 금액보다 내려가도 오류로 처리하지 않습니다.'}</div></div>
+        </div>
+        <div class="auto-funding-obligations-4734"><div class="auto-funding-plan-title-4734">자동으로 확인한 카드·대출 납부예정</div>${obligations||'<div class="meta">현재 미납 카드·대출 예정이 없습니다.</div>'}</div>
+        ${row.plans.length?`<div class="auto-funding-plan-4734"><div class="auto-funding-plan-title-4734">자동 이체예정 계산</div>${planRows}</div>`:''}
+        ${status}
+      </div>`;
+    }).join(''):'<div class="empty">이 달에 카드값 또는 대출이자가 빠져나갈 납부계좌가 없습니다.</div>';
+    try{installMoneyInputs()}catch(_){ }
+  }
+
+  function ensureAutoFundingSection4734(){
+    if(document.getElementById('autoFundingSection4734'))return;
+    const accounts=document.getElementById('accounts');if(!accounts)return;
+    const first=accounts.querySelector('.section');if(!first)return;
+    const section=document.createElement('div');
+    section.id='autoFundingSection4734';
+    section.className='section collapsible-320 auto-funding-section-4734';
+    section.setAttribute('data-collapse-key320','section:accounts:0.5:카드·대출 자동 이체예정');
+    section.setAttribute('data-collapse-title320','카드·대출 자동 이체예정');
+    section.innerHTML=`<div class="section-head"><div><h2>카드·대출 자동 이체예정</h2><div class="subtle" style="margin-top:5px">카드값·대출이자 납부계좌를 자동으로 모아 필요한 금액을 계산합니다. 송금할 통장만 월별로 선택하세요.</div></div><button aria-expanded="true" aria-label="카드·대출 자동 이체예정 접기" class="collapse-toggle-320" title="접기" type="button">−</button></div><div class="collapse-body-320"><div class="auto-funding-toolbar-4734"><div class="meta" id="autoFundingSummary4734"></div><div class="meta">목표잔액은 계산용입니다. 실제 잔액이 더 낮아져도 오류가 아닙니다.</div></div><div class="auto-funding-list-4734" id="autoFundingList4734"></div></div>`;
+    first.insertAdjacentElement('afterend',section);
+    try{if(typeof setupCollapsibles320==='function')setupCollapsibles320()}catch(_){ }
+  }
+
+  const saveStateBefore4734=saveState;
+  let syncing4734=false;
+  saveState=function(...args){
+    ensureAutoFundingState4734();
+    if(syncing4734)return saveStateBefore4734.apply(this,args);
+    syncing4734=true;
+    // 먼저 기존 저장 흐름을 실행해 대출이자 고정지출·카드 스케줄을 최신값으로 맞춘 뒤 계산합니다.
+    const result=saveStateBefore4734.apply(this,args);
+    let changed=false;
+    try{changed=syncAutoFunding4734();}catch(error){console.warn('47.34 자동 이체예정 계산 오류',error)}
+    // 자동 이체예정이 생성/수정/삭제되었다면 그 결과까지 한 번 더 저장합니다.
+    if(changed){try{saveStateBefore4734.apply(this,args)}catch(error){console.warn('47.34 자동 이체예정 추가저장 오류',error)}}
+    syncing4734=false;
+    try{renderAutoFunding4734()}catch(error){console.warn('47.34 자동 이체예정 화면 오류',error)}
+    return result;
+  };
+
+  const renderAccountsBefore4734=renderAccounts;
+  renderAccounts=function(...args){const result=renderAccountsBefore4734.apply(this,args);try{renderAutoFunding4734()}catch(error){}return result;};
+  const renderAllBefore4734=renderAll;
+  renderAll=function(...args){const result=renderAllBefore4734.apply(this,args);try{renderAutoFunding4734()}catch(error){}return result;};
+
+  if(typeof buildBackup27==='function'){
+    const buildBackupBefore4734=buildBackup27;
+    buildBackup27=function(scope='all'){
+      const data=buildBackupBefore4734(scope);ensureAutoFundingState4734();
+      if(data?.state&&(scope==='all'||scope==='accounts')){
+        data.state.autoFundingSources4734=JSON.parse(JSON.stringify(state.autoFundingSources4734||{}));
+        data.state.autoFundingReserve4734=JSON.parse(JSON.stringify(state.autoFundingReserve4734||{}));
+        data.includedKeys=Object.keys(data.state);
+        if(typeof stateCounts27==='function')data.counts=stateCounts27(data.state);
+        if(typeof checksum27==='function'&&typeof stableStringify27==='function')data.checksum=checksum27(stableStringify27(data.state));
+      }
+      if(data&&typeof data==='object')data.backupVersion=VERSION4734;
+      return data;
+    };
+  }
+
+  function forceVersion4734(){
+    const target=`가계부 ${VERSION4734}차`;
+    if(document.title!==target)document.title=target;
+    document.querySelectorAll('.version-pill').forEach(el=>el.textContent=`${VERSION4734}차`);
+    const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+    if(box){const p=box.querySelector('p'),b=box.querySelector('.badge');if(p)p.innerHTML=`<b>가계부 ${VERSION4734}차</b>가 적용되어 있습니다. 카드·대출의 납부계좌를 기준으로 월별 자동 이체예정이 정리되고, 송금할 통장만 선택하면 카드 청구액·대출이자 변경에 맞춰 이체금액이 자동 갱신됩니다. 통장별 목표잔액을 설정할 수 있으며 실제 잔액이 목표보다 낮아져도 오류가 아니라 다음 자동이체 계산에 부족분을 포함합니다.`;if(b)b.textContent=`현재 버전 ${VERSION4734}차`;}
+  }
+
+  ensureAutoFundingSection4734();
+  try{syncAutoFunding4734();renderAutoFunding4734()}catch(error){console.warn('47.34 자동 이체예정 초기화 오류',error)}
+  // 47.33의 제목 감시와 충돌하지 않도록 현재 title을 새 노드로 교체한 뒤 47.34를 유지합니다.
+  const oldTitle=document.querySelector('title');if(oldTitle){const fresh=document.createElement('title');fresh.textContent=`가계부 ${VERSION4734}차`;oldTitle.replaceWith(fresh);new MutationObserver(()=>{if(fresh.textContent!==`가계부 ${VERSION4734}차`)fresh.textContent=`가계부 ${VERSION4734}차`;}).observe(fresh,{childList:true,characterData:true,subtree:true});}
+  forceVersion4734();
+  window.addEventListener('load',()=>setTimeout(()=>{forceVersion4734();try{renderAutoFunding4734()}catch(_){ }},1100));
+  [1600,3200,6000,10000,16000,23000].forEach(delay=>setTimeout(forceVersion4734,delay));
+})();
+</script>
+
