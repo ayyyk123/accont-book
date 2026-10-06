@@ -8,10 +8,10 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="가계부" name="apple-mobile-web-app-title"/>
-<link href="apple-touch-icon.png?v=44.7" rel="apple-touch-icon" sizes="180x180"/>
-<link href="icon-192.png?v=44.7" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 47.33차</title>
-<link href="manifest.json?v=44.7" rel="manifest"/>
+<link href="apple-touch-icon.png?v=47.39" rel="apple-touch-icon" sizes="180x180"/>
+<link href="icon-192.png?v=47.39" rel="icon" sizes="192x192" type="image/png"/>
+<title>가계부 47.39차</title>
+<link href="manifest.json?v=47.39" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
@@ -8884,7 +8884,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=47.33',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=47.39',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
@@ -45932,9 +45932,11 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
   const VERSION4733='47.33';
 
   function carryoverRows4733(month){
-    const rows=[];
+    const closingRows=[];
 
-    // 기존 월마감 이월
+    // 기존 월마감 이월: monthlyBudgetCarryovers401의 기준 합계와만 맞춥니다.
+    // 마감 후 추가 이월은 budgetCarryoverInto401에서 별도로 더해지므로
+    // 기존 이월 합계 보정에 섞으면 +/− 보정행이 중복으로 생깁니다.
     Object.keys(state.monthlyBudgetRolloverDecisions401||{}).forEach(sourceMonth=>{
       let allocations=[];
       try{
@@ -45949,33 +45951,34 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
       }catch(e){}
       allocations
         .filter(a=>a?.targetMonth===month&&Number(a?.amount||0)!==0)
-        .forEach(a=>rows.push({
+        .forEach(a=>closingRows.push({
           sourceMonth,
           amount:Number(a.amount||0),
           kind:'월마감 이월'
         }));
     });
 
-    // 마감 후 변동분 추가 이월
-    (state.budgetPostCloseAdjustments4731||[])
-      .filter(row=>row?.status==='applied'&&row?.targetMonth===month&&Number(row?.amount||0)!==0)
-      .forEach(row=>rows.push({
-        sourceMonth:row.sourceMonth||'',
-        amount:Number(row.amount||0),
-        kind:'마감 후 변동'
-      }));
-
-    // 아주 오래된 데이터 등 출처를 복원할 수 없는 경우 합계라도 표시
-    const total=rows.reduce((sum,row)=>sum+Number(row.amount||0),0);
+    // 아주 오래된 데이터 등 기존 월마감 출처를 복원할 수 없는 경우에만
+    // legacy 합계와 기존 월마감 행을 맞춥니다. 마감 후 추가 이월은 여기서 제외합니다.
+    const closingTotal=closingRows.reduce((sum,row)=>sum+Number(row.amount||0),0);
     const legacy=Number(state.monthlyBudgetCarryovers401?.[month]||0);
-    if(!rows.length&&legacy){
-      rows.push({sourceMonth:'출처 기록 없음',amount:legacy,kind:'기존 이월'});
-    }else if(legacy && Math.round(total)!==Math.round(legacy)){
-      const diff=legacy-total;
-      if(diff)rows.push({sourceMonth:'기존 이월 조정',amount:diff,kind:'기존 이월'});
+    if(!closingRows.length&&legacy){
+      closingRows.push({sourceMonth:'출처 기록 없음',amount:legacy,kind:'기존 이월'});
+    }else if(legacy && Math.round(closingTotal)!==Math.round(legacy)){
+      const diff=legacy-closingTotal;
+      if(diff)closingRows.push({sourceMonth:'기존 이월 조정',amount:diff,kind:'기존 이월'});
     }
 
-    return rows;
+    const adjustmentRows=[];
+    (state.budgetPostCloseAdjustments4731||[])
+      .filter(row=>row?.status==='applied'&&row?.targetMonth===month&&Number(row?.amount||0)!==0)
+      .forEach(row=>adjustmentRows.push({
+        sourceMonth:row.sourceMonth||'',
+        amount:Number(row.amount||0),
+        kind:'마감 후 추가 이월'
+      }));
+
+    return [...closingRows,...adjustmentRows];
   }
 
   function signed4733(amount){
@@ -45993,11 +45996,14 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
 
     const total=rows.reduce((sum,row)=>sum+Number(row.amount||0),0);
     const sourceText=rows.map(row=>{
+      if(row.kind==='마감 후 추가 이월'){
+        const source=row.sourceMonth?`${row.sourceMonth} 마감 후 추가 이월`:'마감 후 추가 이월';
+        return `${source} ${signed4733(row.amount)}`;
+      }
       const source=row.sourceMonth==='출처 기록 없음'||row.sourceMonth==='기존 이월 조정'
         ?row.sourceMonth
         :`${row.sourceMonth}에서 이월`;
-      const kind=row.kind==='마감 후 변동'?' · 마감 후 변동':'';
-      return `${source} ${signed4733(row.amount)}${kind}`;
+      return `${source} ${signed4733(row.amount)}`;
     }).join(' · ');
 
     const html=`
@@ -51761,7 +51767,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
       decisionAllocations403(sourceMonth).filter(a=>a.targetMonth===month).forEach(a=>rows.push({sourceMonth,amount:Number(a.amount||0),kind:'월마감 이월',reason:'월말 예산 마감',at:decision?.decidedAt||''}));
     });
     ensureBudgetAdjustments4731();
-    state.budgetPostCloseAdjustments4731.filter(row=>row.status==='applied'&&row.targetMonth===month).forEach(row=>rows.push({sourceMonth:row.sourceMonth,amount:Number(row.amount||0),kind:'마감 후 변동',reason:row.reason||'마감 후 변경',at:row.resolvedAt||row.detectedAt||''}));
+    state.budgetPostCloseAdjustments4731.filter(row=>row.status==='applied'&&row.targetMonth===month).forEach(row=>rows.push({sourceMonth:row.sourceMonth,amount:Number(row.amount||0),kind:'마감 후 추가 이월',reason:row.reason||'마감 후 변경',at:row.resolvedAt||row.detectedAt||''}));
     return rows.sort((a,b)=>(a.sourceMonth||'').localeCompare(b.sourceMonth||''));
   }
   function ensureCarryoverDetailDialog4731(){
@@ -52426,3 +52432,47 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 })();
 
 </script>
+<script id="v4739-carryover-detail-fix">
+// ===== 47.39차: 마감 후 추가 이월 상세 합계/문구 수정 =====
+(function(){
+  const VERSION4739='47.39';
+
+  // 이전 버전의 title 감시자가 되돌리지 못하도록 title 노드를 다시 교체합니다.
+  const oldTitle4739=document.querySelector('title');
+  if(oldTitle4739){
+    const fresh4739=document.createElement('title');
+    fresh4739.textContent=`가계부 ${VERSION4739}차`;
+    oldTitle4739.replaceWith(fresh4739);
+    new MutationObserver(()=>{
+      if(fresh4739.textContent!==`가계부 ${VERSION4739}차`)fresh4739.textContent=`가계부 ${VERSION4739}차`;
+    }).observe(fresh4739,{childList:true,characterData:true,subtree:true});
+  }
+
+  if(typeof buildBackup27==='function'){
+    const buildBackupBefore4739=buildBackup27;
+    buildBackup27=function(scope='all'){
+      const data=buildBackupBefore4739(scope);
+      if(data&&typeof data==='object')data.backupVersion=VERSION4739;
+      return data;
+    };
+  }
+
+  function forceVersion4739(){
+    const target=`가계부 ${VERSION4739}차`;
+    if(document.title!==target)document.title=target;
+    document.querySelectorAll('.version-pill').forEach(el=>el.textContent=`${VERSION4739}차`);
+    const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+    if(box){
+      const p=box.querySelector('p'),b=box.querySelector('.badge');
+      if(p)p.innerHTML=`<b>가계부 ${VERSION4739}차</b>가 적용되어 있습니다. 마감 후 카드내역 추가 등으로 생긴 <b>추가 이월분</b>을 전월 이월 상세에서 기존 월마감 이월과 중복 보정하지 않도록 수정했습니다. 예를 들어 기존 -550,000원에 마감 후 추가 이월 -15,900원이 있으면 상세 합계도 정확히 <b>-565,900원</b>으로 표시되고, 문구는 <b>마감 후 추가 이월 -15,900원</b>으로 표시됩니다. 47.38의 고정저축 상단 이체 알림과 이전 기능은 그대로 유지됩니다.`;
+      if(b)b.textContent=`현재 버전 ${VERSION4739}차`;
+    }
+  }
+
+  forceVersion4739();
+  window.addEventListener('load',()=>setTimeout(forceVersion4739,1300));
+  window.addEventListener('pageshow',forceVersion4739);
+  [1900,3700,6700,10700,16700,23700,26700].forEach(delay=>setTimeout(forceVersion4739,delay));
+})();
+</script>
+
