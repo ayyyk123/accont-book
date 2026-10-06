@@ -7561,7 +7561,7 @@ html,body,button,[role="button"],tr[role="button"]{
 </style>
 
 <style id="v4741-quick-menu-style">
-/* 47.42차: 빠른입력 2단계 메뉴 - PC/모바일 공통, 로딩 초기화 없음 */
+/* 47.43차: 빠른입력 2단계 메뉴 - PC/모바일 공통 */
 .quick-menu-modal-4741{width:min(620px,100%)}
 .quick-menu-head-4741{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:center;gap:4px}
 .quick-menu-head-4741 h2{text-align:center;margin:0}
@@ -7582,14 +7582,14 @@ body.dark .quick-menu-category-4741,body.dark .quick-menu-action-4741{background
 </style>
 </head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">47.33차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
-<script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},1300);</script>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">47.43차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},4000);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">47.33차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">47.43차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="topbar-actions-4731">
 <a class="calendar-shortcut-4731" href="https://ayyyk123.github.io/calendar-ay/" target="_blank" rel="noopener noreferrer" aria-label="캘린더 웹앱 열기" title="캘린더로 이동">📅</a>
-<div class="desktop-actions"><button class="primary-btn" onclick="openTransactionRegister389()" type="button">거래등록</button></div>
+<div class="desktop-actions"><button class="primary-btn" onclick="openQuickMenu()" type="button">거래등록</button></div>
 <button class="primary-btn mobile-only" onclick="openQuickMenu()" type="button">+ 입력</button>
 </div>
 </header>
@@ -8411,6 +8411,37 @@ function selectedCategory(majorEl,subEl){const major=categoryById(majorEl.value)
 function renderSelectors(){const cardOptions='<option value="">모든 카드</option>'+state.cards.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');const pcf=document.getElementById('purchaseCardFilter'),pcKeep=pcf.value;pcf.innerHTML=cardOptions;pcf.value=pcKeep;const purchaseCard=document.getElementById('purchaseCard'),purchaseKeep=purchaseCard.value;purchaseCard.innerHTML=state.cards.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');if(purchaseKeep)purchaseCard.value=purchaseKeep;const recurringCard=document.getElementById('recurringCard'),rcKeep=recurringCard?.value;if(recurringCard){recurringCard.innerHTML=state.cards.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');if(rcKeep)recurringCard.value=rcKeep}const accountOptions=state.accounts.map(a=>`<option value="${a.id}">${esc(a.name)}${a.bank?' · '+esc(a.bank):''}</option>`).join('');['cardAccount','cashflowAccount','cashflowTarget','payAccount','recurringAccount'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const keep=el.value;el.innerHTML=(id==='cardAccount'?'<option value="">출금 통장 미지정</option>':'')+accountOptions;if(keep)el.value=keep});const laf=document.getElementById('ledgerAccountFilter'),lak=laf.value;laf.innerHTML='<option value="">모든 통장</option>'+accountOptions;if(lak)laf.value=lak;const pmf=document.getElementById('purchaseMajorFilter'),pmk=pmf.value;fillMajorSelect(pmf,'expense',pmk,true);fillSubSelect(document.getElementById('purchaseSubFilter'),'expense',pmf.value,document.getElementById('purchaseSubFilter').value,true)}
 
 function renderAll(){if(syncRecurringCashflows(selectedTargetMonth()))safeStateLocalWrite476();renderSelectors();renderTop();renderDashboard();renderPurchases();renderPayments();renderAccounts();renderRecurring();renderDebts();renderCards();renderBudget();renderCategoryManager();renderStatistics()}
+
+// ===== 47.43차: 초기 로딩 전체렌더 1회로 통합 =====
+// 과거 차수 스크립트가 파싱 중 renderAll()을 여러 번 호출하더라도
+// DOM 구성이 끝날 때까지 기본 전체렌더는 보류하고 마지막 래퍼 체인으로 한 번만 실행합니다.
+(function(){
+  const baseRenderAll4743=renderAll;
+  let bootReady4743=false;
+  renderAll=function(){
+    if(!bootReady4743){
+      window.__bootRenderRequested4743=true;
+      return;
+    }
+    return baseRenderAll4743();
+  };
+  window.__allowInitialRender4743=function(){
+    if(bootReady4743)return;
+    bootReady4743=true;
+    setTimeout(()=>{
+      try{
+        if(typeof safeFinalRender407==='function')safeFinalRender407();
+        else if(typeof renderAll==='function')renderAll();
+      }catch(error){
+        console.error('47.43 초기 렌더 오류',error);
+        try{baseRenderAll4743()}catch(_){ }
+        const splash=document.getElementById('appSplash');
+        if(splash){splash.classList.add('hidden');splash.style.pointerEvents='none';}
+      }
+    },0);
+  };
+  document.addEventListener('DOMContentLoaded',()=>window.__allowInitialRender4743(),{once:true});
+})();
 function renderTop(){const m=document.getElementById('mainMonth').value||currentMonth(),s=monthSummary(m),personal=personalMonthExpense(m),budget=document.getElementById('budgetStat');const monthNumber=Number(m.split('-')[1])||new Date().getMonth()+1;const monthLabel=`${monthNumber}월`;document.getElementById('statBudgetLabel').textContent=`${monthLabel} 남은 예산`;document.getElementById('statIncomeLabel').textContent=`${monthLabel} 소득`;document.getElementById('statConsumptionLabel').textContent=`${monthLabel} 소비`;document.getElementById('statCardDueLabel').textContent=`${monthLabel} 카드 결제예정`;const personalRemaining=s.budgetBase-personal;document.getElementById('statBudget').textContent=(personalRemaining<0?'-':'')+won(Math.abs(personalRemaining));budget.classList.toggle('negative-budget',personalRemaining<0);document.getElementById('statBudgetSub').innerHTML=`예산 기준 ${won(s.budgetBase)} · 내 생활비 사용 ${won(personal)} · 목적자금 사용 ${won(state.purchases.filter(p=>p.date?.slice(0,7)===m&&(p.budgetSource||'personal')!=='personal').reduce((x,p)=>x+Number(p.totalAmount||0),0))} <button type="button" class="mini-link" onclick="setMonthlyBudget()">${s.hasBudget?'기준 수정':'기준 설정'}</button>`;document.getElementById('statIncome').textContent=won(s.income);document.getElementById('statConsumption').textContent=won(s.consumption);document.getElementById('statCardDue').textContent=won(s.cardDue)}
 function accountCardHtml(a,manage=false){return `<div class="line-row"><div class="line-row-title"><span class="color-dot" style="background:${safeColor(a.color)}"></span>${esc(a.name)} <span class="badge card">${esc(a.bank||'통장')}</span></div><div class="line-row-value">${won(accountBalance(a.id))}</div><div class="line-row-meta">시작잔액 ${won(a.initialBalance)}${a.memo?` · ${esc(a.memo)}`:''}</div>${manage?`<div class="line-row-actions"><button type="button" class="small-btn" onclick="editAccount('${a.id}')">수정</button><button type="button" class="small-btn danger" onclick="deleteAccount('${a.id}')">삭제</button></div>`:'<div class="line-row-actions"></div>'}</div>`}
 function renderDashboard(){const total=state.accounts.reduce((x,a)=>x+accountBalance(a.id),0),totalCard=`<div class="card-box entity-card total-card" style="--item-color:#303744"><div class="top"><strong class="entity-title"><span class="color-dot"></span>전체 통장 잔액</strong><span class="badge card">합계</span></div><div class="money">${won(total)}</div><div class="meta">등록된 통장 ${state.accounts.length}개 합계</div></div>`;document.getElementById('dashboardAccounts').innerHTML=totalCard+(state.accounts.length?state.accounts.map(a=>accountCardHtml(a)).join(''):'<div class="empty">통장을 등록해주세요.</div>');const m=document.getElementById('mainMonth').value||currentMonth();document.getElementById('dashboardDues').innerHTML=[m,addMonths(m,1)].map(bm=>{const total=allSchedules().filter(s=>s.billingMonth===bm).reduce((x,s)=>x+Number(s.amount),0),unpaid=allSchedules().filter(s=>s.billingMonth===bm&&!s.paid).reduce((x,s)=>x+Number(s.amount),0);return `<div class="line-row"><div class="line-row-title">${bm} 카드값 <span class="badge ${unpaid?'unpaid':'paid'}">${unpaid?'결제 예정':'확인 완료'}</span></div><div class="line-row-value">${won(total)}</div><div class="line-row-meta">아직 출금 확인 전 ${won(unpaid)}</div><div class="line-row-actions"></div></div>`}).join('');const openDebts=(state.debts||[]).filter(d=>debtRemaining(d)>0),recv=openDebts.filter(d=>d.type==='receivable').reduce((x,d)=>x+debtRemaining(d),0),pay=openDebts.filter(d=>d.type==='payable').reduce((x,d)=>x+debtRemaining(d),0);document.getElementById('dashboardDebts').innerHTML=`<div class="line-row"><div class="line-row-title">받을 돈 <span class="badge income">${openDebts.filter(d=>d.type==='receivable').length}건</span></div><div class="line-row-value">${won(recv)}</div><div class="line-row-meta">아직 받지 못한 금액</div><div class="line-row-actions"></div></div><div class="line-row"><div class="line-row-title">줄 돈 <span class="badge expense">${openDebts.filter(d=>d.type==='payable').length}건</span></div><div class="line-row-value">${won(pay)}</div><div class="line-row-meta">아직 갚지 않은 금액</div><div class="line-row-actions"></div></div>`;const recent=[...state.purchases].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);document.getElementById('recentPurchases').innerHTML=recent.length?purchaseTableHtml(recent):'<div class="empty">카드 사용기록이 없습니다.</div>'}
@@ -46073,6 +46104,47 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
 </script>
 
 
+
+<script id="v4743-fast-boot-and-pc-quick-menu">
+// ===== 47.43차: PC 모바일 메뉴 통일 + 초기 중복 전체렌더 방지 =====
+(function(){
+  const VERSION4743='47.43';
+
+  if(typeof safeFinalRender407==='function'&&!safeFinalRender407.__v4743){
+    const safeFinalRenderBefore4743=safeFinalRender407;
+    safeFinalRender407=function(){
+      if(window.__initialFullRender4743Done){
+        try{if(typeof unlockSplash408==='function')unlockSplash408(); else if(typeof releaseBudgetSplash401==='function')releaseBudgetSplash401();}catch(_){ }
+        return;
+      }
+      const result=safeFinalRenderBefore4743();
+      window.__initialFullRender4743Done=true;
+      return result;
+    };
+    safeFinalRender407.__v4743=true;
+  }
+
+  function forceVersion4743(){
+    const target=`가계부 ${VERSION4743}차`;
+    if(document.title!==target)document.title=target;
+    document.querySelectorAll('.version-pill').forEach(el=>el.textContent=`${VERSION4743}차`);
+    const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+    if(box){
+      const p=box.querySelector('p'),b=box.querySelector('.badge');
+      if(p)p.innerHTML=`<b>가계부 ${VERSION4743}차</b>가 적용되어 있습니다. PC의 거래등록과 모바일 +입력이 같은 2단계 빠른입력 메뉴를 사용하고, 시작 시 누적되던 전체 렌더 호출을 한 번으로 합쳐 초기 로딩을 가볍게 했습니다. Firebase 동기화가 실제로 새 데이터를 적용할 때는 정상적으로 다시 렌더됩니다.`;
+      if(b)b.textContent=`현재 버전 ${VERSION4743}차`;
+    }
+  }
+
+  // 데스크톱 버튼이 과거 거래등록 모달로 되돌아가도 동일 빠른입력 메뉴를 사용합니다.
+  document.querySelectorAll('.desktop-actions button').forEach(btn=>{
+    if((btn.textContent||'').trim()==='거래등록')btn.setAttribute('onclick','openQuickMenu()');
+  });
+
+  forceVersion4743();
+  window.addEventListener('pageshow',forceVersion4743);
+})();
+</script>
 </body>
 </html>
 
@@ -52164,7 +52236,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 <script id="v4738-fixed-savings-transfer-reminder">
 // ===== 47.38차: 고정저축도 상단 이체 알림에 포함 =====
 (function(){
-  const VERSION4738='47.38';
+  const VERSION4738='47.43';
 
   // 47.37의 title 감시자가 47.37로 되돌리지 못하도록 title 노드를 다시 교체합니다.
   const title4738=document.querySelector('title');
@@ -52456,7 +52528,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 <script id="v4739-carryover-detail-fix">
 // ===== 47.42차: 마감 후 추가 이월 상세 합계/문구 수정 =====
 (function(){
-  const VERSION4739='47.42';
+  const VERSION4739='47.43';
 
   // 이전 버전의 title 감시자가 되돌리지 못하도록 title 노드를 다시 교체합니다.
   const oldTitle4739=document.querySelector('title');
@@ -52497,7 +52569,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 })();
 </script>
 <script id="v4741-quick-menu-script">
-// 47.42차: 메뉴 선택 시에만 실행. 로딩 시 DOM 감시/반복 렌더링 없음.
+// 47.43차: 메뉴 선택 시에만 실행. PC/모바일 동일 메뉴.
 function showQuickMenuRoot4741(){
   const root=document.getElementById('quickMenuRoot4741');
   const title=document.getElementById('quickMenuTitle4741');
