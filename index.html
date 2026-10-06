@@ -52133,3 +52133,296 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 })();
 </script>
 
+
+<script id="v4738-fixed-savings-transfer-reminder">
+// ===== 47.38차: 고정저축도 상단 이체 알림에 포함 =====
+(function(){
+  const VERSION4738='47.38';
+
+  // 47.37의 title 감시자가 47.37로 되돌리지 못하도록 title 노드를 다시 교체합니다.
+  const title4738=document.querySelector('title');
+  if(title4738){
+    const fresh4738=document.createElement('title');
+    fresh4738.textContent=`가계부 ${VERSION4738}차`;
+    title4738.replaceWith(fresh4738);
+    new MutationObserver(()=>{
+      if(fresh4738.textContent!==`가계부 ${VERSION4738}차`)fresh4738.textContent=`가계부 ${VERSION4738}차`;
+    }).observe(fresh4738,{childList:true,characterData:true,subtree:true});
+  }
+
+  function fixedSavingsDueDate4738(item,month){
+    try{
+      if(typeof recurringDate==='function')return recurringDate(item,month);
+    }catch(_){ }
+    const day=typeof clampDay==='function'?clampDay(month,Number(item?.day||1)):Math.max(1,Math.min(28,Number(item?.day||1)));
+    return `${month}-${String(day).padStart(2,'0')}`;
+  }
+
+  function fixedSavingsActive4738(item,month){
+    if(!item||item.type!=='savings'||item.active===false)return false;
+    if(item.startMonth&&month<item.startMonth)return false;
+    if(item.endMonth&&month>item.endMonth)return false;
+    try{
+      if(typeof recurringSavingsSkipped296==='function'&&recurringSavingsSkipped296(item.id,month))return false;
+    }catch(_){ }
+    return true;
+  }
+
+  function fixedSavingsFlow4738(recurringId,month){
+    if(typeof recurringSavingsFlow297==='function'){
+      try{return recurringSavingsFlow297(recurringId,month)||null}catch(_){ }
+    }
+    return (state.cashflows||[]).find(flow=>
+      flow?.recurringSavings&&flow.recurringItemId===recurringId&&
+      (flow.recurringMonth===month||(flow.date||'').slice(0,7)===month)
+    )||null;
+  }
+
+  function dueFixedSavings4738(){
+    const month=currentMonth();
+    const now=today();
+    return (state.recurringItems||[])
+      .filter(item=>fixedSavingsActive4738(item,month))
+      .map(item=>{
+        const date=fixedSavingsDueDate4738(item,month);
+        if(!date||date>now||fixedSavingsFlow4738(item.id,month))return null;
+        return {
+          fixedSavings4738:true,
+          id:`saving4738:${item.id}:${month}`,
+          recurringItemId:item.id,
+          recurringMonth:month,
+          date,
+          accountId:item.accountId||'',
+          targetAccountId:item.targetAccountId||'',
+          description:item.description||'고정저축',
+          memo:item.memo||'고정저축 이체 대기',
+          amount:Number(item.amount||0)
+        };
+      })
+      .filter(Boolean)
+      .sort((a,b)=>a.date.localeCompare(b.date)||String(a.recurringItemId).localeCompare(String(b.recurringItemId)));
+  }
+
+  function completedFixedSavingsToday4738(){
+    const day=today();
+    return (state.cashflows||[])
+      .filter(flow=>flow?.recurringSavings&&flow.recurringSavingsCompletedDate4738===day)
+      .map(flow=>({
+        fixedSavings4738:true,
+        completed4738:true,
+        id:`saving-flow4738:${flow.id}`,
+        flowId:flow.id,
+        recurringItemId:flow.recurringItemId||'',
+        recurringMonth:flow.recurringMonth||(flow.date||'').slice(0,7),
+        date:flow.date||day,
+        accountId:flow.accountId||'',
+        targetAccountId:flow.targetAccountId||'',
+        description:flow.description||'고정저축',
+        memo:flow.memo||'고정저축 이체 완료',
+        amount:Number(flow.amount||0)
+      }))
+      .sort((a,b)=>String(a.date||'').localeCompare(String(b.date||'')));
+  }
+
+  function savingsPendingRow4738(row){
+    const source=accountById(row.accountId);
+    const target=accountById(row.targetAccountId);
+    const dateInfo=plannedTransferDateLabel365(row);
+    return `<div class="transfer-reminder-row-365 ${dateInfo.overdue?'overdue-row-365':''}">
+      <div class="transfer-reminder-main-365">
+        <div class="transfer-reminder-route-365">
+          <span>${esc(source?.name||'출금통장')}</span>
+          <span class="transfer-reminder-arrow-365">→</span>
+          <span>${esc(target?.name||'저축통장')}</span>
+        </div>
+        <div class="transfer-reminder-meta-365">
+          <span class="transfer-reminder-date-365 ${dateInfo.overdue?'overdue-365':'today-365'}">${esc(dateInfo.label)}</span>
+          <span class="transfer-reminder-memo-365">고정저축 · ${esc(row.description||'이체 대기')}</span>
+        </div>
+        <div class="transfer-reminder-amount-365">${won(row.amount)}</div>
+      </div>
+      <div class="transfer-reminder-actions-365">
+        <button type="button" class="small-btn transfer-reminder-view-365" data-view-fixed-saving4738="${esc(row.recurringItemId)}">고정내역 보기</button>
+        <button type="button" class="small-btn transfer-reminder-complete-365" data-complete-fixed-saving4738="${esc(row.recurringItemId)}" data-saving-month4738="${esc(row.recurringMonth)}">이체 완료</button>
+      </div>
+    </div>`;
+  }
+
+  function savingsCompletedRow4738(row){
+    const source=accountById(row.accountId);
+    const target=accountById(row.targetAccountId);
+    const late=row.date&&row.date<today();
+    return `<div class="transfer-reminder-row-365 transfer-reminder-completed-row-366">
+      <div class="transfer-reminder-main-365">
+        <div class="transfer-reminder-route-365">
+          <span>${esc(source?.name||'출금통장')}</span>
+          <span class="transfer-reminder-arrow-365">→</span>
+          <span>${esc(target?.name||'저축통장')}</span>
+        </div>
+        <div class="transfer-reminder-meta-365">
+          <span class="transfer-reminder-completed-date-366">오늘 완료</span>
+          <span>고정저축 · 예정일 ${esc(row.date||'')}${late?' · 지연 완료':''}</span>
+          <span class="transfer-reminder-memo-365">${esc(row.description||'고정저축')}</span>
+        </div>
+        <div class="transfer-reminder-amount-365">${won(row.amount)}</div>
+      </div>
+      <div class="transfer-reminder-actions-365">
+        <span class="transfer-reminder-completed-status-366">✓ 완료됨</span>
+        <button type="button" class="small-btn transfer-reminder-view-365" data-view-fixed-saving4738="${esc(row.recurringItemId)}">고정내역 보기</button>
+      </div>
+    </div>`;
+  }
+
+  const plannedDueBefore4738=typeof duePlannedTransfers365==='function'?duePlannedTransfers365:null;
+  const plannedCompletedBefore4738=typeof completedTodayTransfers366==='function'?completedTodayTransfers366:null;
+
+  renderTransferReminder365=function(){
+    const box=document.getElementById('transferReminder365');
+    const title=document.getElementById('transferReminderTitle365');
+    const sub=document.getElementById('transferReminderSub365');
+    const totalCount=document.getElementById('transferReminderCount365');
+    const pendingGroup=document.getElementById('transferReminderPendingGroup366');
+    const completedGroup=document.getElementById('transferReminderCompletedGroup366');
+    const pendingCount=document.getElementById('transferReminderPendingCount366');
+    const completedCount=document.getElementById('transferReminderCompletedCount366');
+    const pendingRows=document.getElementById('transferReminderPendingRows366');
+    const completedRows=document.getElementById('transferReminderCompletedRows366');
+    if(!box||!pendingGroup||!completedGroup||!pendingRows||!completedRows)return;
+
+    const plannedPending=plannedDueBefore4738?plannedDueBefore4738():[];
+    const savingsPending=dueFixedSavings4738();
+    const plannedCompleted=plannedCompletedBefore4738?plannedCompletedBefore4738():[];
+    const savingsCompleted=completedFixedSavingsToday4738();
+    const pendingTotal=plannedPending.length+savingsPending.length;
+    const completedTotal=plannedCompleted.length+savingsCompleted.length;
+    const total=pendingTotal+completedTotal;
+
+    box.classList.toggle('no-transfer-alert-368',total===0);
+    if(total===0){
+      box.hidden=false;
+      box.classList.remove('overdue-365','completed-only-366');
+      if(title)title.textContent='이체 알림 없음';
+      if(sub)sub.textContent='오늘 예정되거나 오늘 완료한 이체가 없습니다.';
+      if(totalCount)totalCount.textContent='0건';
+      pendingGroup.hidden=true;
+      completedGroup.hidden=true;
+      pendingRows.innerHTML='';
+      completedRows.innerHTML='';
+      return;
+    }
+
+    const overdueCount=plannedPending.filter(flow=>flow.date<today()).length+savingsPending.filter(row=>row.date<today()).length;
+    const todayCount=pendingTotal-overdueCount;
+    box.hidden=false;
+    box.classList.toggle('overdue-365',overdueCount>0);
+    box.classList.toggle('completed-only-366',pendingTotal===0&&completedTotal>0);
+    if(title){
+      title.textContent=pendingTotal
+        ?(overdueCount?'완료하지 않은 이체가 있어요':'오늘 이체할 내역이 있어요')
+        :'오늘 완료한 이체가 있어요';
+    }
+    if(sub){
+      const parts=[];
+      if(overdueCount)parts.push(`지난 이체 ${overdueCount}건`);
+      if(todayCount)parts.push(`오늘 이체 ${todayCount}건`);
+      if(completedTotal)parts.push(`오늘 완료 ${completedTotal}건`);
+      sub.textContent=`${parts.join(' · ')}${pendingTotal?'입니다. 실제 이체 후 완료 처리해주세요.':'입니다.'}`;
+    }
+    if(totalCount)totalCount.textContent=`${total}건`;
+
+    pendingGroup.hidden=pendingTotal===0;
+    completedGroup.hidden=completedTotal===0;
+    if(pendingCount)pendingCount.textContent=`${pendingTotal}건`;
+    if(completedCount)completedCount.textContent=`${completedTotal}건`;
+    pendingRows.innerHTML=[
+      ...plannedPending.map(flow=>pendingTransferRowHtml366(flow)),
+      ...savingsPending.map(savingsPendingRow4738)
+    ].join('');
+    completedRows.innerHTML=[
+      ...plannedCompleted.map(flow=>completedTransferRowHtml366(flow)),
+      ...savingsCompleted.map(savingsCompletedRow4738)
+    ].join('');
+    try{applyTransferGroupState366()}catch(_){ }
+  };
+
+  document.addEventListener('click',event=>{
+    const complete=event.target.closest('[data-complete-fixed-saving4738]');
+    if(complete){
+      event.preventDefault();
+      event.stopPropagation();
+      const id=complete.dataset.completeFixedSaving4738||'';
+      const month=complete.dataset.savingMonth4738||currentMonth();
+      if(typeof openRecurringSavingsSettleModal297==='function')openRecurringSavingsSettleModal297(id,month);
+      else if(typeof completeSavings==='function')completeSavings(id,month);
+      return;
+    }
+    const view=event.target.closest('[data-view-fixed-saving4738]');
+    if(view){
+      event.preventDefault();
+      event.stopPropagation();
+      const id=view.dataset.viewFixedSaving4738||'';
+      try{switchTab('recurring')}catch(_){ }
+      requestAnimationFrame(()=>{
+        try{if(typeof openSavingsHistory425==='function')openSavingsHistory425(id)}catch(_){ }
+      });
+    }
+  },true);
+
+  const savingsForm=document.getElementById('recurringSavingsSettleForm297');
+  if(savingsForm&&!savingsForm.__v4738CompletedDate){
+    savingsForm.addEventListener('submit',()=>{
+      const recurringId=document.getElementById('recurringSavingsId297')?.value||'';
+      const month=document.getElementById('recurringSavingsMonth297')?.value||currentMonth();
+      setTimeout(()=>{
+        const flow=fixedSavingsFlow4738(recurringId,month);
+        if(flow&&!flow.recurringSavingsCompletedDate4738){
+          flow.recurringSavingsCompletedDate4738=today();
+          try{saveState()}catch(_){ }
+        }else{
+          try{renderTransferReminder365()}catch(_){ }
+        }
+      },0);
+    });
+    savingsForm.__v4738CompletedDate=true;
+  }
+
+  const undoSavingsBefore4738=typeof undoSavings==='function'?undoSavings:null;
+  if(undoSavingsBefore4738&&!undoSavingsBefore4738.__v4738){
+    undoSavings=function(flowId){
+      const result=undoSavingsBefore4738(flowId);
+      try{renderTransferReminder365()}catch(_){ }
+      return result;
+    };
+    undoSavings.__v4738=true;
+  }
+
+  if(typeof buildBackup27==='function'){
+    const buildBackupBefore4738=buildBackup27;
+    buildBackup27=function(scope='all'){
+      const data=buildBackupBefore4738(scope);
+      if(data&&typeof data==='object')data.backupVersion=VERSION4738;
+      return data;
+    };
+  }
+
+  function forceVersion4738(){
+    const target=`가계부 ${VERSION4738}차`;
+    if(document.title!==target)document.title=target;
+    document.querySelectorAll('.version-pill').forEach(el=>el.textContent=`${VERSION4738}차`);
+    const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+    if(box){
+      const p=box.querySelector('p'),b=box.querySelector('.badge');
+      if(p)p.innerHTML=`<b>가계부 ${VERSION4738}차</b>가 적용되어 있습니다. 기존 일반 이체예정·자동보충 이체뿐 아니라 <b>고정저축 이체 대기</b>도 상단 이체 알림에 함께 표시됩니다. 고정저축 예정일이 지나면 완료할 때까지 계속 미완료 알림으로 남고, 알림의 <b>이체 완료</b> 버튼에서 기존 고정저축 완료창을 바로 열 수 있습니다. 47.37의 전체 예정출금 목표잔액 유지 기능은 그대로 유지됩니다.`;
+      if(b)b.textContent=`현재 버전 ${VERSION4738}차`;
+    }
+  }
+
+  try{renderTransferReminder365()}catch(error){console.warn('47.38 고정저축 이체 알림 초기화 오류',error)}
+  forceVersion4738();
+  window.addEventListener('load',()=>setTimeout(()=>{try{renderTransferReminder365()}catch(_){ }forceVersion4738();},1200));
+  window.addEventListener('pageshow',()=>{try{renderTransferReminder365()}catch(_){ }forceVersion4738();});
+  window.addEventListener('focus',()=>{try{renderTransferReminder365()}catch(_){ }});
+  [1800,3500,6500,10500,16500,23500,25500].forEach(delay=>setTimeout(forceVersion4738,delay));
+})();
+
+</script>
