@@ -8,10 +8,10 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="가계부" name="apple-mobile-web-app-title"/>
-<link href="apple-touch-icon.png?v=47.41" rel="apple-touch-icon" sizes="180x180"/>
-<link href="icon-192.png?v=47.41" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 47.41차</title>
-<link href="manifest.json?v=47.41" rel="manifest"/>
+<link href="apple-touch-icon.png?v=47.42" rel="apple-touch-icon" sizes="180x180"/>
+<link href="icon-192.png?v=47.42" rel="icon" sizes="192x192" type="image/png"/>
+<title>가계부 47.42차</title>
+<link href="manifest.json?v=47.42" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
@@ -7561,15 +7561,15 @@ html,body,button,[role="button"],tr[role="button"]{
 </style>
 
 <style id="v4741-quick-menu-style">
-/* 47.41차: 빠른입력 2단계 메뉴 - PC/모바일 공통, 로딩 초기화 없음 */
+/* 47.42차: 빠른입력 2단계 메뉴 - PC/모바일 공통, 로딩 초기화 없음 */
 .quick-menu-modal-4741{width:min(620px,100%)}
 .quick-menu-head-4741{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:center;gap:4px}
 .quick-menu-head-4741 h2{text-align:center;margin:0}
 .quick-menu-back-4741{border:0;background:transparent;color:var(--primary);font-size:34px;line-height:1;padding:0;border-radius:10px;min-width:42px;min-height:42px}
 .quick-menu-back-4741:hover{background:var(--primary-soft)}
 .quick-menu-back-4741[hidden]{visibility:hidden;display:block}
-.quick-menu-root-4741{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.quick-menu-category-4741{min-height:92px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--text);padding:16px 14px;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.quick-menu-root-4741{display:grid;grid-template-columns:1fr;gap:12px}
+.quick-menu-category-4741{min-height:72px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--text);padding:16px 14px;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:6px}
 .quick-menu-category-4741 b{font-size:18px}.quick-menu-category-4741 span{font-size:12px;color:var(--muted);line-height:1.4}
 .quick-menu-category-4741:hover,.quick-menu-category-4741:focus-visible{border-color:var(--primary);background:var(--primary-soft);outline:none}
 .quick-menu-sub-4741{display:grid;grid-template-columns:1fr;gap:11px}
@@ -7578,7 +7578,7 @@ html,body,button,[role="button"],tr[role="button"]{
 .quick-menu-action-4741:hover,.quick-menu-action-4741:focus-visible{border-color:var(--primary);background:var(--primary-soft);outline:none}
 .quick-menu-action-4741.primary{background:var(--primary);border-color:var(--primary);color:#fff}
 body.dark .quick-menu-category-4741,body.dark .quick-menu-action-4741{background:#202430;color:var(--text)}
-@media(max-width:600px){.quick-menu-root-4741{grid-template-columns:1fr}.quick-menu-category-4741{min-height:72px}}
+
 </style>
 </head>
 <body data-active-tab351="purchases">
@@ -8905,7 +8905,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=47.41',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=47.42',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
@@ -52454,9 +52454,9 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 
 </script>
 <script id="v4739-carryover-detail-fix">
-// ===== 47.41차: 마감 후 추가 이월 상세 합계/문구 수정 =====
+// ===== 47.42차: 마감 후 추가 이월 상세 합계/문구 수정 =====
 (function(){
-  const VERSION4739='47.41';
+  const VERSION4739='47.42';
 
   // 이전 버전의 title 감시자가 되돌리지 못하도록 title 노드를 다시 교체합니다.
   const oldTitle4739=document.querySelector('title');
@@ -52497,7 +52497,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 })();
 </script>
 <script id="v4741-quick-menu-script">
-// 47.41차: 메뉴 선택 시에만 실행. 로딩 시 DOM 감시/반복 렌더링 없음.
+// 47.42차: 메뉴 선택 시에만 실행. 로딩 시 DOM 감시/반복 렌더링 없음.
 function showQuickMenuRoot4741(){
   const root=document.getElementById('quickMenuRoot4741');
   const title=document.getElementById('quickMenuTitle4741');
