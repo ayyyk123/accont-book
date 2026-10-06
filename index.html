@@ -8,10 +8,10 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="가계부" name="apple-mobile-web-app-title"/>
-<link href="apple-touch-icon.png?v=47.39" rel="apple-touch-icon" sizes="180x180"/>
-<link href="icon-192.png?v=47.39" rel="icon" sizes="192x192" type="image/png"/>
+<link href="apple-touch-icon.png?v=47.40" rel="apple-touch-icon" sizes="180x180"/>
+<link href="icon-192.png?v=47.40" rel="icon" sizes="192x192" type="image/png"/>
 <title>가계부 47.39차</title>
-<link href="manifest.json?v=47.39" rel="manifest"/>
+<link href="manifest.json?v=47.40" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
@@ -262,6 +262,26 @@
 #loans .summary-limit-4722{font-size:11.5px;line-height:1.25;color:var(--muted);font-weight:700;text-align:right;white-space:nowrap}
 #loans .summary-limit-4722 strong{font:inherit;color:inherit;font-weight:850}
 @media(max-width:600px){#loans .summary-limit-4722{font-size:10.5px}}
+
+    /* 47.40차: 빠른입력 2단계 메뉴 - 모바일/PC 공통 */
+    .quick-menu-modal-4740{width:min(620px,100%)}
+    .quick-menu-head-4740{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:center;gap:4px}
+    .quick-menu-head-4740 h2{text-align:center}
+    .quick-menu-back-4740{border:0;background:transparent;color:var(--primary);font-size:34px;line-height:1;padding:0;border-radius:10px;min-width:42px;min-height:42px}
+    .quick-menu-back-4740:hover{background:var(--primary-soft)}
+    .quick-menu-back-4740[hidden]{visibility:hidden;display:block}
+    .quick-menu-root-4740{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .quick-menu-category-4740{min-height:92px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--text);padding:16px 14px;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:6px}
+    .quick-menu-category-4740 b{font-size:18px}
+    .quick-menu-category-4740 span{font-size:12px;color:var(--muted);line-height:1.4}
+    .quick-menu-category-4740:hover,.quick-menu-category-4740:focus-visible{border-color:var(--primary);background:var(--primary-soft);outline:none}
+    .quick-menu-sub-4740{display:grid;grid-template-columns:1fr;gap:11px}
+    .quick-menu-sub-4740[hidden]{display:none}
+    .quick-menu-action-4740{min-height:58px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);font-weight:850;padding:13px 16px;text-align:center}
+    .quick-menu-action-4740:hover,.quick-menu-action-4740:focus-visible{border-color:var(--primary);background:var(--primary-soft);outline:none}
+    .quick-menu-action-4740.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+    body.dark .quick-menu-category-4740,body.dark .quick-menu-action-4740{background:#202430;color:var(--text)}
+    body.dark .quick-menu-category-4740:hover,body.dark .quick-menu-category-4740:focus-visible,body.dark .quick-menu-action-4740:hover,body.dark .quick-menu-action-4740:focus-visible{background:var(--primary-soft)}
 </style>
 <style id="v273-budget-split-style">
   .budget-balance-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:7px 0 5px}
@@ -7744,7 +7764,7 @@ html,body,button,[role="button"],tr[role="button"]{
 <div class="all-column-filter-popover-355" hidden="" id="allColumnFilterPopover355"><div class="all-column-filter-popover-head-355"><b id="allColumnFilterTitle355">필터</b><button aria-label="필터 닫기" class="all-column-filter-close-355" onclick="closeAllColumnFilter355()" type="button">×</button></div><select aria-label="열 필터 선택" id="allColumnFilterSelect355"></select><div class="all-column-filter-footer-355"><button class="small-btn" onclick="clearCurrentAllColumnFilter355()" type="button">이 필터 해제</button><button class="small-btn" onclick="clearAllColumnFilters355()" type="button">전체 해제</button></div></div><div class="all-fixed-filter-menu-360" hidden="" id="allFixedFilterMenu360"><div class="all-fixed-filter-menu-head-360"><b id="allFixedFilterMenuTitle360">필터</b><button aria-label="필터 닫기" class="all-fixed-filter-menu-close-360" data-close-fixed-filter360="" type="button">×</button></div><div class="all-fixed-filter-options-360" id="allFixedFilterOptions360"></div><div class="all-fixed-filter-menu-footer-360"><button class="small-btn" data-clear-fixed-filter360="" type="button">이 필터 해제</button></div></div><div class="month-day-menu-361" hidden="" id="monthDayMenu361"><div class="month-day-menu-head-361"><b id="monthDayMenuTitle361">일 선택</b><button aria-label="일 선택 닫기" class="month-day-menu-close-361" data-close-month-day361="" type="button">×</button></div><div class="month-day-shortcuts-429"><button class="month-day-whole-361" data-month-day-value361="0" type="button">월 전체로 보기</button><button class="month-day-today-429" data-month-day-today429="" type="button">오늘</button></div><div class="month-day-weekdays-439" aria-label="요일"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="month-day-grid-361" id="monthDayGrid361"></div></div><dialog id="investmentModal353"><form class="modal" id="investmentForm353"><div class="modal-head"><h2 id="investmentModalTitle353">투자 등록</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('investmentModal353')" type="button">×</button></div><input id="investmentId353" type="hidden"/><div class="form-grid"><div><label>투자 종류</label><select id="investmentType353"><option value="auction">경매투자</option><option value="stock">주식투자</option><option value="other">기타투자</option></select></div><div><label>투자명</label><input id="investmentName353" placeholder="예: 울산 아파트 경매, SK하이닉스" required=""/></div><div><label>기존 투자원금</label><input class="money-input" id="investmentPrincipalInput353" inputmode="numeric" type="text"/><div class="hint">앱 사용 전 이미 투자한 원금만 입력하세요. 이후 통장 출금은 자동 합산됩니다.</div></div><div><label>현재 평가금액</label><input class="money-input" id="investmentCurrentInput353" inputmode="numeric" type="text" value="0"/><div class="hint">주식은 현재 평가액, 경매는 현재 예상 회수 가능액을 입력하세요.</div></div><div id="investmentCurrentDateWrap355"><label>현재 평가 기준일</label><input id="investmentCurrentDate355" type="date"/><div class="hint">평가금액을 수정하면 오늘 날짜로 자동 변경되며, 필요하면 직접 바꿀 수 있습니다.</div></div><div><label>기존 회수금</label><input class="money-input" id="investmentRecoveredInput353" inputmode="numeric" type="text" value="0"/><div class="hint">앱 사용 전 이미 회수한 금액만 입력하세요. 이후 투자 입금은 자동 합산됩니다.</div></div><div><label>투자 시작일</label><input id="investmentStartDate353" type="date"/></div><div><label>상태</label><select id="investmentStatus353"><option value="active">진행 중</option><option value="closed">회수 완료</option></select></div><div class="full"><label>메모</label><textarea id="investmentMemo353" placeholder="평단가, 물건 주소, 목표수익률 등"></textarea></div><div class="full preview" id="investmentPreview353">금액을 입력하면 예상 손익을 계산합니다.</div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('investmentModal353')" type="button">취소</button><button class="primary-btn" type="submit">저장</button></div></form></dialog><dialog id="favoriteModal"><form class="modal" id="favoriteForm"><div class="modal-head"><h2>즐겨찾기 만들기</h2><button class="icon-btn" onclick="closeDialog('favoriteModal')" type="button">×</button></div><input id="favoriteId" type="hidden"/><div class="form-grid"><div><label>종류</label><select id="favoriteType"><option value="purchase">카드 사용</option><option value="income">소득</option><option value="expense">직접 지출</option></select></div><div><label>즐겨찾기 이름</label><input id="favoriteName" placeholder="예: 주유, 마트 장보기" required=""/></div><div><label>기본 금액</label><input class="money-input" id="favoriteAmount" inputmode="numeric" type="text" value="0"/></div><div><label>사용처·항목</label><input id="favoriteDescription" required=""/></div><div id="favoriteCardWrap"><label>카드</label><select id="favoriteCard"></select></div><div id="favoriteAccountWrap" style="display:none"><label>통장</label><select id="favoriteAccount"></select></div><div><label>대분류</label><select id="favoriteMajor"></select></div><div><label>소분류</label><select id="favoriteSub"></select></div><div class="full"><label>메모</label><textarea id="favoriteMemo"></textarea></div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('favoriteModal')" type="button">취소</button><button class="primary-btn" type="submit">저장</button></div></form></dialog>
 <dialog id="loanModal"><form class="modal" id="loanForm"><div class="modal-head"><h2 id="loanModalTitle">일반대출 등록</h2><button class="icon-btn" onclick="closeDialog('loanModal')" type="button">×</button></div><input id="loanId" type="hidden"/><div class="form-grid"><div><label>대출명</label><input id="loanName" placeholder="예: 주택담보대출" required=""/></div><div><label>은행</label><input id="loanBank" placeholder="예: 국민은행"/></div><div><label>현재 대출잔액</label><input class="money-input" id="loanBalance" inputmode="numeric" required="" type="text"/></div><div><label>대출 시작일</label><input id="loanStartDate" type="date"/></div><div><label>월 이자액</label><input class="money-input" id="loanInterestAmount" inputmode="numeric" type="text" value="0"/></div><div><label>이자 납부일</label><input id="loanInterestDay" max="31" min="1" type="number" value="1"/></div><div><label>고정지출 적용 시작월</label><input id="loanInterestStartMonth" required="" type="month"/><div class="hint">선택한 달 이자부터 고정지출에 반영됩니다.</div></div><div><label>이자 출금통장</label><select id="loanInterestAccount"></select></div><div class="full hint">월 이자액과 출금통장을 입력하면 고정지출 목록에 <b>대출이자_대출이름</b>으로 자동 연결됩니다.</div><div class="toggle-line"><input checked="" id="loanActive" type="checkbox"/><label for="loanActive" style="margin:0;color:var(--text)">사용 중</label></div><div class="full"><label>메모</label><textarea id="loanMemo"></textarea></div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('loanModal')" type="button">취소</button><button class="primary-btn" type="submit">저장</button></div></form></dialog>
 <dialog id="authModal"><div class="modal"><div class="modal-head"><h2 id="authModalTitle">로그인</h2><button class="icon-btn" onclick="closeDialog('authModal')" type="button">×</button></div><form id="authForm"><input id="authMode" type="hidden" value="login"/><div class="form-grid"><div class="full"><label>이메일</label><input autocapitalize="none" autocomplete="username" id="authEmail" inputmode="email" name="username" placeholder="example@email.com" required="" spellcheck="false" type="email"/></div><div class="full"><label>비밀번호</label><input autocomplete="current-password" id="authPassword" minlength="6" name="password" placeholder="6자 이상" required="" type="password"/></div><div class="full remember-email-row" id="rememberEmailRow"><input id="rememberEmail" type="checkbox"/><label for="rememberEmail">아이디(이메일) 저장</label></div><div class="full remember-email-row" id="autoLoginRow"><input id="autoLogin" type="checkbox"/><label for="autoLogin">이 기기에서 자동 로그인 유지</label></div><div class="full auth-note" id="authHelp">가입했던 이메일과 비밀번호를 입력하세요. 아이폰에 저장된 암호를 선택하면 Face ID로 안전하게 입력할 수 있어요.</div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('authModal')" type="button">취소</button><button class="primary-btn" id="authSubmitButton" type="submit">로그인</button></div></form></div></dialog>
-<dialog id="quickModal"><div class="modal"><div class="modal-head"><h2>무엇을 입력할까요?</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('quickModal')" type="button">×</button></div><div class="grid-2"><button class="primary-btn" onclick="closeQuickAnd(openPurchaseModal)" type="button">카드 사용</button><button class="ghost-btn" onclick="closeQuickAnd(()=&gt;openCashflowModal('income'))" type="button">소득</button><button class="ghost-btn" onclick="closeQuickAnd(()=&gt;openCashflowModal('deposit'))" type="button">통장 입금</button><button class="ghost-btn" onclick="closeQuickAnd(()=&gt;openCashflowModal('withdrawal'))" type="button">통장 출금</button><button class="ghost-btn" onclick="closeQuickAnd(()=&gt;openCashflowModal('expense'))" type="button">직접 지출</button><button class="ghost-btn" onclick="closeQuickAnd(()=&gt;openCashflowModal('transfer'))" type="button">통장 이체</button><button class="ghost-btn" onclick="closeQuickAnd(()=&gt;openRecurringModal('income'))" type="button">고정수입</button><button class="ghost-btn" onclick="closeQuickAnd(()=&gt;openRecurringModal('expense'))" type="button">고정지출</button><button class="ghost-btn" onclick="closeQuickAnd(()=&gt;openDebtModal('receivable'))" type="button">받을 돈</button><button class="ghost-btn" onclick="closeQuickAnd(()=&gt;openDebtModal('payable'))" type="button">줄 돈</button></div></div></dialog>
+<dialog id="quickModal"><div class="modal quick-menu-modal-4740"><div class="modal-head quick-menu-head-4740"><button aria-label="이전 메뉴" class="quick-menu-back-4740" id="quickMenuBack4740" onclick="showQuickMenuRoot4740()" type="button" hidden>‹</button><h2 id="quickMenuTitle4740">무엇을 입력할까요?</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('quickModal')" type="button">×</button></div><div class="quick-menu-root-4740" id="quickMenuRoot4740"><button class="quick-menu-category-4740" onclick="showQuickMenuGroup4740('expense')" type="button"><b>지출</b><span>카드 · 통장 · 고정지출</span></button><button class="quick-menu-category-4740" onclick="showQuickMenuGroup4740('income')" type="button"><b>소득</b><span>일시소득 · 고정소득</span></button><button class="quick-menu-category-4740" onclick="showQuickMenuGroup4740('transfer')" type="button"><b>이체</b><span>통장 이동 · 입금 · 출금</span></button><button class="quick-menu-category-4740" onclick="showQuickMenuGroup4740('debt')" type="button"><b>금전거래</b><span>받을 돈 · 줄 돈</span></button></div><div class="quick-menu-sub-4740" id="quickMenuSub4740" hidden></div></div></dialog>
 <dialog id="accountModal"><form class="modal" id="accountForm"><div class="modal-head"><h2 id="accountModalTitle">통장 등록</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('accountModal')" type="button">×</button></div><input id="accountId" type="hidden"/><div class="form-grid"><div><label>통장 이름</label><input id="accountName" placeholder="예: 생활비 통장" required=""/></div><div><label>은행</label><input id="accountBank" placeholder="예: 국민은행"/></div><div><label>통장 종류</label><select id="accountType"><option value="checking">입출금</option><option value="cash">현금계좌</option><option value="savings">적금·저축</option><option value="deposit">예금</option><option value="cma">CMA</option><option value="overdraft">마이너스통장</option></select></div><div><label>현재 시작 잔액</label><input class="money-input" id="accountInitial" inputmode="decimal" required="" type="text" value="0"/><div class="hint">마이너스통장은 -3,000,000처럼 입력할 수 있습니다.</div></div><div class="full overdraft-interest-fields" hidden="" id="overdraftInterestFields"><div class="form-grid"><div><label>마이너스통장 한도액</label><input class="money-input" id="overdraftLimit" inputmode="numeric" type="text" value="0"/><div class="hint">예: 한도 2,000만원이면 20,000,000 입력</div></div><div><label>마이너스대출 월 이자액</label><input class="money-input" id="overdraftInterestAmount" inputmode="numeric" type="text" value="0"/></div><div><label>이자 출금일</label><input id="overdraftInterestDay" max="31" min="1" type="number" value="1"/></div><div><label>고정지출 적용 시작월</label><input id="overdraftInterestStartMonth" type="month"/></div><div class="hint" style="align-self:end">입력한 이자는 이 마이너스통장에서 출금되는 고정지출로 자동 연결됩니다.</div></div></div><div><label>통장 색상</label><div class="color-control"><input id="accountColor" type="color" value="#5b6df6"/><span class="subtle">통장 카드 구분색</span></div></div><div class="full"><label>통장 메모</label><textarea id="accountMemo" placeholder="예: 생활비 전용, 카드값 출금용, 비상금 통장"></textarea></div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('accountModal')" type="button">취소</button><button class="primary-btn" type="submit">저장</button></div></form></dialog>
 <dialog id="cardModal"><form class="modal" id="cardForm"><div class="modal-head"><h2 id="cardModalTitle">카드 등록</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('cardModal')" type="button">×</button></div><input id="cardId" type="hidden"/><div class="form-grid">
 <div><label>카드 이름</label><input id="cardName" placeholder="예: 신한 생활비카드" required=""/></div><div><label>카드 종류</label><select id="cardType"><option value="credit">신용카드</option><option value="debit">체크카드</option></select></div><div id="cardPaymentDayWrap"><label>카드대금 결제일</label><input id="cardPaymentDay" max="31" min="1" required="" type="number" value="14"/></div><div><label>카드 색상</label><div class="color-control"><input id="cardColor" type="color" value="#6b7280"/><span class="subtle">카드 구분색</span></div></div>
@@ -46052,7 +46072,113 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
 </script>
 
 
-</body>
+\n<script id="v4740-quick-menu-script">
+// ===== 47.40차: 빠른입력 메뉴 2단계 통합 (모바일/PC 공통) =====
+(()=>{
+  const GROUPS4740={
+    expense:{
+      title:'지출',
+      items:[
+        {label:'카드지출',primary:true,run:()=>openPurchaseModal()},
+        {label:'통장지출',run:()=>openCashflowModal('expense')},
+        {label:'고정지출',run:()=>openRecurringModal('expense')}
+      ]
+    },
+    income:{
+      title:'소득',
+      items:[
+        {label:'일시소득',primary:true,run:()=>openCashflowModal('income')},
+        {label:'고정소득',run:()=>openRecurringModal('income')}
+      ]
+    },
+    transfer:{
+      title:'이체',
+      items:[
+        {label:'통장 이체',primary:true,run:()=>openCashflowModal('transfer')},
+        {label:'통장 입금 (소득 제외)',run:()=>openCashflowModal('deposit')},
+        {label:'통장 출금 (지출 제외)',run:()=>openCashflowModal('withdrawal')}
+      ]
+    },
+    debt:{
+      title:'금전거래',
+      items:[
+        {label:'받을 돈',primary:true,run:()=>openDebtModal('receivable')},
+        {label:'줄 돈',run:()=>openDebtModal('payable')}
+      ]
+    }
+  };
+
+  window.showQuickMenuRoot4740=function(){
+    const root=document.getElementById('quickMenuRoot4740');
+    const sub=document.getElementById('quickMenuSub4740');
+    const title=document.getElementById('quickMenuTitle4740');
+    const back=document.getElementById('quickMenuBack4740');
+    if(root)root.hidden=false;
+    if(sub){sub.hidden=true;sub.innerHTML='';}
+    if(title)title.textContent='무엇을 입력할까요?';
+    if(back)back.hidden=true;
+  };
+
+  window.showQuickMenuGroup4740=function(key){
+    const group=GROUPS4740[key];
+    if(!group)return;
+    const root=document.getElementById('quickMenuRoot4740');
+    const sub=document.getElementById('quickMenuSub4740');
+    const title=document.getElementById('quickMenuTitle4740');
+    const back=document.getElementById('quickMenuBack4740');
+    if(root)root.hidden=true;
+    if(title)title.textContent=group.title;
+    if(back)back.hidden=false;
+    if(!sub)return;
+    sub.innerHTML='';
+    group.items.forEach((item,index)=>{
+      const button=document.createElement('button');
+      button.type='button';
+      button.className=`quick-menu-action-4740${item.primary?' primary':''}`;
+      button.textContent=item.label;
+      button.addEventListener('click',()=>{
+        closeDialog('quickModal');
+        setTimeout(()=>{
+          try{item.run()}catch(error){console.error('빠른입력 메뉴 실행 오류',error);}
+        },0);
+      });
+      sub.appendChild(button);
+    });
+    sub.hidden=false;
+  };
+
+  // 기존 호출 위치는 그대로 두고, 열릴 때마다 항상 1단계 메뉴에서 시작합니다.
+  window.openQuickMenu=function(){
+    showQuickMenuRoot4740();
+    openDialog('quickModal');
+  };
+
+  document.getElementById('quickModal')?.addEventListener('close',showQuickMenuRoot4740);
+  showQuickMenuRoot4740();
+})();
+</script>\n<script id="v4740-version-script">
+(()=>{
+  const VERSION4740='47.40';
+  const oldTitle=document.querySelector('title');
+  if(oldTitle){
+    const fresh=document.createElement('title');
+    fresh.textContent=`가계부 ${VERSION4740}차`;
+    oldTitle.replaceWith(fresh);
+    new MutationObserver(()=>{if(fresh.textContent!==`가계부 ${VERSION4740}차`)fresh.textContent=`가계부 ${VERSION4740}차`;}).observe(fresh,{childList:true,characterData:true,subtree:true});
+  }
+  document.querySelectorAll('.version-pill').forEach(el=>el.textContent=`${VERSION4740}차`);
+  const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+  if(box){
+    const p=box.querySelector('p'),b=box.querySelector('.badge');
+    if(p)p.innerHTML=`<b>가계부 ${VERSION4740}차</b>가 적용되어 있습니다. 빠른입력 메뉴를 모바일·PC 모두 동일하게 <b>지출 / 소득 / 이체 / 금전거래</b> 4개 1단계 메뉴로 정리하고, 선택 후 세부 입력 종류를 한 번 더 고르도록 변경했습니다. 기존 입력 폼과 저장 로직은 그대로 사용합니다.`;
+    if(b)b.textContent=`현재 버전 ${VERSION4740}차`;
+  }
+  if(typeof buildBackup27==='function'){
+    const before=buildBackup27;
+    buildBackup27=function(scope='all'){const data=before(scope);if(data&&typeof data==='object')data.backupVersion=VERSION4740;return data;};
+  }
+})();
+</script>\n</body>
 </html>
 
 <!-- ===== 47.16차: 최근활동 실제 사용자동작 기록 · 생활비 소득 제외 · 카드 실적 목표 ===== -->
