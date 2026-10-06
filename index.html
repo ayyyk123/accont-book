@@ -51815,7 +51815,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 </script>
 
 <style id="v4734-auto-funding-style">
-/* ===== 47.35차: 카드·대출 자동 이체예정 날짜별 선보충 + 계좌별 목표잔액 ===== */
+/* ===== 47.36차: 전체 통장 자동 이체예정 + 명시적 설정 저장 ===== */
 .auto-funding-section-4734{margin:14px 0}
 .auto-funding-toolbar-4734{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
 .auto-funding-toolbar-4734 .meta{font-size:9px;color:var(--muted);line-height:1.45}
@@ -51837,13 +51837,16 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 .auto-funding-status-4734{margin-top:8px;font-size:9px;line-height:1.45;color:var(--muted)}
 .auto-funding-status-4734.ready{color:#047857;font-weight:800}
 .auto-funding-status-4734.need{color:#b45309;font-weight:800}
+.auto-funding-save-row-4736{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin-top:8px;flex-wrap:wrap}
+.auto-funding-save-row-4736 span{font-size:8.5px;color:var(--muted)}
+.auto-funding-save-btn-4736{font-weight:900}
 @media(max-width:720px){.auto-funding-controls-4734{grid-template-columns:1fr}.auto-funding-head-4734{align-items:center}.auto-funding-total-4734{font-size:10px}}
 </style>
 <script id="v4734-auto-funding-script">
 (()=>{
   'use strict';
-  const VERSION4734='47.35';
-  const AUTO_DESC4734='자동 이체예정 · 카드/대출 납부';
+  const VERSION4734='47.36';
+  const AUTO_DESC4734='자동 이체예정 · 예정출금 보충';
 
   function ensureAutoFundingState4734(target=state){
     if(!target||typeof target!=='object')return;
@@ -51884,13 +51887,12 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 
   function targetIdsForMonth4734(month){
     const ids=new Set();
-    (state.cards||[]).forEach(card=>{
-      if(card?.cardType!=='debit'&&card?.accountId&&allSchedules().some(s=>s.card?.id===card.id&&s.billingMonth===month&&!s.paid&&Number(s.amount||0)>0))ids.add(card.accountId);
-    });
-    const loanIds=loanRecurringIds4734();
+    // 47.36: 카드·대출 납부계좌만 보지 않고, 이번 달 예정입출금을 날짜순으로 반영했을 때
+    // 한 번이라도 0원 아래로 내려가는 모든 통장을 자동 보충 대상에 포함합니다.
     (state.accounts||[]).forEach(account=>{
-      const rows=typeof pendingAccountItems280==='function'?pendingAccountItems280(account.id,month):[];
-      if(rows.some(row=>row.recurringId&&loanIds.has(row.recurringId)))ids.add(account.id);
+      if(!account?.id)return;
+      const plan=autoFundingPlan4734(account.id,month);
+      if(plan.triggers.length||plan.plans.length||fundingSource4734(month,account.id))ids.add(account.id);
     });
     Object.keys(state.autoFundingSources4734||{}).forEach(key=>{const [m,id]=String(key).split('|');if(m===month&&id)ids.add(id)});
     return [...ids].filter(id=>accountById(id));
@@ -51911,7 +51913,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
       const net=rows.reduce((sum,row)=>sum+Number(row.amount||0),0);
       balance+=net;
 
-      // 47.35 계산 규칙
+      // 47.36 계산 규칙
       // 1) 목표잔액은 강제 하한선이 아니다. 평소 실제잔액이 목표보다 낮아도 오류/즉시보충하지 않는다.
       // 2) 카드값·대출이자 납부일에는 결제 후 목표잔액까지 남도록 보충한다.
       // 3) 그 외 날짜의 예정출금 때문에 잔액이 0원 미만이 될 때만, 그 날짜에 0원까지만 선보충한다.
@@ -52002,6 +52004,20 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
     if(amount>0)state.autoFundingReserve4734[accountId]=amount;else delete state.autoFundingReserve4734[accountId];
     saveState();
   };
+  window.saveAutoFundingSettings4736=function(month,targetId,button){
+    ensureAutoFundingState4734();
+    const card=button?.closest?.('.auto-funding-card-4734');
+    if(!card)return;
+    const sourceEl=card.querySelector('[data-auto-funding-source-4736]');
+    const reserveEl=card.querySelector('[data-auto-funding-reserve-4736]');
+    const sourceId=sourceEl?.value||'';
+    const key=fundingKey4734(month,targetId);
+    if(sourceId&&sourceId!==targetId)state.autoFundingSources4734[key]=sourceId;else delete state.autoFundingSources4734[key];
+    const amount=Math.max(0,Math.round(parseMoney(reserveEl?.value||0)));
+    if(amount>0)state.autoFundingReserve4734[targetId]=amount;else delete state.autoFundingReserve4734[targetId];
+    saveState();
+    alert('자동 이체예정 설정을 저장했습니다.');
+  };
 
   function sourceOptions4734(month,targetId){
     const selected=fundingSource4734(month,targetId);
@@ -52016,29 +52032,32 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
     const list=document.getElementById('autoFundingList4734'),summary=document.getElementById('autoFundingSummary4734');if(!list)return;
     const month=document.getElementById('mainMonth')?.value||currentMonth();
     const targetIds=targetIdsForMonth4734(month);
-    const rows=targetIds.map(id=>autoFundingPlan4734(id,month)).filter(row=>row.triggers.length||fundingSource4734(month,row.account.id));
+    const rows=targetIds.map(id=>autoFundingPlan4734(id,month)).filter(row=>row.triggers.length||row.plans.length||fundingSource4734(month,row.account.id));
     const total=rows.reduce((s,row)=>s+row.total,0);
-    if(summary)summary.textContent=`${month} · 납부계좌 ${rows.length}개 · 현재 필요한 자동이체 ${won(total)}`;
+    if(summary)summary.textContent=`${month} · 자동관리 통장 ${rows.length}개 · 현재 필요한 자동이체 ${won(total)}`;
     list.innerHTML=rows.length?rows.map(row=>{
       const a=row.account,source=fundingSource4734(month,a.id),current=Number(accountBalance(a.id)||0),gap=Math.max(0,row.reserve-current);
-      const obligations=row.triggers.map(item=>`<div class="auto-funding-obligation-4734"><span>${esc(obligationLabel4734(item))}</span><b>${won(Math.abs(Number(item.amount||0)))}</b></div>`).join('');
+      const isPaymentAccount=row.triggers.length>0;
+      const outflows=row.events.filter(item=>Number(item.amount||0)<0);
+      const obligations=outflows.map(item=>`<div class="auto-funding-obligation-4734"><span>${esc(obligationLabel4734(item))} · ${esc(item.label||'예정 출금')}</span><b>${won(Math.abs(Number(item.amount||0)))}</b></div>`).join('');
       const planRows=row.plans.map(item=>`<div class="auto-funding-plan-row-4734"><span>${esc(item.date)} ${item.reason==='prevent-negative'?'마이너스 방지 선보충':'이체예정'}</span><b>${won(item.amount)}</b></div>`).join('');
       const sourceName=accountById(source)?.name||'';
       let status='';
-      if(!source)status='<div class="auto-funding-status-4734 need">송금할 통장만 선택하면 필요한 이체예정이 자동 등록됩니다.</div>';
-      else if(row.total>0)status=`<div class="auto-funding-status-4734 ready">${esc(sourceName)} → ${esc(a.name)} · 금액은 카드값/대출이자 변경 시 자동으로 다시 계산됩니다.</div>`;
+      if(!source&&row.total>0)status='<div class="auto-funding-status-4734 need">송금할 통장과 목표잔액을 정한 뒤 <b>설정 저장</b>을 눌러주세요.</div>';
+      else if(source&&row.total>0)status=`<div class="auto-funding-status-4734 ready">${esc(sourceName)} → ${esc(a.name)} · 금액은 예정출금 변경 시 자동으로 다시 계산됩니다.</div>`;
       else status=`<div class="auto-funding-status-4734 ready">현재 잔액과 예정 입출금을 반영하면 추가 이체가 필요하지 않습니다.</div>`;
       return `<div class="auto-funding-card-4734">
-        <div class="auto-funding-head-4734"><div><div class="auto-funding-account-4734"><span class="color-dot" style="background:${safeColor(a.color)}"></span>${esc(a.name)} <span class="badge card">납부계좌</span></div><div class="meta">현재잔액 ${signedWon279(current)} · 목표로 남길 금액 ${won(row.reserve)}</div></div><div class="auto-funding-total-4734">필요 ${won(row.total)}</div></div>
+        <div class="auto-funding-head-4734"><div><div class="auto-funding-account-4734"><span class="color-dot" style="background:${safeColor(a.color)}"></span>${esc(a.name)} <span class="badge card">${isPaymentAccount?'납부계좌':'잔액보충'}</span></div><div class="meta">현재잔액 ${signedWon279(current)} · 목표로 남길 금액 ${won(row.reserve)}</div></div><div class="auto-funding-total-4734">필요 ${won(row.total)}</div></div>
         <div class="auto-funding-controls-4734">
-          <div><label>이번 달 송금할 통장</label><select onchange='setAutoFundingSource4734(${JSON.stringify(month)},${JSON.stringify(a.id)},this.value)'>${sourceOptions4734(month,a.id)}</select></div>
-          <div><label>이 통장에 목표로 남겨둘 금액</label><input class="money-input" inputmode="numeric" value="${Number(row.reserve||0).toLocaleString('ko-KR')}" onchange='setAutoFundingReserve4734(${JSON.stringify(a.id)},this.value)'/><div class="auto-funding-reserve-note-4734 ${gap>0?'low':''}">${gap>0?`현재 ${won(gap)} 적지만 오류가 아닙니다. 다음 자동이체 계산에 부족분을 포함합니다.`:'실제 잔액이 이 금액보다 내려가도 오류로 처리하지 않습니다.'}</div></div>
+          <div><label>이번 달 송금할 통장</label><select data-auto-funding-source-4736>${sourceOptions4734(month,a.id)}</select></div>
+          <div><label>이 통장에 목표로 남겨둘 금액</label><input data-auto-funding-reserve-4736 class="money-input" inputmode="numeric" value="${Number(row.reserve||0).toLocaleString('ko-KR')}"/><div class="auto-funding-reserve-note-4734 ${gap>0?'low':''}">${gap>0?`현재 ${won(gap)} 적지만 오류가 아닙니다. 카드·대출 납부일에는 목표잔액까지, 그 밖의 예정출금은 마이너스가 되지 않을 만큼만 보충합니다.`:'실제 잔액이 이 금액보다 내려가도 오류로 처리하지 않습니다.'}</div></div>
         </div>
-        <div class="auto-funding-obligations-4734"><div class="auto-funding-plan-title-4734">자동으로 확인한 카드·대출 납부예정</div>${obligations||'<div class="meta">현재 미납 카드·대출 예정이 없습니다.</div>'}</div>
+        <div class="auto-funding-save-row-4736"><button type="button" class="small-btn primary auto-funding-save-btn-4736" onclick='saveAutoFundingSettings4736(${JSON.stringify(month)},${JSON.stringify(a.id)},this)'>설정 저장</button><span>통장 선택·목표잔액 입력 후 저장해야 반영됩니다.</span></div>
+        <div class="auto-funding-obligations-4734"><div class="auto-funding-plan-title-4734">자동으로 확인한 예정출금</div>${obligations||'<div class="meta">현재 미반영 예정출금이 없습니다.</div>'}</div>
         ${row.plans.length?`<div class="auto-funding-plan-4734"><div class="auto-funding-plan-title-4734">자동 이체예정 계산</div>${planRows}</div>`:''}
         ${status}
       </div>`;
-    }).join(''):'<div class="empty">이 달에 카드값 또는 대출이자가 빠져나갈 납부계좌가 없습니다.</div>';
+    }).join(''):'<div class="empty">이 달에 카드·대출 납부 또는 예정출금으로 자동 보충이 필요한 통장이 없습니다.</div>';
     try{installMoneyInputs()}catch(_){ }
   }
 
@@ -52049,9 +52068,9 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
     const section=document.createElement('div');
     section.id='autoFundingSection4734';
     section.className='section collapsible-320 auto-funding-section-4734';
-    section.setAttribute('data-collapse-key320','section:accounts:0.5:카드·대출 자동 이체예정');
-    section.setAttribute('data-collapse-title320','카드·대출 자동 이체예정');
-    section.innerHTML=`<div class="section-head"><div><h2>카드·대출 자동 이체예정</h2><div class="subtle" style="margin-top:5px">카드값·대출이자 납부계좌를 자동으로 모아 필요한 금액을 계산합니다. 송금할 통장만 월별로 선택하세요.</div></div><button aria-expanded="true" aria-label="카드·대출 자동 이체예정 접기" class="collapse-toggle-320" title="접기" type="button">−</button></div><div class="collapse-body-320"><div class="auto-funding-toolbar-4734"><div class="meta" id="autoFundingSummary4734"></div><div class="meta">목표잔액은 계산용입니다. 실제 잔액이 더 낮아져도 오류가 아닙니다.</div></div><div class="auto-funding-list-4734" id="autoFundingList4734"></div></div>`;
+    section.setAttribute('data-collapse-key320','section:accounts:0.5:자동 이체예정');
+    section.setAttribute('data-collapse-title320','자동 이체예정');
+    section.innerHTML=`<div class="section-head"><div><h2>자동 이체예정</h2><div class="subtle" style="margin-top:5px">카드·대출 납부계좌뿐 아니라 예정출금 반영 중 잔액이 마이너스가 되는 통장도 자동으로 찾아 보충금액을 계산합니다.</div></div><button aria-expanded="true" aria-label="자동 이체예정 접기" class="collapse-toggle-320" title="접기" type="button">−</button></div><div class="collapse-body-320"><div class="auto-funding-toolbar-4734"><div class="meta" id="autoFundingSummary4734"></div><div class="meta">목표잔액은 계산용입니다. 실제 잔액이 더 낮아져도 오류가 아닙니다.</div></div><div class="auto-funding-list-4734" id="autoFundingList4734"></div></div>`;
     first.insertAdjacentElement('afterend',section);
     try{if(typeof setupCollapsibles320==='function')setupCollapsibles320()}catch(_){ }
   }
@@ -52065,11 +52084,11 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
     // 먼저 기존 저장 흐름을 실행해 대출이자 고정지출·카드 스케줄을 최신값으로 맞춘 뒤 계산합니다.
     const result=saveStateBefore4734.apply(this,args);
     let changed=false;
-    try{changed=syncAutoFunding4734();}catch(error){console.warn('47.35 자동 이체예정 계산 오류',error)}
+    try{changed=syncAutoFunding4734();}catch(error){console.warn('47.36 자동 이체예정 계산 오류',error)}
     // 자동 이체예정이 생성/수정/삭제되었다면 그 결과까지 한 번 더 저장합니다.
-    if(changed){try{saveStateBefore4734.apply(this,args)}catch(error){console.warn('47.35 자동 이체예정 추가저장 오류',error)}}
+    if(changed){try{saveStateBefore4734.apply(this,args)}catch(error){console.warn('47.36 자동 이체예정 추가저장 오류',error)}}
     syncing4734=false;
-    try{renderAutoFunding4734()}catch(error){console.warn('47.35 자동 이체예정 화면 오류',error)}
+    try{renderAutoFunding4734()}catch(error){console.warn('47.36 자동 이체예정 화면 오류',error)}
     return result;
   };
 
@@ -52099,12 +52118,12 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
     if(document.title!==target)document.title=target;
     document.querySelectorAll('.version-pill').forEach(el=>el.textContent=`${VERSION4734}차`);
     const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
-    if(box){const p=box.querySelector('p'),b=box.querySelector('.badge');if(p)p.innerHTML=`<b>가계부 ${VERSION4734}차</b>가 적용되어 있습니다. 카드·대출의 납부계좌를 기준으로 월별 자동 이체예정이 정리되고, 송금할 통장만 선택하면 카드 청구액·대출이자 변경에 맞춰 이체금액이 자동 갱신됩니다. 통장별 목표잔액은 강제 하한선이 아니며, 카드·대출 납부일에는 결제 후 목표잔액까지 보충하고 그 전에 다른 예정출금으로 잔액이 마이너스가 될 경우에는 해당 날짜에 0원까지만 자동 선보충합니다.`;if(b)b.textContent=`현재 버전 ${VERSION4734}차`;}
+    if(box){const p=box.querySelector('p'),b=box.querySelector('.badge');if(p)p.innerHTML=`<b>가계부 ${VERSION4734}차</b>가 적용되어 있습니다. 카드·대출 납부계좌와 이번 달 예정출금을 함께 확인해 잔액이 마이너스가 되는 모든 통장을 자동 보충 대상에 포함합니다. 통장별 송금 원천과 목표잔액은 <b>설정 저장</b>을 눌러 확정하며, 이후 예정금액이 바뀌면 이체예정 금액은 자동으로 다시 계산됩니다. 목표잔액은 강제 하한선이 아니고, 일반 예정출금 전에는 0원까지만 선보충하며 카드·대출 납부일에는 결제 후 목표잔액까지 맞춥니다.`;if(b)b.textContent=`현재 버전 ${VERSION4734}차`;}
   }
 
   ensureAutoFundingSection4734();
-  try{syncAutoFunding4734();renderAutoFunding4734()}catch(error){console.warn('47.35 자동 이체예정 초기화 오류',error)}
-  // 47.33의 제목 감시와 충돌하지 않도록 현재 title을 새 노드로 교체한 뒤 47.35를 유지합니다.
+  try{syncAutoFunding4734();renderAutoFunding4734()}catch(error){console.warn('47.36 자동 이체예정 초기화 오류',error)}
+  // 47.33의 제목 감시와 충돌하지 않도록 현재 title을 새 노드로 교체한 뒤 47.36을 유지합니다.
   const oldTitle=document.querySelector('title');if(oldTitle){const fresh=document.createElement('title');fresh.textContent=`가계부 ${VERSION4734}차`;oldTitle.replaceWith(fresh);new MutationObserver(()=>{if(fresh.textContent!==`가계부 ${VERSION4734}차`)fresh.textContent=`가계부 ${VERSION4734}차`;}).observe(fresh,{childList:true,characterData:true,subtree:true});}
   forceVersion4734();
   window.addEventListener('load',()=>setTimeout(()=>{forceVersion4734();try{renderAutoFunding4734()}catch(_){ }},1100));
