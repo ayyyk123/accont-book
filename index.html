@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=47.45" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=47.45" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 47.46차</title>
+<title>가계부 47.47차</title>
 <link href="manifest.json?v=47.45" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -7589,11 +7589,11 @@ body.dark .quick-menu-category-4741.active{background:var(--primary);border-colo
 </style>
 </head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">47.45차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">47.47차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},4000);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">47.45차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">47.47차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="topbar-actions-4731">
 <a class="calendar-shortcut-4731" href="https://ayyyk123.github.io/calendar-ay/" target="_blank" rel="noopener noreferrer" aria-label="캘린더 웹앱 열기" title="캘린더로 이동">📅</a>
 <div class="desktop-actions"><button class="primary-btn" onclick="openQuickMenu()" type="button">거래등록</button></div>
@@ -46164,7 +46164,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
 <script id="v4746-future-balance-fixed-transfer-script">
 (()=>{
   'use strict';
-  const VERSION4746='47.46';
+  const VERSION4746='47.47';
   const CURRENT_MONTH4746=()=>currentMonth();
   let futureProjectionCache4746=new Map();
 
@@ -52598,7 +52598,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 <script id="v4738-fixed-savings-transfer-reminder">
 // ===== 47.38차: 고정저축도 상단 이체 알림에 포함 =====
 (function(){
-  const VERSION4738='47.45';
+  const VERSION4738='47.47';
 
   // 47.37의 title 감시자가 47.37로 되돌리지 못하도록 title 노드를 다시 교체합니다.
   const title4738=document.querySelector('title');
@@ -52890,7 +52890,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion4710,0));
 <script id="v4739-carryover-detail-fix">
 // ===== 47.42차: 마감 후 추가 이월 상세 합계/문구 수정 =====
 (function(){
-  const VERSION4739='47.46';
+  const VERSION4739='47.47';
 
   // 이전 버전의 title 감시자가 되돌리지 못하도록 title 노드를 다시 교체합니다.
   const oldTitle4739=document.querySelector('title');
@@ -53007,5 +53007,214 @@ function runQuickMenuAction4741(action){
     body.innerHTML=rows.length?rows.join(''):'<div class="empty">해당 월 저축 내역이 없습니다.</div>';
     openDialog('monthlyDetailModal');
   };
+})();
+</script>
+
+
+<!-- ===== 47.47차: 미래 고정소득 누적 · 전체통장 자동보충 복구 · 기존 10월 설정 자동승계 · 버전표시 안정화 ===== -->
+<style id="v4747-future-income-autofunding-version-style">
+/* 옛 버전 타이머가 텍스트를 바꿔도 화면에는 현재 버전만 보이게 합니다. */
+.version-pill{font-size:0!important}
+.version-pill::after{content:"47.47차";font-size:11px!important}
+</style>
+<script id="v4747-future-income-autofunding-version-script">
+(()=>{
+  'use strict';
+  const VERSION4747='47.47';
+  const CURRENT4747=()=>currentMonth();
+  let syncQueued4747=false;
+
+  function ensureAutoState4747(target){
+    if(!target||typeof target!=='object')return;
+    if(!target.autoFundingSources4734||typeof target.autoFundingSources4734!=='object'||Array.isArray(target.autoFundingSources4734))target.autoFundingSources4734={};
+    if(!target.autoFundingDefaultSources4746||typeof target.autoFundingDefaultSources4746!=='object'||Array.isArray(target.autoFundingDefaultSources4746))target.autoFundingDefaultSources4746={};
+    if(!target.autoFundingReserve4734||typeof target.autoFundingReserve4734!=='object'||Array.isArray(target.autoFundingReserve4734))target.autoFundingReserve4734={};
+  }
+
+  // 47.46 이전에 월별로 저장해 둔 송금통장을 다시 누를 필요 없이 기본설정으로 자동 승계합니다.
+  // 월별 설정뿐 아니라 이미 만들어진 자동보충 이체예정의 출금통장도 보조 근거로 사용합니다.
+  function migrateDefaults4747(target){
+    if(!target||typeof target!=='object')return false;
+    ensureAutoState4747(target);
+    const accounts=new Set((target.accounts||[]).map(a=>a?.id).filter(Boolean));
+    const current=CURRENT4747();
+    const candidates=new Map();
+    const put=(targetId,sourceId,month,priority)=>{
+      if(!targetId||!sourceId||targetId===sourceId||!accounts.has(targetId)||!accounts.has(sourceId))return;
+      const prev=candidates.get(targetId);
+      const row={sourceId,month:String(month||''),priority:Number(priority||0)};
+      if(!prev||row.priority>prev.priority||(row.priority===prev.priority&&row.month>prev.month))candidates.set(targetId,row);
+    };
+    Object.entries(target.autoFundingSources4734||{}).forEach(([key,sourceId])=>{
+      const m=String(key).match(/^(\d{4}-\d{2})\|(.+)$/);if(!m)return;
+      put(m[2],sourceId,m[1],m[1]===current?30:20);
+    });
+    (target.cashflows||[]).forEach(flow=>{
+      if(!flow?.autoFunding4734)return;
+      const month=flow.autoFundingMonth4734||(flow.date||'').slice(0,7);
+      put(flow.targetAccountId,flow.accountId,month,month===current?25:10);
+    });
+    let changed=false;
+    candidates.forEach((row,targetId)=>{
+      if(!target.autoFundingDefaultSources4746[targetId]){
+        target.autoFundingDefaultSources4746[targetId]=row.sourceId;changed=true;
+      }
+    });
+    return changed;
+  }
+
+  // Firebase/로컬 복원 시점에도 자동승계가 적용되게 합니다.
+  const normalizeBefore4747=normalizeState;
+  normalizeState=function(raw){
+    const normalized=normalizeBefore4747(raw);
+    migrateDefaults4747(normalized);
+    return normalized;
+  };
+  migrateDefaults4747(state);
+
+  function recurringSkipped4747(itemId,month){
+    try{return Array.isArray(state.recurringSkips)&&state.recurringSkips.includes(recurringSkipKey(itemId,month))}catch(_){return false}
+  }
+  function recurringDate4747(item,month){
+    try{return recurringDate(item,month)}catch(_){return `${month}-${String(Math.max(1,Math.min(28,Number(item?.day||1)))).padStart(2,'0')}`}
+  }
+
+  // 미래월을 조회했는데 아직 생성되지 않은 고정소득/고정지출이 있더라도 잔액예측에서 빠지지 않게 보완합니다.
+  const pendingBefore4747=pendingAccountItems280;
+  pendingAccountItems280=function(accountId,month){
+    const m=month||document.getElementById('mainMonth')?.value||CURRENT4747();
+    const rows=(pendingBefore4747(accountId,m)||[]).slice();
+    const existingRecurring=new Set();
+    (state.cashflows||[]).forEach(flow=>{
+      const fm=flow?.recurringMonth||(flow?.date||'').slice(0,7);
+      if(flow?.recurringItemId&&fm===m)existingRecurring.add(flow.recurringItemId);
+    });
+    (state.recurringItems||[]).forEach(item=>{
+      if(!item||item.active===false)return;
+      if(item.type!=='income'&&item.type!=='expense')return;
+      if(item.type==='expense'&&item.paymentMethod==='card')return;
+      if((item.accountId||'')!==accountId)return;
+      if(item.startMonth&&m<item.startMonth)return;
+      if(item.endMonth&&m>item.endMonth)return;
+      if(recurringSkipped4747(item.id,m)||existingRecurring.has(item.id))return;
+      const amount=Math.max(0,Number(item.amount||0));if(!amount)return;
+      const income=item.type==='income';
+      rows.push({
+        kind:'recurringSynthetic4747',recurringId:item.id,date:recurringDate4747(item,m),title:item.description|| (income?'고정수입':'고정지출'),
+        amount:income?amount:-amount,type:income?'income':'expense',label:income?'고정수입':'고정지출',syntheticRecurring4747:true
+      });
+    });
+    return rows.sort((a,b)=>(a.date||'').localeCompare(b.date||'')||(typeof pendingPriority280==='function'?pendingPriority280(a)-pendingPriority280(b):0)||(a.title||'').localeCompare(b.title||'','ko'));
+  };
+  pendingAccountItems279=pendingAccountItems280;
+
+  function isIncomingAutoFunding4747(row,accountId){
+    if(!row?.flowId)return false;
+    const flow=(state.cashflows||[]).find(x=>x.id===row.flowId);
+    return !!(flow?.autoFunding4734&&flow.targetAccountId===accountId);
+  }
+  function reserve4747(accountId){return Math.max(0,Number(state.autoFundingReserve4734?.[accountId]||0))}
+  function loanRecurringIds4747(){return new Set((state.loans||[]).map(l=>l?.recurringItemId).filter(Boolean))}
+
+  // 자동보충 계획은 송금통장이 아직 없어도 먼저 계산합니다.
+  // 그래야 반영 후 잔액이 마이너스가 되는 모든 통장이 자동보충 목록에 나타납니다.
+  window.futureAutoFundingPlan4746=function(accountId,month){
+    const m=String(month||'');if(!/^\d{4}-\d{2}$/.test(m)||m<CURRENT4747())return null;
+    const account=accountById(accountId);if(!account)return null;
+    let startBalance=Number(accountBalance(accountId)||0);
+    if(m>CURRENT4747()){
+      const prev=addMonths(m,-1);
+      try{startBalance=Number(accountTimeline280(accountId,prev)?.projected ?? startBalance)}catch(_){ }
+    }
+    const events=pendingAccountItems280(accountId,m).filter(row=>!isIncomingAutoFunding4747(row,accountId));
+    const loanIds=loanRecurringIds4747();
+    const triggers=events.filter(row=>row.kind==='cardDue'||(row.recurringId&&loanIds.has(row.recurringId)));
+    const triggerDates=new Set(triggers.map(row=>row.date));
+    const byDate=new Map();
+    events.forEach(row=>{const d=row.date||`${m}-01`;if(!byDate.has(d))byDate.set(d,[]);byDate.get(d).push(row)});
+    const keep=reserve4747(accountId),plans=[];let balance=startBalance;
+    [...byDate.keys()].sort().forEach(date=>{
+      const rows=byDate.get(date)||[];
+      rows.sort((a,b)=>(typeof pendingPriority280==='function'?pendingPriority280(a)-pendingPriority280(b):0));
+      balance+=rows.reduce((sum,row)=>sum+Number(row.amount||0),0);
+      const hasScheduledOutflow=rows.some(row=>Number(row.amount||0)<0);
+      if(hasScheduledOutflow&&balance<keep){
+        const amount=Math.max(0,Math.round(keep-balance));
+        if(amount){plans.push({date,amount,balanceBeforeFunding:balance,balanceAfterFunding:balance+amount,reason:triggerDates.has(date)?'payment-reserve':'reserve-preserve'});balance+=amount}
+      }
+    });
+    return {account,month:m,reserve:keep,startBalance,events,triggers,plans,projectedAfter:balance,total:plans.reduce((s,p)=>s+Number(p.amount||0),0)};
+  };
+
+  function fundingSource4747(month,targetId){
+    ensureAutoState4747(state);
+    const id=state.autoFundingSources4734?.[`${month}|${targetId}`]||state.autoFundingDefaultSources4746?.[targetId]||'';
+    return (state.accounts||[]).some(a=>a.id===id&&id!==targetId)?id:'';
+  }
+  function pendingAutoFlows4747(month,targetId){
+    return (state.cashflows||[]).filter(f=>f?.autoFunding4734&&!f?.plannedCompleted&&f.autoFundingMonth4734===month&&f.targetAccountId===targetId);
+  }
+  function autoFundingNeedsSync4747(month){
+    if(!/^\d{4}-\d{2}$/.test(String(month||''))||month<CURRENT4747())return false;
+    for(const account of (state.accounts||[])){
+      if(!account?.id||!fundingSource4747(month,account.id))continue;
+      const plan=window.futureAutoFundingPlan4746(account.id,month);if(!plan)continue;
+      const wanted=new Map((plan.plans||[]).map(p=>[p.date,Math.max(0,Math.round(Number(p.amount||0)))]));
+      const existing=pendingAutoFlows4747(month,account.id);
+      if(existing.length!==wanted.size)return true;
+      for(const flow of existing){if(wanted.get(flow.date)!==Math.max(0,Math.round(Number(flow.amount||0))))return true}
+    }
+    return false;
+  }
+  function queueAutoFundingSync4747(){
+    if(syncQueued4747)return;
+    const month=document.getElementById('mainMonth')?.value||CURRENT4747();
+    if(!autoFundingNeedsSync4747(month))return;
+    syncQueued4747=true;
+    setTimeout(()=>{
+      syncQueued4747=false;
+      try{saveState()}catch(error){console.warn('47.47 자동보충 동기화 오류',error)}
+    },0);
+  }
+
+  // 클라우드 자료가 반영되어 renderAll만 호출된 경우도 자동보충을 다시 생성합니다.
+  const renderAllBefore4747=renderAll;
+  renderAll=function(...args){
+    migrateDefaults4747(state);
+    const result=renderAllBefore4747.apply(this,args);
+    queueAutoFundingSync4747();
+    return result;
+  };
+
+  function forceVersion4747(){
+    const target=`가계부 ${VERSION4747}차`;
+    if(document.title!==target)document.title=target;
+    document.querySelectorAll('.version-pill').forEach(el=>{
+      if(el.textContent!==`${VERSION4747}차`)el.textContent=`${VERSION4747}차`;
+      if(!el.__versionLock4747){
+        new MutationObserver(()=>{if(el.textContent!==`${VERSION4747}차`)el.textContent=`${VERSION4747}차`}).observe(el,{childList:true,characterData:true,subtree:true});
+        el.__versionLock4747=true;
+      }
+    });
+    const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+    if(box){
+      const p=box.querySelector('p'),b=box.querySelector('.badge');
+      const applySettingsVersion4747=()=>{
+        const html=`<b>가계부 ${VERSION4747}차</b>가 적용되어 있습니다. 기존에 저장한 자동보충 송금통장은 다시 저장하지 않아도 기본설정으로 자동 승계됩니다. 미래잔액은 고정소득·고정지출·고정저축·고정이체·카드값과 자동보충을 월별로 누적 계산하며, 반영 후 잔액이 목표보다 부족해지는 모든 설정 통장을 자동보충 대상으로 계산합니다.`;
+        if(p&&p.innerHTML!==html)p.innerHTML=html;
+        if(b&&b.textContent!==`현재 버전 ${VERSION4747}차`)b.textContent=`현재 버전 ${VERSION4747}차`;
+      };
+      applySettingsVersion4747();
+      if(!box.__versionLock4747){
+        new MutationObserver(applySettingsVersion4747).observe(box,{childList:true,characterData:true,subtree:true});
+        box.__versionLock4747=true;
+      }
+    }
+  }
+
+  // 최종 패치 적용 뒤 기존 47.46 계산 캐시를 비우기 위해 한 번 다시 렌더합니다.
+  forceVersion4747();
+  try{renderAll()}catch(error){console.warn('47.47 초기 재계산 오류',error)}
+  window.addEventListener('pageshow',()=>{forceVersion4747();queueAutoFundingSync4747()});
 })();
 </script>
