@@ -10,8 +10,8 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=47.45" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=47.45" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 47.47차</title>
-<link href="manifest.json?v=47.45" rel="manifest"/>
+<title>가계부 47.48차</title>
+<link href="manifest.json?v=47.48" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
@@ -7589,11 +7589,11 @@ body.dark .quick-menu-category-4741.active{background:var(--primary);border-colo
 </style>
 </head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">47.47차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">47.48차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},4000);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">47.47차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">47.48차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="topbar-actions-4731">
 <a class="calendar-shortcut-4731" href="https://ayyyk123.github.io/calendar-ay/" target="_blank" rel="noopener noreferrer" aria-label="캘린더 웹앱 열기" title="캘린더로 이동">📅</a>
 <div class="desktop-actions"><button class="primary-btn" onclick="openQuickMenu()" type="button">거래등록</button></div>
@@ -7801,7 +7801,7 @@ body.dark .quick-menu-category-4741.active{background:var(--primary);border-colo
 <div><label>구분</label><select id="cashflowType"><option value="income">소득</option><option value="deposit">통장 입금(소득 제외)</option><option value="withdrawal">통장 출금(지출 제외)</option><option value="expense">직접 지출</option><option value="transfer">통장 이체</option></select></div><div><label>날짜</label><input id="cashflowDate" required="" type="date"/></div>
 <div><label id="sourceAccountLabel">통장</label><select id="cashflowAccount" required=""></select></div><div id="targetAccountWrap" style="display:none"><label>받는 통장</label><select id="cashflowTarget"></select></div><div id="cashflowCounterpartyTypeWrap354" style="display:none"><label>거래 상대</label><select id="cashflowCounterpartyType354"><option value="cash">현금계좌</option><option value="investment">투자</option><option value="temporary">임시계정 (미확인 금액)</option></select></div><div id="cashflowCashAccountWrap354" style="display:none"><label id="cashflowCashAccountLabel354">현금계좌</label><select id="cashflowCashAccount354"></select><div class="hint">통장,카드관리에서 통장 종류를 ‘현금계좌’로 등록한 항목만 표시됩니다.</div></div><div id="cashflowInvestmentTypeWrap354" style="display:none"><label>투자 종류</label><select id="cashflowInvestmentType354"><option value="auction">경매투자</option><option value="stock">주식투자</option><option value="other">기타투자</option></select></div><div id="cashflowInvestmentWrap354" style="display:none"><label>투자 거래처</label><select id="cashflowInvestment354"></select><div class="hint">대출,저축,투자 탭에 등록된 투자처에서 선택합니다.</div></div>
 <div><label>항목</label><input autocapitalize="sentences" autocomplete="off" id="cashflowDescription" inputmode="text" lang="ko" placeholder="예: 급여, 관리비" required="" spellcheck="true" type="text"/></div><div><label id="cashflowAmountLabel354">금액</label><input class="money-input" id="cashflowAmount" inputmode="numeric" min="1" required="" step="1" type="text"/></div><div class="full" id="cashflowInvestmentReturnWrap354" style="display:none"><div class="investment-return-grid-354"><div><label>회수 원금</label><input class="money-input" id="cashflowPrincipalReturn354" inputmode="numeric" type="text" value="0"/><div class="hint">투자원금 중 회수 기준 금액</div></div><div><label>수익</label><input class="money-input" id="cashflowProfit354" inputmode="numeric" type="text" value="0"/><div class="hint">배당·매매차익 등</div></div><div><label>손실</label><input class="money-input" id="cashflowLoss354" inputmode="numeric" type="text" value="0"/><div class="hint">회수 원금에서 차감되는 손실</div></div></div><div class="investment-return-preview-354" id="cashflowInvestmentReturnPreview354">회수 원금 + 수익 − 손실 = 실제 입금액 0원</div></div>
-<div id="cashflowBudgetSourceWrap" style="display:none"><label>예산 구분</label><select id="cashflowBudgetSource"><option value="personal">내 생활비</option></select><div class="hint">목적자금 사용으로 지정하면 내 생활비 예산에서 차감되지 않습니다.</div></div><div id="cashflowMajorWrap"><label>대분류</label><select id="cashflowMajor"></select></div><div id="cashflowSubWrap"><label>소분류</label><select id="cashflowSub"></select><div class="hint" id="loanCategoryHint" style="display:none">대여금 지출은 받을 돈, 차입금 입금은 줄 돈에 자동 등록됩니다. 항목에는 상대방 이름을 적어주세요.</div></div>
+<div id="cashflowBudgetSourceWrap" style="display:none"><label>예산 구분</label><select id="cashflowBudgetSource"><option value="personal">내 생활비</option></select><div class="hint">목적자금 사용으로 지정하면 내 생활비 예산에서 차감되지 않습니다.</div></div><div id="cashflowMajorWrap"><label>대분류</label><select id="cashflowMajor"></select></div><div id="cashflowSubWrap"><label>소분류</label><select id="cashflowSub"></select><div class="hint" id="loanCategoryHint" style="display:none">대여금 지출은 받을 돈, 차입금 입금은 줄 돈에 자동 등록됩니다. 항목에는 상대방 이름을 적어주세요.</div></div><div id="cashflowLoanWrap4748" style="display:none"><label>대출 선택</label><select id="cashflowLoan4748"><option value="">대출을 선택하세요</option></select><div class="hint" id="cashflowLoanHint4748">선택한 대출의 이자 납부내역으로 연결됩니다.</div></div>
 <div class="full"><label>메모</label><textarea autocapitalize="sentences" autocomplete="off" id="cashflowMemo" inputmode="text" lang="ko" spellcheck="true"></textarea></div>
 </div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('cashflowModal')" type="button">취소</button><button class="primary-btn" type="submit">저장</button></div></form></dialog>
 <dialog id="recurringModal"><form class="modal" id="recurringForm"><div class="modal-head"><h2 id="recurringModalTitle">고정수입 등록</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('recurringModal')" type="button">×</button></div><input id="recurringId" type="hidden"/><div class="form-grid">
@@ -7827,7 +7827,7 @@ body.dark .quick-menu-category-4741.active{background:var(--primary);border-colo
 <dialog id="recurringDeleteModal"><div class="modal"><div class="modal-head"><h2>고정항목 삭제</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('recurringDeleteModal')" type="button">×</button></div><input id="recurringDeleteId" type="hidden"/><div class="notice" id="recurringDeleteMessage" style="margin-bottom:14px"></div><div class="settings-box" style="margin-bottom:10px"><h3>고정항목만 삭제</h3><p>반복 등록만 삭제하고, 적용 시작월부터 실제 이번 달까지 이미 만들어진 모든 내역과 입금·출금·승인 확인 상태를 그대로 유지합니다. 다음 달 이후 내역만 제거됩니다.</p><button class="primary-btn" onclick="confirmDeleteRecurring(false)" type="button">이번 달까지 내역 유지</button></div><div class="settings-box"><h3>이번 달 반영분도 함께 삭제</h3><p>적용 시작월부터 전달까지의 내역은 현재 상태 그대로 유지하고, 실제 이번 달 자동 생성 내역과 다음 달 이후 내역을 삭제합니다. 이번 달에 이미 확인한 내역도 삭제됩니다.</p><button class="danger-btn" onclick="confirmDeleteRecurring(true)" type="button">이번 달 내역도 삭제</button></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('recurringDeleteModal')" type="button">취소</button></div></div></dialog>
 <dialog id="recurringSettleModal"><form class="modal" id="recurringSettleForm"><div class="modal-head"><h2>고정항목 실제 처리</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('recurringSettleModal')" type="button">×</button></div><input id="recurringSettleFlowId" type="hidden"/><div class="form-grid">
 <div><label>실제 처리일</label><input id="recurringSettleDate" required="" type="date"/></div><div><label>실제 금액</label><input class="money-input" id="recurringSettleAmount" inputmode="numeric" min="1" required="" type="text"/></div>
-<div class="full"><label>통장</label><select id="recurringSettleAccount" required=""></select></div><div class="full preview" id="recurringSettlePreview"></div>
+<div class="full"><label>통장</label><select id="recurringSettleAccount" required=""></select></div><div class="full" hidden="" id="recurringSettleLoanWrap4748"><label>대출 선택</label><select id="recurringSettleLoan4748"><option value="">대출을 선택하세요</option></select><div class="hint">이 납부내역을 선택한 대출의 이자내역으로 연결합니다.</div></div><div class="full preview" id="recurringSettlePreview"></div>
 </div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('recurringSettleModal')" type="button">취소</button><button class="primary-btn" type="submit">완료 처리</button></div></form></dialog>
 <dialog id="payModal"><form class="modal" id="payForm"><div class="modal-head"><h2>카드값 납부 완료</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('payModal')" type="button">×</button></div><input id="payCardId" type="hidden"/><input id="payBillingMonth" type="hidden"/><div class="form-grid"><div><label>실제 출금일</label><input id="payDate" required="" type="date"/></div><div><label>출금 통장</label><select id="payAccount" required=""></select></div><div class="full preview" id="payPreview"></div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('payModal')" type="button">취소</button><button class="primary-btn" type="submit">납부 완료 처리</button></div></form></dialog>
 <dialog id="overdraftTopupModal"><form class="modal" id="overdraftTopupForm"><div class="modal-head"><h2>통장 잔액 보충 이체 예정</h2><button aria-label="닫기" class="icon-btn" onclick="closeDialog('overdraftTopupModal')" type="button">×</button></div><input id="topupTargetAccount" type="hidden"/><input id="topupBillingMonth" type="hidden"/><div class="form-grid"><div class="full preview" id="topupPreview"></div><div><label>보내는 통장</label><select id="topupSourceAccount" required=""></select></div><div><label>받는 통장</label><input id="topupTargetName" readonly=""/></div><div><label>이체 예정일</label><input id="topupDate" required="" type="date"/></div><div><label>이체 예정금액</label><input class="money-input" id="topupAmount" inputmode="numeric" required="" type="text"/></div><div class="full"><label>메모</label><textarea id="topupMemo" placeholder="예: 카드값·고정지출 잔액 보충"></textarea></div></div><div class="form-actions"><button class="ghost-btn" onclick="closeDialog('overdraftTopupModal')" type="button">취소</button><button class="primary-btn" type="submit">이체 예정 등록</button></div></form></dialog>
@@ -8943,7 +8943,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=47.42',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=47.48',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
@@ -9786,7 +9786,7 @@ document.getElementById('cashflowForm')?.addEventListener('submit',e=>{
   const cat=type==='transfer'?{majorCategoryId:'',subCategoryId:'',majorCategory:'',subCategory:''}:selectedCategory(document.getElementById('cashflowMajor'),document.getElementById('cashflowSub'));
   if(!cat){alert('대분류와 소분류를 선택해주세요.');return}
   const oldFlow=id?state.cashflows.find(x=>x.id===id):null,recurringMeta=oldFlow?.recurringItemId?{recurringItemId:oldFlow.recurringItemId,recurringMonth:oldFlow.recurringMonth,generatedByRecurring:true,recurringOverride:true}:{};
-  const f={id:id||uid('flow'),type,date:document.getElementById('cashflowDate').value,accountId,targetAccountId:type==='transfer'?target:'',description:document.getElementById('cashflowDescription').value.trim(),amount:parseMoney(document.getElementById('cashflowAmount').value),...cat,memo:document.getElementById('cashflowMemo').value.trim(),...recurringMeta,debtId:oldFlow?.debtId||'',budgetSource:type==='expense'?(document.getElementById('cashflowBudgetSource').value||'personal'):'personal'};
+  const loanSelected4748=(type==='expense'&&String(cat?.subCategory||'').trim()==='대출이자')?(document.getElementById('cashflowLoan4748')?.value||''):'';if(type==='expense'&&String(cat?.subCategory||'').trim()==='대출이자'&&(state.loans||[]).length&&!loanSelected4748){alert('어떤 대출의 이자인지 대출을 선택해주세요.');return}const f={id:id||uid('flow'),type,date:document.getElementById('cashflowDate').value,accountId,targetAccountId:type==='transfer'?target:'',description:document.getElementById('cashflowDescription').value.trim(),amount:parseMoney(document.getElementById('cashflowAmount').value),...cat,memo:document.getElementById('cashflowMemo').value.trim(),...recurringMeta,debtId:oldFlow?.debtId||'',loanId:loanSelected4748,budgetSource:type==='expense'?(document.getElementById('cashflowBudgetSource').value||'personal'):'personal'};
   const debtType=linkedDebtType(type,cat);
   if(debtType){let debt=f.debtId?state.debts.find(d=>d.id===f.debtId):null;const label=debtType==='receivable'?'대여금':'차입금';if(debt&&debt.type!==debtType){const processed=(debt.payments||[]).reduce((x,p)=>x+Number(p.amount||0),0)+Number(debt.waivedAmount||0);if(processed>0){alert('연결된 받을 돈·줄 돈에 처리내역이 있어 거래 종류를 바꿀 수 없습니다.');return}state.debts=state.debts.filter(d=>d.id!==debt.id);debt=null;f.debtId=''}if(!debt){debt={id:uid('debt'),type:debtType,person:f.description,title:`${f.description} ${label}`,amount:f.amount,originalAmount:f.amount,date:f.date,dueDate:'',memo:f.memo,payments:[],waivedAmount:0,closedReason:'',sourceCashflowId:f.id};state.debts.push(debt);f.debtId=debt.id}else{const processed=(debt.payments||[]).reduce((x,p)=>x+Number(p.amount||0),0)+Number(debt.waivedAmount||0);if(f.amount<processed){alert('이미 처리된 금액보다 원래 금액을 작게 수정할 수 없습니다.');return}debt.type=debtType;debt.person=f.description;debt.title=`${f.description} ${label}`;debt.amount=f.amount;debt.originalAmount=Math.max(Number(debt.originalAmount||0),f.amount);debt.date=f.date;debt.memo=f.memo;debt.sourceCashflowId=f.id}}else if(oldFlow?.debtId){const debt=state.debts.find(d=>d.id===oldFlow.debtId);if(debt&&((debt.payments||[]).length||Number(debt.waivedAmount||0)>0)){alert('연결된 받을 돈·줄 돈에 처리내역이 있어 분류를 변경할 수 없습니다.');return}state.debts=state.debts.filter(d=>d.id!==oldFlow.debtId);f.debtId=''}
   state.cashflows=id?state.cashflows.map(x=>x.id===id?f:x):[...state.cashflows,f];closeDialog('cashflowModal');saveState();
@@ -10218,6 +10218,8 @@ document.getElementById('recurringSettleForm')?.addEventListener('submit',functi
   f.date=actualDate410;
   f.settledAmount=amount;
   f.settledAccountId=document.getElementById('recurringSettleAccount').value;
+  const loanWrap4748=document.getElementById('recurringSettleLoanWrap4748'),loanSelect4748=document.getElementById('recurringSettleLoan4748');
+  if(loanWrap4748&&!loanWrap4748.hidden&&loanSelect4748){if((state.loans||[]).length&&!loanSelect4748.value){alert('어떤 대출의 이자인지 대출을 선택해주세요.');return}f.loanId=loanSelect4748.value||'';}
   if(!wasSettled427)f.settledProcessedDate425=today();
   f.recurringAmountAdjusted=amount!==base;
   f.recurringBaseAmount=base;
@@ -21752,8 +21754,8 @@ function generalLoanInterestRows364(loan){
       if(!date||date>today())return false;
 
       const linked=Boolean(
-        loan.recurringItemId&&
-        flow.recurringItemId===loan.recurringItemId
+        flow.loanId===loan.id||
+        (loan.recurringItemId&&flow.recurringItemId===loan.recurringItemId)
       );
       const legacy=exactNames.has(
         String(flow.description||'').trim()
@@ -46498,6 +46500,84 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
 })();
 </script>
 
+
+
+<!-- ===== 47.48차: 대출이자 출금 시 대출 선택·연결 ===== -->
+<style id="v4748-loan-interest-link-style">
+#cashflowLoanWrap4748[hidden],#recurringSettleLoanWrap4748[hidden]{display:none!important}
+</style>
+<script id="v4748-loan-interest-link-script">
+(()=>{
+  'use strict';
+  const loans4748=()=>Array.isArray(state?.loans)?state.loans:[];
+  function loanOptions4748(selected=''){
+    const rows=loans4748().slice().sort((a,b)=>(a.active===false)-(b.active===false)||String(a.name||'').localeCompare(String(b.name||''),'ko'));
+    return '<option value="">대출을 선택하세요</option>'+rows.map(l=>`<option value="${esc(l.id)}"${l.id===selected?' selected':''}>${esc(l.name||'대출')}${l.bank?` · ${esc(l.bank)}`:''}${l.active===false?' (종료)':''}</option>`).join('');
+  }
+  function selectedCashflowCategory4748(){
+    const major=document.getElementById('cashflowMajor'),sub=document.getElementById('cashflowSub');
+    if(!major||!sub)return {major:'',sub:''};
+    return {major:major.options[major.selectedIndex]?.textContent?.trim()||'',sub:sub.options[sub.selectedIndex]?.textContent?.trim()||''};
+  }
+  function isLoanInterestCashflow4748(){
+    const type=document.getElementById('cashflowType')?.value||'';
+    const cat=selectedCashflowCategory4748();
+    return type==='expense'&&cat.sub==='대출이자';
+  }
+  function inferLoanId4748(flow){
+    if(flow?.loanId&&loans4748().some(l=>l.id===flow.loanId))return flow.loanId;
+    if(flow?.recurringItemId){const linked=loans4748().find(l=>l.recurringItemId&&l.recurringItemId===flow.recurringItemId);if(linked)return linked.id;}
+    const desc=String(flow?.description||'').trim();
+    const exact=loans4748().find(l=>desc===`대출이자_${l.name}`||desc===`${l.name} 대출이자`);
+    return exact?.id||'';
+  }
+  function refreshCashflowLoan4748(preferred){
+    const wrap=document.getElementById('cashflowLoanWrap4748'),select=document.getElementById('cashflowLoan4748'),hint=document.getElementById('cashflowLoanHint4748');
+    if(!wrap||!select)return;
+    const show=isLoanInterestCashflow4748();
+    wrap.style.display=show?'block':'none';
+    wrap.hidden=!show;
+    if(!show){select.required=false;select.value='';return;}
+    const current=preferred!==undefined?preferred:(select.value||'');
+    select.innerHTML=loanOptions4748(current);
+    if(current&&[...select.options].some(o=>o.value===current))select.value=current;
+    select.required=loans4748().length>0;
+    if(hint)hint.textContent=loans4748().length?'선택한 대출의 이자 납부내역으로 연결됩니다.':'등록된 일반대출이 없습니다. 먼저 대출을 등록하면 이자내역을 대출별로 연결할 수 있습니다.';
+  }
+  const updateBefore4748=window.updateCashflowUI;
+  if(typeof updateBefore4748==='function')window.updateCashflowUI=function(...args){const result=updateBefore4748.apply(this,args);setTimeout(()=>refreshCashflowLoan4748(),0);return result;};
+  const openBefore4748=window.openCashflowModal;
+  if(typeof openBefore4748==='function')window.openCashflowModal=function(type='income'){const result=openBefore4748.apply(this,arguments);setTimeout(()=>refreshCashflowLoan4748(''),0);return result;};
+  const editBefore4748=window.editCashflow;
+  if(typeof editBefore4748==='function')window.editCashflow=function(id){const flow=(state.cashflows||[]).find(x=>x.id===id);const result=editBefore4748.apply(this,arguments);setTimeout(()=>refreshCashflowLoan4748(inferLoanId4748(flow)),0);return result;};
+  ['cashflowType','cashflowMajor','cashflowSub'].forEach(id=>document.getElementById(id)?.addEventListener('change',()=>setTimeout(()=>refreshCashflowLoan4748(),0)));
+  document.getElementById('cashflowLoan4748')?.addEventListener('change',function(){
+    const loan=loans4748().find(l=>l.id===this.value);if(!loan)return;
+    const desc=document.getElementById('cashflowDescription');
+    if(desc&&(!desc.value.trim()||/^대출\s*이자$/.test(desc.value.trim())||desc.value.trim()==='대출이자'))desc.value=`대출이자_${loan.name}`;
+    const account=document.getElementById('cashflowAccount');
+    if(account&&loan.interestAccountId&&[...account.options].some(o=>o.value===loan.interestAccountId)&&!document.getElementById('cashflowId')?.value)account.value=loan.interestAccountId;
+  });
+
+  function refreshRecurringLoan4748(flow){
+    const wrap=document.getElementById('recurringSettleLoanWrap4748'),select=document.getElementById('recurringSettleLoan4748');if(!wrap||!select)return;
+    const inferred=inferLoanId4748(flow);
+    const loanInterest=Boolean(inferred)||String(flow?.subCategory||'').trim()==='대출이자'||/^대출이자_| 대출이자$/.test(String(flow?.description||''));
+    wrap.hidden=!loanInterest;
+    if(!loanInterest){select.required=false;select.value='';return;}
+    select.innerHTML=loanOptions4748(inferred);
+    if(inferred)select.value=inferred;
+    select.required=loans4748().length>0;
+  }
+  const settleBefore4748=window.openRecurringSettleModal;
+  if(typeof settleBefore4748==='function')window.openRecurringSettleModal=function(id){const flow=(state.cashflows||[]).find(x=>x.id===id);const result=settleBefore4748.apply(this,arguments);setTimeout(()=>refreshRecurringLoan4748(flow),0);return result;};
+
+  let migrated=false;
+  (state.cashflows||[]).forEach(flow=>{if(flow?.type!=='expense'||flow.loanId)return;const id=inferLoanId4748(flow);if(id){flow.loanId=id;migrated=true;}});
+  if(migrated){try{saveState()}catch(error){console.warn('47.48 대출이자 연결 보강 저장 실패',error)}}
+})();
+</script>
+
 </body>
 </html>
 
@@ -53015,12 +53095,12 @@ function runQuickMenuAction4741(action){
 <style id="v4747-future-income-autofunding-version-style">
 /* 옛 버전 타이머가 텍스트를 바꿔도 화면에는 현재 버전만 보이게 합니다. */
 .version-pill{font-size:0!important}
-.version-pill::after{content:"47.47차";font-size:11px!important}
+.version-pill::after{content:"47.48차";font-size:11px!important}
 </style>
 <script id="v4747-future-income-autofunding-version-script">
 (()=>{
   'use strict';
-  const VERSION4747='47.47';
+  const VERSION4747='47.48';
   const CURRENT4747=()=>currentMonth();
   let syncQueued4747=false;
 
