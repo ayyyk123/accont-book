@@ -9786,7 +9786,7 @@ document.getElementById('cashflowForm')?.addEventListener('submit',e=>{
   const cat=type==='transfer'?{majorCategoryId:'',subCategoryId:'',majorCategory:'',subCategory:''}:selectedCategory(document.getElementById('cashflowMajor'),document.getElementById('cashflowSub'));
   if(!cat){alert('대분류와 소분류를 선택해주세요.');return}
   const oldFlow=id?state.cashflows.find(x=>x.id===id):null,recurringMeta=oldFlow?.recurringItemId?{recurringItemId:oldFlow.recurringItemId,recurringMonth:oldFlow.recurringMonth,generatedByRecurring:true,recurringOverride:true}:{};
-  const loanSelected4748=(type==='expense'&&String(cat?.subCategory||'').trim()==='대출이자')?(document.getElementById('cashflowLoan4748')?.value||''):'';if(type==='expense'&&String(cat?.subCategory||'').trim()==='대출이자'&&(state.loans||[]).length&&!loanSelected4748){alert('어떤 대출의 이자인지 대출을 선택해주세요.');return}const f={id:id||uid('flow'),type,date:document.getElementById('cashflowDate').value,accountId,targetAccountId:type==='transfer'?target:'',description:document.getElementById('cashflowDescription').value.trim(),amount:parseMoney(document.getElementById('cashflowAmount').value),...cat,memo:document.getElementById('cashflowMemo').value.trim(),...recurringMeta,debtId:oldFlow?.debtId||'',loanId:loanSelected4748,budgetSource:type==='expense'?(document.getElementById('cashflowBudgetSource').value||'personal'):'personal'};
+  const loanSelected4748=(type==='expense'&&String(cat?.subCategory||'').trim()==='대출이자')?(document.getElementById('cashflowLoan4748')?.value||''):'';if(type==='expense'&&String(cat?.subCategory||'').trim()==='대출이자'&&((state.loans||[]).length||(state.accounts||[]).some(a=>a&&(a.accountType==='overdraft'||Number(a.overdraftLimit||0)>0||Number(a.initialBalance||0)<0)))&&!loanSelected4748){alert('어떤 대출의 이자인지 대출을 선택해주세요.');return}const f={id:id||uid('flow'),type,date:document.getElementById('cashflowDate').value,accountId,targetAccountId:type==='transfer'?target:'',description:document.getElementById('cashflowDescription').value.trim(),amount:parseMoney(document.getElementById('cashflowAmount').value),...cat,memo:document.getElementById('cashflowMemo').value.trim(),...recurringMeta,debtId:oldFlow?.debtId||'',loanId:loanSelected4748,budgetSource:type==='expense'?(document.getElementById('cashflowBudgetSource').value||'personal'):'personal'};
   const debtType=linkedDebtType(type,cat);
   if(debtType){let debt=f.debtId?state.debts.find(d=>d.id===f.debtId):null;const label=debtType==='receivable'?'대여금':'차입금';if(debt&&debt.type!==debtType){const processed=(debt.payments||[]).reduce((x,p)=>x+Number(p.amount||0),0)+Number(debt.waivedAmount||0);if(processed>0){alert('연결된 받을 돈·줄 돈에 처리내역이 있어 거래 종류를 바꿀 수 없습니다.');return}state.debts=state.debts.filter(d=>d.id!==debt.id);debt=null;f.debtId=''}if(!debt){debt={id:uid('debt'),type:debtType,person:f.description,title:`${f.description} ${label}`,amount:f.amount,originalAmount:f.amount,date:f.date,dueDate:'',memo:f.memo,payments:[],waivedAmount:0,closedReason:'',sourceCashflowId:f.id};state.debts.push(debt);f.debtId=debt.id}else{const processed=(debt.payments||[]).reduce((x,p)=>x+Number(p.amount||0),0)+Number(debt.waivedAmount||0);if(f.amount<processed){alert('이미 처리된 금액보다 원래 금액을 작게 수정할 수 없습니다.');return}debt.type=debtType;debt.person=f.description;debt.title=`${f.description} ${label}`;debt.amount=f.amount;debt.originalAmount=Math.max(Number(debt.originalAmount||0),f.amount);debt.date=f.date;debt.memo=f.memo;debt.sourceCashflowId=f.id}}else if(oldFlow?.debtId){const debt=state.debts.find(d=>d.id===oldFlow.debtId);if(debt&&((debt.payments||[]).length||Number(debt.waivedAmount||0)>0)){alert('연결된 받을 돈·줄 돈에 처리내역이 있어 분류를 변경할 수 없습니다.');return}state.debts=state.debts.filter(d=>d.id!==oldFlow.debtId);f.debtId=''}
   state.cashflows=id?state.cashflows.map(x=>x.id===id?f:x):[...state.cashflows,f];closeDialog('cashflowModal');saveState();
@@ -10219,7 +10219,7 @@ document.getElementById('recurringSettleForm')?.addEventListener('submit',functi
   f.settledAmount=amount;
   f.settledAccountId=document.getElementById('recurringSettleAccount').value;
   const loanWrap4748=document.getElementById('recurringSettleLoanWrap4748'),loanSelect4748=document.getElementById('recurringSettleLoan4748');
-  if(loanWrap4748&&!loanWrap4748.hidden&&loanSelect4748){if((state.loans||[]).length&&!loanSelect4748.value){alert('어떤 대출의 이자인지 대출을 선택해주세요.');return}f.loanId=loanSelect4748.value||'';}
+  if(loanWrap4748&&!loanWrap4748.hidden&&loanSelect4748){if(((state.loans||[]).length||(state.accounts||[]).some(a=>a&&(a.accountType==='overdraft'||Number(a.overdraftLimit||0)>0||Number(a.initialBalance||0)<0)))&&!loanSelect4748.value){alert('어떤 대출의 이자인지 대출을 선택해주세요.');return}f.loanId=loanSelect4748.value||'';}
   if(!wasSettled427)f.settledProcessedDate425=today();
   f.recurringAmountAdjusted=amount!==base;
   f.recurringBaseAmount=base;
@@ -46502,6 +46502,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
 
 
 
+<!-- ===== 47.49차: 대출이자 선택에 마이너스통장 포함 ===== -->
 <!-- ===== 47.48차: 대출이자 출금 시 대출 선택·연결 ===== -->
 <style id="v4748-loan-interest-link-style">
 #cashflowLoanWrap4748[hidden],#recurringSettleLoanWrap4748[hidden]{display:none!important}
@@ -46509,10 +46510,24 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
 <script id="v4748-loan-interest-link-script">
 (()=>{
   'use strict';
-  const loans4748=()=>Array.isArray(state?.loans)?state.loans:[];
+  const loans4748=()=>{
+    const general=(Array.isArray(state?.loans)?state.loans:[]).map(l=>({...l,_loanKind4749:'general'}));
+    const overdrafts=(Array.isArray(state?.accounts)?state.accounts:[])
+      .filter(a=>a&&(a.accountType==='overdraft'||Number(a.overdraftLimit||0)>0||Number(a.initialBalance||0)<0))
+      .map(a=>({
+        id:a.id,
+        name:a.name||'마이너스통장',
+        bank:a.bank||'',
+        active:true,
+        interestAccountId:a.id,
+        recurringItemId:a.overdraftInterestRecurringId||'',
+        _loanKind4749:'overdraft'
+      }));
+    return [...general,...overdrafts];
+  };
   function loanOptions4748(selected=''){
     const rows=loans4748().slice().sort((a,b)=>(a.active===false)-(b.active===false)||String(a.name||'').localeCompare(String(b.name||''),'ko'));
-    return '<option value="">대출을 선택하세요</option>'+rows.map(l=>`<option value="${esc(l.id)}"${l.id===selected?' selected':''}>${esc(l.name||'대출')}${l.bank?` · ${esc(l.bank)}`:''}${l.active===false?' (종료)':''}</option>`).join('');
+    return '<option value="">대출을 선택하세요</option>'+rows.map(l=>`<option value="${esc(l.id)}"${l.id===selected?' selected':''}>${l._loanKind4749==='overdraft'?'[마이너스통장]':'[일반대출]'} ${esc(l.name||'대출')}${l.bank?` · ${esc(l.bank)}`:''}${l.active===false?' (종료)':''}</option>`).join('');
   }
   function selectedCashflowCategory4748(){
     const major=document.getElementById('cashflowMajor'),sub=document.getElementById('cashflowSub');
@@ -46542,7 +46557,7 @@ window.addEventListener('load',()=>setTimeout(forceVersion476,0));
     select.innerHTML=loanOptions4748(current);
     if(current&&[...select.options].some(o=>o.value===current))select.value=current;
     select.required=loans4748().length>0;
-    if(hint)hint.textContent=loans4748().length?'선택한 대출의 이자 납부내역으로 연결됩니다.':'등록된 일반대출이 없습니다. 먼저 대출을 등록하면 이자내역을 대출별로 연결할 수 있습니다.';
+    if(hint)hint.textContent=loans4748().length?'선택한 일반대출 또는 마이너스통장의 이자 납부내역으로 연결됩니다.':'등록된 대출이 없습니다. 일반대출 또는 마이너스통장을 등록하면 이자내역을 대출별로 연결할 수 있습니다.';
   }
   const updateBefore4748=window.updateCashflowUI;
   if(typeof updateBefore4748==='function')window.updateCashflowUI=function(...args){const result=updateBefore4748.apply(this,args);setTimeout(()=>refreshCashflowLoan4748(),0);return result;};
@@ -53100,7 +53115,7 @@ function runQuickMenuAction4741(action){
 <script id="v4747-future-income-autofunding-version-script">
 (()=>{
   'use strict';
-  const VERSION4747='47.48';
+  const VERSION4747='47.49';
   const CURRENT4747=()=>currentMonth();
   let syncQueued4747=false;
 
