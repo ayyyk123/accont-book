@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=47.61" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=47.61" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 47.69차</title>
+<title>가계부 47.70차</title>
 <link href="manifest.json?v=47.61" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -7597,11 +7597,11 @@ body.dark .quick-menu-category-4741.active{background:var(--primary);border-colo
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body data-active-tab351="purchases">
-<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">47.69차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
+<div aria-label="가계부 실행 중" id="appSplash" role="status"><div class="splash-inner"><div class="splash-heart">♥</div><div class="splash-title">가계부 <span class="version-pill">47.70차</span></div><div class="splash-sub">SMART BUDGET MANAGER</div></div></div>
 <script>setTimeout(function(){var s=document.getElementById('appSplash');if(s){s.classList.add('hidden');s.style.pointerEvents='none';}},4000);</script>
 <div class="app">
 <header class="topbar">
-<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">47.69차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
+<div class="brand"><div class="brand-title"><span aria-hidden="true" class="brand-heart">♥</span><div><h1>가계부 <span class="version-pill">47.70차</span></h1><p>카드·통장·예산·목적자금을 편안하게 한 번에 관리해요.</p></div></div></div>
 <div class="topbar-actions-4731">
 <a class="calendar-shortcut-4731" href="https://ayyyk123.github.io/calendar-ay/" target="_blank" rel="noopener noreferrer" aria-label="캘린더 웹앱 열기" title="캘린더로 이동">📅</a>
 <div class="desktop-actions"><button class="primary-btn" onclick="openQuickMenu()" type="button">거래등록</button></div>
@@ -8951,7 +8951,7 @@ window.addEventListener('load',async()=>{
   const splash=document.getElementById('appSplash');
   setTimeout(()=>splash?.classList.add('hidden'),1000);
   if('serviceWorker' in navigator){
-    try{const reg=await navigator.serviceWorker.register('./sw.js?v=47.61',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
+    try{const reg=await navigator.serviceWorker.register('./sw.js?v=47.70',{updateViaCache:'none'});await reg.update()}catch(err){console.warn('서비스워커 등록 실패',err)}
   }
 });
 
@@ -56343,5 +56343,183 @@ body.dark #recurringMonthlyStatus .recurring-monthly-row-complete-4758 .row-sub>
   cleanupWrongPostClose4769();
   window.addEventListener('pageshow',()=>{forceVersion4769();setTimeout(cleanupWrongPostClose4769,0);});
   [300,1200,3000].forEach(delay=>setTimeout(forceVersion4769,delay));
+})();
+</script>
+
+
+<!-- 47.70 카드취소 원결제월 예산영향 자체 고정 + Firebase 적용 후 재보정 -->
+<script id="v4770-card-cancel-budget-impact-lock">
+(()=>{
+  'use strict';
+  const VERSION4770='47.70';
+  let repairing4770=false;
+
+  function cancelRows4770(purchase){
+    if(!purchase?.id||!Array.isArray(state.cardCancellations4760))return [];
+    return state.cardCancellations4760.filter(row=>row?.purchaseId===purchase.id);
+  }
+  function cancelReduction4770(row){
+    if(Array.isArray(row?.receivablePlan4765)){
+      return row.receivablePlan4765.reduce((sum,item)=>sum+Math.max(0,Number(item?.reduction||0)),0);
+    }
+    if(Array.isArray(row?.receivableAdjustments4764)){
+      return row.receivableAdjustments4764.reduce((sum,item)=>sum+Math.max(0,Number(item?.reduction||0)),0);
+    }
+    return Math.max(0,Number(row?.receivableAdjustmentTotal4764||0));
+  }
+  function livePromised4770(purchase){
+    const debts=(state.debts||[]).filter(d=>
+      (d?.autoCardReceivable===true&&d?.sourcePurchaseId===purchase?.id)||
+      (Array.isArray(purchase?.reimbursementDebtIds4723)&&purchase.reimbursementDebtIds4723.includes(d?.id))||
+      (purchase?.reimbursementDebtId&&purchase.reimbursementDebtId===d?.id)
+    );
+    if(debts.length){
+      return debts.reduce((sum,d)=>sum+Math.max(0,Number(d?.amount||0)-Number(d?.waivedAmount||0)),0);
+    }
+    if(Array.isArray(purchase?.reimbursements4723)&&purchase.reimbursements4723.length){
+      return purchase.reimbursements4723.reduce((sum,item)=>sum+Math.max(0,Number(item?.amount||0)-Number(item?.waivedAmount||0)),0);
+    }
+    return purchase?.reimbursementEnabled?Math.max(0,Number(purchase?.reimbursementAmount||0)):0;
+  }
+  function impactFromBasis4770(purchase,basis){
+    const total=Math.max(0,Number(purchase?.totalAmount||0));
+    const promised=Math.max(0,Number(basis||0));
+    if(total===promised)return 0;
+    const mode=typeof reimbursementDifferenceMode465==='function'
+      ?reimbursementDifferenceMode465(purchase,total,promised)
+      :(promised<total?'include':'exclude');
+    if(mode==='exclude')return 0;
+    if(mode==='include')return total-promised;
+    return Math.max(0,total-promised);
+  }
+
+  // 이 시점의 함수는 47.69까지 모든 기존 예산 로직이 적용된 최종 함수입니다.
+  const cardBudgetSpendBefore4770=typeof cardBudgetSpend368==='function'?cardBudgetSpend368:null;
+
+  function ensurePurchaseLock4770(purchase){
+    const cancels=cancelRows4770(purchase);
+    if(!cancels.length)return false;
+    let changed=false;
+    const reconstructed=Math.max(0,livePromised4770(purchase)+cancels.reduce((sum,row)=>sum+cancelReduction4770(row),0));
+    const existingBasis=Number(purchase?.cardCancelBudgetBasis4767);
+    // 예전 버전에서 0 또는 누락으로 잘못 저장된 경우를 복구합니다. 이미 더 큰 정상 기준값은 유지합니다.
+    const basis=Number.isFinite(existingBasis)?Math.max(0,existingBasis,reconstructed):reconstructed;
+    if(!Number.isFinite(existingBasis)||Math.abs(existingBasis-basis)>=0.5){
+      purchase.cardCancelBudgetBasis4767=basis;changed=true;
+    }
+    const impact=impactFromBasis4770(purchase,basis);
+    const oldImpact=Number(purchase?.cardCancelOriginalBudgetImpact4770);
+    if(!Number.isFinite(oldImpact)||Math.abs(oldImpact-impact)>=0.5){
+      purchase.cardCancelOriginalBudgetImpact4770=impact;changed=true;
+    }
+    return changed;
+  }
+  function ensureAllLocks4770(){
+    let changed=false;
+    (state.purchases||[]).forEach(p=>{if(ensurePurchaseLock4770(p))changed=true});
+    return changed;
+  }
+
+  // 새 취소는 받을 돈을 줄이기 전에 원결제의 실제 예산 반영액 자체를 먼저 저장합니다.
+  if(typeof openCardCancel4760==='function'){
+    const openBefore4770=openCardCancel4760;
+    openCardCancel4760=function(purchaseId){
+      const purchase=typeof purchaseById==='function'?purchaseById(purchaseId):null;
+      if(purchase&&cancelRows4770(purchase).length===0&&!Number.isFinite(Number(purchase.cardCancelOriginalBudgetImpact4770))){
+        try{
+          const impact=cardBudgetSpendBefore4770?Number(cardBudgetSpendBefore4770(purchase)||0):0;
+          purchase.cardCancelOriginalBudgetImpact4770=impact;
+        }catch(_){ }
+      }
+      return openBefore4770.apply(this,arguments);
+    };
+  }
+
+  // 카드취소가 하나라도 연결된 원결제는 이후 받을 돈 상태와 무관하게 저장된 원래 예산 영향만 사용합니다.
+  if(typeof cardBudgetSpend368==='function'){
+    const fallbackSpend4770=cardBudgetSpend368;
+    cardBudgetSpend368=function(purchase){
+      if(purchase&&cancelRows4770(purchase).length){
+        ensurePurchaseLock4770(purchase);
+        const locked=Number(purchase.cardCancelOriginalBudgetImpact4770);
+        if(Number.isFinite(locked))return locked;
+      }
+      return fallbackSpend4770.apply(this,arguments);
+    };
+  }
+
+  function currentPostCloseDesired4770(month){
+    try{
+      const decision=state.monthlyBudgetRolloverDecisions401?.[month];
+      if(!decision||typeof budgetMetrics27!=='function')return null;
+      const resolved=(state.budgetPostCloseAdjustments4731||[])
+        .filter(row=>row?.sourceMonth===month&&row?.status!=='pending'&&row?.status!=='cancelled')
+        .reduce((sum,row)=>sum+Number(row?.amount||0),0);
+      return Number(budgetMetrics27(month)?.remainingBudget||0)-Number(decision.amount||0)-resolved;
+    }catch(_){return null}
+  }
+  function clearStalePending4770(){
+    if(!Array.isArray(state.budgetPostCloseAdjustments4731))return false;
+    let changed=false;
+    state.budgetPostCloseAdjustments4731=state.budgetPostCloseAdjustments4731.filter(row=>{
+      if(!row||row.status!=='pending')return true;
+      const desired=currentPostCloseDesired4770(row.sourceMonth);
+      if(desired!==null&&Math.abs(desired)<0.5){changed=true;return false;}
+      return true;
+    });
+    return changed;
+  }
+
+  function forceVersion4770(){
+    const title=`가계부 ${VERSION4770}차`;
+    if(document.title!==title)document.title=title;
+    document.querySelectorAll('.version-pill').forEach(el=>el.textContent=`${VERSION4770}차`);
+    const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+    if(box){const badge=box.querySelector('.badge');if(badge)badge.textContent=`현재 버전 ${VERSION4770}차`;}
+  }
+
+  function repair4770({persist=true}={}){
+    if(repairing4770)return false;
+    repairing4770=true;
+    try{
+      const lockChanged=ensureAllLocks4770();
+      // saveState의 47.33 마감후변동 동기화를 새 예산 계산 기준으로 다시 실행합니다.
+      if(typeof saveState==='function'){
+        try{saveState()}catch(error){console.warn('47.70 마감후변동 재계산 실패',error)}
+      }
+      const pendingChanged=clearStalePending4770();
+      if(pendingChanged){
+        try{
+          if(typeof safeStateLocalWrite476==='function')safeStateLocalWrite476();
+          else localStorage.setItem(STORE_KEY,JSON.stringify(state));
+        }catch(_){ }
+        if(persist&&typeof scheduleCloudSave==='function'){
+          try{scheduleCloudSave()}catch(_){ }
+        }
+      }else if(lockChanged&&persist&&typeof scheduleCloudSave==='function'){
+        try{scheduleCloudSave()}catch(_){ }
+      }
+      try{if(typeof renderBudgetRolloverReminder401==='function')renderBudgetRolloverReminder401();}catch(_){ }
+      try{if(typeof renderBudget==='function')renderBudget();}catch(_){ }
+      try{if(typeof renderPurchases==='function')renderPurchases();}catch(_){ }
+      return lockChanged||pendingChanged;
+    }finally{repairing4770=false;}
+  }
+
+  // Firebase 최신자료가 적용된 뒤 예전 pending 레코드가 다시 들어오는 경우도 즉시 다시 보정합니다.
+  if(typeof applyServer475==='function'){
+    const applyServerBefore4770=applyServer475;
+    applyServer475=function(){
+      const result=applyServerBefore4770.apply(this,arguments);
+      setTimeout(()=>repair4770({persist:true}),0);
+      return result;
+    };
+  }
+
+  forceVersion4770();
+  setTimeout(()=>repair4770({persist:true}),0);
+  window.addEventListener('pageshow',()=>{forceVersion4770();setTimeout(()=>repair4770({persist:true}),0)});
+  window.addEventListener('load',()=>setTimeout(()=>repair4770({persist:true}),0),{once:true});
+  [300,1200,3000].forEach(delay=>setTimeout(forceVersion4770,delay));
 })();
 </script>
