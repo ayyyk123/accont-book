@@ -10,7 +10,7 @@
 <meta content="가계부" name="apple-mobile-web-app-title"/>
 <link href="apple-touch-icon.png?v=47.75" rel="apple-touch-icon" sizes="180x180"/>
 <link href="icon-192.png?v=47.75" rel="icon" sizes="192x192" type="image/png"/>
-<title>가계부 47.76차</title>
+<title>가계부 47.77차</title>
 <link href="manifest.json?v=47.75" rel="manifest"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -48371,6 +48371,220 @@ function forceVersion4776(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{forceVersion4776();try{renderRecurring()}catch(_){ }});else{forceVersion4776();try{renderRecurring()}catch(_){ }}
 [500,1500,3500].forEach(delay=>setTimeout(()=>{forceVersion4776();try{renderRecurring()}catch(_){ }},delay));
+</script>
+
+
+<style id="v4777-card-cancel-cash-refund-style">
+#cardCancelRefundAccountWrap4777[hidden],#cardCancelBillingMonthWrap4777[hidden]{display:none!important}
+.card-cancel-refund-note-4777{font-size:11px;color:var(--muted);line-height:1.45;margin-top:4px}
+.card-cancel-history-row-4760.cash-refund-4777 b{color:var(--good)}
+@media(max-width:640px){
+  #cardCancelForm4760 .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px 12px!important}
+  #cardCancelForm4760 .form-grid>*{min-width:0!important}
+  #cardCancelForm4760 select,#cardCancelForm4760 input{max-width:100%!important}
+}
+</style>
+<script id="v4777-card-cancel-cash-refund-script">
+(()=>{
+  'use strict';
+  const VERSION4777='47.77';
+  const FLOW_PREFIX4777='cardrefund4777:';
+
+  function cancelById4777(id){return (state.cardCancellations4760||[]).find(row=>row?.id===id)||null}
+  function refundMode4777(row){return row?.refundMode4777==='cash'?'cash':'card'}
+  function refundAccountName4777(row){return accountById(row?.refundAccountId4777||'')?.name||'입금통장'}
+  function refundFlowId4777(cancelId){return FLOW_PREFIX4777+cancelId}
+  function sourcePurchase4777(row){return row?.purchaseId?purchaseById(row.purchaseId):null}
+
+  function buildRefundFlow4777(cancel){
+    const purchase=sourcePurchase4777(cancel);
+    return {
+      id:refundFlowId4777(cancel.id),
+      type:'deposit',
+      date:cancel.date||today(),
+      accountId:cancel.refundAccountId4777||'',
+      targetAccountId:'',
+      description:`카드결제 취소 현금환급 · ${purchase?.merchant||'카드 사용'}`,
+      amount:Math.max(0,Number(cancel.amount||0)),
+      majorCategoryId:'',subCategoryId:'',majorCategory:'',subCategory:'',
+      memo:cancel.memo||'',budgetSource:'personal',excludeFromIncome:true,
+      counterpartyType:'external',counterpartyAccountId:'',
+      cardCancellationRefund4777:true,cancellationId4777:cancel.id,sourcePurchaseId4777:cancel.purchaseId||''
+    };
+  }
+
+  function syncCashRefundFlows4777(){
+    if(!Array.isArray(state.cashflows))state.cashflows=[];
+    const valid=new Set();
+    (state.cardCancellations4760||[]).forEach(cancel=>{
+      if(refundMode4777(cancel)!=='cash'||!cancel.id||!cancel.refundAccountId4777)return;
+      valid.add(cancel.id);
+      const id=refundFlowId4777(cancel.id),flow=buildRefundFlow4777(cancel);
+      const index=state.cashflows.findIndex(row=>row?.id===id||row?.cancellationId4777===cancel.id);
+      if(index>=0)state.cashflows[index]={...state.cashflows[index],...flow};
+      else state.cashflows.push(flow);
+    });
+    state.cashflows=state.cashflows.filter(flow=>!flow?.cardCancellationRefund4777||valid.has(flow.cancellationId4777));
+  }
+
+  function accountOptions4777(select,value=''){
+    if(!select)return;
+    const current=value||select.value||'';
+    select.innerHTML='<option value="">입금 통장을 선택하세요</option>'+(state.accounts||[]).map(account=>`<option value="${esc(account.id)}">${esc(account.name)}${account.bank?' · '+esc(account.bank):''}</option>`).join('');
+    if(current&&[...select.options].some(option=>option.value===current))select.value=current;
+  }
+
+  function ensureRefundUi4777(){
+    const form=document.getElementById('cardCancelForm4760');
+    const grid=form?.querySelector('.form-grid');
+    if(!form||!grid)return;
+    if(!document.getElementById('cardCancelRefundMode4777')){
+      const preview=document.getElementById('cardCancelPreview4760');
+      const modeWrap=document.createElement('div');
+      modeWrap.id='cardCancelRefundModeWrap4777';
+      modeWrap.innerHTML='<label>환불 방식</label><select id="cardCancelRefundMode4777"><option value="card">카드대금에서 차감</option><option value="cash">통장으로 현금 환급</option></select>';
+      preview?.insertAdjacentElement('afterend',modeWrap);
+
+      const dateInput=document.getElementById('cardCancelDate4760');
+      const billingInput=document.getElementById('cardCancelBillingMonth4760');
+      const dateWrap=dateInput?.parentElement;
+      const billingWrap=billingInput?.parentElement;
+      if(dateWrap){dateWrap.id='cardCancelDateWrap4777';const label=dateWrap.querySelector('label');if(label)label.id='cardCancelDateLabel4777'}
+      if(billingWrap)billingWrap.id='cardCancelBillingMonthWrap4777';
+
+      const accountWrap=document.createElement('div');
+      accountWrap.id='cardCancelRefundAccountWrap4777';accountWrap.hidden=true;
+      accountWrap.innerHTML='<label>입금 통장</label><select id="cardCancelRefundAccount4777"></select>';
+      billingWrap?.insertAdjacentElement('afterend',accountWrap);
+      accountOptions4777(accountWrap.querySelector('select'));
+
+      document.getElementById('cardCancelRefundMode4777')?.addEventListener('change',updateRefundModeUi4777);
+    }
+    const formEl=document.getElementById('cardCancelForm4760');
+    if(formEl&&!formEl.dataset.refundCapture4777){
+      formEl.dataset.refundCapture4777='1';
+      formEl.addEventListener('submit',prepareSubmit4777,true);
+    }
+  }
+
+  function updateRefundModeUi4777(){
+    const mode=document.getElementById('cardCancelRefundMode4777')?.value||'card';
+    const billingWrap=document.getElementById('cardCancelBillingMonthWrap4777');
+    const accountWrap=document.getElementById('cardCancelRefundAccountWrap4777');
+    const account=document.getElementById('cardCancelRefundAccount4777');
+    const dateLabel=document.getElementById('cardCancelDateLabel4777');
+    if(dateLabel)dateLabel.textContent=mode==='cash'?'입금일':'취소일';
+    if(billingWrap)billingWrap.hidden=mode==='cash';
+    if(accountWrap)accountWrap.hidden=mode!=='cash';
+    if(account){account.required=mode==='cash';if(mode==='cash')accountOptions4777(account,account.value)}
+  }
+
+  function prepareSubmit4777(event){
+    const mode=document.getElementById('cardCancelRefundMode4777')?.value||'card';
+    const accountId=document.getElementById('cardCancelRefundAccount4777')?.value||'';
+    if(mode==='cash'&&!accountId){event.preventDefault();event.stopImmediatePropagation();alert('현금 환급이 입금된 통장을 선택해주세요.');return;}
+    const list=state.cardCancellations4760;
+    if(!Array.isArray(list))return;
+    const hadOwn=Object.prototype.hasOwnProperty.call(list,'push');
+    const originalPush=list.push;
+    let restored=false;
+    const restore=()=>{if(restored)return;restored=true;if(hadOwn)list.push=originalPush;else delete list.push;};
+    list.push=function(...items){
+      items.forEach(row=>{
+        row.refundMode4777=mode;
+        row.refundAccountId4777=mode==='cash'?accountId:'';
+        if(mode==='cash'){row.billingMonth='';row.paid=false;row.paidDate='';row.paidAccountId='';}
+      });
+      const result=Array.prototype.push.apply(this,items);
+      items.forEach(row=>{if(mode==='cash'&&row?.id){const flow=buildRefundFlow4777(row);state.cashflows=(state.cashflows||[]).filter(f=>f.id!==flow.id&&f.cancellationId4777!==row.id);state.cashflows.push(flow);}});
+      restore();
+      return result;
+    };
+    setTimeout(restore,0);
+  }
+
+  function decorateHistory4777(purchaseId){
+    const host=document.getElementById('cardCancelHistory4760');if(!host)return;
+    const rows=(state.cardCancellations4760||[]).filter(row=>row?.purchaseId===purchaseId).sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))||String(a.id||'').localeCompare(String(b.id||'')));
+    const elements=[...host.querySelectorAll('.card-cancel-history-row-4760')];
+    elements.forEach((element,index)=>{
+      const row=rows[index];if(!row||refundMode4777(row)!=='cash')return;
+      element.classList.add('cash-refund-4777');
+      const span=element.querySelector('span');const amount=element.querySelector('b');
+      const recvAdj=Number(row.receivableAdjustmentTotal4764??(Array.isArray(row.receivablePlan4765)?row.receivablePlan4765.reduce((sum,item)=>sum+Number(item.reduction||0),0):0));
+      if(span)span.textContent=`${row.date} · 통장 현금환급 · ${refundAccountName4777(row)}${recvAdj>0?' · 받을 돈 -'+won(recvAdj):''}${row.memo?' · '+row.memo:''}`;
+      if(amount)amount.textContent=`+${won(row.amount)}`;
+    });
+  }
+
+  if(typeof window.openCardCancel4760==='function'){
+    const beforeOpen4777=window.openCardCancel4760;
+    window.openCardCancel4760=function(purchaseId){
+      const result=beforeOpen4777.apply(this,arguments);
+      ensureRefundUi4777();
+      const mode=document.getElementById('cardCancelRefundMode4777');if(mode)mode.value='card';
+      const account=document.getElementById('cardCancelRefundAccount4777');if(account){accountOptions4777(account);account.value='';}
+      updateRefundModeUi4777();decorateHistory4777(purchaseId);
+      return result;
+    };
+  }
+
+  // 현금환급은 카드 청구액에서 차감하지 않습니다.
+  if(typeof allSchedules==='function'){
+    const beforeSchedules4777=allSchedules;
+    allSchedules=function(){
+      const rows=beforeSchedules4777.apply(this,arguments)||[];
+      return rows.filter(row=>{
+        if(!row?.cardCancellation4760)return true;
+        const cancel=cancelById4777(row.cancellationId4760||row.purchase?.cancellationId4760||'');
+        return refundMode4777(cancel)!=='cash';
+      });
+    };
+  }
+
+  // 예산 상세의 설명도 환불 방식에 맞춰 표시합니다.
+  if(typeof budgetUsageRows412==='function'){
+    const beforeBudgetRows4777=budgetUsageRows412;
+    budgetUsageRows412=function(month,type){
+      return (beforeBudgetRows4777.apply(this,arguments)||[]).map(row=>{
+        const id=row?.raw?.cancellationId4760;if(!id)return row;
+        const cancel=cancelById4777(id);if(refundMode4777(cancel)!=='cash')return row;
+        return {...row,title:`${sourcePurchase4777(cancel)?.merchant||'카드 사용'} · 결제취소 현금환급`,sourceId:cancel.refundAccountId4777||'',sourceName:refundAccountName4777(cancel),memo:`카드값 차감 없음 · ${refundAccountName4777(cancel)}으로 ${won(cancel.amount)} 환급`};
+      });
+    };
+  }
+
+  // 취소기록 삭제 시 연결된 실제 통장입금도 함께 제거합니다.
+  if(typeof window.deleteCardCancellation4760==='function'){
+    const beforeDelete4777=window.deleteCardCancellation4760;
+    window.deleteCardCancellation4760=function(id){
+      const existed=cancelById4777(id);
+      const result=beforeDelete4777.apply(this,arguments);
+      if(existed&&!cancelById4777(id)){
+        state.cashflows=(state.cashflows||[]).filter(flow=>flow?.cancellationId4777!==id&&flow?.id!==refundFlowId4777(id));
+        try{saveState()}catch(_){ }
+      }
+      return result;
+    };
+  }
+
+  // 저장/클라우드 복원 후에도 현금환급과 통장 입금을 1:1로 유지합니다.
+  syncCashRefundFlows4777();
+  if(typeof saveState==='function'){
+    const beforeSave4777=saveState;
+    saveState=function(){syncCashRefundFlows4777();return beforeSave4777.apply(this,arguments)};
+  }
+
+  function forceVersion4777(){
+    document.title='가계부 47.77차';
+    document.querySelectorAll('.version-pill').forEach(el=>el.textContent='47.77차');
+    const box=[...document.querySelectorAll('#settings .settings-box')].find(item=>item.querySelector('h3')?.textContent.trim()==='현재 앱 버전');
+    if(box){const p=box.querySelector('p'),badge=box.querySelector('.badge');if(p)p.innerHTML='<b>가계부 47.77차</b>가 적용되어 있습니다. 카드 결제취소 환불 방식을 카드대금 차감 또는 통장 현금환급으로 나눠 처리할 수 있습니다.';if(badge)badge.textContent='현재 버전 47.77차';}
+  }
+  forceVersion4777();
+  window.addEventListener('pageshow',()=>{syncCashRefundFlows4777();forceVersion4777();});
+  [300,1200,3000].forEach(delay=>setTimeout(forceVersion4777,delay));
+})();
 </script>
 
 </body>
