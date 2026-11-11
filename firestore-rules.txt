@@ -1,10 +1,20 @@
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{userId}/{document=**} {
-      allow read, write: if request.auth != null
-                         && request.auth.uid == userId;
+    match /users/{userId}/data/{documentId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null && request.auth.uid == userId
+        && documentId == 'accountBook'
+        && request.resource.data.syncProtocol483 == 483
+        && request.resource.data.syncProof483 is string
+        && request.resource.data.syncRevision421 == 1;
+      allow update: if request.auth != null && request.auth.uid == userId
+        && documentId == 'accountBook'
+        && request.resource.data.syncProtocol483 == 483
+        && request.resource.data.syncProof483 is string
+        && request.resource.data.syncProof483 != resource.data.get('syncProof483', '')
+        && request.resource.data.syncRevision421 == resource.data.get('syncRevision421', 0) + 1;
+      allow delete: if false;
     }
   }
 }
